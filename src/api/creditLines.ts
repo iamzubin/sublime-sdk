@@ -1,4 +1,4 @@
-import { SublimeConfig } from '../config/sublimeConfig';
+import { SublimeConfig } from '../types/sublimeConfig';
 import { BytesLike, ContractTransaction, Signer } from 'ethers';
 
 import { CreditLine } from '../wrappers/CreditLine';

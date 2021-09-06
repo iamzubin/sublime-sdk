@@ -1,7 +1,7 @@
 import { BytesLike, ContractTransaction, ethers, Signer } from 'ethers';
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber';
 
-import { SublimeConfig } from '../config/sublimeConfig';
+import { SublimeConfig } from '../types/sublimeConfig';
 import { abi as PoolAbi } from '../artifacts/contracts/Pool/Pool.sol/Pool.json';
 import { bytecode as SublimeProxyByteCode } from '../artifacts/contracts/Proxy.sol/SublimeProxy.json';
 

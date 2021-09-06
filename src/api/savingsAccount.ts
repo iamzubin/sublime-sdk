@@ -1,4 +1,4 @@
-import { SublimeConfig } from '../config/sublimeConfig';
+import { SublimeConfig } from '../types/sublimeConfig';
 import { ContractTransaction, Signer } from 'ethers';
 
 import { SavingsAccount } from '../wrappers/SavingsAccount';
@@ -7,6 +7,7 @@ import { BigNumber, BigNumberish } from '@ethersproject/bignumber';
 
 import { Token } from '../wrappers/Token';
 import { Token__factory } from '../wrappers/factories/Token__factory';
+
 import { zeroAddress } from '../config/constants';
 import { IYield } from '../wrappers';
 import { IYield__factory } from '../wrappers/factories/IYield__factory';
