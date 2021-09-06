@@ -7,8 +7,8 @@ import { IYield__factory } from '../wrappers/factories/IYield__factory';
 import { Token } from '../wrappers/Token';
 import { Token__factory } from '../wrappers/factories/Token__factory';
 
-import { StrategyRegistry } from "../wrappers/StrategyRegistry";
-import {StrategyRegistry__factory } from "../wrappers/factories/StrategyRegistry__factory";
+import { StrategyRegistry } from '../wrappers/StrategyRegistry';
+import { StrategyRegistry__factory } from '../wrappers/factories/StrategyRegistry__factory';
 
 import { zeroAddress } from '../config/constants';
 import { SublimeConfig } from '../types/sublimeConfig';
@@ -56,7 +56,7 @@ export class YieldAndStrategyApi {
     return _temp.div(BigNumber.from(10).pow(liquidityTokenDecimal));
   }
 
-  public async getStrategies() : Promise<string[]> {
-      return this.strategyRegistry.getStrategies();
+  public async getStrategies(): Promise<string[]> {
+    return this.strategyRegistry.getStrategies();
   }
 }

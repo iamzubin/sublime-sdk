@@ -5,10 +5,10 @@ import { SublimeConfig } from './types/sublimeConfig';
 import { PoolApi } from './api/pool';
 import { CreditLineApi } from './api/creditLines';
 import { SavingsAccountApi } from './api/savingsAccount';
-import { ExtensionApi } from "./api/extension"
-import { RepaymentApi } from "./api/repayments"
-import { VerificationAPI } from "./api/verification"
-import { YieldAndStrategyApi } from "./api/yieldAndStrategy"
+import { ExtensionApi } from './api/extension';
+import { RepaymentApi } from './api/repayments';
+import { VerificationAPI } from './api/verification';
+import { YieldAndStrategyApi } from './api/yieldAndStrategy';
 
 import { ethers } from 'ethers';
 
@@ -40,11 +40,11 @@ export class SublimeConnector {
   }
 
   RepaymentApi() {
-    return new RepaymentApi(this.signer, this.config)
+    return new RepaymentApi(this.signer, this.config);
   }
 
   VerificationApi() {
-    return new VerificationAPI(this.signer, this.config)
+    return new VerificationAPI(this.signer, this.config);
   }
 
   YieldAndStrategyApi() {
