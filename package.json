@@ -1,0 +1,31 @@
+{
+  "name": "sublime-sdk",
+  "version": "1.0.0",
+  "description": "SDK to interact with set of sublime smart contracts",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --write .",
+    "build": "tsc",
+    "tslint": "tslint -c tslint.json -p tsconfig.json \\src/**/*.ts\\"
+  },
+  "author": "Akshay Meher",
+  "license": "ISC",
+  "dependencies": {
+    "@ethersproject/abi": "^5.4.1",
+    "@ethersproject/abstract-provider": "^5.4.1",
+    "@ethersproject/abstract-signer": "^5.4.1",
+    "@ethersproject/bytes": "^5.4.0",
+    "@ethersproject/contracts": "^5.4.1",
+    "@ethersproject/providers": "^5.4.5",
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "bignumber.js": "^9.0.1",
+    "ethers": "^5.4.6",
+    "hardhat": "^2.6.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.2",
+    "tslint": "^6.1.3",
+    "typescript": "^4.4.2"
+  }
+}
