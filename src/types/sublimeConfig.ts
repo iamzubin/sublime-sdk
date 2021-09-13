@@ -12,4 +12,6 @@ export interface SublimeConfig {
   compoundStrategyContractAddress: string;
   yearnStrategyContractAddress: string;
   noStrategyAddress: string;
+  repaymentContractAddress: string;
+  extensionContractAddress: string;
 }

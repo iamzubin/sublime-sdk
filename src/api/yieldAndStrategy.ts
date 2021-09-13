@@ -11,7 +11,7 @@ import { StrategyRegistry } from '../wrappers/StrategyRegistry';
 import { StrategyRegistry__factory } from '../wrappers/factories/StrategyRegistry__factory';
 
 import { zeroAddress } from '../config/constants';
-import { SublimeConfig } from '../config/sublimeConfig';
+import { SublimeConfig } from '../types/sublimeConfig';
 
 import { Strategy } from '../types/Types';
 
