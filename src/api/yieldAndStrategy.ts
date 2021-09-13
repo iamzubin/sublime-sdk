@@ -7,18 +7,22 @@ import { IYield__factory } from '../wrappers/factories/IYield__factory';
 import { Token } from '../wrappers/Token';
 import { Token__factory } from '../wrappers/factories/Token__factory';
 
-import { StrategyRegistry } from "../wrappers/StrategyRegistry";
-import {StrategyRegistry__factory } from "../wrappers/factories/StrategyRegistry__factory";
+import { StrategyRegistry } from '../wrappers/StrategyRegistry';
+import { StrategyRegistry__factory } from '../wrappers/factories/StrategyRegistry__factory';
 
 import { zeroAddress } from '../config/constants';
 import { SublimeConfig } from '../config/sublimeConfig';
 
+import { Strategy } from '../types/Types';
+
 export class YieldAndStrategyApi {
   private signer: Signer;
   private strategyRegistry: StrategyRegistry;
+  config: SublimeConfig;
 
   constructor(signer: Signer, config: SublimeConfig) {
     this.signer = signer;
+    this.config = config;
     this.strategyRegistry = new StrategyRegistry__factory(this.signer).attach(config.strategyRegistryContractAddress);
   }
 
@@ -56,7 +60,20 @@ export class YieldAndStrategyApi {
     return _temp.div(BigNumber.from(10).pow(liquidityTokenDecimal));
   }
 
-  public async getStrategies() : Promise<string[]> {
-      return this.strategyRegistry.getStrategies();
+  public async getStrategies(): Promise<Strategy[]> {
+    return [
+      {
+        address: this.config.noStrategyAddress,
+        name: 'No Strategy',
+      },
+      {
+        address: this.config.compoundStrategyContractAddress,
+        name: 'Compound',
+      },
+      {
+        address: this.config.yearnStrategyContractAddress,
+        name: 'Yearn',
+      },
+    ];
   }
 }

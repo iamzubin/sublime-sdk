@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prettier": "prettier --write .",
     "build": "tsc",
-    "tslint": "tslint -c tslint.json -p tsconfig.json \\src/**/*.ts\\"
+    "tslint": "tslint -c tslint.json -p tsconfig.json \\src/**/*.ts\\",
+    "ts-node": "ts-node"
   },
   "author": "Akshay Meher",
   "license": "ISC",
@@ -19,9 +20,11 @@
     "@ethersproject/contracts": "^5.4.1",
     "@ethersproject/providers": "^5.4.5",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "axios": "^0.21.4",
     "bignumber.js": "^9.0.1",
     "ethers": "^5.4.6",
-    "hardhat": "^2.6.2"
+    "hardhat": "^2.6.2",
+    "ts-node": "^10.2.1"
   },
   "devDependencies": {
     "prettier": "^2.3.2",

@@ -3,7 +3,7 @@ import { BytesLike, ContractTransaction, Signer } from 'ethers';
 
 import { CreditLine } from '../wrappers/CreditLine';
 import { CreditLine__factory } from '../wrappers/factories/CreditLine__factory';
-import { CreditLineRequest } from 'creditLinesTypes';
+import { CreditLineRequest } from '../types/Types';
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber';
 
 import { Token } from '../wrappers/Token';

@@ -16,7 +16,7 @@ import { Pool__factory } from '../wrappers/factories/Pool__factory';
 import { Token } from '../wrappers/Token';
 import { Token__factory } from '../wrappers/factories/Token__factory';
 
-import { zeroAddress } from '@src/config/constants';
+import { zeroAddress } from '../config/constants';
 const _interface = new ethers.utils.Interface(PoolAbi);
 const initializeFragement = _interface.getFunction('initialize');
 

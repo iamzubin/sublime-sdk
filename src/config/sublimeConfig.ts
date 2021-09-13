@@ -7,4 +7,9 @@ export interface SublimeConfig {
   poolLogicContractAddress: string;
   savingsAccountContractAddress: string;
   strategyRegistryContractAddress: string;
+  verificationContractAddress: string;
+  aaveStrategyContractAddress: string;
+  compoundStrategyContractAddress: string;
+  yearnStrategyContractAddress: string;
+  noStrategyAddress: string;
 }

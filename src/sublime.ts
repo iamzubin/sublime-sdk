@@ -3,6 +3,7 @@ import { Signer } from '@ethersproject/abstract-signer';
 import { SublimeConfig } from './config/sublimeConfig';
 import { PoolApi } from './api/pool';
 import { CreditLineApi } from './api/creditLines';
+import { YieldAndStrategyApi } from './api/yieldAndStrategy';
 import { SavingsAccountApi } from './api/savingsAccount';
 
 import { ethers } from 'ethers';
@@ -28,6 +29,14 @@ export class SublimeConnector {
 
   SavingsAccountApi() {
     return new SavingsAccountApi(this.signer, this.config);
+  }
+
+  YieldAndStrategyApi() {
+    return new YieldAndStrategyApi(this.signer, this.config);
+  }
+
+  Address(): Promise<string> {
+    return this.signer.getAddress();
   }
 
   public async getBalance(address: string): Promise<string> {

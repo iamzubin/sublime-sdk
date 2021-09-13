@@ -14,9 +14,11 @@ import { IYield__factory } from '../wrappers/factories/IYield__factory';
 export class SavingsAccountApi {
   private signer: Signer;
   private savingsAccount: SavingsAccount;
+  private config: SublimeConfig;
 
   constructor(signer: Signer, config: SublimeConfig) {
     this.signer = signer;
+    this.config = config;
     this.savingsAccount = new SavingsAccount__factory(signer).attach(config.savingsAccountContractAddress);
   }
 
