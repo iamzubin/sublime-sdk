@@ -1,5 +1,5 @@
 import { Signer, BytesLike } from 'ethers';
-import { SublimeConfig } from 'sublimeConfig';
+import { SublimeConfig } from '../types/sublimeConfig';
 
 import { Verification } from '../wrappers/Verification';
 import { Verification__factory } from '../wrappers/factories/Verification__factory';

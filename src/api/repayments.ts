@@ -1,5 +1,5 @@
 import { Signer, BytesLike, BigNumber, BigNumberish, ContractTransaction } from 'ethers';
-import { SublimeConfig } from 'sublimeConfig';
+import { SublimeConfig } from '../types/sublimeConfig';
 
 import { Repayments } from '../wrappers/Repayments';
 import { Repayments__factory } from '../wrappers/factories/Repayments__factory';
