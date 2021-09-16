@@ -1,10 +1,8 @@
-import { BigNumber, BigNumberish } from '@ethersproject/bignumber';
-
 export interface Asset {
   name?: string;
   address: string;
   logo?: string;
-  pricePerAssetInUSD?: BigNumberish;
+  pricePerAssetInUSD?: string;
 }
 
 export interface Strategy {
@@ -15,90 +13,97 @@ export interface Strategy {
 }
 export interface CreditLineRequest {
   address: string;
-  borrowLimit: BigNumberish;
-  liquidationThreshold: BigNumberish;
-  borrowRate: BigNumberish;
+  borrowLimit: string;
+  liquidationThreshold: string;
+  borrowRate: string;
   autoLiquidation: boolean;
-  collateralRatio: BigNumberish;
+  collateralRatio: string;
   borrowAsset: string;
   collateralAsset: string;
 }
 export interface SavingsAccountTokenDetail {
   token: Asset;
-  deposited: BigNumberish;
-  interestRate: BigNumberish;
-  interestEarned: BigNumberish;
+  deposited: string;
+  interestRate: string;
+  interestEarned: string;
 }
 
 export interface PoolDetail {
   name?: string; // refers to borrower name
   username?: string; // refers to borrower user name
   address: string; // refer to borrower address,
-  borrowRate: BigNumberish;
-  borrowedAmount: BigNumberish;
-  nextPayment: BigNumberish; // timestamp
-  repaymentProgress: BigNumberish;
+  borrowRate: string;
+  borrowedAmount: string;
+  lentAmount: string;
+  nextPayment: string; // timestamp
+  repaymentProgress: string;
   borrowAsset: Asset;
   collateralAsset: Asset;
   poolType: string;
+  estimatedEndDate: string;
+  lockedCollateral: string;
+  collectionProgress: string;
+  lent: string;
+  profit: string;
+  endedOn: string;
 }
 
 export interface PoolLender {
   name?: string; // refers to lender name
   username?: string; // refers to lender username
   address: string; // refers to lender address
-  shareInPool: BigNumberish;
+  shareInPool: string;
   poolToken: Asset;
   suppliedToken: Asset;
   suppliedAmount: string;
 }
 
 export interface DashboardOverview {
-  totalBorrowedAmount: BigNumberish;
-  totalLentAmount: BigNumberish;
-  totalBorrowRate: BigNumberish;
-  totalLentRate: BigNumberish;
+  totalBorrowedAmount: string;
+  totalLentAmount: string;
+  totalBorrowRate: string;
+  totalLentRate: string;
 }
 
 export interface SavingsAccountOverview {
-  deposited: BigNumberish;
-  interestEarned: BigNumberish;
-  interestRate: BigNumberish;
+  deposited: string;
+  interestEarned: string;
+  interestRate: string;
 }
 
 export interface CreditLinesOverview {
-  creditGranted: BigNumberish;
-  interestAccrued: BigNumberish;
-  activeCredit: BigNumberish;
-  interestRate: BigNumberish;
+  creditGranted: string;
+  interestAccrued: string;
+  activeCredit: string;
+  interestRate: string;
 }
 
 export interface ProfileOverview {
   name?: string;
   username?: string;
-  poolsCreated: BigNumberish;
-  activePools: BigNumberish;
-  timesDefaulted: BigNumberish;
-  totalAmountInBorrow: BigNumberish;
+  poolsCreated: string;
+  activePools: string;
+  timesDefaulted: string;
+  totalAmountInBorrow: string;
 }
 export interface SavingsAccountDetail {
   asset: Asset;
-  amount: BigNumberish;
-  interestRate: BigNumberish;
-  interestEarned: BigNumberish;
+  amount: string;
+  interestRate: string;
+  interestEarned: string;
 }
 
 export interface CreditLineDetail {
-  currentDebt: BigNumberish;
-  principal: BigNumberish;
-  interestAccrued: BigNumberish;
-  collateralRatio: BigNumberish;
-  creditLimit: BigNumberish;
-  interestRate: BigNumberish;
-  idealCollateralRatio: BigNumberish;
+  currentDebt: string;
+  principal: string;
+  interestAccrued: string;
+  collateralRatio: string;
+  creditLimit: string;
+  interestRate: string;
+  idealCollateralRatio: string;
   collateralAsset: Asset;
   borrowAsset: Asset;
-  liquidationThreshold: BigNumberish;
+  liquidationThreshold: string;
   autoLiquidate: boolean;
 }
 

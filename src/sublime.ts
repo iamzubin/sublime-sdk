@@ -9,6 +9,7 @@ import { SavingsAccountApi } from './api/savingsAccount';
 import { ExtensionApi } from './api/extension';
 import { RepaymentApi } from './api/repayments';
 import { VerificationAPI } from './api/verification';
+import { TokenApi } from './api/tokenApi';
 
 import { ethers } from 'ethers';
 
@@ -53,6 +54,9 @@ export class SublimeConnector {
 
   YieldAndStrategyApi() {
     return new YieldAndStrategyApi(this.signer, this.config);
+  }
+  TokenApi(tokenAddress: string) {
+    return new TokenApi(this.signer, tokenAddress);
   }
 
   public async getBalance(address: string): Promise<string> {

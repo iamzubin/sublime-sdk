@@ -10,9 +10,12 @@ export async function getAllPools(url): Promise<any[]> {
           id,
           borrowRate,
           lentAmount,
+          borrowAmountRequested,
           nextRepayTime,
           borrowAsset,
           collateralAsset,
+          borrowAssetDecimal,
+          collateralAssetDecimal,
           loanStatus
         }
       }`,
@@ -47,9 +50,12 @@ export async function getAllPoolsByPoolType(url: string, poolType: string): Prom
           id,
           borrowRate,
           lentAmount,
+          borrowAmountRequested,
           nextRepayTime,
           borrowAsset,
           collateralAsset,
+          borrowAssetDecimal,
+          collateralAssetDecimal,
           loanStatus
         }
       }`,
@@ -86,9 +92,12 @@ export async function getAllPoolsByBorrower(url: string, borrower: string): Prom
             id,
             borrowRate,
             lentAmount,
+            borrowAmountRequested,
             nextRepayTime,
             borrowAsset,
             collateralAsset,
+            borrowAssetDecimal,
+            collateralAssetDecimal,
             loanStatus
           }
         }
@@ -130,9 +139,12 @@ export async function getAllPoolsByLender(url: string, lender: string): Promise<
               id,
               borrowRate,
               lentAmount,
+              borrowAmountRequested,
               nextRepayTime,
               borrowAsset,
               collateralAsset,
+              borrowAssetDecimal,
+              collateralAssetDecimal,
               loanStatus
             }
           }
@@ -177,9 +189,12 @@ export async function getAllPoolsByLenderByType(url: string, lender: string, poo
               id,
               borrowRate,
               lentAmount,
+              borrowAmountRequested,
               nextRepayTime,
               borrowAsset,
               collateralAsset,
+              borrowAssetDecimal,
+              collateralAssetDecimal,
               loanStatus
             }
           }
@@ -222,9 +237,12 @@ export async function getAllPoolsByBorrowerByType(url: string, borrower: string,
             id,
             borrowRate,
             lentAmount,
+            borrowAmountRequested,
             nextRepayTime,
             borrowAsset,
             collateralAsset,
+            borrowAssetDecimal,
+            collateralAssetDecimal,
             loanStatus
           }
         }

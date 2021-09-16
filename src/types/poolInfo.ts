@@ -16,24 +16,23 @@
 // result.extraLiquidityShares = poolVars.extraLiquidityShares;
 // result.loanStatus = poolVars.loanStatus;
 // result.penalityLiquidityAmount = poolVars.penalityLiquidityAmount;
-import { BigNumberish } from '@ethersproject/bignumber';
 import { LoanStatus } from './poolGenerateParam';
-
+import { Asset } from './Types';
 export interface PoolInfo {
   borrower: string;
-  borrowAmountRequested: BigNumberish;
-  minborrowAmount: BigNumberish;
-  loanStartTime: BigNumberish;
-  loanWithdrawalDeadline: BigNumberish;
-  borrowAsset: string;
-  idealCollateralRatio: BigNumberish;
-  borrowRate: BigNumberish;
-  noOfRepaymentIntervals: BigNumberish;
-  repaymentInterval: BigNumberish;
-  collateralAsset: string;
+  borrowAmountRequested: string;
+  minborrowAmount: string;
+  loanStartTime: string;
+  loanWithdrawalDeadline: string;
+  borrowAsset: Asset;
+  idealCollateralRatio: string;
+  borrowRate: string;
+  noOfRepaymentIntervals: string;
+  repaymentInterval: string;
+  collateralAsset: Asset;
   poolSavingsStrategy: string;
-  baseLiquidityShares: BigNumberish;
-  extraLiquidityShares: BigNumberish;
+  baseLiquidityShares: string;
+  extraLiquidityShares: string;
   loanStatus: LoanStatus;
-  penalityLiquidityAmount: BigNumberish;
+  penalityLiquidityAmount: string;
 }

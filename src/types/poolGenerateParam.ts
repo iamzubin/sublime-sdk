@@ -1,21 +1,20 @@
-import { BigNumberish } from '@ethersproject/bignumber';
 import { BytesLike } from 'ethers';
 
 export interface PoolGenerateParams {
-  poolSize: BigNumberish;
-  minborrowAmount: BigNumberish;
+  poolSize: string;
+  minborrowAmount: string;
   borrower: string;
   borrowToken: string;
   collateralToken: string;
-  collateralRatio: BigNumberish;
-  borrowRate: BigNumberish;
-  repaymentInterval: BigNumberish;
-  noOfRepaymentIntervals: BigNumberish;
+  collateralRatio: string;
+  borrowRate: string;
+  repaymentInterval: string;
+  noOfRepaymentIntervals: string;
   strategy: string;
-  collateralAmount: BigNumberish;
+  collateralAmount: string;
   transferFromSavingsAccount: boolean;
-  loanWithdrawDuration: BigNumberish;
-  collectionPeriod: BigNumberish;
+  // loanWithdrawDuration: string;
+  // collectionPeriod: string;
   salt: BytesLike;
 }
 

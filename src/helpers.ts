@@ -9,7 +9,7 @@ export async function fetchData(requestData: any) {
   }
 }
 
-export const countPerQuery = 5;
+export const countPerQuery = 999;
 
 export function print(data: any): void {
   console.log(JSON.stringify(data, null, 4));
