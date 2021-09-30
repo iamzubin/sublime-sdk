@@ -30,8 +30,8 @@ interface IPoolInterface extends ethers.utils.Interface {
     'getBalanceDetails(address)': FunctionFragment;
     'getLoanStatus()': FunctionFragment;
     'getMarginCallEndTime(address)': FunctionFragment;
-    'getTotalSupply()': FunctionFragment;
-    'setPoolToken(address)': FunctionFragment;
+    'getTokensLent()': FunctionFragment;
+    'setConstants(address,address)': FunctionFragment;
     'withdrawBorrowedAmount()': FunctionFragment;
   };
 
@@ -43,8 +43,8 @@ interface IPoolInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'getBalanceDetails', values: [string]): string;
   encodeFunctionData(functionFragment: 'getLoanStatus', values?: undefined): string;
   encodeFunctionData(functionFragment: 'getMarginCallEndTime', values: [string]): string;
-  encodeFunctionData(functionFragment: 'getTotalSupply', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'setPoolToken', values: [string]): string;
+  encodeFunctionData(functionFragment: 'getTokensLent', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'setConstants', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'withdrawBorrowedAmount', values?: undefined): string;
 
   decodeFunctionResult(functionFragment: 'addCollateralInMarginCall', data: BytesLike): Result;
@@ -55,8 +55,8 @@ interface IPoolInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'getBalanceDetails', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getLoanStatus', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getMarginCallEndTime', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getTotalSupply', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setPoolToken', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'getTokensLent', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setConstants', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'withdrawBorrowedAmount', data: BytesLike): Result;
 
   events: {};
@@ -169,13 +169,21 @@ export class IPool extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    getTotalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
+    getTokensLent(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'getTotalSupply()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'getTokensLent()'(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    setPoolToken(_poolToken: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    setConstants(
+      _poolToken: string,
+      _lenderVerifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'setPoolToken(address)'(_poolToken: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    'setConstants(address,address)'(
+      _poolToken: string,
+      _lenderVerifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     withdrawBorrowedAmount(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -245,13 +253,21 @@ export class IPool extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  getTotalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+  getTokensLent(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'getTotalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+  'getTokensLent()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-  setPoolToken(_poolToken: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  setConstants(
+    _poolToken: string,
+    _lenderVerifier: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'setPoolToken(address)'(_poolToken: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  'setConstants(address,address)'(
+    _poolToken: string,
+    _lenderVerifier: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   withdrawBorrowedAmount(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -299,13 +315,13 @@ export class IPool extends Contract {
 
     'getMarginCallEndTime(address)'(_lender: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    getTotalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+    getTokensLent(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getTotalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    'getTokensLent()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setPoolToken(_poolToken: string, overrides?: CallOverrides): Promise<void>;
+    setConstants(_poolToken: string, _lenderVerifier: string, overrides?: CallOverrides): Promise<void>;
 
-    'setPoolToken(address)'(_poolToken: string, overrides?: CallOverrides): Promise<void>;
+    'setConstants(address,address)'(_poolToken: string, _lenderVerifier: string, overrides?: CallOverrides): Promise<void>;
 
     withdrawBorrowedAmount(overrides?: CallOverrides): Promise<void>;
 
@@ -375,13 +391,21 @@ export class IPool extends Contract {
 
     'getMarginCallEndTime(address)'(_lender: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    getTotalSupply(overrides?: CallOverrides): Promise<BigNumber>;
+    getTokensLent(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getTotalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    'getTokensLent()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setPoolToken(_poolToken: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    setConstants(
+      _poolToken: string,
+      _lenderVerifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'setPoolToken(address)'(_poolToken: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'setConstants(address,address)'(
+      _poolToken: string,
+      _lenderVerifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     withdrawBorrowedAmount(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
@@ -452,13 +476,21 @@ export class IPool extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    getTotalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getTokensLent(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'getTotalSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'getTokensLent()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    setPoolToken(_poolToken: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    setConstants(
+      _poolToken: string,
+      _lenderVerifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'setPoolToken(address)'(_poolToken: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    'setConstants(address,address)'(
+      _poolToken: string,
+      _lenderVerifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     withdrawBorrowedAmount(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 

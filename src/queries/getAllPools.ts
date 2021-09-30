@@ -182,10 +182,10 @@ export async function getAllPoolsByLenderByType(url: string, lender: string, poo
   for (;;) {
     const data = JSON.stringify({
       query: `{
-        users(where:{id:"${lender}"}) {
+        users(where: {id:"${lender}"}) {
           lendingPools (first: ${countPerQuery}, skip:${skip * countPerQuery}) {
             id,
-            pool(where:{loanStatus:"${poolType.toString()}"}){
+            pool {
               id,
               borrowRate,
               lentAmount,
@@ -213,9 +213,9 @@ export async function getAllPoolsByLenderByType(url: string, lender: string, poo
       print(result.errors);
       throw new Error('Error while fetching data from subgraph');
     } else if (result.data.users.length == 0) {
-      return allData;
+      return allData.filter((a) => a.loanStatus === poolType);
     } else if (result.data.users.length > 0 && result.data.users[0].lendingPools && result.data.users[0].lendingPools.length == 0) {
-      return allData;
+      return allData.filter((a) => a.loanStatus === poolType);
     } else {
       skip++;
       for (let index = 0; index < result.data.users[0].lendingPools.length; index++) {
@@ -260,9 +260,9 @@ export async function getAllPoolsByBorrowerByType(url: string, borrower: string,
       print(result.errors);
       throw new Error('Error while fetching data from subgraph');
     } else if (result.data.users.length == 0) {
-      return allData;
+      return allData.filter((a) => a.loanStatus === poolType);
     } else if (result.data.users.length > 0 && result.data.users[0].borrowingPools && result.data.users[0].borrowingPools.length == 0) {
-      return allData;
+      return allData.filter((a) => a.loanStatus === poolType);
     } else {
       skip++;
       allData.push(...result.data.users[0].borrowingPools);

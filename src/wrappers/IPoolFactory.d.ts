@@ -27,13 +27,14 @@ interface IPoolFactoryInterface extends ethers.utils.Interface {
     'liquidatorRewardFraction()': FunctionFragment;
     'marginCallDuration()': FunctionFragment;
     'matchCollateralRatioInterval()': FunctionFragment;
-    'openBorrowPoolRegistry(address)': FunctionFragment;
+    'minBorrowFraction()': FunctionFragment;
     'owner()': FunctionFragment;
-    'poolCancelPenalityFraction()': FunctionFragment;
+    'poolCancelPenaltyFraction()': FunctionFragment;
+    'poolRegistry(address)': FunctionFragment;
     'priceOracle()': FunctionFragment;
     'repaymentImpl()': FunctionFragment;
     'savingsAccount()': FunctionFragment;
-    'volatilityThreshold(address)': FunctionFragment;
+    'userRegistry()': FunctionFragment;
     'votingPassRatio()': FunctionFragment;
   };
 
@@ -44,13 +45,14 @@ interface IPoolFactoryInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'liquidatorRewardFraction', values?: undefined): string;
   encodeFunctionData(functionFragment: 'marginCallDuration', values?: undefined): string;
   encodeFunctionData(functionFragment: 'matchCollateralRatioInterval', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'openBorrowPoolRegistry', values: [string]): string;
+  encodeFunctionData(functionFragment: 'minBorrowFraction', values?: undefined): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'poolCancelPenalityFraction', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'poolCancelPenaltyFraction', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'poolRegistry', values: [string]): string;
   encodeFunctionData(functionFragment: 'priceOracle', values?: undefined): string;
   encodeFunctionData(functionFragment: 'repaymentImpl', values?: undefined): string;
   encodeFunctionData(functionFragment: 'savingsAccount', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'volatilityThreshold', values: [string]): string;
+  encodeFunctionData(functionFragment: 'userRegistry', values?: undefined): string;
   encodeFunctionData(functionFragment: 'votingPassRatio', values?: undefined): string;
 
   decodeFunctionResult(functionFragment: 'collectionPeriod', data: BytesLike): Result;
@@ -60,13 +62,14 @@ interface IPoolFactoryInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'liquidatorRewardFraction', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'marginCallDuration', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'matchCollateralRatioInterval', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'openBorrowPoolRegistry', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'minBorrowFraction', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'poolCancelPenalityFraction', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'poolCancelPenaltyFraction', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'poolRegistry', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'priceOracle', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'repaymentImpl', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'savingsAccount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'volatilityThreshold', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'userRegistry', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'votingPassRatio', data: BytesLike): Result;
 
   events: {};
@@ -144,17 +147,21 @@ export class IPoolFactory extends Contract {
 
     'matchCollateralRatioInterval()'(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    openBorrowPoolRegistry(pool: string, overrides?: CallOverrides): Promise<[boolean]>;
+    minBorrowFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'openBorrowPoolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<[boolean]>;
+    'minBorrowFraction()'(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     'owner()'(overrides?: CallOverrides): Promise<[string]>;
 
-    poolCancelPenalityFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
+    poolCancelPenaltyFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'poolCancelPenalityFraction()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'poolCancelPenaltyFraction()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    poolRegistry(pool: string, overrides?: CallOverrides): Promise<[boolean]>;
+
+    'poolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     priceOracle(overrides?: CallOverrides): Promise<[string]>;
 
@@ -168,9 +175,9 @@ export class IPoolFactory extends Contract {
 
     'savingsAccount()'(overrides?: CallOverrides): Promise<[string]>;
 
-    volatilityThreshold(token: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+    userRegistry(overrides?: CallOverrides): Promise<[string]>;
 
-    'volatilityThreshold(address)'(token: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+    'userRegistry()'(overrides?: CallOverrides): Promise<[string]>;
 
     votingPassRatio(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -205,17 +212,21 @@ export class IPoolFactory extends Contract {
 
   'matchCollateralRatioInterval()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-  openBorrowPoolRegistry(pool: string, overrides?: CallOverrides): Promise<boolean>;
+  minBorrowFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'openBorrowPoolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<boolean>;
+  'minBorrowFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
   'owner()'(overrides?: CallOverrides): Promise<string>;
 
-  poolCancelPenalityFraction(overrides?: CallOverrides): Promise<BigNumber>;
+  poolCancelPenaltyFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'poolCancelPenalityFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+  'poolCancelPenaltyFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+  poolRegistry(pool: string, overrides?: CallOverrides): Promise<boolean>;
+
+  'poolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<boolean>;
 
   priceOracle(overrides?: CallOverrides): Promise<string>;
 
@@ -229,9 +240,9 @@ export class IPoolFactory extends Contract {
 
   'savingsAccount()'(overrides?: CallOverrides): Promise<string>;
 
-  volatilityThreshold(token: string, overrides?: CallOverrides): Promise<BigNumber>;
+  userRegistry(overrides?: CallOverrides): Promise<string>;
 
-  'volatilityThreshold(address)'(token: string, overrides?: CallOverrides): Promise<BigNumber>;
+  'userRegistry()'(overrides?: CallOverrides): Promise<string>;
 
   votingPassRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -266,17 +277,21 @@ export class IPoolFactory extends Contract {
 
     'matchCollateralRatioInterval()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    openBorrowPoolRegistry(pool: string, overrides?: CallOverrides): Promise<boolean>;
+    minBorrowFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'openBorrowPoolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<boolean>;
+    'minBorrowFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     'owner()'(overrides?: CallOverrides): Promise<string>;
 
-    poolCancelPenalityFraction(overrides?: CallOverrides): Promise<BigNumber>;
+    poolCancelPenaltyFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'poolCancelPenalityFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+    'poolCancelPenaltyFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    poolRegistry(pool: string, overrides?: CallOverrides): Promise<boolean>;
+
+    'poolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<boolean>;
 
     priceOracle(overrides?: CallOverrides): Promise<string>;
 
@@ -290,9 +305,9 @@ export class IPoolFactory extends Contract {
 
     'savingsAccount()'(overrides?: CallOverrides): Promise<string>;
 
-    volatilityThreshold(token: string, overrides?: CallOverrides): Promise<BigNumber>;
+    userRegistry(overrides?: CallOverrides): Promise<string>;
 
-    'volatilityThreshold(address)'(token: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'userRegistry()'(overrides?: CallOverrides): Promise<string>;
 
     votingPassRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -330,17 +345,21 @@ export class IPoolFactory extends Contract {
 
     'matchCollateralRatioInterval()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    openBorrowPoolRegistry(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
+    minBorrowFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'openBorrowPoolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'minBorrowFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    poolCancelPenalityFraction(overrides?: CallOverrides): Promise<BigNumber>;
+    poolCancelPenaltyFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'poolCancelPenalityFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+    'poolCancelPenaltyFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    poolRegistry(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'poolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     priceOracle(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -354,9 +373,9 @@ export class IPoolFactory extends Contract {
 
     'savingsAccount()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    volatilityThreshold(token: string, overrides?: CallOverrides): Promise<BigNumber>;
+    userRegistry(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'volatilityThreshold(address)'(token: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'userRegistry()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     votingPassRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -392,17 +411,21 @@ export class IPoolFactory extends Contract {
 
     'matchCollateralRatioInterval()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    openBorrowPoolRegistry(pool: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    minBorrowFraction(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'openBorrowPoolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'minBorrowFraction()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    poolCancelPenalityFraction(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    poolCancelPenaltyFraction(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'poolCancelPenalityFraction()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'poolCancelPenaltyFraction()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    poolRegistry(pool: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'poolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     priceOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -416,9 +439,9 @@ export class IPoolFactory extends Contract {
 
     'savingsAccount()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    volatilityThreshold(token: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    userRegistry(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'volatilityThreshold(address)'(token: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'userRegistry()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     votingPassRatio(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

@@ -12,28 +12,31 @@ import { VerificationAPI } from './api/verification';
 import { TokenApi } from './api/tokenApi';
 
 import { ethers } from 'ethers';
+import { TokenManager } from './tokenManager';
 
 export class SublimeConnector {
   private provider: Provider;
   private signer: Signer;
   private config: SublimeConfig;
+  private tokenManager: TokenManager;
 
-  constructor(provider: Provider, signer: Signer, config: SublimeConfig) {
+  constructor(provider: Provider, signer: Signer, config: SublimeConfig, tokenManager: TokenManager) {
     this.provider = provider;
     this.signer = signer;
     this.config = config;
+    this.tokenManager = tokenManager;
   }
 
   PoolApi() {
-    return new PoolApi(this.signer, this.config);
+    return new PoolApi(this.signer, this.config, this.tokenManager);
   }
 
   CreditLinesApi() {
-    return new CreditLineApi(this.signer, this.config);
+    return new CreditLineApi(this.signer, this.config, this.tokenManager);
   }
 
   SavingsAccountApi() {
-    return new SavingsAccountApi(this.signer, this.config);
+    return new SavingsAccountApi(this.signer, this.config, this.tokenManager);
   }
 
   Address(): Promise<string> {
@@ -45,7 +48,7 @@ export class SublimeConnector {
   }
 
   RepaymentApi() {
-    return new RepaymentApi(this.signer, this.config);
+    return new RepaymentApi(this.signer, this.config, this.tokenManager);
   }
 
   VerificationApi() {
@@ -53,10 +56,10 @@ export class SublimeConnector {
   }
 
   YieldAndStrategyApi() {
-    return new YieldAndStrategyApi(this.signer, this.config);
+    return new YieldAndStrategyApi(this.signer, this.config, this.tokenManager);
   }
   TokenApi(tokenAddress: string) {
-    return new TokenApi(this.signer, tokenAddress);
+    return new TokenApi(this.signer, tokenAddress, this.tokenManager);
   }
 
   public async getBalance(address: string): Promise<string> {

@@ -17,7 +17,7 @@ export class VerificationAPI {
     return this.verification.registeredUsers(user);
   }
 
-  public async isUser(user: string): Promise<boolean> {
-    return this.verification.isUser(user);
+  public async isUser(user: string, verifier: string): Promise<boolean> {
+    return this.verification.isUser(user, verifier);
   }
 }

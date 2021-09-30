@@ -22,9 +22,9 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 interface ExtensionInterface extends ethers.utils.Interface {
   functions: {
     'closePoolExtension()': FunctionFragment;
+    'extensions(address)': FunctionFragment;
     'initialize(address,uint256)': FunctionFragment;
     'initializePoolExtension(uint256)': FunctionFragment;
-    'poolInfo(address)': FunctionFragment;
     'requestExtension(address)': FunctionFragment;
     'updatePoolFactory(address)': FunctionFragment;
     'updateVotingPassRatio(uint256)': FunctionFragment;
@@ -32,18 +32,18 @@ interface ExtensionInterface extends ethers.utils.Interface {
   };
 
   encodeFunctionData(functionFragment: 'closePoolExtension', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'extensions', values: [string]): string;
   encodeFunctionData(functionFragment: 'initialize', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'initializePoolExtension', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'poolInfo', values: [string]): string;
   encodeFunctionData(functionFragment: 'requestExtension', values: [string]): string;
   encodeFunctionData(functionFragment: 'updatePoolFactory', values: [string]): string;
   encodeFunctionData(functionFragment: 'updateVotingPassRatio', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'voteOnExtension', values: [string]): string;
 
   decodeFunctionResult(functionFragment: 'closePoolExtension', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'extensions', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'initializePoolExtension', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'poolInfo', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'requestExtension', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updatePoolFactory', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateVotingPassRatio', data: BytesLike): Result;
@@ -112,6 +112,30 @@ export class Extension extends Contract {
 
     'closePoolExtension()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
+    extensions(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        periodWhenExtensionIsPassed: BigNumber;
+        totalExtensionSupport: BigNumber;
+        extensionVoteEndTime: BigNumber;
+        repaymentInterval: BigNumber;
+      }
+    >;
+
+    'extensions(address)'(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        periodWhenExtensionIsPassed: BigNumber;
+        totalExtensionSupport: BigNumber;
+        extensionVoteEndTime: BigNumber;
+        repaymentInterval: BigNumber;
+      }
+    >;
+
     initialize(
       _poolFactory: string,
       _votingPassRatio: BigNumberish,
@@ -133,30 +157,6 @@ export class Extension extends Contract {
       _repaymentInterval: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    poolInfo(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        periodWhenExtensionIsPassed: BigNumber;
-        totalExtensionSupport: BigNumber;
-        extensionVoteEndTime: BigNumber;
-        repaymentInterval: BigNumber;
-      }
-    >;
-
-    'poolInfo(address)'(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        periodWhenExtensionIsPassed: BigNumber;
-        totalExtensionSupport: BigNumber;
-        extensionVoteEndTime: BigNumber;
-        repaymentInterval: BigNumber;
-      }
-    >;
 
     requestExtension(_pool: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -188,6 +188,30 @@ export class Extension extends Contract {
 
   'closePoolExtension()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
+  extensions(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber, BigNumber] & {
+      periodWhenExtensionIsPassed: BigNumber;
+      totalExtensionSupport: BigNumber;
+      extensionVoteEndTime: BigNumber;
+      repaymentInterval: BigNumber;
+    }
+  >;
+
+  'extensions(address)'(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber, BigNumber] & {
+      periodWhenExtensionIsPassed: BigNumber;
+      totalExtensionSupport: BigNumber;
+      extensionVoteEndTime: BigNumber;
+      repaymentInterval: BigNumber;
+    }
+  >;
+
   initialize(
     _poolFactory: string,
     _votingPassRatio: BigNumberish,
@@ -209,30 +233,6 @@ export class Extension extends Contract {
     _repaymentInterval: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  poolInfo(
-    arg0: string,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      periodWhenExtensionIsPassed: BigNumber;
-      totalExtensionSupport: BigNumber;
-      extensionVoteEndTime: BigNumber;
-      repaymentInterval: BigNumber;
-    }
-  >;
-
-  'poolInfo(address)'(
-    arg0: string,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      periodWhenExtensionIsPassed: BigNumber;
-      totalExtensionSupport: BigNumber;
-      extensionVoteEndTime: BigNumber;
-      repaymentInterval: BigNumber;
-    }
-  >;
 
   requestExtension(_pool: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -264,6 +264,30 @@ export class Extension extends Contract {
 
     'closePoolExtension()'(overrides?: CallOverrides): Promise<void>;
 
+    extensions(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        periodWhenExtensionIsPassed: BigNumber;
+        totalExtensionSupport: BigNumber;
+        extensionVoteEndTime: BigNumber;
+        repaymentInterval: BigNumber;
+      }
+    >;
+
+    'extensions(address)'(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber] & {
+        periodWhenExtensionIsPassed: BigNumber;
+        totalExtensionSupport: BigNumber;
+        extensionVoteEndTime: BigNumber;
+        repaymentInterval: BigNumber;
+      }
+    >;
+
     initialize(_poolFactory: string, _votingPassRatio: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     'initialize(address,uint256)'(_poolFactory: string, _votingPassRatio: BigNumberish, overrides?: CallOverrides): Promise<void>;
@@ -271,30 +295,6 @@ export class Extension extends Contract {
     initializePoolExtension(_repaymentInterval: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     'initializePoolExtension(uint256)'(_repaymentInterval: BigNumberish, overrides?: CallOverrides): Promise<void>;
-
-    poolInfo(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        periodWhenExtensionIsPassed: BigNumber;
-        totalExtensionSupport: BigNumber;
-        extensionVoteEndTime: BigNumber;
-        repaymentInterval: BigNumber;
-      }
-    >;
-
-    'poolInfo(address)'(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        periodWhenExtensionIsPassed: BigNumber;
-        totalExtensionSupport: BigNumber;
-        extensionVoteEndTime: BigNumber;
-        repaymentInterval: BigNumber;
-      }
-    >;
 
     requestExtension(_pool: string, overrides?: CallOverrides): Promise<void>;
 
@@ -341,6 +341,10 @@ export class Extension extends Contract {
 
     'closePoolExtension()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
+    extensions(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'extensions(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     initialize(
       _poolFactory: string,
       _votingPassRatio: BigNumberish,
@@ -362,10 +366,6 @@ export class Extension extends Contract {
       _repaymentInterval: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    poolInfo(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'poolInfo(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     requestExtension(_pool: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
@@ -392,6 +392,10 @@ export class Extension extends Contract {
 
     'closePoolExtension()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
+    extensions(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'extensions(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     initialize(
       _poolFactory: string,
       _votingPassRatio: BigNumberish,
@@ -413,10 +417,6 @@ export class Extension extends Contract {
       _repaymentInterval: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    poolInfo(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    'poolInfo(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     requestExtension(_pool: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 

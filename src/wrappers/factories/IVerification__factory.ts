@@ -21,6 +21,11 @@ const _abi = [
         name: '_user',
         type: 'address',
       },
+      {
+        internalType: 'address',
+        name: '_verifier',
+        type: 'address',
+      },
     ],
     name: 'isUser',
     outputs: [
@@ -31,6 +36,42 @@ const _abi = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_masterAddress',
+        type: 'address',
+      },
+      {
+        internalType: 'bool',
+        name: '_isMasterLinked',
+        type: 'bool',
+      },
+    ],
+    name: 'registerMasterAddress',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_masterAddress',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: '_verifier',
+        type: 'address',
+      },
+    ],
+    name: 'unregisterMasterAddress',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
 ];

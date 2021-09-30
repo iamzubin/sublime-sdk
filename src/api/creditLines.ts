@@ -7,22 +7,22 @@ import { CreditLineRequest } from '../types/Types';
 import { BigNumberish } from '@ethersproject/bignumber';
 import { BigNumber } from 'bignumber.js';
 
-import { Token } from '../wrappers/Token';
-import { Token__factory } from '../wrappers/factories/Token__factory';
 import { zeroAddress } from '../config/constants';
-
+import { TokenManager } from '../tokenManager';
 export class CreditLineApi {
   private signer: Signer;
   private creditLineContract: CreditLine;
+  private tokenManager: TokenManager;
 
-  constructor(signer: Signer, config: SublimeConfig) {
+  constructor(signer: Signer, config: SublimeConfig, tokenManager: TokenManager) {
     this.signer = signer;
     this.creditLineContract = new CreditLine__factory(signer).attach(config.creditLineContractAddress);
+    this.tokenManager = tokenManager;
   }
 
   public async requestCreditLineToLender(request: CreditLineRequest): Promise<ContractTransaction> {
-    const BorrowToken: Token = new Token__factory(this.signer).attach(request.borrowAsset);
-    const borrowDecimal: BigNumberish = BorrowToken.address === zeroAddress ? 18 : await BorrowToken.decimals();
+    await this.tokenManager.updateTokenDecimals(request.borrowAsset);
+    const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(request.borrowAsset);
 
     let borrowLimit = new BigNumber(request.borrowLimit);
     if (borrowLimit.isNaN() || borrowLimit.isZero() || borrowLimit.isNegative()) {
@@ -54,8 +54,8 @@ export class CreditLineApi {
   }
 
   public async requestCreditLineToBorrower(request: CreditLineRequest): Promise<ContractTransaction> {
-    const BorrowToken: Token = new Token__factory(this.signer).attach(request.borrowAsset);
-    const borrowDecimal: BigNumberish = BorrowToken.address === zeroAddress ? 18 : await BorrowToken.decimals();
+    await this.tokenManager.updateTokenDecimals(request.borrowAsset);
+    const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(request.borrowAsset);
 
     let borrowLimit = new BigNumber(request.borrowLimit);
     if (borrowLimit.isNaN() || borrowLimit.isZero() || borrowLimit.isNegative()) {
@@ -89,8 +89,8 @@ export class CreditLineApi {
   public async calculateInterestAccrued(creditLineHash: BytesLike): Promise<string> {
     let _value = await this.creditLineContract.calculateInterestAccrued(creditLineHash);
     let borrowAsset: string = await (await this.creditLineContract.creditLineInfo(creditLineHash)).borrowAsset;
-    const BorrowToken: Token = new Token__factory(this.signer).attach(borrowAsset);
-    const borrowDecimal: BigNumberish = BorrowToken.address === zeroAddress ? 18 : await BorrowToken.decimals();
+    await this.tokenManager.updateTokenDecimals(borrowAsset);
+    const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
     return new BigNumber(_value.toString()).div(new BigNumber(10).pow(borrowDecimal)).toFixed(2);
   }
@@ -98,8 +98,8 @@ export class CreditLineApi {
   public async calculateCurrentDebt(creditLineHash: BytesLike): Promise<string> {
     let _value = await this.creditLineContract.calculateCurrentDebt(creditLineHash);
     let borrowAsset: string = await (await this.creditLineContract.creditLineInfo(creditLineHash)).borrowAsset;
-    const BorrowToken: Token = new Token__factory(this.signer).attach(borrowAsset);
-    const borrowDecimal: BigNumberish = BorrowToken.address === zeroAddress ? 18 : await BorrowToken.decimals();
+    await this.tokenManager.updateTokenDecimals(borrowAsset);
+    const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
     return new BigNumber(_value.toString()).div(new BigNumber(10).pow(borrowDecimal)).toFixed(2);
   }
@@ -107,8 +107,8 @@ export class CreditLineApi {
   public async calculateBorrowableAmount(creditLineHash: BytesLike): Promise<string> {
     let _value: BigNumberish = await this.creditLineContract.callStatic.calculateBorrowableAmount(creditLineHash);
     let borrowAsset: string = await (await this.creditLineContract.creditLineInfo(creditLineHash)).borrowAsset;
-    const BorrowToken: Token = new Token__factory(this.signer).attach(borrowAsset);
-    const borrowDecimal: BigNumberish = BorrowToken.address === zeroAddress ? 18 : await BorrowToken.decimals();
+    await this.tokenManager.updateTokenDecimals(borrowAsset);
+    const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
     return new BigNumber(_value.toString()).div(new BigNumber(10).pow(borrowDecimal)).toFixed(2);
   }
@@ -121,16 +121,16 @@ export class CreditLineApi {
   public async calculateTotalCollateralTokens(creditLineHash: BytesLike): Promise<string> {
     let _value: BigNumberish = await this.creditLineContract.callStatic.calculateTotalCollateralTokens(creditLineHash);
     let collateralAsset: string = await (await this.creditLineContract.creditLineInfo(creditLineHash)).collateralAsset;
-    const CollateralToken: Token = new Token__factory(this.signer).attach(collateralAsset);
-    const collateralDecimal: BigNumberish = CollateralToken.address === zeroAddress ? 18 : await CollateralToken.decimals();
+    await this.tokenManager.updateTokenDecimals(collateralAsset);
+    const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(collateralAsset);
 
     return new BigNumber(_value.toString()).div(new BigNumber(10).pow(collateralDecimal)).toFixed(2);
   }
 
   public async withdrawCollateralFromCreditLine(creditLineHash: BytesLike, amount: string): Promise<ContractTransaction> {
     let collateralAsset: string = await (await this.creditLineContract.creditLineInfo(creditLineHash)).collateralAsset;
-    const CollateralToken: Token = new Token__factory(this.signer).attach(collateralAsset);
-    const collateralDecimal: BigNumberish = CollateralToken.address === zeroAddress ? 18 : await CollateralToken.decimals();
+    await this.tokenManager.updateTokenDecimals(collateralAsset);
+    const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(collateralAsset);
 
     let _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {

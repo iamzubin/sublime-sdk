@@ -14,64 +14,38 @@ import { PoolFactory__factory } from '../wrappers/factories/PoolFactory__factory
 import { Pool } from '../wrappers/Pool';
 import { Pool__factory } from '../wrappers/factories/Pool__factory';
 
-import { Token } from '../wrappers/Token';
-import { Token__factory } from '../wrappers/factories/Token__factory';
-
-import { IYield } from '../wrappers/IYield';
 import { IYield__factory } from '../wrappers/factories/IYield__factory';
 
 import { zeroAddress } from '../config/constants';
 const _interface = new ethers.utils.Interface(PoolAbi);
 const initializeFragement = _interface.getFunction('initialize');
 
+import { TokenManager } from '../tokenManager';
+
 export class PoolApi {
   private signer: Signer;
   private config: SublimeConfig;
+  private tokenManager: TokenManager;
 
   private poolFactory: PoolFactory;
-  private names = {};
-  private decimals = {};
 
-  constructor(signer: Signer, config: SublimeConfig) {
+  constructor(signer: Signer, config: SublimeConfig, tokenManager: TokenManager) {
     this.signer = signer;
     this.config = config;
+    this.tokenManager = tokenManager;
     this.poolFactory = new PoolFactory__factory(this.signer).attach(config.poolFactoryContractAddress);
-    this.names[zeroAddress] = 'ETH';
-    this.decimals[zeroAddress] = 18;
-  }
-
-  private async updateName(tokenAddress: string): Promise<string> {
-    tokenAddress = tokenAddress.toLowerCase();
-    if (tokenAddress in this.names) {
-      return this.names[tokenAddress];
-    } else {
-      let token: Token = await new Token__factory(this.signer).attach(tokenAddress);
-      this.names[tokenAddress] = await token.name();
-      return this.names[tokenAddress];
-    }
-  }
-
-  private async updateDecimals(tokenAddress: string): Promise<number> {
-    tokenAddress = tokenAddress.toLowerCase();
-    if (tokenAddress in this.decimals) {
-      return this.decimals[tokenAddress];
-    } else {
-      let token: Token = await new Token__factory(this.signer).attach(tokenAddress);
-      this.decimals[tokenAddress] = await token.decimals();
-      return this.decimals[tokenAddress];
-    }
   }
 
   public async createPool(params: PoolGenerateParams): Promise<ContractTransaction> {
-    const BorrowToken: Token = new Token__factory(this.signer).attach(params.borrowToken);
-    const CollateralToken: Token = new Token__factory(this.signer).attach(params.collateralToken);
+    await this.tokenManager.updateTokenDecimals(params.borrowToken);
+    const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(params.borrowToken);
 
-    const borrowDecimal: BigNumberish = params.borrowToken === zeroAddress ? 18 : await BorrowToken.decimals();
-    const collateralDecimal: BigNumberish = params.collateralToken === zeroAddress ? 18 : await CollateralToken.decimals();
+    await this.tokenManager.updateTokenDecimals(params.collateralToken);
+    const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(params.collateralToken);
 
-    let poolSize = new BigNumber(params.poolSize);
-    if (poolSize.isNaN() || poolSize.isZero() || poolSize.isNegative()) {
-      throw new Error('poolSize should be a valid number');
+    let borrowAmountRequests = new BigNumber(params.borrowAmountRequests);
+    if (borrowAmountRequests.isNaN() || borrowAmountRequests.isZero() || borrowAmountRequests.isNegative()) {
+      throw new Error('borrowAmountRequests should be a valid number');
     }
 
     let minborrowAmount = new BigNumber(params.minborrowAmount);
@@ -105,7 +79,7 @@ export class PoolApi {
     }
 
     return await this.poolFactory.createPool(
-      poolSize.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
+      borrowAmountRequests.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
       minborrowAmount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
       params.borrowToken,
       params.collateralToken,
@@ -117,6 +91,8 @@ export class PoolApi {
       collateralAmount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0),
       params.transferFromSavingsAccount,
       params.salt,
+      params.verifier,
+      params.lenderVerifier,
       {
         value:
           params.collateralToken === zeroAddress ? collateralAmount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0) : 0,
@@ -125,15 +101,15 @@ export class PoolApi {
   }
 
   public async generatePoolAddress(params: PoolGenerateParams): Promise<string> {
-    const BorrowToken: Token = new Token__factory(this.signer).attach(params.borrowToken);
-    const CollateralToken: Token = new Token__factory(this.signer).attach(params.collateralToken);
+    await this.tokenManager.updateTokenDecimals(params.borrowToken);
+    const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(params.borrowToken);
 
-    const borrowDecimal: BigNumberish = params.borrowToken === zeroAddress ? 18 : await BorrowToken.decimals();
-    const collateralDecimal: BigNumberish = params.collateralToken === zeroAddress ? 18 : await CollateralToken.decimals();
+    await this.tokenManager.updateTokenDecimals(params.collateralToken);
+    const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(params.collateralToken);
 
-    let poolSize = new BigNumber(params.poolSize);
-    if (poolSize.isNaN() || poolSize.isZero() || poolSize.isNegative()) {
-      throw new Error('poolSize should be a valid number');
+    let borrowAmountRequests = new BigNumber(params.borrowAmountRequests);
+    if (borrowAmountRequests.isNaN() || borrowAmountRequests.isZero() || borrowAmountRequests.isNegative()) {
+      throw new Error('borrowAmountRequests should be a valid number');
     }
 
     let minborrowAmount = new BigNumber(params.minborrowAmount);
@@ -170,7 +146,7 @@ export class PoolApi {
     let collectionPeriod = await this.poolFactory.collectionPeriod();
 
     const poolData = _interface.encodeFunctionData(initializeFragement, [
-      poolSize.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
+      borrowAmountRequests.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
       minborrowAmount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
       params.borrower,
       params.borrowToken,
@@ -196,14 +172,16 @@ export class PoolApi {
         '0x0000000000000000000000000000000000000001'
       )
     );
-    console.log('trying');
+
     return poolAddress;
   }
 
   public async depositCollateral(poolContract: string, amount: string, transferFromSavingsAccount: boolean): Promise<ContractTransaction> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
-    const CollateralToken: Token = new Token__factory(this.signer).attach(await (await pool.poolConstants()).collateralAsset);
-    const collateralDecimal: BigNumberish = CollateralToken.address === zeroAddress ? 18 : await CollateralToken.decimals();
+    const collateralAsset = (await pool.poolConstants()).collateralAsset;
+
+    await this.tokenManager.updateTokenDecimals(collateralAsset);
+    const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(collateralAsset);
 
     let _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
@@ -218,8 +196,10 @@ export class PoolApi {
 
   public async interestTillNow(poolContract: string): Promise<string> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
-    const BorrowToken: Token = new Token__factory(this.signer).attach(await (await pool.poolConstants()).borrowAsset);
-    const borrowDecimal: BigNumberish = BorrowToken.address === zeroAddress ? 18 : await BorrowToken.decimals();
+    const borrowAsset = (await pool.poolConstants()).borrowAsset;
+
+    await this.tokenManager.updateTokenDecimals(borrowAsset);
+    const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
     let interestTillNow = await (await pool.interestTillNow()).toString();
     return new BigNumber(interestTillNow).div(new BigNumber(10).pow(borrowDecimal.toFixed(0))).toFixed(2);
@@ -254,8 +234,10 @@ export class PoolApi {
 
   public async interestPerPeriod(poolContract: string, amount: string): Promise<string> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
-    const BorrowToken: Token = new Token__factory(this.signer).attach(await (await pool.poolConstants()).borrowAsset);
-    const borrowDecimal: BigNumberish = BorrowToken.address === zeroAddress ? 18 : await BorrowToken.decimals();
+    const borrowAsset = (await pool.poolConstants()).borrowAsset;
+
+    await this.tokenManager.updateTokenDecimals(borrowAsset);
+    const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
     let _amount = new BigNumber(amount).multipliedBy(new BigNumber(10).pow(borrowDecimal));
     let interestPerPeriod = await (await pool.interestPerPeriod(_amount.toFixed(0))).toString();
@@ -264,8 +246,10 @@ export class PoolApi {
 
   public async interestPerSecond(poolContract: string, amount: string): Promise<string> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
-    const BorrowToken: Token = new Token__factory(this.signer).attach(await (await pool.poolConstants()).borrowAsset);
-    const borrowDecimal: BigNumberish = BorrowToken.address === zeroAddress ? 18 : await BorrowToken.decimals();
+    const borrowAsset = (await pool.poolConstants()).borrowAsset;
+
+    await this.tokenManager.updateTokenDecimals(borrowAsset);
+    const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
     let _amount = new BigNumber(amount).multipliedBy(new BigNumber(10).pow(borrowDecimal));
     let interestPerSecond = await (await pool.interestPerSecond(_amount.toFixed(0))).toString();
@@ -291,8 +275,10 @@ export class PoolApi {
 
   public async getBalanceDetails(poolContract: string, lender: string): Promise<string> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
-    const _token: Token = new Token__factory(this.signer).attach(poolContract);
-    const _decimal = await _token.decimals();
+
+    await this.tokenManager.updateTokenDecimals(poolContract);
+    const _decimal: BigNumberish = this.tokenManager.getTokenDecimals(poolContract);
+
     const details = await (
       await pool.getBalanceDetails(lender)
     ).map((a) => new BigNumber(a.toString()).div(new BigNumber(10).pow(_decimal)));
@@ -301,8 +287,9 @@ export class PoolApi {
 
   public async getTotalSupply(poolContract: string): Promise<string> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
-    const _token: Token = new Token__factory(this.signer).attach(poolContract);
-    const _decimal = await _token.decimals();
+
+    await this.tokenManager.updateTokenDecimals(poolContract);
+    const _decimal: BigNumberish = this.tokenManager.getTokenDecimals(poolContract);
 
     let totalSupply = await pool.getTotalSupply();
     return new BigNumber(totalSupply.toString()).div(new BigNumber(10).pow(_decimal)).toFixed(2);
@@ -326,38 +313,50 @@ export class PoolApi {
     );
     for (let index = 0; index < allTokens.length; index++) {
       const element = allTokens[index];
-      await this.updateName(element);
-      await this.updateDecimals(element);
+      await this.tokenManager.updateAll(element);
     }
 
-    result.borrower = poolConstants.borrower;
+    let minBorrowFraction = await this.poolFactory.minBorrowFraction();
+
     result.borrowAmountRequested = new BigNumber(poolConstants.borrowAmountRequested.toString())
-      .div(new BigNumber(10).pow(this.decimals[poolConstants.borrowAsset.toLowerCase()]))
+      .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(poolConstants.borrowAsset.toLowerCase())))
       .toFixed(2);
-    result.minborrowAmount = new BigNumber(poolConstants.minborrowAmount.toString())
-      .div(new BigNumber(10).pow(this.decimals[poolConstants.borrowAsset.toLowerCase()]))
+    result.minborrowAmount = new BigNumber(poolConstants.borrowAmountRequested.toString())
+      .multipliedBy(minBorrowFraction.toString())
+      .div(new BigNumber(10).pow(28))
+      .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(poolConstants.borrowAsset.toLowerCase())))
       .toFixed(2);
     result.loanStartTime = poolConstants.loanStartTime.toString();
     result.loanWithdrawalDeadline = poolConstants.loanWithdrawalDeadline.toString();
-    result.borrowAsset = { address: poolConstants.borrowAsset, name: this.names[poolConstants.borrowAsset.toLowerCase()] };
+    result.borrowAsset = {
+      address: poolConstants.borrowAsset,
+      name: this.tokenManager.getTokenName(poolConstants.borrowAsset.toLowerCase()),
+      pricePerAssetInUSD: this.tokenManager.getPricePerAsset(poolConstants.borrowAsset),
+      logo: this.tokenManager.getLogo(poolConstants.borrowAsset),
+    };
     result.idealCollateralRatio = new BigNumber(poolConstants.idealCollateralRatio.toString()).div(new BigNumber(10).pow(28)).toFixed(2);
     result.borrowRate = new BigNumber(poolConstants.borrowRate.toString()).div(new BigNumber(10).pow(28)).toFixed(2);
     result.noOfRepaymentIntervals = poolConstants.noOfRepaymentIntervals.toString();
     result.repaymentInterval = poolConstants.repaymentInterval.toString();
-    result.collateralAsset = { address: poolConstants.collateralAsset, name: this.names[poolConstants.collateralAsset.toLowerCase()]};
+    result.collateralAsset = {
+      address: poolConstants.collateralAsset,
+      name: this.tokenManager.getTokenName(poolConstants.collateralAsset),
+      pricePerAssetInUSD: this.tokenManager.getPricePerAsset(poolConstants.collateralAsset),
+      logo: this.tokenManager.getLogo(poolConstants.collateralAsset),
+    };
     result.poolSavingsStrategy = poolConstants.poolSavingsStrategy;
 
     const poolVars = await pool.poolVars();
 
     result.baseLiquidityShares = new BigNumber(poolVars.baseLiquidityShares.toString())
-      .div(new BigNumber(10).pow(this.decimals[liquidityToken.toLowerCase()]))
+      .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(liquidityToken.toLowerCase())))
       .toFixed(2);
     result.extraLiquidityShares = new BigNumber(poolVars.extraLiquidityShares.toString())
-      .div(new BigNumber(10).pow(this.decimals[liquidityToken.toLowerCase()]))
+      .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(liquidityToken.toLowerCase())))
       .toFixed(2);
     result.loanStatus = LoanStatus[poolVars.loanStatus.toString()];
-    result.penalityLiquidityAmount = new BigNumber(poolVars.penalityLiquidityAmount.toString())
-      .div(new BigNumber(10).pow(this.decimals[poolConstants.collateralAsset.toLowerCase()]))
+    result.penaltyLiquidityAmount = new BigNumber(poolVars.penaltyLiquidityAmount.toString())
+      .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(poolConstants.collateralAsset.toLowerCase())))
       .toFixed(2);
     return result;
   }

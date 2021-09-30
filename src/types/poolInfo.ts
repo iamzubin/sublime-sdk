@@ -34,5 +34,5 @@ export interface PoolInfo {
   baseLiquidityShares: string;
   extraLiquidityShares: string;
   loanStatus: LoanStatus;
-  penalityLiquidityAmount: string;
+  penaltyLiquidityAmount: string;
 }

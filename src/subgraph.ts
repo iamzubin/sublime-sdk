@@ -29,18 +29,17 @@ import { Signer } from '@ethersproject/abstract-signer';
 import { BigNumber } from 'bignumber.js';
 import { zeroAddress } from './config/constants';
 import { sha256 } from '@ethersproject/sha2';
+
+import { TokenManager } from './tokenManager';
 export class SublimeSubgraph {
   private subgraphUrl: string;
   private signer: Signer;
+  private tokenManager: TokenManager;
 
-  private decimals = {};
-  private names = {};
-
-  constructor(url: string, signer: Signer) {
+  constructor(url: string, signer: Signer, tokenManager: TokenManager) {
     this.subgraphUrl = url;
     this.signer = signer;
-    this.decimals[zeroAddress] = 18;
-    this.names[zeroAddress] = 'ETH';
+    this.tokenManager = tokenManager;
   }
 
   async getPools(): Promise<PoolDetail[]> {
@@ -93,36 +92,18 @@ export class SublimeSubgraph {
         poolToken: {
           address: poolToken,
           name: 'Pending...',
+          pricePerAssetInUSD: '00.00',
+          logo: 'Logo pending ...',
         },
         suppliedToken: {
           address: suppliedToken,
           name: 'Pending...',
+          pricePerAssetInUSD: '00.00',
+          logo: 'Logo pending ...',
         },
       });
     }
     return lenders;
-  }
-
-  private async updateDecimals(tokenAddress: string): Promise<number> {
-    tokenAddress = tokenAddress.toLowerCase();
-    if (tokenAddress in this.decimals) {
-      return this.decimals[tokenAddress];
-    } else {
-      let token: Token = await new Token__factory(this.signer).attach(tokenAddress);
-      this.decimals[tokenAddress] = await token.decimals();
-      return this.decimals[tokenAddress];
-    }
-  }
-
-  private async updateName(tokenAddress: string): Promise<string> {
-    tokenAddress = tokenAddress.toLowerCase();
-    if (tokenAddress in this.names) {
-      return this.names[tokenAddress];
-    } else {
-      let token: Token = await new Token__factory(this.signer).attach(tokenAddress);
-      this.names[tokenAddress] = await token.name();
-      return this.names[tokenAddress];
-    }
   }
 
   private async transformToPoolDetail(data: any[]): Promise<PoolDetail[]> {
@@ -131,20 +112,33 @@ export class SublimeSubgraph {
     let allTokens = [...borrowTokens, ...collateralTokens].filter((value, index, array) => array.indexOf(value) === index);
     for (let index = 0; index < allTokens.length; index++) {
       const element = allTokens[index];
-      await this.updateDecimals(element);
-      await this.updateName(element);
+      await this.tokenManager.updateAll(element);
     }
     return data.map((a) => {
       return {
         address: a.id,
         poolType: a.loanStatus,
-        borrowedAmount: new BigNumber(a.borrowAmountRequested).div(new BigNumber(10).pow(this.decimals[a.borrowAsset])).toFixed(2),
-        lentAmount: new BigNumber(a.lentAmount).div(new BigNumber(10).pow(this.decimals[a.collateralAsset])).toFixed(2),
+        borrowedAmount: new BigNumber(a.borrowAmountRequested)
+          .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.borrowAsset)))
+          .toFixed(2),
+        lentAmount: new BigNumber(a.lentAmount)
+          .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
+          .toFixed(2),
         borrowRate: new BigNumber(a.borrowRate).div(new BigNumber(10).pow(28)).toFixed(2),
         nextPayment: new BigNumber(a.nextRepayTime).toString(),
         repaymentProgress: new BigNumber(this.getRandomInt(10000)).div(100).toFixed(2),
-        borrowAsset: { address: a.borrowAsset, name: this.names[a.borrowAsset] },
-        collateralAsset: { address: a.collateralAsset, name: this.names[a.collateralAsset] },
+        borrowAsset: {
+          address: a.borrowAsset,
+          name: this.tokenManager.getTokenName(a.borrowAsset),
+          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.borrowAsset),
+          logo: this.tokenManager.getLogo(a.borrowAsset),
+        },
+        collateralAsset: {
+          address: a.collateralAsset,
+          name: this.tokenManager.getTokenName(a.collateralAsset),
+          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.collateralAsset),
+          logo: this.tokenManager.getLogo(a.collateralAsset),
+        },
         estimatedEndDate: new BigNumber(this.getRandomInt(1000000)).multipliedBy(new BigNumber(10).pow(4)).toString(),
         lockedCollateral: new BigNumber(this.getRandomInt(10000)).div(100).toFixed(2),
         collectionProgress: new BigNumber(this.getRandomInt(100)).toFixed(2),
@@ -188,15 +182,16 @@ export class SublimeSubgraph {
     let allTokens = [...collateralTokens].filter((value, index, array) => array.indexOf(value) === index);
     for (let index = 0; index < allTokens.length; index++) {
       const element = allTokens[index];
-      await this.updateDecimals(element);
-      await this.updateName(element);
+      await this.tokenManager.updateAll(element);
     }
 
     return result.map((a) => {
       return {
         token: {
           address: a.asset,
-          name: this.names[a.asset],
+          name: this.tokenManager.getTokenName(a.asset),
+          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.asset),
+          logo: this.tokenManager.getLogo(a.asset),
         },
         deposited: new BigNumber(this.getRandomInt(10000000)).div(100).toFixed(2),
         interestEarned: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
@@ -228,26 +223,31 @@ export class SublimeSubgraph {
     let allTokens = [...borrowTokens, ...collateralTokens].filter((value, index, array) => array.indexOf(value) === index);
     for (let index = 0; index < allTokens.length; index++) {
       const element = allTokens[index];
-      await this.updateDecimals(element);
-      await this.updateName(element);
+      await this.tokenManager.updateAll(element);
     }
 
     return result.map((a) => {
       return {
-        currentDebt: new BigNumber(a.collateralAmount).div(new BigNumber(10).pow(this.decimals[a.collateralAsset])).toFixed(2),
-        principal: new BigNumber(a.principal).div(new BigNumber(10).pow(this.decimals[a.collateralAsset])).toFixed(2),
+        currentDebt: new BigNumber(a.collateralAmount)
+          .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
+          .toFixed(2),
+        principal: new BigNumber(a.principal).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset))).toFixed(2),
         interestAccrued: new BigNumber(this.getRandomInt(10000)).div(100).toFixed(2),
         collateralAsset: {
           address: a.collateralAsset,
-          name: this.names[a.collateralAsset],
+          name: this.tokenManager.getTokenName(a.collateralAsset),
+          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.collateralAsset),
+          logo: this.tokenManager.getLogo(a.collateralAsset),
         },
         collateralRatio: new BigNumber(this.getRandomInt(50000)).div(100).toFixed(2),
-        creditLimit: new BigNumber(a.BorrowLimit).div(new BigNumber(10).pow(this.decimals[a.BorrowAsset])).toFixed(2),
+        creditLimit: new BigNumber(a.BorrowLimit).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.BorrowAsset))).toFixed(2),
         interestRate: new BigNumber(a.borrowRate).div(new BigNumber(10).pow(28)).toFixed(2),
         idealCollateralRatio: new BigNumber(a.idealCollateralRatio).div(new BigNumber(10).pow(28)).toFixed(2),
         borrowAsset: {
           address: a.BorrowAsset,
-          name: this.names[a.BorrowAsset],
+          name: this.tokenManager.getTokenName(a.BorrowAsset),
+          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.BorrowAsset),
+          logo: this.tokenManager.getLogo(a.BorrowAsset),
         },
         liquidationThreshold: new BigNumber(a.liquidationThreshold).div(new BigNumber(10).pow(28)).toFixed(2),
         autoLiquidate: a.autoLiquidation,
@@ -263,26 +263,31 @@ export class SublimeSubgraph {
     let allTokens = [...borrowTokens, ...collateralTokens].filter((value, index, array) => array.indexOf(value) === index);
     for (let index = 0; index < allTokens.length; index++) {
       const element = allTokens[index];
-      await this.updateDecimals(element);
-      await this.updateName(element);
+      await this.tokenManager.updateAll(element);
     }
 
     return result.map((a) => {
       return {
-        currentDebt: new BigNumber(a.collateralAmount).div(new BigNumber(10).pow(this.decimals[a.collateralAsset])).toFixed(2),
-        principal: new BigNumber(a.principal).div(new BigNumber(10).pow(this.decimals[a.collateralAsset])).toFixed(2),
+        currentDebt: new BigNumber(a.collateralAmount)
+          .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
+          .toFixed(2),
+        principal: new BigNumber(a.principal).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset))).toFixed(2),
         interestAccrued: new BigNumber(this.getRandomInt(10000)).div(100).toFixed(2),
         collateralAsset: {
           address: a.collateralAsset,
-          name: this.names[a.collateralAsset],
+          name: this.tokenManager.getTokenName(a.collateralAsset),
+          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.collateralAsset),
+          logo: this.tokenManager.getLogo(a.collateralAsset),
         },
         collateralRatio: new BigNumber(this.getRandomInt(50000)).div(100).toFixed(2),
-        creditLimit: new BigNumber(a.BorrowLimit).div(new BigNumber(10).pow(this.decimals[a.BorrowAsset])).toFixed(2),
+        creditLimit: new BigNumber(a.BorrowLimit).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.BorrowAsset))).toFixed(2),
         interestRate: new BigNumber(a.borrowRate).div(new BigNumber(10).pow(28)).toFixed(2),
         idealCollateralRatio: new BigNumber(a.idealCollateralRatio).div(new BigNumber(10).pow(28)).toFixed(2),
         borrowAsset: {
           address: a.BorrowAsset,
-          name: this.names[a.BorrowAsset],
+          name: this.tokenManager.getTokenName(a.BorrowAsset),
+          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.BorrowAsset),
+          logo: this.tokenManager.getLogo(a.BorrowAsset),
         },
         liquidationThreshold: new BigNumber(a.liquidationThreshold).div(new BigNumber(10).pow(28)).toFixed(2),
         autoLiquidate: a.autoLiquidation,

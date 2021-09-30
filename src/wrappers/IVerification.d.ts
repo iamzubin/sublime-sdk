@@ -11,6 +11,7 @@ import {
   PopulatedTransaction,
   Contract,
   ContractTransaction,
+  Overrides,
   CallOverrides,
 } from 'ethers';
 import { BytesLike } from '@ethersproject/bytes';
@@ -20,12 +21,18 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface IVerificationInterface extends ethers.utils.Interface {
   functions: {
-    'isUser(address)': FunctionFragment;
+    'isUser(address,address)': FunctionFragment;
+    'registerMasterAddress(address,bool)': FunctionFragment;
+    'unregisterMasterAddress(address,address)': FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'isUser', values: [string]): string;
+  encodeFunctionData(functionFragment: 'isUser', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'registerMasterAddress', values: [string, boolean]): string;
+  encodeFunctionData(functionFragment: 'unregisterMasterAddress', values: [string, string]): string;
 
   decodeFunctionResult(functionFragment: 'isUser', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'registerMasterAddress', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'unregisterMasterAddress', data: BytesLike): Result;
 
   events: {};
 }
@@ -74,32 +81,136 @@ export class IVerification extends Contract {
   interface: IVerificationInterface;
 
   functions: {
-    isUser(_user: string, overrides?: CallOverrides): Promise<[boolean]>;
+    isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<[boolean]>;
 
-    'isUser(address)'(_user: string, overrides?: CallOverrides): Promise<[boolean]>;
+    'isUser(address,address)'(_user: string, _verifier: string, overrides?: CallOverrides): Promise<[boolean]>;
+
+    registerMasterAddress(
+      _masterAddress: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    'registerMasterAddress(address,bool)'(
+      _masterAddress: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    unregisterMasterAddress(
+      _masterAddress: string,
+      _verifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    'unregisterMasterAddress(address,address)'(
+      _masterAddress: string,
+      _verifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
-  isUser(_user: string, overrides?: CallOverrides): Promise<boolean>;
+  isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<boolean>;
 
-  'isUser(address)'(_user: string, overrides?: CallOverrides): Promise<boolean>;
+  'isUser(address,address)'(_user: string, _verifier: string, overrides?: CallOverrides): Promise<boolean>;
+
+  registerMasterAddress(
+    _masterAddress: string,
+    _isMasterLinked: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  'registerMasterAddress(address,bool)'(
+    _masterAddress: string,
+    _isMasterLinked: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  unregisterMasterAddress(
+    _masterAddress: string,
+    _verifier: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  'unregisterMasterAddress(address,address)'(
+    _masterAddress: string,
+    _verifier: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
-    isUser(_user: string, overrides?: CallOverrides): Promise<boolean>;
+    isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<boolean>;
 
-    'isUser(address)'(_user: string, overrides?: CallOverrides): Promise<boolean>;
+    'isUser(address,address)'(_user: string, _verifier: string, overrides?: CallOverrides): Promise<boolean>;
+
+    registerMasterAddress(_masterAddress: string, _isMasterLinked: boolean, overrides?: CallOverrides): Promise<void>;
+
+    'registerMasterAddress(address,bool)'(_masterAddress: string, _isMasterLinked: boolean, overrides?: CallOverrides): Promise<void>;
+
+    unregisterMasterAddress(_masterAddress: string, _verifier: string, overrides?: CallOverrides): Promise<void>;
+
+    'unregisterMasterAddress(address,address)'(_masterAddress: string, _verifier: string, overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
-    isUser(_user: string, overrides?: CallOverrides): Promise<BigNumber>;
+    isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'isUser(address)'(_user: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'isUser(address,address)'(_user: string, _verifier: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    registerMasterAddress(
+      _masterAddress: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    'registerMasterAddress(address,bool)'(
+      _masterAddress: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    unregisterMasterAddress(
+      _masterAddress: string,
+      _verifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    'unregisterMasterAddress(address,address)'(
+      _masterAddress: string,
+      _verifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    isUser(_user: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'isUser(address)'(_user: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'isUser(address,address)'(_user: string, _verifier: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    registerMasterAddress(
+      _masterAddress: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    'registerMasterAddress(address,bool)'(
+      _masterAddress: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    unregisterMasterAddress(
+      _masterAddress: string,
+      _verifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    'unregisterMasterAddress(address,address)'(
+      _masterAddress: string,
+      _verifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
   };
 }

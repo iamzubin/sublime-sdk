@@ -1,5 +1,6 @@
 import { SublimeConnector } from './sublime';
 import { SublimeSubgraph } from './subgraph';
+import { TokenManager } from './tokenManager';
 
 import { Provider, TransactionReceipt } from '@ethersproject/providers';
 import { Signer } from '@ethersproject/abstract-signer';
@@ -10,8 +11,9 @@ export class SublimeSdk {
   private sublimeSubgraph: SublimeSubgraph;
 
   constructor(provider: Provider, signer: Signer, subgraphUrl: string, config: SublimeConfig) {
-    this.sublimeConnector = new SublimeConnector(provider, signer, config);
-    this.sublimeSubgraph = new SublimeSubgraph(subgraphUrl, signer);
+    let tokenManager = new TokenManager(signer);
+    this.sublimeConnector = new SublimeConnector(provider, signer, config, tokenManager);
+    this.sublimeSubgraph = new SublimeSubgraph(subgraphUrl, signer, tokenManager);
   }
 
   Connector(): SublimeConnector {

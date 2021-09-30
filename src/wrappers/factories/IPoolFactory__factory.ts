@@ -111,19 +111,13 @@ const _abi = [
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'pool',
-        type: 'address',
-      },
-    ],
-    name: 'openBorrowPoolRegistry',
+    inputs: [],
+    name: 'minBorrowFraction',
     outputs: [
       {
-        internalType: 'bool',
+        internalType: 'uint256',
         name: '',
-        type: 'bool',
+        type: 'uint256',
       },
     ],
     stateMutability: 'view',
@@ -144,12 +138,31 @@ const _abi = [
   },
   {
     inputs: [],
-    name: 'poolCancelPenalityFraction',
+    name: 'poolCancelPenaltyFraction',
     outputs: [
       {
         internalType: 'uint256',
         name: '',
         type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'pool',
+        type: 'address',
+      },
+    ],
+    name: 'poolRegistry',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
       },
     ],
     stateMutability: 'view',
@@ -195,19 +208,13 @@ const _abi = [
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'token',
-        type: 'address',
-      },
-    ],
-    name: 'volatilityThreshold',
+    inputs: [],
+    name: 'userRegistry',
     outputs: [
       {
-        internalType: 'uint256',
+        internalType: 'address',
         name: '',
-        type: 'uint256',
+        type: 'address',
       },
     ],
     stateMutability: 'view',

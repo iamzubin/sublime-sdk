@@ -1,7 +1,7 @@
 import { BytesLike } from 'ethers';
 
 export interface PoolGenerateParams {
-  poolSize: string;
+  borrowAmountRequests: string;
   minborrowAmount: string;
   borrower: string;
   borrowToken: string;
@@ -16,6 +16,8 @@ export interface PoolGenerateParams {
   // loanWithdrawDuration: string;
   // collectionPeriod: string;
   salt: BytesLike;
+  verifier: string;
+  lenderVerifier: string;
 }
 
 export enum LoanStatus {

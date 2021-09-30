@@ -1,8 +1,8 @@
 export interface Asset {
-  name?: string;
+  name: string;
   address: string;
-  logo?: string;
-  pricePerAssetInUSD?: string;
+  logo: string;
+  pricePerAssetInUSD: string;
 }
 
 export interface Strategy {

@@ -156,7 +156,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: 'getTotalSupply',
+    name: 'getTokensLent',
     outputs: [
       {
         internalType: 'uint256',
@@ -174,8 +174,13 @@ const _abi = [
         name: '_poolToken',
         type: 'address',
       },
+      {
+        internalType: 'address',
+        name: '_lenderVerifier',
+        type: 'address',
+      },
     ],
-    name: 'setPoolToken',
+    name: 'setConstants',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
