@@ -14,4 +14,5 @@ export interface SublimeConfig {
   noStrategyAddress: string;
   repaymentContractAddress: string;
   extensionContractAddress: string;
+  adminVerifierContractAddress: string;
 }

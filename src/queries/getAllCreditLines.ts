@@ -72,6 +72,7 @@ async function _getCreditLinesByLender(url: string, status, requestByLender, len
   return allData;
 }
 
+// creditLineTypes ACTIVE, CLOSED, LIQUIDATED, NOT_CREATED, REQUESTED, CANCELLED
 export async function getCreditLinesByBorrower(url: string, borrower, count, skip): Promise<any[]> {
   let data = [];
   let activeOnes = await _getCreditLinesByBorrower(url, 'ACTIVE', false, borrower, count, skip);
@@ -89,5 +90,20 @@ export async function getCreditLinesLender(url: string, lender, count, skip): Pr
   let liquidatedOnes = await _getCreditLinesByLender(url, 'LIQUIDATED', true, lender, count, skip);
   let notCreatedOnes = await _getCreditLinesByLender(url, 'NOT_CREATED', true, lender, count, skip);
   data = [...activeOnes, ...closedOnes, ...liquidatedOnes, ...notCreatedOnes];
+  return data;
+}
+
+export async function getPendingCreditLinesByBorrower(url: string, lender, count, skip): Promise<any[]> {
+  let data = [];
+  let pendingBorrow = await _getCreditLinesByBorrower(url, 'REQUESTED', false, lender, count, skip);
+  data = [...pendingBorrow];
+  return data;
+}
+
+export async function getPendingCreditLinesByLender(url: string, lender, count, skip): Promise<any[]> {
+  let data = [];
+  let pendingLend = await _getCreditLinesByLender(url, 'REQUESTED', true, lender, count, skip);
+
+  data = [...pendingLend];
   return data;
 }

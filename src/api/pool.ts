@@ -48,9 +48,9 @@ export class PoolApi {
       throw new Error('borrowAmountRequests should be a valid number');
     }
 
-    let minborrowAmount = new BigNumber(params.minborrowAmount);
-    if (minborrowAmount.isNaN() || minborrowAmount.isZero() || minborrowAmount.isNegative()) {
-      throw new Error('minborrowAmount should be a valid number');
+    let collateralVolatilityThreshold = new BigNumber(params.collateralVolatilityThreshold);
+    if (collateralVolatilityThreshold.isNaN() || collateralVolatilityThreshold.isZero() || collateralVolatilityThreshold.isNegative()) {
+      throw new Error('collateralVolatilityThreshold should be a valid number');
     }
 
     let collateralRatio = new BigNumber(params.collateralRatio);
@@ -80,18 +80,18 @@ export class PoolApi {
 
     return await this.poolFactory.createPool(
       borrowAmountRequests.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
-      minborrowAmount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
+      borrowRate.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       params.borrowToken,
       params.collateralToken,
       collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
-      borrowRate.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
+      collateralVolatilityThreshold.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       repaymentInterval.toFixed(0),
       noOfRepaymentIntervals.toFixed(0),
       params.strategy,
       collateralAmount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0),
       params.transferFromSavingsAccount,
       params.salt,
-      params.verifier,
+      this.config.adminVerifierContractAddress,
       params.lenderVerifier,
       {
         value:
@@ -112,9 +112,9 @@ export class PoolApi {
       throw new Error('borrowAmountRequests should be a valid number');
     }
 
-    let minborrowAmount = new BigNumber(params.minborrowAmount);
-    if (minborrowAmount.isNaN() || minborrowAmount.isZero() || minborrowAmount.isNegative()) {
-      throw new Error('minborrowAmount should be a valid number');
+    let collateralVolatilityThreshold = new BigNumber(params.collateralVolatilityThreshold);
+    if (collateralVolatilityThreshold.isNaN() || collateralVolatilityThreshold.isZero() || collateralVolatilityThreshold.isNegative()) {
+      throw new Error('collateralVolatilityThreshold should be a valid number');
     }
 
     let collateralRatio = new BigNumber(params.collateralRatio);
@@ -147,12 +147,12 @@ export class PoolApi {
 
     const poolData = _interface.encodeFunctionData(initializeFragement, [
       borrowAmountRequests.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
-      minborrowAmount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
+      borrowRate.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       params.borrower,
       params.borrowToken,
       params.collateralToken,
       collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
-      borrowRate.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
+      collateralVolatilityThreshold.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       repaymentInterval.toFixed(0),
       noOfRepaymentIntervals.toFixed(0),
       params.strategy,

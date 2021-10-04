@@ -105,8 +105,15 @@ export interface CreditLineDetail {
   borrowAsset: Asset;
   liquidationThreshold: string;
   autoLiquidate: boolean;
+  lender: CreditLineUser;
+  borrower: CreditLineUser;
+  type: string;
 }
-
+export interface CreditLineUser {
+  address: string;
+  name?: string;
+  username?: string;
+}
 export interface CreditLineHistory {
   title: string;
   description: string;
