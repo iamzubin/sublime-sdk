@@ -190,7 +190,10 @@ export class PoolApi {
 
     return pool.depositCollateral(
       _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal.toString())).toFixed(0),
-      transferFromSavingsAccount
+      transferFromSavingsAccount,
+      {
+        value: collateralAsset === zeroAddress ? _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal.toString())).toFixed(0) : 0
+      }
     );
   }
 
@@ -201,7 +204,7 @@ export class PoolApi {
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
-    let interestTillNow = await (await pool.interestTillNow()).toString();
+    let interestTillNow = await (await pool.interestToPay()).toString();
     return new BigNumber(interestTillNow).div(new BigNumber(10).pow(borrowDecimal.toFixed(0))).toFixed(2);
   }
 
@@ -229,7 +232,7 @@ export class PoolApi {
     recieveLiquidityShare: boolean
   ): Promise<ContractTransaction> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
-    return await pool.liquidateLender(lender, fromSavingsAccount, toSavingsAccount, recieveLiquidityShare);
+    return await pool.liquidateForLender(lender, fromSavingsAccount, toSavingsAccount, recieveLiquidityShare);
   }
 
   public async interestPerPeriod(poolContract: string, amount: string): Promise<string> {
@@ -241,7 +244,8 @@ export class PoolApi {
 
     let _amount = new BigNumber(amount).multipliedBy(new BigNumber(10).pow(borrowDecimal));
     let interestPerPeriod = await (await pool.interestPerPeriod(_amount.toFixed(0))).toString();
-    return new BigNumber(interestPerPeriod).div(new BigNumber(10).pow(borrowDecimal)).toFixed(2);
+    let value = new BigNumber(interestPerPeriod).div(new BigNumber(10).pow(borrowDecimal));
+    return value.div(new BigNumber(10).pow(30)).toFixed(2);
   }
 
   public async interestPerSecond(poolContract: string, amount: string): Promise<string> {
@@ -254,7 +258,8 @@ export class PoolApi {
     let _amount = new BigNumber(amount).multipliedBy(new BigNumber(10).pow(borrowDecimal));
     let interestPerSecond = await (await pool.interestPerSecond(_amount.toFixed(0))).toString();
 
-    return new BigNumber(interestPerSecond).div(new BigNumber(10).pow(borrowDecimal)).toFixed(2);
+    let value = new BigNumber(interestPerSecond).div(new BigNumber(10).pow(borrowDecimal));
+    return value.div(new BigNumber(10).pow(30)).toFixed(2);
   }
 
   public async calculateCurrentPeriod(poolContract: string): Promise<string> {

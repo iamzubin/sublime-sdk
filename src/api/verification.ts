@@ -18,10 +18,6 @@ export class VerificationAPI {
     this.adminVerifier = new AdminVerifier__factory(this.signer).attach(config.adminVerifierContractAddress);
   }
 
-  public async getOffchainDetails(user: string): Promise<BytesLike> {
-    return this.verification.registeredUsers(user);
-  }
-
   public async isUser(user: string): Promise<boolean> {
     return this.verification.isUser(user, this.adminVerifier.address);
   }

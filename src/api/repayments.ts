@@ -21,7 +21,7 @@ export class RepaymentApi {
   }
 
   public async getInterestPerSecond(pool: string): Promise<string> {
-    const poolConstants = await this.repayments.repaymentConstants(pool);
+    const poolConstants = await this.repayments.repayInfo(pool);
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
@@ -34,7 +34,7 @@ export class RepaymentApi {
   }
 
   public async getInterestDueTillInstalmentDeadline(pool: string): Promise<string> {
-    const poolConstants = await this.repayments.repaymentConstants(pool);
+    const poolConstants = await this.repayments.repayInfo(pool);
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
@@ -63,7 +63,7 @@ export class RepaymentApi {
   }
 
   public async getInterestLeft(pool: string): Promise<string> {
-    const poolConstants = await this.repayments.repaymentConstants(pool);
+    const poolConstants = await this.repayments.repayInfo(pool);
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
@@ -72,7 +72,7 @@ export class RepaymentApi {
   }
 
   public async getInterestOverdue(pool: string): Promise<string> {
-    const poolConstants = await this.repayments.repaymentConstants(pool);
+    const poolConstants = await this.repayments.repayInfo(pool);
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
@@ -81,7 +81,7 @@ export class RepaymentApi {
   }
 
   public async repayAmount(pool: string, amount: string): Promise<ContractTransaction> {
-    const poolConstants = await this.repayments.repaymentConstants(pool);
+    const poolConstants = await this.repayments.repayInfo(pool);
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
@@ -90,7 +90,7 @@ export class RepaymentApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.repayments.repayAmount(pool, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0));
+    return this.repayments.repay(pool, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0));
   }
 
   public async repayPrincipal(pool: string): Promise<ContractTransaction> {
@@ -98,7 +98,7 @@ export class RepaymentApi {
   }
 
   public async getTotalRepaidAmount(pool: string): Promise<string> {
-    const poolConstants = await this.repayments.repaymentConstants(pool);
+    const poolConstants = await this.repayments.repayInfo(pool);
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
