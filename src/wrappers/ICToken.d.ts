@@ -23,6 +23,7 @@ interface ICTokenInterface extends ethers.utils.Interface {
   functions: {
     'balanceOfUnderlying(address)': FunctionFragment;
     'exchangeRateCurrent()': FunctionFragment;
+    'exchangeRateStored()': FunctionFragment;
     'liquidateBorrow(address,uint256,address)': FunctionFragment;
     'mint(uint256)': FunctionFragment;
     'redeem(uint256)': FunctionFragment;
@@ -35,6 +36,7 @@ interface ICTokenInterface extends ethers.utils.Interface {
 
   encodeFunctionData(functionFragment: 'balanceOfUnderlying', values: [string]): string;
   encodeFunctionData(functionFragment: 'exchangeRateCurrent', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'exchangeRateStored', values?: undefined): string;
   encodeFunctionData(functionFragment: 'liquidateBorrow', values: [string, BigNumberish, string]): string;
   encodeFunctionData(functionFragment: 'mint', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'redeem', values: [BigNumberish]): string;
@@ -46,6 +48,7 @@ interface ICTokenInterface extends ethers.utils.Interface {
 
   decodeFunctionResult(functionFragment: 'balanceOfUnderlying', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'exchangeRateCurrent', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'exchangeRateStored', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'liquidateBorrow', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'mint', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'redeem', data: BytesLike): Result;
@@ -112,6 +115,10 @@ export class ICToken extends Contract {
     exchangeRateCurrent(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     'exchangeRateCurrent()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    exchangeRateStored(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    'exchangeRateStored()'(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     liquidateBorrow(
       borrower: string,
@@ -184,6 +191,10 @@ export class ICToken extends Contract {
 
   'exchangeRateCurrent()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
+  exchangeRateStored(overrides?: CallOverrides): Promise<BigNumber>;
+
+  'exchangeRateStored()'(overrides?: CallOverrides): Promise<BigNumber>;
+
   liquidateBorrow(
     borrower: string,
     amount: BigNumberish,
@@ -249,6 +260,10 @@ export class ICToken extends Contract {
 
     'exchangeRateCurrent()'(overrides?: CallOverrides): Promise<BigNumber>;
 
+    exchangeRateStored(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'exchangeRateStored()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     liquidateBorrow(borrower: string, amount: BigNumberish, collateral: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'liquidateBorrow(address,uint256,address)'(
@@ -297,6 +312,10 @@ export class ICToken extends Contract {
     exchangeRateCurrent(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     'exchangeRateCurrent()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    exchangeRateStored(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'exchangeRateStored()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     liquidateBorrow(
       borrower: string,
@@ -360,6 +379,10 @@ export class ICToken extends Contract {
     exchangeRateCurrent(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     'exchangeRateCurrent()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    exchangeRateStored(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'exchangeRateStored()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     liquidateBorrow(
       borrower: string,

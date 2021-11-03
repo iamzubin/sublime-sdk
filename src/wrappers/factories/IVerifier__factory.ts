@@ -15,22 +15,41 @@ export class IVerifier__factory {
 
 const _abi = [
   {
+    anonymous: false,
     inputs: [
       {
+        indexed: false,
         internalType: 'address',
-        name: '_user',
+        name: 'user',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'bool',
+        name: 'isMasterLinked',
+        type: 'bool',
+      },
+      {
+        indexed: false,
+        internalType: 'string',
+        name: 'metadata',
+        type: 'string',
+      },
+    ],
+    name: 'UserRegistered',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'user',
         type: 'address',
       },
     ],
-    name: 'verify',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
+    name: 'UserUnregistered',
+    type: 'event',
   },
 ];

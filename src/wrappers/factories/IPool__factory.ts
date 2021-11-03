@@ -15,6 +15,201 @@ export class IPool__factory {
 
 const _abi = [
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'AmountBorrowed',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'borrower',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'sharesReceived',
+        type: 'uint256',
+      },
+    ],
+    name: 'CollateralAdded',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'borrower',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'CollateralWithdrawn',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'liquidator',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'lender',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: '_tokenReceived',
+        type: 'uint256',
+      },
+    ],
+    name: 'LenderLiquidated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amountSupplied',
+        type: 'uint256',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'lenderAddress',
+        type: 'address',
+      },
+    ],
+    name: 'LiquiditySupplied',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'lenderAddress',
+        type: 'address',
+      },
+    ],
+    name: 'LiquidityWithdrawn',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'borrower',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'lender',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'sharesReceived',
+        type: 'uint256',
+      },
+    ],
+    name: 'MarginCallCollateralAdded',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'lenderAddress',
+        type: 'address',
+      },
+    ],
+    name: 'MarginCalled',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [],
+    name: 'PoolCancelled',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [],
+    name: 'PoolClosed',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'liquidator',
+        type: 'address',
+      },
+    ],
+    name: 'PoolLiquidated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [],
+    name: 'PoolTerminated',
+    type: 'event',
+  },
+  {
     inputs: [
       {
         internalType: 'address',
@@ -35,29 +230,6 @@ const _abi = [
     name: 'addCollateralInMarginCall',
     outputs: [],
     stateMutability: 'payable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_from',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: '_to',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: '_amount',
-        type: 'uint256',
-      },
-    ],
-    name: 'beforeTransfer',
-    outputs: [],
-    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -156,7 +328,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: 'getTokensLent',
+    name: 'totalSupply',
     outputs: [
       {
         internalType: 'uint256',
@@ -165,24 +337,6 @@ const _abi = [
       },
     ],
     stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_poolToken',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: '_lenderVerifier',
-        type: 'address',
-      },
-    ],
-    name: 'setConstants',
-    outputs: [],
-    stateMutability: 'nonpayable',
     type: 'function',
   },
   {

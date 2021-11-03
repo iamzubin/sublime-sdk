@@ -628,34 +628,34 @@ export class ISavingsAccount extends Contract {
 
   filters: {
     Approved(
-      token: null,
-      from: null,
-      to: null,
+      token: string | null,
+      from: string | null,
+      to: string | null,
       amount: null
     ): TypedEventFilter<[string, string, string, BigNumber], { token: string; from: string; to: string; amount: BigNumber }>;
 
     CreditLineAllowanceRefreshed(
-      token: null,
-      from: null,
+      token: string | null,
+      from: string | null,
       amount: null
     ): TypedEventFilter<[string, string, BigNumber], { token: string; from: string; amount: BigNumber }>;
 
-    CreditLineUpdated(_updatedCreditLine: null): TypedEventFilter<[string], { _updatedCreditLine: string }>;
+    CreditLineUpdated(_updatedCreditLine: string | null): TypedEventFilter<[string], { _updatedCreditLine: string }>;
 
     Deposited(
-      user: null,
+      user: string | null,
       amount: null,
-      token: null,
-      strategy: null
+      token: string | null,
+      strategy: string | null
     ): TypedEventFilter<[string, BigNumber, string, string], { user: string; amount: BigNumber; token: string; strategy: string }>;
 
-    StrategyRegistryUpdated(_updatedStrategyRegistry: null): TypedEventFilter<[string], { _updatedStrategyRegistry: string }>;
+    StrategyRegistryUpdated(_updatedStrategyRegistry: string | null): TypedEventFilter<[string], { _updatedStrategyRegistry: string }>;
 
     StrategySwitched(
-      user: null,
-      token: null,
+      user: string | null,
+      token: string | null,
       currentStrategy: null,
-      newStrategy: null
+      newStrategy: string | null
     ): TypedEventFilter<
       [string, string, string, string],
       {
@@ -667,10 +667,10 @@ export class ISavingsAccount extends Contract {
     >;
 
     Transfer(
-      token: null,
+      token: string | null,
       strategy: null,
-      from: null,
-      to: null,
+      from: string | null,
+      to: string | null,
       amount: null
     ): TypedEventFilter<
       [string, string, string, string, BigNumber],
@@ -684,10 +684,10 @@ export class ISavingsAccount extends Contract {
     >;
 
     Withdrawn(
-      from: null,
-      to: null,
+      from: string | null,
+      to: string | null,
       amountReceived: null,
-      token: null,
+      token: string | null,
       strategy: null
     ): TypedEventFilter<
       [string, string, BigNumber, string, string],
@@ -701,9 +701,9 @@ export class ISavingsAccount extends Contract {
     >;
 
     WithdrawnAll(
-      user: null,
+      user: string | null,
       tokenReceived: null,
-      token: null
+      token: string | null
     ): TypedEventFilter<[string, BigNumber, string], { user: string; tokenReceived: BigNumber; token: string }>;
   };
 

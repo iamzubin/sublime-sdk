@@ -10,7 +10,7 @@ import { StrategyRegistry__factory } from '../wrappers/factories/StrategyRegistr
 import { zeroAddress } from '../config/constants';
 import { SublimeConfig } from '../types/sublimeConfig';
 
-import { Strategy } from '../types/Types';
+import { Strategy, StrategyType } from '../types/Types';
 import { TokenManager } from '../tokenManager';
 
 export class YieldAndStrategyApi {
@@ -75,15 +75,15 @@ export class YieldAndStrategyApi {
     return [
       {
         address: this.config.noStrategyAddress,
-        name: 'No Strategy',
+        name: StrategyType.NoYield,
       },
       {
         address: this.config.compoundStrategyContractAddress,
-        name: 'Compound',
+        name: StrategyType.CompounYield,
       },
       {
         address: this.config.yearnStrategyContractAddress,
-        name: 'Yearn',
+        name: StrategyType.YearnYield,
       },
     ];
   }

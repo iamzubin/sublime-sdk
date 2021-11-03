@@ -564,8 +564,8 @@ export class AaveYield extends Contract {
     >;
 
     LockedTokens(
-      user: null,
-      investedTo: null,
+      user: string | null,
+      investedTo: string | null,
       lpTokensReceived: null
     ): TypedEventFilter<[string, string, BigNumber], { user: string; investedTo: string; lpTokensReceived: BigNumber }>;
 
@@ -576,12 +576,15 @@ export class AaveYield extends Contract {
 
     ReferralCodeUpdated(referralCode: null): TypedEventFilter<[number], { referralCode: number }>;
 
-    SavingsAccountUpdated(savingsAccount: null): TypedEventFilter<[string], { savingsAccount: string }>;
+    SavingsAccountUpdated(savingsAccount: string | null): TypedEventFilter<[string], { savingsAccount: string }>;
 
-    UnlockedShares(asset: null, sharesReleased: null): TypedEventFilter<[string, BigNumber], { asset: string; sharesReleased: BigNumber }>;
+    UnlockedShares(
+      asset: string | null,
+      sharesReleased: null
+    ): TypedEventFilter<[string, BigNumber], { asset: string; sharesReleased: BigNumber }>;
 
     UnlockedTokens(
-      investedTo: null,
+      investedTo: string | null,
       collateralReceived: null
     ): TypedEventFilter<[string, BigNumber], { investedTo: string; collateralReceived: BigNumber }>;
   };

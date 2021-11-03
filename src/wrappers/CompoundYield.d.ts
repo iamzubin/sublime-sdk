@@ -446,8 +446,8 @@ export class CompoundYield extends Contract {
 
   filters: {
     LockedTokens(
-      user: null,
-      investedTo: null,
+      user: string | null,
+      investedTo: string | null,
       lpTokensReceived: null
     ): TypedEventFilter<[string, string, BigNumber], { user: string; investedTo: string; lpTokensReceived: BigNumber }>;
 
@@ -457,16 +457,19 @@ export class CompoundYield extends Contract {
     ): TypedEventFilter<[string, string], { previousOwner: string; newOwner: string }>;
 
     ProtocolAddressesUpdated(
-      asset: null,
-      protocolToken: null
+      asset: string | null,
+      protocolToken: string | null
     ): TypedEventFilter<[string, string], { asset: string; protocolToken: string }>;
 
-    SavingsAccountUpdated(savingsAccount: null): TypedEventFilter<[string], { savingsAccount: string }>;
+    SavingsAccountUpdated(savingsAccount: string | null): TypedEventFilter<[string], { savingsAccount: string }>;
 
-    UnlockedShares(asset: null, sharesReleased: null): TypedEventFilter<[string, BigNumber], { asset: string; sharesReleased: BigNumber }>;
+    UnlockedShares(
+      asset: string | null,
+      sharesReleased: null
+    ): TypedEventFilter<[string, BigNumber], { asset: string; sharesReleased: BigNumber }>;
 
     UnlockedTokens(
-      investedTo: null,
+      investedTo: string | null,
       collateralReceived: null
     ): TypedEventFilter<[string, BigNumber], { investedTo: string; collateralReceived: BigNumber }>;
   };

@@ -3,19 +3,19 @@ import { BytesLike, ContractTransaction, Signer } from 'ethers';
 
 import { CreditLine } from '../wrappers/CreditLine';
 import { CreditLine__factory } from '../wrappers/factories/CreditLine__factory';
-import { CreditLineRequest } from '../types/Types';
+import { CreditLineRequest, StrategyType } from '../types/Types';
 import { BigNumberish } from '@ethersproject/bignumber';
 import { BigNumber } from 'bignumber.js';
 
 import { TokenManager } from '../tokenManager';
 export class CreditLineApi {
-  private signer: Signer;
   private creditLineContract: CreditLine;
   private tokenManager: TokenManager;
+  private config: SublimeConfig;
 
   constructor(signer: Signer, config: SublimeConfig, tokenManager: TokenManager) {
-    this.signer = signer;
     this.creditLineContract = new CreditLine__factory(signer).attach(config.creditLineContractAddress);
+    this.config = config;
     this.tokenManager = tokenManager;
   }
 
@@ -26,10 +26,6 @@ export class CreditLineApi {
     let borrowLimit = new BigNumber(request.borrowLimit);
     if (borrowLimit.isNaN() || borrowLimit.isZero() || borrowLimit.isNegative()) {
       throw new Error('borrowLimit should be a valid number');
-    }
-    let liquidationThreshold = new BigNumber(request.liquidationThreshold);
-    if (liquidationThreshold.isNaN() || liquidationThreshold.isZero() || liquidationThreshold.isNegative()) {
-      throw new Error('liquidationThreshold should be a valid number');
     }
     let borrowRate = new BigNumber(request.borrowRate);
     if (borrowRate.isNaN() || borrowRate.isZero() || borrowRate.isNegative()) {
@@ -43,7 +39,6 @@ export class CreditLineApi {
     return await this.creditLineContract.request(
       request.address,
       borrowLimit.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
-      liquidationThreshold.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       borrowRate.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       request.autoLiquidation,
       collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
@@ -61,10 +56,6 @@ export class CreditLineApi {
     if (borrowLimit.isNaN() || borrowLimit.isZero() || borrowLimit.isNegative()) {
       throw new Error('borrowLimit should be a valid number');
     }
-    let liquidationThreshold = new BigNumber(request.liquidationThreshold);
-    if (liquidationThreshold.isNaN() || liquidationThreshold.isZero() || liquidationThreshold.isNegative()) {
-      throw new Error('liquidationThreshold should be a valid number');
-    }
     let borrowRate = new BigNumber(request.borrowRate);
     if (borrowRate.isNaN() || borrowRate.isZero() || borrowRate.isNegative()) {
       throw new Error('borrowRate should be a valid number');
@@ -77,7 +68,6 @@ export class CreditLineApi {
     return await this.creditLineContract.request(
       request.address,
       borrowLimit.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
-      liquidationThreshold.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       borrowRate.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       request.autoLiquidation,
       collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
@@ -132,7 +122,11 @@ export class CreditLineApi {
     return new BigNumber(_value.toString()).div(new BigNumber(10).pow(collateralDecimal)).toFixed(2);
   }
 
-  public async withdrawCollateralFromCreditLine(creditLineHash: BytesLike, amount: string): Promise<ContractTransaction> {
+  public async withdrawCollateralFromCreditLine(
+    creditLineHash: BytesLike,
+    amount: string,
+    toSavingsAccount: boolean = false
+  ): Promise<ContractTransaction> {
     let collateralAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineHash)).collateralAsset;
     await this.tokenManager.updateTokenDecimals(collateralAsset);
     const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(collateralAsset);
@@ -144,11 +138,17 @@ export class CreditLineApi {
 
     return this.creditLineContract.withdrawCollateral(
       creditLineHash,
-      _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0)
+      _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0),
+      toSavingsAccount
     );
   }
 
-  public async depositCollateral(creditLineHash: BytesLike, amount: string, fromSavingsAccount: boolean): Promise<ContractTransaction> {
+  public async depositCollateral(
+    creditLineHash: BytesLike,
+    amount: string,
+    strategy: StrategyType,
+    fromSavingsAccount: boolean
+  ): Promise<ContractTransaction> {
     let collateralAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineHash)).collateralAsset;
     await this.tokenManager.updateTokenDecimals(collateralAsset);
     const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(collateralAsset);
@@ -157,9 +157,19 @@ export class CreditLineApi {
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
+    let strategyAddress;
+    if (strategy == StrategyType.NoYield) {
+      strategyAddress = this.config.noStrategyAddress;
+    } else if (strategy == StrategyType.CompounYield) {
+      strategyAddress = this.config.compoundStrategyContractAddress;
+    } else {
+      strategyAddress = this.config.yearnStrategyContractAddress;
+    }
+
     return this.creditLineContract.depositCollateral(
       creditLineHash,
       _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0),
+      strategyAddress,
       fromSavingsAccount
     );
   }
@@ -198,7 +208,7 @@ export class CreditLineApi {
     return this.creditLineContract.close(creditLineHash);
   }
 
-  public async liquidateCreditLine(creditLineHash: BytesLike): Promise<ContractTransaction> {
-    return this.creditLineContract.liquidate(creditLineHash);
+  public async liquidateCreditLine(creditLineHash: BytesLike, toSavingsAccount: boolean = false): Promise<ContractTransaction> {
+    return this.creditLineContract.liquidate(creditLineHash, toSavingsAccount);
   }
 }

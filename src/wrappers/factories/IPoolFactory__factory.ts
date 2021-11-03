@@ -15,6 +15,309 @@ export class IPoolFactory__factory {
 
 const _abi = [
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'borrowToken',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'bool',
+        name: 'isSupported',
+        type: 'bool',
+      },
+    ],
+    name: 'BorrowTokenUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'collateralToken',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'bool',
+        name: 'isSupported',
+        type: 'bool',
+      },
+    ],
+    name: 'CollateralTokenUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'updatedCollectionPeriod',
+        type: 'uint256',
+      },
+    ],
+    name: 'CollectionPeriodUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'updatedExtension',
+        type: 'address',
+      },
+    ],
+    name: 'ExtensionImplUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'string',
+        name: 'limitType',
+        type: 'string',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'max',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'min',
+        type: 'uint256',
+      },
+    ],
+    name: 'LimitsUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'updatedLiquidatorRewardFraction',
+        type: 'uint256',
+      },
+    ],
+    name: 'LiquidatorRewardFractionUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'updatedLoanWithdrawalDuration',
+        type: 'uint256',
+      },
+    ],
+    name: 'LoanWithdrawalDurationUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'updatedMarginCallDuration',
+        type: 'uint256',
+      },
+    ],
+    name: 'MarginCallDurationUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'updatedMinBorrowFraction',
+        type: 'uint256',
+      },
+    ],
+    name: 'MinBorrowFractionUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'noStrategy',
+        type: 'address',
+      },
+    ],
+    name: 'NoStrategyUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'updatedPoolCancelPenaltyFraction',
+        type: 'uint256',
+      },
+    ],
+    name: 'PoolCancelPenaltyFractionUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'pool',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'borrower',
+        type: 'address',
+      },
+    ],
+    name: 'PoolCreated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'bytes4',
+        name: 'updatedSelector',
+        type: 'bytes4',
+      },
+    ],
+    name: 'PoolInitSelectorUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'updatedPoolLogic',
+        type: 'address',
+      },
+    ],
+    name: 'PoolLogicUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'updatedPriceOracle',
+        type: 'address',
+      },
+    ],
+    name: 'PriceOracleUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'updatedProtocolFeeCollector',
+        type: 'address',
+      },
+    ],
+    name: 'ProtocolFeeCollectorUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'updatedProtocolFee',
+        type: 'uint256',
+      },
+    ],
+    name: 'ProtocolFeeFractionUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'updatedRepaymentImpl',
+        type: 'address',
+      },
+    ],
+    name: 'RepaymentImplUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'savingsAccount',
+        type: 'address',
+      },
+    ],
+    name: 'SavingsAccountUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'updatedStrategyRegistry',
+        type: 'address',
+      },
+    ],
+    name: 'StrategyRegistryUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'updatedBorrowerRegistry',
+        type: 'address',
+      },
+    ],
+    name: 'UserRegistryUpdated',
+    type: 'event',
+  },
+  {
     inputs: [],
     name: 'collectionPeriod',
     outputs: [
@@ -60,7 +363,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: 'gracePeriodPenaltyFraction',
+    name: 'liquidatorRewardFraction',
     outputs: [
       {
         internalType: 'uint256',
@@ -73,7 +376,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: 'liquidatorRewardFraction',
+    name: 'loanWithdrawalDuration',
     outputs: [
       {
         internalType: 'uint256',
@@ -99,7 +402,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: 'matchCollateralRatioInterval',
+    name: 'minBorrowFraction',
     outputs: [
       {
         internalType: 'uint256',
@@ -112,12 +415,12 @@ const _abi = [
   },
   {
     inputs: [],
-    name: 'minBorrowFraction',
+    name: 'noStrategyAddress',
     outputs: [
       {
-        internalType: 'uint256',
+        internalType: 'address',
         name: '',
-        type: 'uint256',
+        type: 'address',
       },
     ],
     stateMutability: 'view',
@@ -215,19 +518,6 @@ const _abi = [
         internalType: 'address',
         name: '',
         type: 'address',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'votingPassRatio',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
       },
     ],
     stateMutability: 'view',

@@ -84,7 +84,6 @@ export class PoolApi {
       params.borrowToken,
       params.collateralToken,
       collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
-      collateralVolatilityThreshold.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       repaymentInterval.toFixed(0),
       noOfRepaymentIntervals.toFixed(0),
       params.strategy,
@@ -192,7 +191,7 @@ export class PoolApi {
       _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal.toString())).toFixed(0),
       transferFromSavingsAccount,
       {
-        value: collateralAsset === zeroAddress ? _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal.toString())).toFixed(0) : 0
+        value: collateralAsset === zeroAddress ? _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal.toString())).toFixed(0) : 0,
       }
     );
   }

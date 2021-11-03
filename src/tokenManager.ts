@@ -51,10 +51,10 @@ export class TokenManager {
 
   async updatePricePerAsset(tokenAddress: string): Promise<void> {
     tokenAddress = tokenAddress.toLowerCase();
+    this.prices[tokenAddress] = new BigNumber(Math.random()).toString();
     if (tokenAddress in this.prices) {
       return;
     } else {
-      this.prices[tokenAddress] = new BigNumber(Math.random()).toString();
       return;
     }
   }

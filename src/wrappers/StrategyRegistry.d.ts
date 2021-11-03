@@ -331,9 +331,9 @@ export class StrategyRegistry extends Contract {
       newOwner: string | null
     ): TypedEventFilter<[string, string], { previousOwner: string; newOwner: string }>;
 
-    StrategyAdded(strategy: null): TypedEventFilter<[string], { strategy: string }>;
+    StrategyAdded(strategy: string | null): TypedEventFilter<[string], { strategy: string }>;
 
-    StrategyRemoved(strategy: null): TypedEventFilter<[string], { strategy: string }>;
+    StrategyRemoved(strategy: string | null): TypedEventFilter<[string], { strategy: string }>;
   };
 
   estimateGas: {

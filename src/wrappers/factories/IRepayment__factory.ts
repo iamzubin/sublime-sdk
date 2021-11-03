@@ -15,6 +15,140 @@ export class IRepayment__factory {
 
 const _abi = [
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'repayAmount',
+        type: 'uint256',
+      },
+    ],
+    name: 'ExtensionRepaid',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'uint256',
+        name: 'gracePenaltyRate',
+        type: 'uint256',
+      },
+    ],
+    name: 'GracePenaltyRateUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'repayAmount',
+        type: 'uint256',
+      },
+    ],
+    name: 'GracePenaltyRepaid',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'uint256',
+        name: 'gracePeriodFraction',
+        type: 'uint256',
+      },
+    ],
+    name: 'GracePeriodFractionUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'repayAmount',
+        type: 'uint256',
+      },
+    ],
+    name: 'InterestRepaid',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'repayAmount',
+        type: 'uint256',
+      },
+    ],
+    name: 'InterestRepaymentComplete',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'poolFactory',
+        type: 'address',
+      },
+    ],
+    name: 'PoolFactoryUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'repayAmount',
+        type: 'uint256',
+      },
+    ],
+    name: 'PrincipalRepaid',
+    type: 'event',
+  },
+  {
     inputs: [
       {
         internalType: 'address',
@@ -166,11 +300,6 @@ const _abi = [
         internalType: 'address',
         name: '_poolID',
         type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: '_period',
-        type: 'uint256',
       },
     ],
     name: 'instalmentDeadlineExtended',

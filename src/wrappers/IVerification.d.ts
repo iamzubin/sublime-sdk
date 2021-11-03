@@ -34,7 +34,21 @@ interface IVerificationInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'registerMasterAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'unregisterMasterAddress', data: BytesLike): Result;
 
-  events: {};
+  events: {
+    'AddressLinked(address,address)': EventFragment;
+    'AddressUnlinked(address,address)': EventFragment;
+    'UserRegistered(address,address,bool)': EventFragment;
+    'UserUnregistered(address,address,address)': EventFragment;
+    'VerifierAdded(address)': EventFragment;
+    'VerifierRemoved(address)': EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: 'AddressLinked'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'AddressUnlinked'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'UserRegistered'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'UserUnregistered'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'VerifierAdded'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'VerifierRemoved'): EventFragment;
 }
 
 export class IVerification extends Contract {
@@ -152,7 +166,33 @@ export class IVerification extends Contract {
     'unregisterMasterAddress(address,address)'(_masterAddress: string, _verifier: string, overrides?: CallOverrides): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    AddressLinked(
+      linkedAddress: string | null,
+      masterAddress: string | null
+    ): TypedEventFilter<[string, string], { linkedAddress: string; masterAddress: string }>;
+
+    AddressUnlinked(
+      linkedAddress: string | null,
+      masterAddress: string | null
+    ): TypedEventFilter<[string, string], { linkedAddress: string; masterAddress: string }>;
+
+    UserRegistered(
+      masterAddress: string | null,
+      verifier: string | null,
+      isMasterLinked: boolean | null
+    ): TypedEventFilter<[string, string, boolean], { masterAddress: string; verifier: string; isMasterLinked: boolean }>;
+
+    UserUnregistered(
+      masterAddress: string | null,
+      verifier: string | null,
+      unregisteredBy: string | null
+    ): TypedEventFilter<[string, string, string], { masterAddress: string; verifier: string; unregisteredBy: string }>;
+
+    VerifierAdded(verifier: string | null): TypedEventFilter<[string], { verifier: string }>;
+
+    VerifierRemoved(verifier: string | null): TypedEventFilter<[string], { verifier: string }>;
+  };
 
   estimateGas: {
     isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<BigNumber>;

@@ -5,6 +5,12 @@ export interface Asset {
   pricePerAssetInUSD: string;
 }
 
+export enum StrategyType {
+  NoYield = 'NoYield',
+  CompounYield = 'CompoundYield',
+  YearnYield = 'YearnYield',
+}
+
 export interface Strategy {
   name: string;
   address: string;
@@ -14,7 +20,6 @@ export interface Strategy {
 export interface CreditLineRequest {
   address: string;
   borrowLimit: string;
-  liquidationThreshold: string;
   borrowRate: string;
   autoLiquidation: boolean;
   collateralRatio: string;

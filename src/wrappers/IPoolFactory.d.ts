@@ -23,11 +23,11 @@ interface IPoolFactoryInterface extends ethers.utils.Interface {
     'collectionPeriod()': FunctionFragment;
     'extension()': FunctionFragment;
     'getProtocolFeeData()': FunctionFragment;
-    'gracePeriodPenaltyFraction()': FunctionFragment;
     'liquidatorRewardFraction()': FunctionFragment;
+    'loanWithdrawalDuration()': FunctionFragment;
     'marginCallDuration()': FunctionFragment;
-    'matchCollateralRatioInterval()': FunctionFragment;
     'minBorrowFraction()': FunctionFragment;
+    'noStrategyAddress()': FunctionFragment;
     'owner()': FunctionFragment;
     'poolCancelPenaltyFraction()': FunctionFragment;
     'poolRegistry(address)': FunctionFragment;
@@ -35,17 +35,16 @@ interface IPoolFactoryInterface extends ethers.utils.Interface {
     'repaymentImpl()': FunctionFragment;
     'savingsAccount()': FunctionFragment;
     'userRegistry()': FunctionFragment;
-    'votingPassRatio()': FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: 'collectionPeriod', values?: undefined): string;
   encodeFunctionData(functionFragment: 'extension', values?: undefined): string;
   encodeFunctionData(functionFragment: 'getProtocolFeeData', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'gracePeriodPenaltyFraction', values?: undefined): string;
   encodeFunctionData(functionFragment: 'liquidatorRewardFraction', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'loanWithdrawalDuration', values?: undefined): string;
   encodeFunctionData(functionFragment: 'marginCallDuration', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'matchCollateralRatioInterval', values?: undefined): string;
   encodeFunctionData(functionFragment: 'minBorrowFraction', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'noStrategyAddress', values?: undefined): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'poolCancelPenaltyFraction', values?: undefined): string;
   encodeFunctionData(functionFragment: 'poolRegistry', values: [string]): string;
@@ -53,16 +52,15 @@ interface IPoolFactoryInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'repaymentImpl', values?: undefined): string;
   encodeFunctionData(functionFragment: 'savingsAccount', values?: undefined): string;
   encodeFunctionData(functionFragment: 'userRegistry', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'votingPassRatio', values?: undefined): string;
 
   decodeFunctionResult(functionFragment: 'collectionPeriod', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'extension', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getProtocolFeeData', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'gracePeriodPenaltyFraction', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'liquidatorRewardFraction', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'loanWithdrawalDuration', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'marginCallDuration', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'matchCollateralRatioInterval', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'minBorrowFraction', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'noStrategyAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'poolCancelPenaltyFraction', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'poolRegistry', data: BytesLike): Result;
@@ -70,9 +68,52 @@ interface IPoolFactoryInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'repaymentImpl', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'savingsAccount', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'userRegistry', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'votingPassRatio', data: BytesLike): Result;
 
-  events: {};
+  events: {
+    'BorrowTokenUpdated(address,bool)': EventFragment;
+    'CollateralTokenUpdated(address,bool)': EventFragment;
+    'CollectionPeriodUpdated(uint256)': EventFragment;
+    'ExtensionImplUpdated(address)': EventFragment;
+    'LimitsUpdated(string,uint256,uint256)': EventFragment;
+    'LiquidatorRewardFractionUpdated(uint256)': EventFragment;
+    'LoanWithdrawalDurationUpdated(uint256)': EventFragment;
+    'MarginCallDurationUpdated(uint256)': EventFragment;
+    'MinBorrowFractionUpdated(uint256)': EventFragment;
+    'NoStrategyUpdated(address)': EventFragment;
+    'PoolCancelPenaltyFractionUpdated(uint256)': EventFragment;
+    'PoolCreated(address,address)': EventFragment;
+    'PoolInitSelectorUpdated(bytes4)': EventFragment;
+    'PoolLogicUpdated(address)': EventFragment;
+    'PriceOracleUpdated(address)': EventFragment;
+    'ProtocolFeeCollectorUpdated(address)': EventFragment;
+    'ProtocolFeeFractionUpdated(uint256)': EventFragment;
+    'RepaymentImplUpdated(address)': EventFragment;
+    'SavingsAccountUpdated(address)': EventFragment;
+    'StrategyRegistryUpdated(address)': EventFragment;
+    'UserRegistryUpdated(address)': EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: 'BorrowTokenUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'CollateralTokenUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'CollectionPeriodUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'ExtensionImplUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'LimitsUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'LiquidatorRewardFractionUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'LoanWithdrawalDurationUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'MarginCallDurationUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'MinBorrowFractionUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'NoStrategyUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'PoolCancelPenaltyFractionUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'PoolCreated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'PoolInitSelectorUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'PoolLogicUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'PriceOracleUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'ProtocolFeeCollectorUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'ProtocolFeeFractionUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'RepaymentImplUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'SavingsAccountUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'StrategyRegistryUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'UserRegistryUpdated'): EventFragment;
 }
 
 export class IPoolFactory extends Contract {
@@ -131,25 +172,25 @@ export class IPoolFactory extends Contract {
 
     'getProtocolFeeData()'(overrides?: CallOverrides): Promise<[BigNumber, string]>;
 
-    gracePeriodPenaltyFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    'gracePeriodPenaltyFraction()'(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     liquidatorRewardFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     'liquidatorRewardFraction()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    loanWithdrawalDuration(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    'loanWithdrawalDuration()'(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     marginCallDuration(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     'marginCallDuration()'(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    matchCollateralRatioInterval(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    'matchCollateralRatioInterval()'(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     minBorrowFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     'minBorrowFraction()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    noStrategyAddress(overrides?: CallOverrides): Promise<[string]>;
+
+    'noStrategyAddress()'(overrides?: CallOverrides): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -178,10 +219,6 @@ export class IPoolFactory extends Contract {
     userRegistry(overrides?: CallOverrides): Promise<[string]>;
 
     'userRegistry()'(overrides?: CallOverrides): Promise<[string]>;
-
-    votingPassRatio(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    'votingPassRatio()'(overrides?: CallOverrides): Promise<[BigNumber]>;
   };
 
   collectionPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -196,25 +233,25 @@ export class IPoolFactory extends Contract {
 
   'getProtocolFeeData()'(overrides?: CallOverrides): Promise<[BigNumber, string]>;
 
-  gracePeriodPenaltyFraction(overrides?: CallOverrides): Promise<BigNumber>;
-
-  'gracePeriodPenaltyFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
-
   liquidatorRewardFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
   'liquidatorRewardFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+  loanWithdrawalDuration(overrides?: CallOverrides): Promise<BigNumber>;
+
+  'loanWithdrawalDuration()'(overrides?: CallOverrides): Promise<BigNumber>;
 
   marginCallDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
   'marginCallDuration()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-  matchCollateralRatioInterval(overrides?: CallOverrides): Promise<BigNumber>;
-
-  'matchCollateralRatioInterval()'(overrides?: CallOverrides): Promise<BigNumber>;
-
   minBorrowFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
   'minBorrowFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+  noStrategyAddress(overrides?: CallOverrides): Promise<string>;
+
+  'noStrategyAddress()'(overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -244,10 +281,6 @@ export class IPoolFactory extends Contract {
 
   'userRegistry()'(overrides?: CallOverrides): Promise<string>;
 
-  votingPassRatio(overrides?: CallOverrides): Promise<BigNumber>;
-
-  'votingPassRatio()'(overrides?: CallOverrides): Promise<BigNumber>;
-
   callStatic: {
     collectionPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -261,25 +294,25 @@ export class IPoolFactory extends Contract {
 
     'getProtocolFeeData()'(overrides?: CallOverrides): Promise<[BigNumber, string]>;
 
-    gracePeriodPenaltyFraction(overrides?: CallOverrides): Promise<BigNumber>;
-
-    'gracePeriodPenaltyFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
-
     liquidatorRewardFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
     'liquidatorRewardFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    loanWithdrawalDuration(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'loanWithdrawalDuration()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     marginCallDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
     'marginCallDuration()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    matchCollateralRatioInterval(overrides?: CallOverrides): Promise<BigNumber>;
-
-    'matchCollateralRatioInterval()'(overrides?: CallOverrides): Promise<BigNumber>;
-
     minBorrowFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
     'minBorrowFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    noStrategyAddress(overrides?: CallOverrides): Promise<string>;
+
+    'noStrategyAddress()'(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -308,13 +341,67 @@ export class IPoolFactory extends Contract {
     userRegistry(overrides?: CallOverrides): Promise<string>;
 
     'userRegistry()'(overrides?: CallOverrides): Promise<string>;
-
-    votingPassRatio(overrides?: CallOverrides): Promise<BigNumber>;
-
-    'votingPassRatio()'(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
-  filters: {};
+  filters: {
+    BorrowTokenUpdated(
+      borrowToken: string | null,
+      isSupported: null
+    ): TypedEventFilter<[string, boolean], { borrowToken: string; isSupported: boolean }>;
+
+    CollateralTokenUpdated(
+      collateralToken: string | null,
+      isSupported: null
+    ): TypedEventFilter<[string, boolean], { collateralToken: string; isSupported: boolean }>;
+
+    CollectionPeriodUpdated(updatedCollectionPeriod: null): TypedEventFilter<[BigNumber], { updatedCollectionPeriod: BigNumber }>;
+
+    ExtensionImplUpdated(updatedExtension: string | null): TypedEventFilter<[string], { updatedExtension: string }>;
+
+    LimitsUpdated(
+      limitType: string | null,
+      max: null,
+      min: null
+    ): TypedEventFilter<[string, BigNumber, BigNumber], { limitType: string; max: BigNumber; min: BigNumber }>;
+
+    LiquidatorRewardFractionUpdated(
+      updatedLiquidatorRewardFraction: null
+    ): TypedEventFilter<[BigNumber], { updatedLiquidatorRewardFraction: BigNumber }>;
+
+    LoanWithdrawalDurationUpdated(
+      updatedLoanWithdrawalDuration: null
+    ): TypedEventFilter<[BigNumber], { updatedLoanWithdrawalDuration: BigNumber }>;
+
+    MarginCallDurationUpdated(updatedMarginCallDuration: null): TypedEventFilter<[BigNumber], { updatedMarginCallDuration: BigNumber }>;
+
+    MinBorrowFractionUpdated(updatedMinBorrowFraction: null): TypedEventFilter<[BigNumber], { updatedMinBorrowFraction: BigNumber }>;
+
+    NoStrategyUpdated(noStrategy: null): TypedEventFilter<[string], { noStrategy: string }>;
+
+    PoolCancelPenaltyFractionUpdated(
+      updatedPoolCancelPenaltyFraction: null
+    ): TypedEventFilter<[BigNumber], { updatedPoolCancelPenaltyFraction: BigNumber }>;
+
+    PoolCreated(pool: string | null, borrower: string | null): TypedEventFilter<[string, string], { pool: string; borrower: string }>;
+
+    PoolInitSelectorUpdated(updatedSelector: null): TypedEventFilter<[string], { updatedSelector: string }>;
+
+    PoolLogicUpdated(updatedPoolLogic: string | null): TypedEventFilter<[string], { updatedPoolLogic: string }>;
+
+    PriceOracleUpdated(updatedPriceOracle: string | null): TypedEventFilter<[string], { updatedPriceOracle: string }>;
+
+    ProtocolFeeCollectorUpdated(updatedProtocolFeeCollector: null): TypedEventFilter<[string], { updatedProtocolFeeCollector: string }>;
+
+    ProtocolFeeFractionUpdated(updatedProtocolFee: null): TypedEventFilter<[BigNumber], { updatedProtocolFee: BigNumber }>;
+
+    RepaymentImplUpdated(updatedRepaymentImpl: string | null): TypedEventFilter<[string], { updatedRepaymentImpl: string }>;
+
+    SavingsAccountUpdated(savingsAccount: string | null): TypedEventFilter<[string], { savingsAccount: string }>;
+
+    StrategyRegistryUpdated(updatedStrategyRegistry: string | null): TypedEventFilter<[string], { updatedStrategyRegistry: string }>;
+
+    UserRegistryUpdated(updatedBorrowerRegistry: string | null): TypedEventFilter<[string], { updatedBorrowerRegistry: string }>;
+  };
 
   estimateGas: {
     collectionPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -329,25 +416,25 @@ export class IPoolFactory extends Contract {
 
     'getProtocolFeeData()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    gracePeriodPenaltyFraction(overrides?: CallOverrides): Promise<BigNumber>;
-
-    'gracePeriodPenaltyFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
-
     liquidatorRewardFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
     'liquidatorRewardFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    loanWithdrawalDuration(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'loanWithdrawalDuration()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     marginCallDuration(overrides?: CallOverrides): Promise<BigNumber>;
 
     'marginCallDuration()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    matchCollateralRatioInterval(overrides?: CallOverrides): Promise<BigNumber>;
-
-    'matchCollateralRatioInterval()'(overrides?: CallOverrides): Promise<BigNumber>;
-
     minBorrowFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
     'minBorrowFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    noStrategyAddress(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'noStrategyAddress()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -376,10 +463,6 @@ export class IPoolFactory extends Contract {
     userRegistry(overrides?: CallOverrides): Promise<BigNumber>;
 
     'userRegistry()'(overrides?: CallOverrides): Promise<BigNumber>;
-
-    votingPassRatio(overrides?: CallOverrides): Promise<BigNumber>;
-
-    'votingPassRatio()'(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -395,25 +478,25 @@ export class IPoolFactory extends Contract {
 
     'getProtocolFeeData()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    gracePeriodPenaltyFraction(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    'gracePeriodPenaltyFraction()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     liquidatorRewardFraction(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'liquidatorRewardFraction()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    loanWithdrawalDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'loanWithdrawalDuration()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     marginCallDuration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'marginCallDuration()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    matchCollateralRatioInterval(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    'matchCollateralRatioInterval()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     minBorrowFraction(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'minBorrowFraction()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    noStrategyAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'noStrategyAddress()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -442,9 +525,5 @@ export class IPoolFactory extends Contract {
     userRegistry(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'userRegistry()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    votingPassRatio(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    'votingPassRatio()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

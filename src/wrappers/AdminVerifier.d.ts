@@ -27,6 +27,8 @@ interface AdminVerifierInterface extends ethers.utils.Interface {
     'renounceOwnership()': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
     'unregisterUser(address)': FunctionFragment;
+    'updateVerification(address)': FunctionFragment;
+    'userData(address)': FunctionFragment;
     'verification()': FunctionFragment;
   };
 
@@ -36,6 +38,8 @@ interface AdminVerifierInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'unregisterUser', values: [string]): string;
+  encodeFunctionData(functionFragment: 'updateVerification', values: [string]): string;
+  encodeFunctionData(functionFragment: 'userData', values: [string]): string;
   encodeFunctionData(functionFragment: 'verification', values?: undefined): string;
 
   decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
@@ -44,17 +48,21 @@ interface AdminVerifierInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'unregisterUser', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'updateVerification', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'userData', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'verification', data: BytesLike): Result;
 
   events: {
     'OwnershipTransferred(address,address)': EventFragment;
     'UserRegistered(address,bool,string)': EventFragment;
     'UserUnregistered(address)': EventFragment;
+    'VerificationUpdated(address)': EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'UserRegistered'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'UserUnregistered'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'VerificationUpdated'): EventFragment;
 }
 
 export class AdminVerifier extends Contract {
@@ -146,6 +154,17 @@ export class AdminVerifier extends Contract {
 
     'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
+    updateVerification(_verification: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    'updateVerification(address)'(
+      _verification: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    userData(arg0: string, overrides?: CallOverrides): Promise<[string]>;
+
+    'userData(address)'(arg0: string, overrides?: CallOverrides): Promise<[string]>;
+
     verification(overrides?: CallOverrides): Promise<[string]>;
 
     'verification()'(overrides?: CallOverrides): Promise<[string]>;
@@ -193,6 +212,17 @@ export class AdminVerifier extends Contract {
 
   'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
+  updateVerification(_verification: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  'updateVerification(address)'(
+    _verification: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  userData(arg0: string, overrides?: CallOverrides): Promise<string>;
+
+  'userData(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
+
   verification(overrides?: CallOverrides): Promise<string>;
 
   'verification()'(overrides?: CallOverrides): Promise<string>;
@@ -227,6 +257,14 @@ export class AdminVerifier extends Contract {
 
     'unregisterUser(address)'(_user: string, overrides?: CallOverrides): Promise<void>;
 
+    updateVerification(_verification: string, overrides?: CallOverrides): Promise<void>;
+
+    'updateVerification(address)'(_verification: string, overrides?: CallOverrides): Promise<void>;
+
+    userData(arg0: string, overrides?: CallOverrides): Promise<string>;
+
+    'userData(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
+
     verification(overrides?: CallOverrides): Promise<string>;
 
     'verification()'(overrides?: CallOverrides): Promise<string>;
@@ -245,6 +283,8 @@ export class AdminVerifier extends Contract {
     ): TypedEventFilter<[string, boolean, string], { user: string; isMasterLinked: boolean; metadata: string }>;
 
     UserUnregistered(user: null): TypedEventFilter<[string], { user: string }>;
+
+    VerificationUpdated(verification: string | null): TypedEventFilter<[string], { verification: string }>;
   };
 
   estimateGas: {
@@ -285,6 +325,14 @@ export class AdminVerifier extends Contract {
     unregisterUser(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    updateVerification(_verification: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    'updateVerification(address)'(_verification: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    userData(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'userData(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     verification(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -336,6 +384,17 @@ export class AdminVerifier extends Contract {
     unregisterUser(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    updateVerification(_verification: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    'updateVerification(address)'(
+      _verification: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    userData(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'userData(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     verification(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

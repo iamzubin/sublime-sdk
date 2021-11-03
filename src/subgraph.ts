@@ -52,7 +52,8 @@ export class SublimeSubgraph {
 
   async getPool(poolId): Promise<PoolDetail> {
     let result = await getPool(this.subgraphUrl, poolId);
-    return this.transformToPoolDetail(result)[0];
+    let poolDetails: PoolDetail[] = await this.transformToPoolDetail(result);
+    return poolDetails[0];
   }
 
   async getPoolByBorrower(borrower): Promise<PoolDetail[]> {
@@ -150,11 +151,12 @@ export class SublimeSubgraph {
     let borrowTokens: string[] = data.map((a) => a.collateralAsset);
     let collateralTokens: string[] = data.map((a) => a.borrowAsset);
     let allTokens = [...borrowTokens, ...collateralTokens].filter((value, index, array) => array.indexOf(value) === index);
+
     for (let index = 0; index < allTokens.length; index++) {
       const element = allTokens[index];
       await this.tokenManager.updateAll(element);
     }
-    return data.map((a) => {
+    let transformedData: PoolDetail[] = data.map((a) => {
       return {
         address: a.id,
         poolType: a.loanStatus,
@@ -187,6 +189,8 @@ export class SublimeSubgraph {
         endedOn: new BigNumber(this.getRandomInt(1000000)).multipliedBy(1000).toString(),
       };
     });
+    // console.log({transformedData});
+    return transformedData;
   }
 
   // to-do

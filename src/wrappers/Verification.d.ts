@@ -68,22 +68,22 @@ interface VerificationInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'verifiers', data: BytesLike): Result;
 
   events: {
+    'AddressLinked(address,address)': EventFragment;
+    'AddressUnlinked(address,address)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
     'UserRegistered(address,address,bool)': EventFragment;
     'UserUnregistered(address,address,address)': EventFragment;
     'VerifierAdded(address)': EventFragment;
     'VerifierRemoved(address)': EventFragment;
-    'addressLinked(address,address)': EventFragment;
-    'addressUnlinked(address,address)': EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: 'AddressLinked'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'AddressUnlinked'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'UserRegistered'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'UserUnregistered'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'VerifierAdded'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'VerifierRemoved'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'addressLinked'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'addressUnlinked'): EventFragment;
 }
 
 export class Verification extends Contract {
@@ -343,36 +343,36 @@ export class Verification extends Contract {
   };
 
   filters: {
+    AddressLinked(
+      linkedAddress: string | null,
+      masterAddress: string | null
+    ): TypedEventFilter<[string, string], { linkedAddress: string; masterAddress: string }>;
+
+    AddressUnlinked(
+      linkedAddress: string | null,
+      masterAddress: string | null
+    ): TypedEventFilter<[string, string], { linkedAddress: string; masterAddress: string }>;
+
     OwnershipTransferred(
       previousOwner: string | null,
       newOwner: string | null
     ): TypedEventFilter<[string, string], { previousOwner: string; newOwner: string }>;
 
     UserRegistered(
-      masterAddress: null,
-      verifier: null,
-      isMasterLinked: null
+      masterAddress: string | null,
+      verifier: string | null,
+      isMasterLinked: boolean | null
     ): TypedEventFilter<[string, string, boolean], { masterAddress: string; verifier: string; isMasterLinked: boolean }>;
 
     UserUnregistered(
-      masterAddress: null,
-      verifier: null,
-      unregisteredBy: null
+      masterAddress: string | null,
+      verifier: string | null,
+      unregisteredBy: string | null
     ): TypedEventFilter<[string, string, string], { masterAddress: string; verifier: string; unregisteredBy: string }>;
 
-    VerifierAdded(verifier: null): TypedEventFilter<[string], { verifier: string }>;
+    VerifierAdded(verifier: string | null): TypedEventFilter<[string], { verifier: string }>;
 
-    VerifierRemoved(verifier: null): TypedEventFilter<[string], { verifier: string }>;
-
-    addressLinked(
-      linkedAddress: null,
-      masterAddress: null
-    ): TypedEventFilter<[string, string], { linkedAddress: string; masterAddress: string }>;
-
-    addressUnlinked(
-      linkedAddress: null,
-      masterAddress: null
-    ): TypedEventFilter<[string, string], { linkedAddress: string; masterAddress: string }>;
+    VerifierRemoved(verifier: string | null): TypedEventFilter<[string], { verifier: string }>;
   };
 
   estimateGas: {

@@ -18,10 +18,10 @@ export interface PoolGenerateParams {
 }
 
 export enum LoanStatus {
-  COLLECTION,
-  ACTIVE,
-  CLOSED,
-  CANCELLED,
-  DEFAULTED,
-  TERMINATED,
+  COLLECTION = 'COLLECTION',
+  ACTIVE = 'ACTIVE',
+  CLOSED = 'CLOSED',
+  CANCELLED = 'CANCELLED',
+  DEFAULTED = 'DEFAULTED',
+  TERMINATED = 'TERMINATED',
 }

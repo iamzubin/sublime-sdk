@@ -231,14 +231,14 @@ export class YearnYield extends Contract {
     ): Promise<ContractTransaction>;
 
     updateProtocolAddresses(
-      asset: string,
-      to: string,
+      _asset: string,
+      _to: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'updateProtocolAddresses(address,address)'(
-      asset: string,
-      to: string,
+      _asset: string,
+      _to: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -344,14 +344,14 @@ export class YearnYield extends Contract {
   ): Promise<ContractTransaction>;
 
   updateProtocolAddresses(
-    asset: string,
-    to: string,
+    _asset: string,
+    _to: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'updateProtocolAddresses(address,address)'(
-    asset: string,
-    to: string,
+    _asset: string,
+    _to: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -411,9 +411,9 @@ export class YearnYield extends Contract {
 
     'unlockTokens(address,uint256)'(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    updateProtocolAddresses(asset: string, to: string, overrides?: CallOverrides): Promise<void>;
+    updateProtocolAddresses(_asset: string, _to: string, overrides?: CallOverrides): Promise<void>;
 
-    'updateProtocolAddresses(address,address)'(asset: string, to: string, overrides?: CallOverrides): Promise<void>;
+    'updateProtocolAddresses(address,address)'(_asset: string, _to: string, overrides?: CallOverrides): Promise<void>;
 
     updateSavingsAccount(_savingsAccount: string, overrides?: CallOverrides): Promise<void>;
 
@@ -422,8 +422,8 @@ export class YearnYield extends Contract {
 
   filters: {
     LockedTokens(
-      user: null,
-      investedTo: null,
+      user: string | null,
+      investedTo: string | null,
       lpTokensReceived: null
     ): TypedEventFilter<[string, string, BigNumber], { user: string; investedTo: string; lpTokensReceived: BigNumber }>;
 
@@ -433,16 +433,19 @@ export class YearnYield extends Contract {
     ): TypedEventFilter<[string, string], { previousOwner: string; newOwner: string }>;
 
     ProtocolAddressesUpdated(
-      asset: null,
-      protocolToken: null
+      asset: string | null,
+      protocolToken: string | null
     ): TypedEventFilter<[string, string], { asset: string; protocolToken: string }>;
 
-    SavingsAccountUpdated(savingsAccount: null): TypedEventFilter<[string], { savingsAccount: string }>;
+    SavingsAccountUpdated(savingsAccount: string | null): TypedEventFilter<[string], { savingsAccount: string }>;
 
-    UnlockedShares(asset: null, sharesReleased: null): TypedEventFilter<[string, BigNumber], { asset: string; sharesReleased: BigNumber }>;
+    UnlockedShares(
+      asset: string | null,
+      sharesReleased: null
+    ): TypedEventFilter<[string, BigNumber], { asset: string; sharesReleased: BigNumber }>;
 
     UnlockedTokens(
-      investedTo: null,
+      investedTo: string | null,
       collateralReceived: null
     ): TypedEventFilter<[string, BigNumber], { investedTo: string; collateralReceived: BigNumber }>;
   };
@@ -522,11 +525,11 @@ export class YearnYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    updateProtocolAddresses(asset: string, to: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    updateProtocolAddresses(_asset: string, _to: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     'updateProtocolAddresses(address,address)'(
-      asset: string,
-      to: string,
+      _asset: string,
+      _to: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -633,14 +636,14 @@ export class YearnYield extends Contract {
     ): Promise<PopulatedTransaction>;
 
     updateProtocolAddresses(
-      asset: string,
-      to: string,
+      _asset: string,
+      _to: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'updateProtocolAddresses(address,address)'(
-      asset: string,
-      to: string,
+      _asset: string,
+      _to: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

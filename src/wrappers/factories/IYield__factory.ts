@@ -18,13 +18,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'user',
         type: 'address',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'investedTo',
         type: 'address',
@@ -43,7 +43,7 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'savingsAccount',
         type: 'address',
@@ -56,7 +56,7 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'asset',
         type: 'address',
@@ -75,7 +75,7 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'investedTo',
         type: 'address',

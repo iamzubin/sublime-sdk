@@ -23,6 +23,8 @@ export async function getPool(url: string, poolId: string): Promise<any[]> {
   };
 
   let result = await fetchData(options);
+  // console.log({result: result.data.pools});
   allData.push(...result.data.pools);
+  // console.log({allData})
   return allData;
 }

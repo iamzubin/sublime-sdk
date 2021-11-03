@@ -188,9 +188,9 @@ export class IStrategyRegistry extends Contract {
   };
 
   filters: {
-    StrategyAdded(strategy: null): TypedEventFilter<[string], { strategy: string }>;
+    StrategyAdded(strategy: string | null): TypedEventFilter<[string], { strategy: string }>;
 
-    StrategyRemoved(strategy: null): TypedEventFilter<[string], { strategy: string }>;
+    StrategyRemoved(strategy: string | null): TypedEventFilter<[string], { strategy: string }>;
   };
 
   estimateGas: {

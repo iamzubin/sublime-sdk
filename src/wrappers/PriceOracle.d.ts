@@ -307,7 +307,10 @@ export class PriceOracle extends Contract {
   };
 
   filters: {
-    ChainlinkFeedUpdated(token: null, priceOracle: null): TypedEventFilter<[string, string], { token: string; priceOracle: string }>;
+    ChainlinkFeedUpdated(
+      token: string | null,
+      priceOracle: string | null
+    ): TypedEventFilter<[string, string], { token: string; priceOracle: string }>;
 
     OwnershipTransferred(
       previousOwner: string | null,
@@ -315,10 +318,10 @@ export class PriceOracle extends Contract {
     ): TypedEventFilter<[string, string], { previousOwner: string; newOwner: string }>;
 
     UniswapFeedUpdated(
-      token1: null,
-      token2: null,
+      token1: string | null,
+      token2: string | null,
       feedId: null,
-      pool: null
+      pool: string | null
     ): TypedEventFilter<[string, string, string, string], { token1: string; token2: string; feedId: string; pool: string }>;
 
     UniswapPriceAveragingPeriodUpdated(

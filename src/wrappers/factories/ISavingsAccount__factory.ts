@@ -18,19 +18,19 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'token',
         type: 'address',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'from',
         type: 'address',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'to',
         type: 'address',
@@ -49,13 +49,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'token',
         type: 'address',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'from',
         type: 'address',
@@ -74,7 +74,7 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: '_updatedCreditLine',
         type: 'address',
@@ -87,7 +87,7 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'user',
         type: 'address',
@@ -99,13 +99,13 @@ const _abi = [
         type: 'uint256',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'token',
         type: 'address',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'strategy',
         type: 'address',
@@ -118,7 +118,7 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: '_updatedStrategyRegistry',
         type: 'address',
@@ -131,13 +131,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'user',
         type: 'address',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'token',
         type: 'address',
@@ -149,7 +149,7 @@ const _abi = [
         type: 'address',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'newStrategy',
         type: 'address',
@@ -162,7 +162,7 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'token',
         type: 'address',
@@ -174,13 +174,13 @@ const _abi = [
         type: 'address',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'from',
         type: 'address',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'to',
         type: 'address',
@@ -199,13 +199,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'from',
         type: 'address',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'to',
         type: 'address',
@@ -217,7 +217,7 @@ const _abi = [
         type: 'uint256',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'token',
         type: 'address',
@@ -236,7 +236,7 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'user',
         type: 'address',
@@ -248,7 +248,7 @@ const _abi = [
         type: 'uint256',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'address',
         name: 'token',
         type: 'address',

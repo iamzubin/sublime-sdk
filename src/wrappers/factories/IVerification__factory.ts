@@ -15,6 +15,120 @@ export class IVerification__factory {
 
 const _abi = [
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'linkedAddress',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'masterAddress',
+        type: 'address',
+      },
+    ],
+    name: 'AddressLinked',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'linkedAddress',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'masterAddress',
+        type: 'address',
+      },
+    ],
+    name: 'AddressUnlinked',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'masterAddress',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'verifier',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'bool',
+        name: 'isMasterLinked',
+        type: 'bool',
+      },
+    ],
+    name: 'UserRegistered',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'masterAddress',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'verifier',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'unregisteredBy',
+        type: 'address',
+      },
+    ],
+    name: 'UserUnregistered',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'verifier',
+        type: 'address',
+      },
+    ],
+    name: 'VerifierAdded',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'verifier',
+        type: 'address',
+      },
+    ],
+    name: 'VerifierRemoved',
+    type: 'event',
+  },
+  {
     inputs: [
       {
         internalType: 'address',

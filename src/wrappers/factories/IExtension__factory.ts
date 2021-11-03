@@ -15,6 +15,83 @@ export class IExtension__factory {
 
 const _abi = [
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
+      },
+    ],
+    name: 'ExtensionPassed',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'extensionVoteEndTime',
+        type: 'uint256',
+      },
+    ],
+    name: 'ExtensionRequested',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'lender',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'totalExtensionSupport',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'lastVoteTime',
+        type: 'uint256',
+      },
+    ],
+    name: 'LenderVoted',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'poolFactory',
+        type: 'address',
+      },
+    ],
+    name: 'PoolFactoryUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'votingPassRatio',
+        type: 'uint256',
+      },
+    ],
+    name: 'VotingPassRatioUpdated',
+    type: 'event',
+  },
+  {
     inputs: [],
     name: 'closePoolExtension',
     outputs: [],
@@ -30,6 +107,29 @@ const _abi = [
       },
     ],
     name: 'initializePoolExtension',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_from',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: '_to',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: '_amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'removeVotes',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',

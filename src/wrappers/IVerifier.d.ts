@@ -2,32 +2,22 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import {
-  ethers,
-  EventFilter,
-  Signer,
-  BigNumber,
-  BigNumberish,
-  PopulatedTransaction,
-  Contract,
-  ContractTransaction,
-  CallOverrides,
-} from 'ethers';
+import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction, Contract, ContractTransaction } from 'ethers';
 import { BytesLike } from '@ethersproject/bytes';
 import { Listener, Provider } from '@ethersproject/providers';
 import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
 import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface IVerifierInterface extends ethers.utils.Interface {
-  functions: {
-    'verify(address)': FunctionFragment;
+  functions: {};
+
+  events: {
+    'UserRegistered(address,bool,string)': EventFragment;
+    'UserUnregistered(address)': EventFragment;
   };
 
-  encodeFunctionData(functionFragment: 'verify', values: [string]): string;
-
-  decodeFunctionResult(functionFragment: 'verify', data: BytesLike): Result;
-
-  events: {};
+  getEvent(nameOrSignatureOrTopic: 'UserRegistered'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'UserUnregistered'): EventFragment;
 }
 
 export class IVerifier extends Contract {
@@ -73,33 +63,21 @@ export class IVerifier extends Contract {
 
   interface: IVerifierInterface;
 
-  functions: {
-    verify(_user: string, overrides?: CallOverrides): Promise<[boolean]>;
+  functions: {};
 
-    'verify(address)'(_user: string, overrides?: CallOverrides): Promise<[boolean]>;
+  callStatic: {};
+
+  filters: {
+    UserRegistered(
+      user: null,
+      isMasterLinked: null,
+      metadata: null
+    ): TypedEventFilter<[string, boolean, string], { user: string; isMasterLinked: boolean; metadata: string }>;
+
+    UserUnregistered(user: null): TypedEventFilter<[string], { user: string }>;
   };
 
-  verify(_user: string, overrides?: CallOverrides): Promise<boolean>;
+  estimateGas: {};
 
-  'verify(address)'(_user: string, overrides?: CallOverrides): Promise<boolean>;
-
-  callStatic: {
-    verify(_user: string, overrides?: CallOverrides): Promise<boolean>;
-
-    'verify(address)'(_user: string, overrides?: CallOverrides): Promise<boolean>;
-  };
-
-  filters: {};
-
-  estimateGas: {
-    verify(_user: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'verify(address)'(_user: string, overrides?: CallOverrides): Promise<BigNumber>;
-  };
-
-  populateTransaction: {
-    verify(_user: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    'verify(address)'(_user: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-  };
+  populateTransaction: {};
 }
