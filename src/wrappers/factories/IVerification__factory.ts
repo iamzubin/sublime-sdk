@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { IVerification } from '../IVerification';
+import type { IVerification } from "../IVerification";
 
 export class IVerification__factory {
-  static connect(address: string, signerOrProvider: Signer | Provider): IVerification {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IVerification {
     return new Contract(address, _abi, signerOrProvider) as IVerification;
   }
 }
@@ -19,173 +22,173 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'linkedAddress',
-        type: 'address',
+        internalType: "address",
+        name: "linkedAddress",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'masterAddress',
-        type: 'address',
+        internalType: "address",
+        name: "masterAddress",
+        type: "address",
       },
     ],
-    name: 'AddressLinked',
-    type: 'event',
+    name: "AddressLinked",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'linkedAddress',
-        type: 'address',
+        internalType: "address",
+        name: "linkedAddress",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'masterAddress',
-        type: 'address',
+        internalType: "address",
+        name: "masterAddress",
+        type: "address",
       },
     ],
-    name: 'AddressUnlinked',
-    type: 'event',
+    name: "AddressUnlinked",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'masterAddress',
-        type: 'address',
+        internalType: "address",
+        name: "masterAddress",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'verifier',
-        type: 'address',
+        internalType: "address",
+        name: "verifier",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'bool',
-        name: 'isMasterLinked',
-        type: 'bool',
+        internalType: "bool",
+        name: "isMasterLinked",
+        type: "bool",
       },
     ],
-    name: 'UserRegistered',
-    type: 'event',
+    name: "UserRegistered",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'masterAddress',
-        type: 'address',
+        internalType: "address",
+        name: "masterAddress",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'verifier',
-        type: 'address',
+        internalType: "address",
+        name: "verifier",
+        type: "address",
       },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'unregisteredBy',
-        type: 'address',
+        internalType: "address",
+        name: "unregisteredBy",
+        type: "address",
       },
     ],
-    name: 'UserUnregistered',
-    type: 'event',
+    name: "UserUnregistered",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'verifier',
-        type: 'address',
+        internalType: "address",
+        name: "verifier",
+        type: "address",
       },
     ],
-    name: 'VerifierAdded',
-    type: 'event',
+    name: "VerifierAdded",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'verifier',
-        type: 'address',
+        internalType: "address",
+        name: "verifier",
+        type: "address",
       },
     ],
-    name: 'VerifierRemoved',
-    type: 'event',
+    name: "VerifierRemoved",
+    type: "event",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_user',
-        type: 'address',
+        internalType: "address",
+        name: "_user",
+        type: "address",
       },
       {
-        internalType: 'address',
-        name: '_verifier',
-        type: 'address',
+        internalType: "address",
+        name: "_verifier",
+        type: "address",
       },
     ],
-    name: 'isUser',
+    name: "isUser",
     outputs: [
       {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_masterAddress',
-        type: 'address',
+        internalType: "address",
+        name: "_masterAddress",
+        type: "address",
       },
       {
-        internalType: 'bool',
-        name: '_isMasterLinked',
-        type: 'bool',
+        internalType: "bool",
+        name: "_isMasterLinked",
+        type: "bool",
       },
     ],
-    name: 'registerMasterAddress',
+    name: "registerMasterAddress",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_masterAddress',
-        type: 'address',
+        internalType: "address",
+        name: "_masterAddress",
+        type: "address",
       },
       {
-        internalType: 'address',
-        name: '_verifier',
-        type: 'address',
+        internalType: "address",
+        name: "_verifier",
+        type: "address",
       },
     ],
-    name: 'unregisterMasterAddress',
+    name: "unregisterMasterAddress",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];

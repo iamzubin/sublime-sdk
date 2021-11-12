@@ -14,40 +14,55 @@ import {
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface SublimeProxyInterface extends ethers.utils.Interface {
   functions: {
-    'admin()': FunctionFragment;
-    'changeAdmin(address)': FunctionFragment;
-    'implementation()': FunctionFragment;
-    'upgradeTo(address)': FunctionFragment;
-    'upgradeToAndCall(address,bytes)': FunctionFragment;
+    "admin()": FunctionFragment;
+    "changeAdmin(address)": FunctionFragment;
+    "implementation()": FunctionFragment;
+    "upgradeTo(address)": FunctionFragment;
+    "upgradeToAndCall(address,bytes)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'admin', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'changeAdmin', values: [string]): string;
-  encodeFunctionData(functionFragment: 'implementation', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'upgradeTo', values: [string]): string;
-  encodeFunctionData(functionFragment: 'upgradeToAndCall', values: [string, BytesLike]): string;
+  encodeFunctionData(functionFragment: "admin", values?: undefined): string;
+  encodeFunctionData(functionFragment: "changeAdmin", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "implementation",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "upgradeTo", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "upgradeToAndCall",
+    values: [string, BytesLike]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'admin', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'changeAdmin', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'implementation', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'upgradeTo', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'upgradeToAndCall', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "admin", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "changeAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "implementation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "upgradeTo", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "upgradeToAndCall",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'AdminChanged(address,address)': EventFragment;
-    'Upgraded(address)': EventFragment;
+    "AdminChanged(address,address)": EventFragment;
+    "Upgraded(address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'AdminChanged'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Upgraded'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AdminChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Upgraded"): EventFragment;
 }
 
 export class SublimeProxy extends Contract {
@@ -94,21 +109,38 @@ export class SublimeProxy extends Contract {
   interface: SublimeProxyInterface;
 
   functions: {
-    admin(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    admin(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'admin()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "admin()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    changeAdmin(newAdmin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    changeAdmin(
+      newAdmin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'changeAdmin(address)'(newAdmin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "changeAdmin(address)"(
+      newAdmin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    implementation(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    implementation(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'implementation()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "implementation()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    upgradeTo(newImplementation: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    upgradeTo(
+      newImplementation: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'upgradeTo(address)'(
+    "upgradeTo(address)"(
       newImplementation: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -119,28 +151,45 @@ export class SublimeProxy extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'upgradeToAndCall(address,bytes)'(
+    "upgradeToAndCall(address,bytes)"(
       newImplementation: string,
       data: BytesLike,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
-  admin(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  admin(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'admin()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "admin()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  changeAdmin(newAdmin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  changeAdmin(
+    newAdmin: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'changeAdmin(address)'(newAdmin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "changeAdmin(address)"(
+    newAdmin: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  implementation(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  implementation(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'implementation()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "implementation()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  upgradeTo(newImplementation: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  upgradeTo(
+    newImplementation: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'upgradeTo(address)'(
+  "upgradeTo(address)"(
     newImplementation: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -151,7 +200,7 @@ export class SublimeProxy extends Contract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'upgradeToAndCall(address,bytes)'(
+  "upgradeToAndCall(address,bytes)"(
     newImplementation: string,
     data: BytesLike,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -160,47 +209,92 @@ export class SublimeProxy extends Contract {
   callStatic: {
     admin(overrides?: CallOverrides): Promise<string>;
 
-    'admin()'(overrides?: CallOverrides): Promise<string>;
+    "admin()"(overrides?: CallOverrides): Promise<string>;
 
     changeAdmin(newAdmin: string, overrides?: CallOverrides): Promise<void>;
 
-    'changeAdmin(address)'(newAdmin: string, overrides?: CallOverrides): Promise<void>;
+    "changeAdmin(address)"(
+      newAdmin: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     implementation(overrides?: CallOverrides): Promise<string>;
 
-    'implementation()'(overrides?: CallOverrides): Promise<string>;
+    "implementation()"(overrides?: CallOverrides): Promise<string>;
 
-    upgradeTo(newImplementation: string, overrides?: CallOverrides): Promise<void>;
+    upgradeTo(
+      newImplementation: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'upgradeTo(address)'(newImplementation: string, overrides?: CallOverrides): Promise<void>;
+    "upgradeTo(address)"(
+      newImplementation: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    upgradeToAndCall(newImplementation: string, data: BytesLike, overrides?: CallOverrides): Promise<void>;
+    upgradeToAndCall(
+      newImplementation: string,
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'upgradeToAndCall(address,bytes)'(newImplementation: string, data: BytesLike, overrides?: CallOverrides): Promise<void>;
+    "upgradeToAndCall(address,bytes)"(
+      newImplementation: string,
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
-    AdminChanged(previousAdmin: null, newAdmin: null): TypedEventFilter<[string, string], { previousAdmin: string; newAdmin: string }>;
+    AdminChanged(
+      previousAdmin: null,
+      newAdmin: null
+    ): TypedEventFilter<
+      [string, string],
+      { previousAdmin: string; newAdmin: string }
+    >;
 
-    Upgraded(implementation: string | null): TypedEventFilter<[string], { implementation: string }>;
+    Upgraded(
+      implementation: string | null
+    ): TypedEventFilter<[string], { implementation: string }>;
   };
 
   estimateGas: {
-    admin(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    admin(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'admin()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "admin()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    changeAdmin(newAdmin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    changeAdmin(
+      newAdmin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'changeAdmin(address)'(newAdmin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "changeAdmin(address)"(
+      newAdmin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    implementation(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    implementation(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'implementation()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "implementation()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    upgradeTo(newImplementation: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    upgradeTo(
+      newImplementation: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'upgradeTo(address)'(newImplementation: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "upgradeTo(address)"(
+      newImplementation: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     upgradeToAndCall(
       newImplementation: string,
@@ -208,7 +302,7 @@ export class SublimeProxy extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'upgradeToAndCall(address,bytes)'(
+    "upgradeToAndCall(address,bytes)"(
       newImplementation: string,
       data: BytesLike,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -216,21 +310,38 @@ export class SublimeProxy extends Contract {
   };
 
   populateTransaction: {
-    admin(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    admin(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'admin()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "admin()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    changeAdmin(newAdmin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    changeAdmin(
+      newAdmin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'changeAdmin(address)'(newAdmin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "changeAdmin(address)"(
+      newAdmin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    implementation(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    implementation(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'implementation()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "implementation()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    upgradeTo(newImplementation: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    upgradeTo(
+      newImplementation: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'upgradeTo(address)'(
+    "upgradeTo(address)"(
       newImplementation: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -241,7 +352,7 @@ export class SublimeProxy extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'upgradeToAndCall(address,bytes)'(
+    "upgradeToAndCall(address,bytes)"(
       newImplementation: string,
       data: BytesLike,
       overrides?: PayableOverrides & { from?: string | Promise<string> }

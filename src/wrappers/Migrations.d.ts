@@ -13,26 +13,38 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface MigrationsInterface extends ethers.utils.Interface {
   functions: {
-    'last_completed_migration()': FunctionFragment;
-    'owner()': FunctionFragment;
-    'setCompleted(uint256)': FunctionFragment;
+    "last_completed_migration()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "setCompleted(uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'last_completed_migration', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'setCompleted', values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "last_completed_migration",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "setCompleted",
+    values: [BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'last_completed_migration', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setCompleted', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "last_completed_migration",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setCompleted",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -83,15 +95,20 @@ export class Migrations extends Contract {
   functions: {
     last_completed_migration(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'last_completed_migration()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "last_completed_migration()"(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
-    'owner()'(overrides?: CallOverrides): Promise<[string]>;
+    "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
-    setCompleted(completed: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    setCompleted(
+      completed: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'setCompleted(uint256)'(
+    "setCompleted(uint256)"(
       completed: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -99,15 +116,18 @@ export class Migrations extends Contract {
 
   last_completed_migration(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'last_completed_migration()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "last_completed_migration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
-  setCompleted(completed: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  setCompleted(
+    completed: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'setCompleted(uint256)'(
+  "setCompleted(uint256)"(
     completed: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -115,15 +135,21 @@ export class Migrations extends Contract {
   callStatic: {
     last_completed_migration(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'last_completed_migration()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "last_completed_migration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
-    setCompleted(completed: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    setCompleted(
+      completed: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setCompleted(uint256)'(completed: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "setCompleted(uint256)"(
+      completed: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
@@ -131,29 +157,42 @@ export class Migrations extends Contract {
   estimateGas: {
     last_completed_migration(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'last_completed_migration()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "last_completed_migration()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setCompleted(completed: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    setCompleted(
+      completed: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'setCompleted(uint256)'(completed: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "setCompleted(uint256)"(
+      completed: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    last_completed_migration(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    last_completed_migration(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'last_completed_migration()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "last_completed_migration()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    setCompleted(completed: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    setCompleted(
+      completed: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'setCompleted(uint256)'(
+    "setCompleted(uint256)"(
       completed: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

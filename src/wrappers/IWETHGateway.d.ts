@@ -14,32 +14,59 @@ import {
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface IWETHGatewayInterface extends ethers.utils.Interface {
   functions: {
-    'depositETH(address,uint16)': FunctionFragment;
-    'getAWETHAddress()': FunctionFragment;
-    'getLendingPoolAddress()': FunctionFragment;
-    'getWETHAddress()': FunctionFragment;
-    'withdrawETH(uint256,address)': FunctionFragment;
+    "depositETH(address,uint16)": FunctionFragment;
+    "getAWETHAddress()": FunctionFragment;
+    "getLendingPoolAddress()": FunctionFragment;
+    "getWETHAddress()": FunctionFragment;
+    "withdrawETH(uint256,address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'depositETH', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'getAWETHAddress', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getLendingPoolAddress', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getWETHAddress', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'withdrawETH', values: [BigNumberish, string]): string;
+  encodeFunctionData(
+    functionFragment: "depositETH",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAWETHAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getLendingPoolAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getWETHAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawETH",
+    values: [BigNumberish, string]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'depositETH', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getAWETHAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getLendingPoolAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getWETHAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawETH', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "depositETH", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getAWETHAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getLendingPoolAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getWETHAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawETH",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -94,7 +121,7 @@ export class IWETHGateway extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'depositETH(address,uint16)'(
+    "depositETH(address,uint16)"(
       onBehalfOf: string,
       referralCode: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -102,15 +129,15 @@ export class IWETHGateway extends Contract {
 
     getAWETHAddress(overrides?: CallOverrides): Promise<[string]>;
 
-    'getAWETHAddress()'(overrides?: CallOverrides): Promise<[string]>;
+    "getAWETHAddress()"(overrides?: CallOverrides): Promise<[string]>;
 
     getLendingPoolAddress(overrides?: CallOverrides): Promise<[string]>;
 
-    'getLendingPoolAddress()'(overrides?: CallOverrides): Promise<[string]>;
+    "getLendingPoolAddress()"(overrides?: CallOverrides): Promise<[string]>;
 
     getWETHAddress(overrides?: CallOverrides): Promise<[string]>;
 
-    'getWETHAddress()'(overrides?: CallOverrides): Promise<[string]>;
+    "getWETHAddress()"(overrides?: CallOverrides): Promise<[string]>;
 
     withdrawETH(
       amount: BigNumberish,
@@ -118,7 +145,7 @@ export class IWETHGateway extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'withdrawETH(uint256,address)'(
+    "withdrawETH(uint256,address)"(
       amount: BigNumberish,
       to: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -131,7 +158,7 @@ export class IWETHGateway extends Contract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'depositETH(address,uint16)'(
+  "depositETH(address,uint16)"(
     onBehalfOf: string,
     referralCode: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -139,44 +166,64 @@ export class IWETHGateway extends Contract {
 
   getAWETHAddress(overrides?: CallOverrides): Promise<string>;
 
-  'getAWETHAddress()'(overrides?: CallOverrides): Promise<string>;
+  "getAWETHAddress()"(overrides?: CallOverrides): Promise<string>;
 
   getLendingPoolAddress(overrides?: CallOverrides): Promise<string>;
 
-  'getLendingPoolAddress()'(overrides?: CallOverrides): Promise<string>;
+  "getLendingPoolAddress()"(overrides?: CallOverrides): Promise<string>;
 
   getWETHAddress(overrides?: CallOverrides): Promise<string>;
 
-  'getWETHAddress()'(overrides?: CallOverrides): Promise<string>;
+  "getWETHAddress()"(overrides?: CallOverrides): Promise<string>;
 
-  withdrawETH(amount: BigNumberish, to: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  withdrawETH(
+    amount: BigNumberish,
+    to: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'withdrawETH(uint256,address)'(
+  "withdrawETH(uint256,address)"(
     amount: BigNumberish,
     to: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    depositETH(onBehalfOf: string, referralCode: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    depositETH(
+      onBehalfOf: string,
+      referralCode: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'depositETH(address,uint16)'(onBehalfOf: string, referralCode: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "depositETH(address,uint16)"(
+      onBehalfOf: string,
+      referralCode: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     getAWETHAddress(overrides?: CallOverrides): Promise<string>;
 
-    'getAWETHAddress()'(overrides?: CallOverrides): Promise<string>;
+    "getAWETHAddress()"(overrides?: CallOverrides): Promise<string>;
 
     getLendingPoolAddress(overrides?: CallOverrides): Promise<string>;
 
-    'getLendingPoolAddress()'(overrides?: CallOverrides): Promise<string>;
+    "getLendingPoolAddress()"(overrides?: CallOverrides): Promise<string>;
 
     getWETHAddress(overrides?: CallOverrides): Promise<string>;
 
-    'getWETHAddress()'(overrides?: CallOverrides): Promise<string>;
+    "getWETHAddress()"(overrides?: CallOverrides): Promise<string>;
 
-    withdrawETH(amount: BigNumberish, to: string, overrides?: CallOverrides): Promise<void>;
+    withdrawETH(
+      amount: BigNumberish,
+      to: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'withdrawETH(uint256,address)'(amount: BigNumberish, to: string, overrides?: CallOverrides): Promise<void>;
+    "withdrawETH(uint256,address)"(
+      amount: BigNumberish,
+      to: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
@@ -188,7 +235,7 @@ export class IWETHGateway extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'depositETH(address,uint16)'(
+    "depositETH(address,uint16)"(
       onBehalfOf: string,
       referralCode: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -196,19 +243,23 @@ export class IWETHGateway extends Contract {
 
     getAWETHAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getAWETHAddress()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getAWETHAddress()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getLendingPoolAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getLendingPoolAddress()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getLendingPoolAddress()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getWETHAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getWETHAddress()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getWETHAddress()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    withdrawETH(amount: BigNumberish, to: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    withdrawETH(
+      amount: BigNumberish,
+      to: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'withdrawETH(uint256,address)'(
+    "withdrawETH(uint256,address)"(
       amount: BigNumberish,
       to: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -222,7 +273,7 @@ export class IWETHGateway extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'depositETH(address,uint16)'(
+    "depositETH(address,uint16)"(
       onBehalfOf: string,
       referralCode: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -230,15 +281,23 @@ export class IWETHGateway extends Contract {
 
     getAWETHAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'getAWETHAddress()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getAWETHAddress()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    getLendingPoolAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getLendingPoolAddress(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getLendingPoolAddress()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getLendingPoolAddress()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     getWETHAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'getWETHAddress()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getWETHAddress()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     withdrawETH(
       amount: BigNumberish,
@@ -246,7 +305,7 @@ export class IWETHGateway extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'withdrawETH(uint256,address)'(
+    "withdrawETH(uint256,address)"(
       amount: BigNumberish,
       to: string,
       overrides?: Overrides & { from?: string | Promise<string> }

@@ -13,23 +13,35 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface IUniswapV3PoolOwnerActionsInterface extends ethers.utils.Interface {
   functions: {
-    'collectProtocol(address,uint128,uint128)': FunctionFragment;
-    'setFeeProtocol(uint8,uint8)': FunctionFragment;
+    "collectProtocol(address,uint128,uint128)": FunctionFragment;
+    "setFeeProtocol(uint8,uint8)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'collectProtocol', values: [string, BigNumberish, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'setFeeProtocol', values: [BigNumberish, BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "collectProtocol",
+    values: [string, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setFeeProtocol",
+    values: [BigNumberish, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'collectProtocol', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setFeeProtocol', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "collectProtocol",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setFeeProtocol",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -85,7 +97,7 @@ export class IUniswapV3PoolOwnerActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'collectProtocol(address,uint128,uint128)'(
+    "collectProtocol(address,uint128,uint128)"(
       recipient: string,
       amount0Requested: BigNumberish,
       amount1Requested: BigNumberish,
@@ -98,7 +110,7 @@ export class IUniswapV3PoolOwnerActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'setFeeProtocol(uint8,uint8)'(
+    "setFeeProtocol(uint8,uint8)"(
       feeProtocol0: BigNumberish,
       feeProtocol1: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -112,7 +124,7 @@ export class IUniswapV3PoolOwnerActions extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'collectProtocol(address,uint128,uint128)'(
+  "collectProtocol(address,uint128,uint128)"(
     recipient: string,
     amount0Requested: BigNumberish,
     amount1Requested: BigNumberish,
@@ -125,7 +137,7 @@ export class IUniswapV3PoolOwnerActions extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'setFeeProtocol(uint8,uint8)'(
+  "setFeeProtocol(uint8,uint8)"(
     feeProtocol0: BigNumberish,
     feeProtocol1: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -137,18 +149,30 @@ export class IUniswapV3PoolOwnerActions extends Contract {
       amount0Requested: BigNumberish,
       amount1Requested: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }>;
+    ): Promise<
+      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
+    >;
 
-    'collectProtocol(address,uint128,uint128)'(
+    "collectProtocol(address,uint128,uint128)"(
       recipient: string,
       amount0Requested: BigNumberish,
       amount1Requested: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }>;
+    ): Promise<
+      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
+    >;
 
-    setFeeProtocol(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    setFeeProtocol(
+      feeProtocol0: BigNumberish,
+      feeProtocol1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setFeeProtocol(uint8,uint8)'(feeProtocol0: BigNumberish, feeProtocol1: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "setFeeProtocol(uint8,uint8)"(
+      feeProtocol0: BigNumberish,
+      feeProtocol1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
@@ -161,7 +185,7 @@ export class IUniswapV3PoolOwnerActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'collectProtocol(address,uint128,uint128)'(
+    "collectProtocol(address,uint128,uint128)"(
       recipient: string,
       amount0Requested: BigNumberish,
       amount1Requested: BigNumberish,
@@ -174,7 +198,7 @@ export class IUniswapV3PoolOwnerActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'setFeeProtocol(uint8,uint8)'(
+    "setFeeProtocol(uint8,uint8)"(
       feeProtocol0: BigNumberish,
       feeProtocol1: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -189,7 +213,7 @@ export class IUniswapV3PoolOwnerActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'collectProtocol(address,uint128,uint128)'(
+    "collectProtocol(address,uint128,uint128)"(
       recipient: string,
       amount0Requested: BigNumberish,
       amount1Requested: BigNumberish,
@@ -202,7 +226,7 @@ export class IUniswapV3PoolOwnerActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'setFeeProtocol(uint8,uint8)'(
+    "setFeeProtocol(uint8,uint8)"(
       feeProtocol0: BigNumberish,
       feeProtocol1: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }

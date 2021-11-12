@@ -14,31 +14,34 @@ import {
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface WETHInterface extends ethers.utils.Interface {
   functions: {
-    'deposit()': FunctionFragment;
-    'withdraw(uint256)': FunctionFragment;
+    "deposit()": FunctionFragment;
+    "withdraw(uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'deposit', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'withdraw', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "deposit", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "withdraw",
+    values: [BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'deposit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdraw', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
 
   events: {
-    'Deposit(address,uint256)': EventFragment;
-    'Withdrawal(address,uint256)': EventFragment;
+    "Deposit(address,uint256)": EventFragment;
+    "Withdrawal(address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Deposit'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Withdrawal'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Deposit"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Withdrawal"): EventFragment;
 }
 
 export class WETH extends Contract {
@@ -85,56 +88,105 @@ export class WETH extends Contract {
   interface: WETHInterface;
 
   functions: {
-    deposit(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    deposit(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'deposit()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "deposit()"(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    withdraw(wad: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    withdraw(
+      wad: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'withdraw(uint256)'(wad: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "withdraw(uint256)"(
+      wad: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
-  deposit(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  deposit(
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'deposit()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "deposit()"(
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  withdraw(wad: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  withdraw(
+    wad: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'withdraw(uint256)'(wad: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "withdraw(uint256)"(
+    wad: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
     deposit(overrides?: CallOverrides): Promise<void>;
 
-    'deposit()'(overrides?: CallOverrides): Promise<void>;
+    "deposit()"(overrides?: CallOverrides): Promise<void>;
 
     withdraw(wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    'withdraw(uint256)'(wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "withdraw(uint256)"(
+      wad: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
-    Deposit(dst: string | null, wad: null): TypedEventFilter<[string, BigNumber], { dst: string; wad: BigNumber }>;
+    Deposit(
+      dst: string | null,
+      wad: null
+    ): TypedEventFilter<[string, BigNumber], { dst: string; wad: BigNumber }>;
 
-    Withdrawal(src: string | null, wad: null): TypedEventFilter<[string, BigNumber], { src: string; wad: BigNumber }>;
+    Withdrawal(
+      src: string | null,
+      wad: null
+    ): TypedEventFilter<[string, BigNumber], { src: string; wad: BigNumber }>;
   };
 
   estimateGas: {
-    deposit(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    deposit(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'deposit()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "deposit()"(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    withdraw(wad: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    withdraw(
+      wad: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'withdraw(uint256)'(wad: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "withdraw(uint256)"(
+      wad: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    deposit(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    deposit(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'deposit()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "deposit()"(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    withdraw(wad: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    withdraw(
+      wad: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'withdraw(uint256)'(wad: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "withdraw(uint256)"(
+      wad: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
   };
 }

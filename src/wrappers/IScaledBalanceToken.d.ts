@@ -12,20 +12,26 @@ import {
   Contract,
   ContractTransaction,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface IScaledBalanceTokenInterface extends ethers.utils.Interface {
   functions: {
-    'scaledBalanceOf(address)': FunctionFragment;
+    "scaledBalanceOf(address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'scaledBalanceOf', values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "scaledBalanceOf",
+    values: [string]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'scaledBalanceOf', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "scaledBalanceOf",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -74,32 +80,59 @@ export class IScaledBalanceToken extends Contract {
   interface: IScaledBalanceTokenInterface;
 
   functions: {
-    scaledBalanceOf(user: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+    scaledBalanceOf(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
-    'scaledBalanceOf(address)'(user: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+    "scaledBalanceOf(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
   };
 
   scaledBalanceOf(user: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  'scaledBalanceOf(address)'(user: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "scaledBalanceOf(address)"(
+    user: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   callStatic: {
-    scaledBalanceOf(user: string, overrides?: CallOverrides): Promise<BigNumber>;
+    scaledBalanceOf(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'scaledBalanceOf(address)'(user: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "scaledBalanceOf(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   filters: {};
 
   estimateGas: {
-    scaledBalanceOf(user: string, overrides?: CallOverrides): Promise<BigNumber>;
+    scaledBalanceOf(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'scaledBalanceOf(address)'(user: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "scaledBalanceOf(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    scaledBalanceOf(user: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    scaledBalanceOf(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'scaledBalanceOf(address)'(user: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "scaledBalanceOf(address)"(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
   };
 }

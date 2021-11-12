@@ -2,13 +2,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from 'ethers';
-import { Provider } from '@ethersproject/providers';
+import { Contract, Signer } from "ethers";
+import { Provider } from "@ethersproject/providers";
 
-import type { IStrategyRegistry } from '../IStrategyRegistry';
+import type { IStrategyRegistry } from "../IStrategyRegistry";
 
 export class IStrategyRegistry__factory {
-  static connect(address: string, signerOrProvider: Signer | Provider): IStrategyRegistry {
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IStrategyRegistry {
     return new Contract(address, _abi, signerOrProvider) as IStrategyRegistry;
   }
 }
@@ -19,106 +22,106 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'strategy',
-        type: 'address',
+        internalType: "address",
+        name: "strategy",
+        type: "address",
       },
     ],
-    name: 'StrategyAdded',
-    type: 'event',
+    name: "StrategyAdded",
+    type: "event",
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'strategy',
-        type: 'address',
+        internalType: "address",
+        name: "strategy",
+        type: "address",
       },
     ],
-    name: 'StrategyRemoved',
-    type: 'event',
+    name: "StrategyRemoved",
+    type: "event",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_strategy',
-        type: 'address',
+        internalType: "address",
+        name: "_strategy",
+        type: "address",
       },
     ],
-    name: 'addStrategy',
+    name: "addStrategy",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [],
-    name: 'getStrategies',
+    name: "getStrategies",
     outputs: [
       {
-        internalType: 'address[]',
-        name: '',
-        type: 'address[]',
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_strategy',
-        type: 'address',
+        internalType: "address",
+        name: "_strategy",
+        type: "address",
       },
     ],
-    name: 'registry',
+    name: "registry",
     outputs: [
       {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
-    stateMutability: 'view',
-    type: 'function',
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: '_strategyIndex',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "_strategyIndex",
+        type: "uint256",
       },
     ],
-    name: 'removeStrategy',
+    name: "removeStrategy",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: '_strategyIndex',
-        type: 'uint256',
+        internalType: "uint256",
+        name: "_strategyIndex",
+        type: "uint256",
       },
       {
-        internalType: 'address',
-        name: '_oldStrategy',
-        type: 'address',
+        internalType: "address",
+        name: "_oldStrategy",
+        type: "address",
       },
       {
-        internalType: 'address',
-        name: '_newStrategy',
-        type: 'address',
+        internalType: "address",
+        name: "_newStrategy",
+        type: "address",
       },
     ],
-    name: 'updateStrategy',
+    name: "updateStrategy",
     outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];

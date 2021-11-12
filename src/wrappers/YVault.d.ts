@@ -14,118 +14,211 @@ import {
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface YVaultInterface extends ethers.utils.Interface {
   functions: {
-    'allowance(address,address)': FunctionFragment;
-    'approve(address,uint256)': FunctionFragment;
-    'available()': FunctionFragment;
-    'balance()': FunctionFragment;
-    'balanceOf(address)': FunctionFragment;
-    'controller()': FunctionFragment;
-    'decimals()': FunctionFragment;
-    'decreaseAllowance(address,uint256)': FunctionFragment;
-    'deposit(uint256)': FunctionFragment;
-    'depositAll()': FunctionFragment;
-    'depositETH()': FunctionFragment;
-    'earn()': FunctionFragment;
-    'getPricePerFullShare()': FunctionFragment;
-    'governance()': FunctionFragment;
-    'harvest(address,uint256)': FunctionFragment;
-    'increaseAllowance(address,uint256)': FunctionFragment;
-    'max()': FunctionFragment;
-    'min()': FunctionFragment;
-    'name()': FunctionFragment;
-    'setController(address)': FunctionFragment;
-    'setGovernance(address)': FunctionFragment;
-    'setMin(uint256)': FunctionFragment;
-    'symbol()': FunctionFragment;
-    'token()': FunctionFragment;
-    'totalSupply()': FunctionFragment;
-    'transfer(address,uint256)': FunctionFragment;
-    'transferFrom(address,address,uint256)': FunctionFragment;
-    'withdraw(uint256)': FunctionFragment;
-    'withdrawAll()': FunctionFragment;
-    'withdrawAllETH()': FunctionFragment;
-    'withdrawETH(uint256)': FunctionFragment;
+    "allowance(address,address)": FunctionFragment;
+    "approve(address,uint256)": FunctionFragment;
+    "available()": FunctionFragment;
+    "balance()": FunctionFragment;
+    "balanceOf(address)": FunctionFragment;
+    "controller()": FunctionFragment;
+    "decimals()": FunctionFragment;
+    "decreaseAllowance(address,uint256)": FunctionFragment;
+    "deposit(uint256)": FunctionFragment;
+    "depositAll()": FunctionFragment;
+    "depositETH()": FunctionFragment;
+    "earn()": FunctionFragment;
+    "getPricePerFullShare()": FunctionFragment;
+    "governance()": FunctionFragment;
+    "harvest(address,uint256)": FunctionFragment;
+    "increaseAllowance(address,uint256)": FunctionFragment;
+    "max()": FunctionFragment;
+    "min()": FunctionFragment;
+    "name()": FunctionFragment;
+    "setController(address)": FunctionFragment;
+    "setGovernance(address)": FunctionFragment;
+    "setMin(uint256)": FunctionFragment;
+    "symbol()": FunctionFragment;
+    "token()": FunctionFragment;
+    "totalSupply()": FunctionFragment;
+    "transfer(address,uint256)": FunctionFragment;
+    "transferFrom(address,address,uint256)": FunctionFragment;
+    "withdraw(uint256)": FunctionFragment;
+    "withdrawAll()": FunctionFragment;
+    "withdrawAllETH()": FunctionFragment;
+    "withdrawETH(uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'allowance', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'approve', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'available', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'balance', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string;
-  encodeFunctionData(functionFragment: 'controller', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'decimals', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'decreaseAllowance', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'deposit', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'depositAll', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'depositETH', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'earn', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getPricePerFullShare', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'governance', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'harvest', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'increaseAllowance', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'max', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'min', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'name', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'setController', values: [string]): string;
-  encodeFunctionData(functionFragment: 'setGovernance', values: [string]): string;
-  encodeFunctionData(functionFragment: 'setMin', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'symbol', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'token', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'totalSupply', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transfer', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'transferFrom', values: [string, string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'withdraw', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'withdrawAll', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'withdrawAllETH', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'withdrawETH', values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "allowance",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approve",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "available", values?: undefined): string;
+  encodeFunctionData(functionFragment: "balance", values?: undefined): string;
+  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "controller",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "deposit",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositAll",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositETH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "earn", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "getPricePerFullShare",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "governance",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "harvest",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "max", values?: undefined): string;
+  encodeFunctionData(functionFragment: "min", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "setController",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setGovernance",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMin",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+  encodeFunctionData(functionFragment: "token", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom",
+    values: [string, string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdraw",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawAll",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawAllETH",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawETH",
+    values: [BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'allowance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'approve', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'available', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'balance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'controller', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'decimals', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'decreaseAllowance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'deposit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'depositAll', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'depositETH', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'earn', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getPricePerFullShare', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'governance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'harvest', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'increaseAllowance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'max', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'min', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'name', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setController', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setGovernance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setMin', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'symbol', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'token', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalSupply', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transfer', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferFrom', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdraw', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawAll', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawAllETH', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawETH', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "available", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "controller", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "depositAll", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "depositETH", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "earn", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getPricePerFullShare",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "governance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "harvest", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "max", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "min", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setController",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setGovernance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setMin", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "token", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawAllETH",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawETH",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Approval(address,address,uint256)': EventFragment;
-    'Transfer(address,address,uint256)': EventFragment;
+    "Approval(address,address,uint256)": EventFragment;
+    "Transfer(address,address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'Approval'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'Transfer'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
 export class YVault extends Contract {
@@ -172,9 +265,17 @@ export class YVault extends Contract {
   interface: YVaultInterface;
 
   functions: {
-    allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+    allowance(
+      owner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
-    'allowance(address,address)'(owner: string, spender: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+    "allowance(address,address)"(
+      owner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     approve(
       spender: string,
@@ -182,7 +283,7 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -190,23 +291,26 @@ export class YVault extends Contract {
 
     available(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'available()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "available()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     balance(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'balance()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "balance()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     balanceOf(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+    "balanceOf(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     controller(overrides?: CallOverrides): Promise<[string]>;
 
-    'controller()'(overrides?: CallOverrides): Promise<[string]>;
+    "controller()"(overrides?: CallOverrides): Promise<[string]>;
 
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
-    'decimals()'(overrides?: CallOverrides): Promise<[number]>;
+    "decimals()"(overrides?: CallOverrides): Promise<[number]>;
 
     decreaseAllowance(
       spender: string,
@@ -214,35 +318,53 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'decreaseAllowance(address,uint256)'(
+    "decreaseAllowance(address,uint256)"(
       spender: string,
       subtractedValue: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    deposit(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    deposit(
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'deposit(uint256)'(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "deposit(uint256)"(
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    depositAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    depositAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'depositAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "depositAll()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    depositETH(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    depositETH(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'depositETH()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "depositETH()"(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    earn(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    earn(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'earn()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "earn()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     getPricePerFullShare(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'getPricePerFullShare()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "getPricePerFullShare()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     governance(overrides?: CallOverrides): Promise<[string]>;
 
-    'governance()'(overrides?: CallOverrides): Promise<[string]>;
+    "governance()"(overrides?: CallOverrides): Promise<[string]>;
 
     harvest(
       reserve: string,
@@ -250,7 +372,7 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'harvest(address,uint256)'(
+    "harvest(address,uint256)"(
       reserve: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -262,7 +384,7 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'increaseAllowance(address,uint256)'(
+    "increaseAllowance(address,uint256)"(
       spender: string,
       addedValue: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -270,45 +392,57 @@ export class YVault extends Contract {
 
     max(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'max()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "max()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     min(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'min()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "min()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
-    'name()'(overrides?: CallOverrides): Promise<[string]>;
+    "name()"(overrides?: CallOverrides): Promise<[string]>;
 
-    setController(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
-
-    'setController(address)'(
+    setController(
       _controller: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "setController(address)"(
+      _controller: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'setGovernance(address)'(
+    setGovernance(
       _governance: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setMin(_min: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "setGovernance(address)"(
+      _governance: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'setMin(uint256)'(_min: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    setMin(
+      _min: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "setMin(uint256)"(
+      _min: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
-    'symbol()'(overrides?: CallOverrides): Promise<[string]>;
+    "symbol()"(overrides?: CallOverrides): Promise<[string]>;
 
     token(overrides?: CallOverrides): Promise<[string]>;
 
-    'token()'(overrides?: CallOverrides): Promise<[string]>;
+    "token()"(overrides?: CallOverrides): Promise<[string]>;
 
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transfer(
       recipient: string,
@@ -316,7 +450,7 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -329,40 +463,69 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    withdraw(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    withdraw(
+      _shares: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'withdraw(uint256)'(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "withdraw(uint256)"(
+      _shares: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    withdrawAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    withdrawAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'withdrawAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "withdrawAll()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    withdrawAllETH(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    withdrawAllETH(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'withdrawAllETH()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "withdrawAllETH()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    withdrawETH(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    withdrawETH(
+      _shares: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'withdrawETH(uint256)'(
+    "withdrawETH(uint256)"(
       _shares: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
-  allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+  allowance(
+    owner: string,
+    spender: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'allowance(address,address)'(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "allowance(address,address)"(
+    owner: string,
+    spender: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  approve(spender: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  approve(
+    spender: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'approve(address,uint256)'(
+  "approve(address,uint256)"(
     spender: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -370,23 +533,26 @@ export class YVault extends Contract {
 
   available(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'available()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "available()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   balance(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'balance()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "balance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "balanceOf(address)"(
+    account: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   controller(overrides?: CallOverrides): Promise<string>;
 
-  'controller()'(overrides?: CallOverrides): Promise<string>;
+  "controller()"(overrides?: CallOverrides): Promise<string>;
 
   decimals(overrides?: CallOverrides): Promise<number>;
 
-  'decimals()'(overrides?: CallOverrides): Promise<number>;
+  "decimals()"(overrides?: CallOverrides): Promise<number>;
 
   decreaseAllowance(
     spender: string,
@@ -394,39 +560,61 @@ export class YVault extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'decreaseAllowance(address,uint256)'(
+  "decreaseAllowance(address,uint256)"(
     spender: string,
     subtractedValue: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  deposit(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  deposit(
+    _amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'deposit(uint256)'(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "deposit(uint256)"(
+    _amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  depositAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  depositAll(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'depositAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "depositAll()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  depositETH(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  depositETH(
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'depositETH()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "depositETH()"(
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  earn(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  earn(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'earn()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "earn()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   getPricePerFullShare(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'getPricePerFullShare()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "getPricePerFullShare()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   governance(overrides?: CallOverrides): Promise<string>;
 
-  'governance()'(overrides?: CallOverrides): Promise<string>;
+  "governance()"(overrides?: CallOverrides): Promise<string>;
 
-  harvest(reserve: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  harvest(
+    reserve: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'harvest(address,uint256)'(
+  "harvest(address,uint256)"(
     reserve: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -438,7 +626,7 @@ export class YVault extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'increaseAllowance(address,uint256)'(
+  "increaseAllowance(address,uint256)"(
     spender: string,
     addedValue: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -446,39 +634,57 @@ export class YVault extends Contract {
 
   max(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'max()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "max()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   min(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'min()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "min()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   name(overrides?: CallOverrides): Promise<string>;
 
-  'name()'(overrides?: CallOverrides): Promise<string>;
+  "name()"(overrides?: CallOverrides): Promise<string>;
 
-  setController(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  setController(
+    _controller: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'setController(address)'(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "setController(address)"(
+    _controller: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  setGovernance(
+    _governance: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'setGovernance(address)'(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "setGovernance(address)"(
+    _governance: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  setMin(_min: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  setMin(
+    _min: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'setMin(uint256)'(_min: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "setMin(uint256)"(
+    _min: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   symbol(overrides?: CallOverrides): Promise<string>;
 
-  'symbol()'(overrides?: CallOverrides): Promise<string>;
+  "symbol()"(overrides?: CallOverrides): Promise<string>;
 
   token(overrides?: CallOverrides): Promise<string>;
 
-  'token()'(overrides?: CallOverrides): Promise<string>;
+  "token()"(overrides?: CallOverrides): Promise<string>;
 
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   transfer(
     recipient: string,
@@ -486,7 +692,7 @@ export class YVault extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'transfer(address,uint256)'(
+  "transfer(address,uint256)"(
     recipient: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -499,137 +705,231 @@ export class YVault extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'transferFrom(address,address,uint256)'(
+  "transferFrom(address,address,uint256)"(
     sender: string,
     recipient: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  withdraw(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  withdraw(
+    _shares: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'withdraw(uint256)'(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "withdraw(uint256)"(
+    _shares: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  withdrawAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  withdrawAll(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'withdrawAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "withdrawAll()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  withdrawAllETH(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  withdrawAllETH(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'withdrawAllETH()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "withdrawAllETH()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  withdrawETH(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  withdrawETH(
+    _shares: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'withdrawETH(uint256)'(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "withdrawETH(uint256)"(
+    _shares: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
-    allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allowance(
+      owner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'allowance(address,address)'(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "allowance(address,address)"(
+      owner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    approve(spender: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    approve(
+      spender: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'approve(address,uint256)'(spender: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    "approve(address,uint256)"(
+      spender: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     available(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'available()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "available()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     balance(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'balance()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "balance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     controller(overrides?: CallOverrides): Promise<string>;
 
-    'controller()'(overrides?: CallOverrides): Promise<string>;
+    "controller()"(overrides?: CallOverrides): Promise<string>;
 
     decimals(overrides?: CallOverrides): Promise<number>;
 
-    'decimals()'(overrides?: CallOverrides): Promise<number>;
+    "decimals()"(overrides?: CallOverrides): Promise<number>;
 
-    decreaseAllowance(spender: string, subtractedValue: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    decreaseAllowance(
+      spender: string,
+      subtractedValue: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'decreaseAllowance(address,uint256)'(spender: string, subtractedValue: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    "decreaseAllowance(address,uint256)"(
+      spender: string,
+      subtractedValue: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     deposit(_amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    'deposit(uint256)'(_amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "deposit(uint256)"(
+      _amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     depositAll(overrides?: CallOverrides): Promise<void>;
 
-    'depositAll()'(overrides?: CallOverrides): Promise<void>;
+    "depositAll()"(overrides?: CallOverrides): Promise<void>;
 
     depositETH(overrides?: CallOverrides): Promise<void>;
 
-    'depositETH()'(overrides?: CallOverrides): Promise<void>;
+    "depositETH()"(overrides?: CallOverrides): Promise<void>;
 
     earn(overrides?: CallOverrides): Promise<void>;
 
-    'earn()'(overrides?: CallOverrides): Promise<void>;
+    "earn()"(overrides?: CallOverrides): Promise<void>;
 
     getPricePerFullShare(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getPricePerFullShare()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getPricePerFullShare()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     governance(overrides?: CallOverrides): Promise<string>;
 
-    'governance()'(overrides?: CallOverrides): Promise<string>;
+    "governance()"(overrides?: CallOverrides): Promise<string>;
 
-    harvest(reserve: string, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    harvest(
+      reserve: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'harvest(address,uint256)'(reserve: string, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "harvest(address,uint256)"(
+      reserve: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    increaseAllowance(spender: string, addedValue: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    increaseAllowance(
+      spender: string,
+      addedValue: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'increaseAllowance(address,uint256)'(spender: string, addedValue: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    "increaseAllowance(address,uint256)"(
+      spender: string,
+      addedValue: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     max(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'max()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "max()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     min(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'min()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "min()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
-    'name()'(overrides?: CallOverrides): Promise<string>;
+    "name()"(overrides?: CallOverrides): Promise<string>;
 
-    setController(_controller: string, overrides?: CallOverrides): Promise<void>;
+    setController(
+      _controller: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setController(address)'(_controller: string, overrides?: CallOverrides): Promise<void>;
+    "setController(address)"(
+      _controller: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setGovernance(_governance: string, overrides?: CallOverrides): Promise<void>;
+    setGovernance(
+      _governance: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setGovernance(address)'(_governance: string, overrides?: CallOverrides): Promise<void>;
+    "setGovernance(address)"(
+      _governance: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setMin(_min: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    'setMin(uint256)'(_min: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "setMin(uint256)"(
+      _min: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     symbol(overrides?: CallOverrides): Promise<string>;
 
-    'symbol()'(overrides?: CallOverrides): Promise<string>;
+    "symbol()"(overrides?: CallOverrides): Promise<string>;
 
     token(overrides?: CallOverrides): Promise<string>;
 
-    'token()'(overrides?: CallOverrides): Promise<string>;
+    "token()"(overrides?: CallOverrides): Promise<string>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    transfer(recipient: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    transfer(
+      recipient: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'transfer(address,uint256)'(recipient: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    "transfer(address,uint256)"(
+      recipient: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    transferFrom(sender: string, recipient: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    transferFrom(
+      sender: string,
+      recipient: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
@@ -638,19 +938,28 @@ export class YVault extends Contract {
 
     withdraw(_shares: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    'withdraw(uint256)'(_shares: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "withdraw(uint256)"(
+      _shares: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     withdrawAll(overrides?: CallOverrides): Promise<void>;
 
-    'withdrawAll()'(overrides?: CallOverrides): Promise<void>;
+    "withdrawAll()"(overrides?: CallOverrides): Promise<void>;
 
     withdrawAllETH(overrides?: CallOverrides): Promise<void>;
 
-    'withdrawAllETH()'(overrides?: CallOverrides): Promise<void>;
+    "withdrawAllETH()"(overrides?: CallOverrides): Promise<void>;
 
-    withdrawETH(_shares: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    withdrawETH(
+      _shares: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'withdrawETH(uint256)'(_shares: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "withdrawETH(uint256)"(
+      _shares: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -658,23 +967,41 @@ export class YVault extends Contract {
       owner: string | null,
       spender: string | null,
       value: null
-    ): TypedEventFilter<[string, string, BigNumber], { owner: string; spender: string; value: BigNumber }>;
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
 
     Transfer(
       from: string | null,
       to: string | null,
       value: null
-    ): TypedEventFilter<[string, string, BigNumber], { from: string; to: string; value: BigNumber }>;
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
+    >;
   };
 
   estimateGas: {
-    allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    allowance(
+      owner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'allowance(address,address)'(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "allowance(address,address)"(
+      owner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    approve(spender: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    approve(
+      spender: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -682,23 +1009,26 @@ export class YVault extends Contract {
 
     available(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'available()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "available()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     balance(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'balance()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "balance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     controller(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'controller()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "controller()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'decimals()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     decreaseAllowance(
       spender: string,
@@ -706,39 +1036,61 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'decreaseAllowance(address,uint256)'(
+    "decreaseAllowance(address,uint256)"(
       spender: string,
       subtractedValue: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    deposit(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    deposit(
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'deposit(uint256)'(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "deposit(uint256)"(
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    depositAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    depositAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'depositAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "depositAll()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    depositETH(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    depositETH(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'depositETH()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "depositETH()"(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    earn(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    earn(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'earn()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "earn()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     getPricePerFullShare(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getPricePerFullShare()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getPricePerFullShare()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     governance(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'governance()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "governance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    harvest(reserve: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    harvest(
+      reserve: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'harvest(address,uint256)'(
+    "harvest(address,uint256)"(
       reserve: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -750,7 +1102,7 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'increaseAllowance(address,uint256)'(
+    "increaseAllowance(address,uint256)"(
       spender: string,
       addedValue: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -758,43 +1110,65 @@ export class YVault extends Contract {
 
     max(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'max()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "max()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     min(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'min()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "min()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'name()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setController(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    setController(
+      _controller: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'setController(address)'(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "setController(address)"(
+      _controller: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    setGovernance(
+      _governance: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'setGovernance(address)'(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "setGovernance(address)"(
+      _governance: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    setMin(_min: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    setMin(
+      _min: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'setMin(uint256)'(_min: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "setMin(uint256)"(
+      _min: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'symbol()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     token(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'token()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "token()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    transfer(recipient: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    transfer(
+      recipient: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -807,34 +1181,62 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    withdraw(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    withdraw(
+      _shares: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'withdraw(uint256)'(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "withdraw(uint256)"(
+      _shares: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    withdrawAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    withdrawAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'withdrawAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "withdrawAll()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    withdrawAllETH(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    withdrawAllETH(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'withdrawAllETH()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "withdrawAllETH()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    withdrawETH(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    withdrawETH(
+      _shares: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'withdrawETH(uint256)'(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "withdrawETH(uint256)"(
+      _shares: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    allowance(
+      owner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'allowance(address,address)'(owner: string, spender: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "allowance(address,address)"(
+      owner: string,
+      spender: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     approve(
       spender: string,
@@ -842,7 +1244,7 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'approve(address,uint256)'(
+    "approve(address,uint256)"(
       spender: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -850,23 +1252,29 @@ export class YVault extends Contract {
 
     available(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'available()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "available()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     balance(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'balance()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "balance()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    balanceOf(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    balanceOf(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'balanceOf(address)'(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "balanceOf(address)"(
+      account: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     controller(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'controller()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "controller()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'decimals()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     decreaseAllowance(
       spender: string,
@@ -874,35 +1282,57 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'decreaseAllowance(address,uint256)'(
+    "decreaseAllowance(address,uint256)"(
       spender: string,
       subtractedValue: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    deposit(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    deposit(
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'deposit(uint256)'(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "deposit(uint256)"(
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    depositAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    depositAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'depositAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "depositAll()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    depositETH(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    depositETH(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'depositETH()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "depositETH()"(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    earn(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    earn(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'earn()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "earn()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    getPricePerFullShare(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getPricePerFullShare(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getPricePerFullShare()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getPricePerFullShare()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     governance(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'governance()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "governance()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     harvest(
       reserve: string,
@@ -910,7 +1340,7 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'harvest(address,uint256)'(
+    "harvest(address,uint256)"(
       reserve: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -922,7 +1352,7 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'increaseAllowance(address,uint256)'(
+    "increaseAllowance(address,uint256)"(
       spender: string,
       addedValue: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -930,45 +1360,57 @@ export class YVault extends Contract {
 
     max(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'max()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "max()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     min(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'min()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "min()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'name()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    setController(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
-
-    'setController(address)'(
+    setController(
       _controller: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "setController(address)"(
+      _controller: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'setGovernance(address)'(
+    setGovernance(
       _governance: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setMin(_min: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "setGovernance(address)"(
+      _governance: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'setMin(uint256)'(_min: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    setMin(
+      _min: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setMin(uint256)"(
+      _min: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'symbol()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     token(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'token()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "token()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transfer(
       recipient: string,
@@ -976,7 +1418,7 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'transfer(address,uint256)'(
+    "transfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -989,28 +1431,45 @@ export class YVault extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'transferFrom(address,address,uint256)'(
+    "transferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    withdraw(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    withdraw(
+      _shares: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'withdraw(uint256)'(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "withdraw(uint256)"(
+      _shares: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    withdrawAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    withdrawAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'withdrawAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "withdrawAll()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    withdrawAllETH(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    withdrawAllETH(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'withdrawAllETH()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "withdrawAllETH()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    withdrawETH(_shares: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    withdrawETH(
+      _shares: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'withdrawETH(uint256)'(
+    "withdrawETH(uint256)"(
       _shares: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

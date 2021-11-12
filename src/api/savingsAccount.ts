@@ -25,7 +25,7 @@ export class SavingsAccountApi {
     this.tokenManager = tokenManager;
   }
 
-  public async depositTo(amount: string, asset: string, strategy: string, to: string): Promise<ContractTransaction> {
+  public async deposit(amount: string, asset: string, strategy: string, to: string): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(asset);
     const borrowDecimal = this.tokenManager.getTokenDecimals(asset);
 
@@ -34,7 +34,7 @@ export class SavingsAccountApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.depositTo(_amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0), asset, strategy, to);
+    return this.savingsAccount.deposit(_amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0), asset, strategy, to);
   }
 
   public async switchStrategy(currentStrategy: string, newStrategy: string, asset: string, amount: string): Promise<ContractTransaction> {
@@ -135,7 +135,7 @@ export class SavingsAccountApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.increaseAllowance(token, to, _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0));
+    return this.savingsAccount.increaseAllowance(_amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0), token, to);
   }
 
   public async decreaseAllowance(token: string, to: string, amount: string): Promise<ContractTransaction> {

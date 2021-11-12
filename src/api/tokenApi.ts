@@ -24,4 +24,15 @@ export class TokenApi {
 
     return this.tokenContract.connect(this.signer).increaseAllowance(to, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0));
   }
+
+  public async approve(to: string, amount: string): Promise<ContractTransaction> {
+    let _amount = new BigNumber(amount);
+    if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
+      throw new Error('shares should be a valid number');
+    }
+    await this.tokenManager.updateTokenDecimals(this.tokenContract.address);
+    let decimal = await this.tokenManager.getTokenDecimals(this.tokenContract.address);
+
+    return this.tokenContract.connect(this.signer).approve(to, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0));
+  }
 }

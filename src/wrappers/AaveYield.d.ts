@@ -14,92 +14,194 @@ import {
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface AaveYieldInterface extends ethers.utils.Interface {
   functions: {
-    'emergencyWithdraw(address,address)': FunctionFragment;
-    'getSharesForTokens(uint256,address)': FunctionFragment;
-    'getTokensForShares(uint256,address)': FunctionFragment;
-    'initialize(address,address,address,address,address)': FunctionFragment;
-    'lendingPoolAddressesProvider()': FunctionFragment;
-    'liquidityToken(address)': FunctionFragment;
-    'lockTokens(address,address,uint256)': FunctionFragment;
-    'owner()': FunctionFragment;
-    'protocolDataProvider()': FunctionFragment;
-    'referralCode()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
-    'savingsAccount()': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
-    'unlockShares(address,uint256)': FunctionFragment;
-    'unlockTokens(address,uint256)': FunctionFragment;
-    'updateAaveAddresses(address,address,address)': FunctionFragment;
-    'updateReferralCode(uint16)': FunctionFragment;
-    'updateSavingsAccount(address)': FunctionFragment;
-    'wethGateway()': FunctionFragment;
+    "emergencyWithdraw(address,address)": FunctionFragment;
+    "getSharesForTokens(uint256,address)": FunctionFragment;
+    "getTokensForShares(uint256,address)": FunctionFragment;
+    "initialize(address,address,address,address,address)": FunctionFragment;
+    "lendingPoolAddressesProvider()": FunctionFragment;
+    "liquidityToken(address)": FunctionFragment;
+    "lockTokens(address,address,uint256)": FunctionFragment;
+    "owner()": FunctionFragment;
+    "protocolDataProvider()": FunctionFragment;
+    "referralCode()": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
+    "savingsAccount()": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "unlockShares(address,uint256)": FunctionFragment;
+    "unlockTokens(address,uint256)": FunctionFragment;
+    "updateAaveAddresses(address,address,address)": FunctionFragment;
+    "updateReferralCode(uint16)": FunctionFragment;
+    "updateSavingsAccount(address)": FunctionFragment;
+    "wethGateway()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'emergencyWithdraw', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'getSharesForTokens', values: [BigNumberish, string]): string;
-  encodeFunctionData(functionFragment: 'getTokensForShares', values: [BigNumberish, string]): string;
-  encodeFunctionData(functionFragment: 'initialize', values: [string, string, string, string, string]): string;
-  encodeFunctionData(functionFragment: 'lendingPoolAddressesProvider', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'liquidityToken', values: [string]): string;
-  encodeFunctionData(functionFragment: 'lockTokens', values: [string, string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'protocolDataProvider', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'referralCode', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'savingsAccount', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'unlockShares', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'unlockTokens', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'updateAaveAddresses', values: [string, string, string]): string;
-  encodeFunctionData(functionFragment: 'updateReferralCode', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'updateSavingsAccount', values: [string]): string;
-  encodeFunctionData(functionFragment: 'wethGateway', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "emergencyWithdraw",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getSharesForTokens",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTokensForShares",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initialize",
+    values: [string, string, string, string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lendingPoolAddressesProvider",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "liquidityToken",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lockTokens",
+    values: [string, string, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "protocolDataProvider",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "referralCode",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "savingsAccount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "unlockShares",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "unlockTokens",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateAaveAddresses",
+    values: [string, string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateReferralCode",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateSavingsAccount",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "wethGateway",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'emergencyWithdraw', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getSharesForTokens', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getTokensForShares', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'lendingPoolAddressesProvider', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'liquidityToken', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'lockTokens', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'protocolDataProvider', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'referralCode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'savingsAccount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'unlockShares', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'unlockTokens', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'updateAaveAddresses', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'updateReferralCode', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'updateSavingsAccount', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'wethGateway', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "emergencyWithdraw",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getSharesForTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getTokensForShares",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "lendingPoolAddressesProvider",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "liquidityToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "lockTokens", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "protocolDataProvider",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "referralCode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "savingsAccount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "unlockShares",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "unlockTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateAaveAddresses",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateReferralCode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateSavingsAccount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wethGateway",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'AaveAddressesUpdated(address,address,address)': EventFragment;
-    'LockedTokens(address,address,uint256)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
-    'ReferralCodeUpdated(uint16)': EventFragment;
-    'SavingsAccountUpdated(address)': EventFragment;
-    'UnlockedShares(address,uint256)': EventFragment;
-    'UnlockedTokens(address,uint256)': EventFragment;
+    "AaveAddressesUpdated(address,address,address)": EventFragment;
+    "LockedTokens(address,address,uint256)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "ReferralCodeUpdated(uint16)": EventFragment;
+    "SavingsAccountUpdated(address)": EventFragment;
+    "UnlockedShares(address,uint256)": EventFragment;
+    "UnlockedTokens(address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'AaveAddressesUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'LockedTokens'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'ReferralCodeUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'SavingsAccountUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'UnlockedShares'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'UnlockedTokens'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AaveAddressesUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LockedTokens"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ReferralCodeUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "SavingsAccountUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "UnlockedShares"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "UnlockedTokens"): EventFragment;
 }
 
 export class AaveYield extends Contract {
@@ -152,23 +254,31 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'emergencyWithdraw(address,address)'(
+    "emergencyWithdraw(address,address)"(
       _asset: string,
       _wallet: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<[BigNumber] & { shares: BigNumber }>;
-
-    'getSharesForTokens(uint256,address)'(
+    getSharesForTokens(
       amount: BigNumberish,
       asset: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { shares: BigNumber }>;
 
-    getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<[BigNumber] & { amount: BigNumber }>;
+    "getSharesForTokens(uint256,address)"(
+      amount: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { shares: BigNumber }>;
 
-    'getTokensForShares(uint256,address)'(
+    getTokensForShares(
+      shares: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { amount: BigNumber }>;
+
+    "getTokensForShares(uint256,address)"(
       shares: BigNumberish,
       asset: string,
       overrides?: CallOverrides
@@ -183,7 +293,7 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'initialize(address,address,address,address,address)'(
+    "initialize(address,address,address,address,address)"(
       _owner: string,
       _savingsAccount: string,
       _wethGateway: string,
@@ -194,11 +304,19 @@ export class AaveYield extends Contract {
 
     lendingPoolAddressesProvider(overrides?: CallOverrides): Promise<[string]>;
 
-    'lendingPoolAddressesProvider()'(overrides?: CallOverrides): Promise<[string]>;
+    "lendingPoolAddressesProvider()"(
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
-    liquidityToken(asset: string, overrides?: CallOverrides): Promise<[string] & { aToken: string }>;
+    liquidityToken(
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<[string] & { aToken: string }>;
 
-    'liquidityToken(address)'(asset: string, overrides?: CallOverrides): Promise<[string] & { aToken: string }>;
+    "liquidityToken(address)"(
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<[string] & { aToken: string }>;
 
     lockTokens(
       user: string,
@@ -207,7 +325,7 @@ export class AaveYield extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'lockTokens(address,address,uint256)'(
+    "lockTokens(address,address,uint256)"(
       user: string,
       asset: string,
       amount: BigNumberish,
@@ -216,27 +334,34 @@ export class AaveYield extends Contract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
-    'owner()'(overrides?: CallOverrides): Promise<[string]>;
+    "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
     protocolDataProvider(overrides?: CallOverrides): Promise<[string]>;
 
-    'protocolDataProvider()'(overrides?: CallOverrides): Promise<[string]>;
+    "protocolDataProvider()"(overrides?: CallOverrides): Promise<[string]>;
 
     referralCode(overrides?: CallOverrides): Promise<[number]>;
 
-    'referralCode()'(overrides?: CallOverrides): Promise<[number]>;
+    "referralCode()"(overrides?: CallOverrides): Promise<[number]>;
 
-    renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     savingsAccount(overrides?: CallOverrides): Promise<[string]>;
 
-    'savingsAccount()'(overrides?: CallOverrides): Promise<[string]>;
+    "savingsAccount()"(overrides?: CallOverrides): Promise<[string]>;
 
-    transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -247,7 +372,7 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'unlockShares(address,uint256)'(
+    "unlockShares(address,uint256)"(
       asset: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -259,7 +384,7 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'unlockTokens(address,uint256)'(
+    "unlockTokens(address,uint256)"(
       asset: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -272,7 +397,7 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'updateAaveAddresses(address,address,address)'(
+    "updateAaveAddresses(address,address,address)"(
       _wethGateway: string,
       _protocolDataProvider: string,
       _lendingPoolAddressesProvider: string,
@@ -284,7 +409,7 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'updateReferralCode(uint16)'(
+    "updateReferralCode(uint16)"(
       _referralCode: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -294,14 +419,14 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'updateSavingsAccount(address)'(
+    "updateSavingsAccount(address)"(
       _savingsAccount: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     wethGateway(overrides?: CallOverrides): Promise<[string]>;
 
-    'wethGateway()'(overrides?: CallOverrides): Promise<[string]>;
+    "wethGateway()"(overrides?: CallOverrides): Promise<[string]>;
   };
 
   emergencyWithdraw(
@@ -310,19 +435,35 @@ export class AaveYield extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'emergencyWithdraw(address,address)'(
+  "emergencyWithdraw(address,address)"(
     _asset: string,
     _wallet: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+  getSharesForTokens(
+    amount: BigNumberish,
+    asset: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'getSharesForTokens(uint256,address)'(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "getSharesForTokens(uint256,address)"(
+    amount: BigNumberish,
+    asset: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+  getTokensForShares(
+    shares: BigNumberish,
+    asset: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  'getTokensForShares(uint256,address)'(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "getTokensForShares(uint256,address)"(
+    shares: BigNumberish,
+    asset: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   initialize(
     _owner: string,
@@ -333,7 +474,7 @@ export class AaveYield extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'initialize(address,address,address,address,address)'(
+  "initialize(address,address,address,address,address)"(
     _owner: string,
     _savingsAccount: string,
     _wethGateway: string,
@@ -344,11 +485,14 @@ export class AaveYield extends Contract {
 
   lendingPoolAddressesProvider(overrides?: CallOverrides): Promise<string>;
 
-  'lendingPoolAddressesProvider()'(overrides?: CallOverrides): Promise<string>;
+  "lendingPoolAddressesProvider()"(overrides?: CallOverrides): Promise<string>;
 
   liquidityToken(asset: string, overrides?: CallOverrides): Promise<string>;
 
-  'liquidityToken(address)'(asset: string, overrides?: CallOverrides): Promise<string>;
+  "liquidityToken(address)"(
+    asset: string,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   lockTokens(
     user: string,
@@ -357,7 +501,7 @@ export class AaveYield extends Contract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'lockTokens(address,address,uint256)'(
+  "lockTokens(address,address,uint256)"(
     user: string,
     asset: string,
     amount: BigNumberish,
@@ -366,27 +510,37 @@ export class AaveYield extends Contract {
 
   owner(overrides?: CallOverrides): Promise<string>;
 
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
   protocolDataProvider(overrides?: CallOverrides): Promise<string>;
 
-  'protocolDataProvider()'(overrides?: CallOverrides): Promise<string>;
+  "protocolDataProvider()"(overrides?: CallOverrides): Promise<string>;
 
   referralCode(overrides?: CallOverrides): Promise<number>;
 
-  'referralCode()'(overrides?: CallOverrides): Promise<number>;
+  "referralCode()"(overrides?: CallOverrides): Promise<number>;
 
-  renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  renounceOwnership(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "renounceOwnership()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   savingsAccount(overrides?: CallOverrides): Promise<string>;
 
-  'savingsAccount()'(overrides?: CallOverrides): Promise<string>;
+  "savingsAccount()"(overrides?: CallOverrides): Promise<string>;
 
-  transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'transferOwnership(address)'(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "transferOwnership(address)"(
+    newOwner: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   unlockShares(
     asset: string,
@@ -394,7 +548,7 @@ export class AaveYield extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'unlockShares(address,uint256)'(
+  "unlockShares(address,uint256)"(
     asset: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -406,7 +560,7 @@ export class AaveYield extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'unlockTokens(address,uint256)'(
+  "unlockTokens(address,uint256)"(
     asset: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -419,7 +573,7 @@ export class AaveYield extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'updateAaveAddresses(address,address,address)'(
+  "updateAaveAddresses(address,address,address)"(
     _wethGateway: string,
     _protocolDataProvider: string,
     _lendingPoolAddressesProvider: string,
@@ -431,34 +585,61 @@ export class AaveYield extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'updateReferralCode(uint16)'(
+  "updateReferralCode(uint16)"(
     _referralCode: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  updateSavingsAccount(_savingsAccount: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  updateSavingsAccount(
+    _savingsAccount: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'updateSavingsAccount(address)'(
+  "updateSavingsAccount(address)"(
     _savingsAccount: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   wethGateway(overrides?: CallOverrides): Promise<string>;
 
-  'wethGateway()'(overrides?: CallOverrides): Promise<string>;
+  "wethGateway()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    emergencyWithdraw(_asset: string, _wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    emergencyWithdraw(
+      _asset: string,
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'emergencyWithdraw(address,address)'(_asset: string, _wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "emergencyWithdraw(address,address)"(
+      _asset: string,
+      _wallet: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getSharesForTokens(
+      amount: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getSharesForTokens(uint256,address)'(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getSharesForTokens(uint256,address)"(
+      amount: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getTokensForShares(
+      shares: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getTokensForShares(uint256,address)'(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getTokensForShares(uint256,address)"(
+      shares: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     initialize(
       _owner: string,
@@ -469,7 +650,7 @@ export class AaveYield extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'initialize(address,address,address,address,address)'(
+    "initialize(address,address,address,address,address)"(
       _owner: string,
       _savingsAccount: string,
       _wethGateway: string,
@@ -480,47 +661,84 @@ export class AaveYield extends Contract {
 
     lendingPoolAddressesProvider(overrides?: CallOverrides): Promise<string>;
 
-    'lendingPoolAddressesProvider()'(overrides?: CallOverrides): Promise<string>;
+    "lendingPoolAddressesProvider()"(
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     liquidityToken(asset: string, overrides?: CallOverrides): Promise<string>;
 
-    'liquidityToken(address)'(asset: string, overrides?: CallOverrides): Promise<string>;
+    "liquidityToken(address)"(
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    lockTokens(user: string, asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    lockTokens(
+      user: string,
+      asset: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'lockTokens(address,address,uint256)'(user: string, asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "lockTokens(address,address,uint256)"(
+      user: string,
+      asset: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     protocolDataProvider(overrides?: CallOverrides): Promise<string>;
 
-    'protocolDataProvider()'(overrides?: CallOverrides): Promise<string>;
+    "protocolDataProvider()"(overrides?: CallOverrides): Promise<string>;
 
     referralCode(overrides?: CallOverrides): Promise<number>;
 
-    'referralCode()'(overrides?: CallOverrides): Promise<number>;
+    "referralCode()"(overrides?: CallOverrides): Promise<number>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
     savingsAccount(overrides?: CallOverrides): Promise<string>;
 
-    'savingsAccount()'(overrides?: CallOverrides): Promise<string>;
+    "savingsAccount()"(overrides?: CallOverrides): Promise<string>;
 
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    unlockShares(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    unlockShares(
+      asset: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'unlockShares(address,uint256)'(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "unlockShares(address,uint256)"(
+      asset: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    unlockTokens(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    unlockTokens(
+      asset: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'unlockTokens(address,uint256)'(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "unlockTokens(address,uint256)"(
+      asset: string,
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     updateAaveAddresses(
       _wethGateway: string,
@@ -529,24 +747,36 @@ export class AaveYield extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'updateAaveAddresses(address,address,address)'(
+    "updateAaveAddresses(address,address,address)"(
       _wethGateway: string,
       _protocolDataProvider: string,
       _lendingPoolAddressesProvider: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    updateReferralCode(_referralCode: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    updateReferralCode(
+      _referralCode: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'updateReferralCode(uint16)'(_referralCode: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "updateReferralCode(uint16)"(
+      _referralCode: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    updateSavingsAccount(_savingsAccount: string, overrides?: CallOverrides): Promise<void>;
+    updateSavingsAccount(
+      _savingsAccount: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'updateSavingsAccount(address)'(_savingsAccount: string, overrides?: CallOverrides): Promise<void>;
+    "updateSavingsAccount(address)"(
+      _savingsAccount: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     wethGateway(overrides?: CallOverrides): Promise<string>;
 
-    'wethGateway()'(overrides?: CallOverrides): Promise<string>;
+    "wethGateway()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -567,44 +797,80 @@ export class AaveYield extends Contract {
       user: string | null,
       investedTo: string | null,
       lpTokensReceived: null
-    ): TypedEventFilter<[string, string, BigNumber], { user: string; investedTo: string; lpTokensReceived: BigNumber }>;
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { user: string; investedTo: string; lpTokensReceived: BigNumber }
+    >;
 
     OwnershipTransferred(
       previousOwner: string | null,
       newOwner: string | null
-    ): TypedEventFilter<[string, string], { previousOwner: string; newOwner: string }>;
+    ): TypedEventFilter<
+      [string, string],
+      { previousOwner: string; newOwner: string }
+    >;
 
-    ReferralCodeUpdated(referralCode: null): TypedEventFilter<[number], { referralCode: number }>;
+    ReferralCodeUpdated(
+      referralCode: null
+    ): TypedEventFilter<[number], { referralCode: number }>;
 
-    SavingsAccountUpdated(savingsAccount: string | null): TypedEventFilter<[string], { savingsAccount: string }>;
+    SavingsAccountUpdated(
+      savingsAccount: string | null
+    ): TypedEventFilter<[string], { savingsAccount: string }>;
 
     UnlockedShares(
       asset: string | null,
       sharesReleased: null
-    ): TypedEventFilter<[string, BigNumber], { asset: string; sharesReleased: BigNumber }>;
+    ): TypedEventFilter<
+      [string, BigNumber],
+      { asset: string; sharesReleased: BigNumber }
+    >;
 
     UnlockedTokens(
       investedTo: string | null,
       collateralReceived: null
-    ): TypedEventFilter<[string, BigNumber], { investedTo: string; collateralReceived: BigNumber }>;
+    ): TypedEventFilter<
+      [string, BigNumber],
+      { investedTo: string; collateralReceived: BigNumber }
+    >;
   };
 
   estimateGas: {
-    emergencyWithdraw(_asset: string, _wallet: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'emergencyWithdraw(address,address)'(
+    emergencyWithdraw(
       _asset: string,
       _wallet: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "emergencyWithdraw(address,address)"(
+      _asset: string,
+      _wallet: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'getSharesForTokens(uint256,address)'(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getSharesForTokens(
+      amount: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getSharesForTokens(uint256,address)"(
+      amount: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getTokensForShares(uint256,address)'(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getTokensForShares(
+      shares: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getTokensForShares(uint256,address)"(
+      shares: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     initialize(
       _owner: string,
@@ -615,7 +881,7 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'initialize(address,address,address,address,address)'(
+    "initialize(address,address,address,address,address)"(
       _owner: string,
       _savingsAccount: string,
       _wethGateway: string,
@@ -626,11 +892,19 @@ export class AaveYield extends Contract {
 
     lendingPoolAddressesProvider(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'lendingPoolAddressesProvider()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "lendingPoolAddressesProvider()"(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    liquidityToken(asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    liquidityToken(
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'liquidityToken(address)'(asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "liquidityToken(address)"(
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     lockTokens(
       user: string,
@@ -639,7 +913,7 @@ export class AaveYield extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'lockTokens(address,address,uint256)'(
+    "lockTokens(address,address,uint256)"(
       user: string,
       asset: string,
       amount: BigNumberish,
@@ -648,39 +922,57 @@ export class AaveYield extends Contract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     protocolDataProvider(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'protocolDataProvider()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "protocolDataProvider()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     referralCode(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'referralCode()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "referralCode()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     savingsAccount(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'savingsAccount()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "savingsAccount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    unlockShares(asset: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'unlockShares(address,uint256)'(
+    unlockShares(
       asset: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    unlockTokens(asset: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "unlockShares(address,uint256)"(
+      asset: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'unlockTokens(address,uint256)'(
+    unlockTokens(
+      asset: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "unlockTokens(address,uint256)"(
       asset: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -693,30 +985,36 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'updateAaveAddresses(address,address,address)'(
+    "updateAaveAddresses(address,address,address)"(
       _wethGateway: string,
       _protocolDataProvider: string,
       _lendingPoolAddressesProvider: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    updateReferralCode(_referralCode: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'updateReferralCode(uint16)'(
+    updateReferralCode(
       _referralCode: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    updateSavingsAccount(_savingsAccount: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "updateReferralCode(uint16)"(
+      _referralCode: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'updateSavingsAccount(address)'(
+    updateSavingsAccount(
+      _savingsAccount: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "updateSavingsAccount(address)"(
       _savingsAccount: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     wethGateway(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'wethGateway()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "wethGateway()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -726,19 +1024,35 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'emergencyWithdraw(address,address)'(
+    "emergencyWithdraw(address,address)"(
       _asset: string,
       _wallet: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getSharesForTokens(
+      amount: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getSharesForTokens(uint256,address)'(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getSharesForTokens(uint256,address)"(
+      amount: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getTokensForShares(
+      shares: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getTokensForShares(uint256,address)'(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getTokensForShares(uint256,address)"(
+      shares: BigNumberish,
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     initialize(
       _owner: string,
@@ -749,7 +1063,7 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'initialize(address,address,address,address,address)'(
+    "initialize(address,address,address,address,address)"(
       _owner: string,
       _savingsAccount: string,
       _wethGateway: string,
@@ -758,13 +1072,23 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    lendingPoolAddressesProvider(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    lendingPoolAddressesProvider(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'lendingPoolAddressesProvider()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "lendingPoolAddressesProvider()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    liquidityToken(asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    liquidityToken(
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'liquidityToken(address)'(asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "liquidityToken(address)"(
+      asset: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     lockTokens(
       user: string,
@@ -773,7 +1097,7 @@ export class AaveYield extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'lockTokens(address,address,uint256)'(
+    "lockTokens(address,address,uint256)"(
       user: string,
       asset: string,
       amount: BigNumberish,
@@ -782,27 +1106,40 @@ export class AaveYield extends Contract {
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    protocolDataProvider(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    protocolDataProvider(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'protocolDataProvider()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "protocolDataProvider()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     referralCode(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'referralCode()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "referralCode()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     savingsAccount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'savingsAccount()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "savingsAccount()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'transferOwnership(address)'(
+    "transferOwnership(address)"(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -813,7 +1150,7 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'unlockShares(address,uint256)'(
+    "unlockShares(address,uint256)"(
       asset: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -825,7 +1162,7 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'unlockTokens(address,uint256)'(
+    "unlockTokens(address,uint256)"(
       asset: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -838,7 +1175,7 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'updateAaveAddresses(address,address,address)'(
+    "updateAaveAddresses(address,address,address)"(
       _wethGateway: string,
       _protocolDataProvider: string,
       _lendingPoolAddressesProvider: string,
@@ -850,7 +1187,7 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'updateReferralCode(uint16)'(
+    "updateReferralCode(uint16)"(
       _referralCode: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -860,13 +1197,13 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'updateSavingsAccount(address)'(
+    "updateSavingsAccount(address)"(
       _savingsAccount: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     wethGateway(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'wethGateway()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "wethGateway()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

@@ -13,38 +13,62 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface IUniswapV3PoolActionsInterface extends ethers.utils.Interface {
   functions: {
-    'burn(int24,int24,uint128)': FunctionFragment;
-    'collect(address,int24,int24,uint128,uint128)': FunctionFragment;
-    'flash(address,uint256,uint256,bytes)': FunctionFragment;
-    'increaseObservationCardinalityNext(uint16)': FunctionFragment;
-    'initialize(uint160)': FunctionFragment;
-    'mint(address,int24,int24,uint128,bytes)': FunctionFragment;
-    'swap(address,bool,int256,uint160,bytes)': FunctionFragment;
+    "burn(int24,int24,uint128)": FunctionFragment;
+    "collect(address,int24,int24,uint128,uint128)": FunctionFragment;
+    "flash(address,uint256,uint256,bytes)": FunctionFragment;
+    "increaseObservationCardinalityNext(uint16)": FunctionFragment;
+    "initialize(uint160)": FunctionFragment;
+    "mint(address,int24,int24,uint128,bytes)": FunctionFragment;
+    "swap(address,bool,int256,uint160,bytes)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'burn', values: [BigNumberish, BigNumberish, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'collect', values: [string, BigNumberish, BigNumberish, BigNumberish, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'flash', values: [string, BigNumberish, BigNumberish, BytesLike]): string;
-  encodeFunctionData(functionFragment: 'increaseObservationCardinalityNext', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'initialize', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'mint', values: [string, BigNumberish, BigNumberish, BigNumberish, BytesLike]): string;
-  encodeFunctionData(functionFragment: 'swap', values: [string, boolean, BigNumberish, BigNumberish, BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "burn",
+    values: [BigNumberish, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "collect",
+    values: [string, BigNumberish, BigNumberish, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "flash",
+    values: [string, BigNumberish, BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseObservationCardinalityNext",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initialize",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mint",
+    values: [string, BigNumberish, BigNumberish, BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swap",
+    values: [string, boolean, BigNumberish, BigNumberish, BytesLike]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'burn', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'collect', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'flash', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'increaseObservationCardinalityNext', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'mint', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'swap', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "collect", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "flash", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseObservationCardinalityNext",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
 
   events: {};
 }
@@ -100,7 +124,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'burn(int24,int24,uint128)'(
+    "burn(int24,int24,uint128)"(
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
       amount: BigNumberish,
@@ -116,7 +140,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'collect(address,int24,int24,uint128,uint128)'(
+    "collect(address,int24,int24,uint128,uint128)"(
       recipient: string,
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
@@ -133,7 +157,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'flash(address,uint256,uint256,bytes)'(
+    "flash(address,uint256,uint256,bytes)"(
       recipient: string,
       amount0: BigNumberish,
       amount1: BigNumberish,
@@ -146,14 +170,17 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'increaseObservationCardinalityNext(uint16)'(
+    "increaseObservationCardinalityNext(uint16)"(
       observationCardinalityNext: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    initialize(
+      sqrtPriceX96: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'initialize(uint160)'(
+    "initialize(uint160)"(
       sqrtPriceX96: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -167,7 +194,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'mint(address,int24,int24,uint128,bytes)'(
+    "mint(address,int24,int24,uint128,bytes)"(
       recipient: string,
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
@@ -185,7 +212,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'swap(address,bool,int256,uint160,bytes)'(
+    "swap(address,bool,int256,uint160,bytes)"(
       recipient: string,
       zeroForOne: boolean,
       amountSpecified: BigNumberish,
@@ -202,7 +229,7 @@ export class IUniswapV3PoolActions extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'burn(int24,int24,uint128)'(
+  "burn(int24,int24,uint128)"(
     tickLower: BigNumberish,
     tickUpper: BigNumberish,
     amount: BigNumberish,
@@ -218,7 +245,7 @@ export class IUniswapV3PoolActions extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'collect(address,int24,int24,uint128,uint128)'(
+  "collect(address,int24,int24,uint128,uint128)"(
     recipient: string,
     tickLower: BigNumberish,
     tickUpper: BigNumberish,
@@ -235,7 +262,7 @@ export class IUniswapV3PoolActions extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'flash(address,uint256,uint256,bytes)'(
+  "flash(address,uint256,uint256,bytes)"(
     recipient: string,
     amount0: BigNumberish,
     amount1: BigNumberish,
@@ -248,14 +275,17 @@ export class IUniswapV3PoolActions extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'increaseObservationCardinalityNext(uint16)'(
+  "increaseObservationCardinalityNext(uint16)"(
     observationCardinalityNext: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  initialize(
+    sqrtPriceX96: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'initialize(uint160)'(
+  "initialize(uint160)"(
     sqrtPriceX96: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -269,7 +299,7 @@ export class IUniswapV3PoolActions extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'mint(address,int24,int24,uint128,bytes)'(
+  "mint(address,int24,int24,uint128,bytes)"(
     recipient: string,
     tickLower: BigNumberish,
     tickUpper: BigNumberish,
@@ -287,7 +317,7 @@ export class IUniswapV3PoolActions extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'swap(address,bool,int256,uint160,bytes)'(
+  "swap(address,bool,int256,uint160,bytes)"(
     recipient: string,
     zeroForOne: boolean,
     amountSpecified: BigNumberish,
@@ -302,14 +332,18 @@ export class IUniswapV3PoolActions extends Contract {
       tickUpper: BigNumberish,
       amount: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }>;
+    ): Promise<
+      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
+    >;
 
-    'burn(int24,int24,uint128)'(
+    "burn(int24,int24,uint128)"(
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
       amount: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }>;
+    ): Promise<
+      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
+    >;
 
     collect(
       recipient: string,
@@ -318,20 +352,22 @@ export class IUniswapV3PoolActions extends Contract {
       amount0Requested: BigNumberish,
       amount1Requested: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }>;
+    ): Promise<
+      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
+    >;
 
-    'collect(address,int24,int24,uint128,uint128)'(
+    "collect(address,int24,int24,uint128,uint128)"(
       recipient: string,
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
       amount0Requested: BigNumberish,
       amount1Requested: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }>;
+    ): Promise<
+      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
+    >;
 
-    flash(recipient: string, amount0: BigNumberish, amount1: BigNumberish, data: BytesLike, overrides?: CallOverrides): Promise<void>;
-
-    'flash(address,uint256,uint256,bytes)'(
+    flash(
       recipient: string,
       amount0: BigNumberish,
       amount1: BigNumberish,
@@ -339,13 +375,33 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    increaseObservationCardinalityNext(observationCardinalityNext: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "flash(address,uint256,uint256,bytes)"(
+      recipient: string,
+      amount0: BigNumberish,
+      amount1: BigNumberish,
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'increaseObservationCardinalityNext(uint16)'(observationCardinalityNext: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    increaseObservationCardinalityNext(
+      observationCardinalityNext: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    initialize(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "increaseObservationCardinalityNext(uint16)"(
+      observationCardinalityNext: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'initialize(uint160)'(sqrtPriceX96: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    initialize(
+      sqrtPriceX96: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "initialize(uint160)"(
+      sqrtPriceX96: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     mint(
       recipient: string,
@@ -354,16 +410,20 @@ export class IUniswapV3PoolActions extends Contract {
       amount: BigNumberish,
       data: BytesLike,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }>;
+    ): Promise<
+      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
+    >;
 
-    'mint(address,int24,int24,uint128,bytes)'(
+    "mint(address,int24,int24,uint128,bytes)"(
       recipient: string,
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
       amount: BigNumberish,
       data: BytesLike,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }>;
+    ): Promise<
+      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
+    >;
 
     swap(
       recipient: string,
@@ -372,16 +432,20 @@ export class IUniswapV3PoolActions extends Contract {
       sqrtPriceLimitX96: BigNumberish,
       data: BytesLike,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }>;
+    ): Promise<
+      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
+    >;
 
-    'swap(address,bool,int256,uint160,bytes)'(
+    "swap(address,bool,int256,uint160,bytes)"(
       recipient: string,
       zeroForOne: boolean,
       amountSpecified: BigNumberish,
       sqrtPriceLimitX96: BigNumberish,
       data: BytesLike,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }>;
+    ): Promise<
+      [BigNumber, BigNumber] & { amount0: BigNumber; amount1: BigNumber }
+    >;
   };
 
   filters: {};
@@ -394,7 +458,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'burn(int24,int24,uint128)'(
+    "burn(int24,int24,uint128)"(
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
       amount: BigNumberish,
@@ -410,7 +474,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'collect(address,int24,int24,uint128,uint128)'(
+    "collect(address,int24,int24,uint128,uint128)"(
       recipient: string,
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
@@ -427,7 +491,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'flash(address,uint256,uint256,bytes)'(
+    "flash(address,uint256,uint256,bytes)"(
       recipient: string,
       amount0: BigNumberish,
       amount1: BigNumberish,
@@ -440,14 +504,20 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'increaseObservationCardinalityNext(uint16)'(
+    "increaseObservationCardinalityNext(uint16)"(
       observationCardinalityNext: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    initialize(
+      sqrtPriceX96: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'initialize(uint160)'(sqrtPriceX96: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "initialize(uint160)"(
+      sqrtPriceX96: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     mint(
       recipient: string,
@@ -458,7 +528,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'mint(address,int24,int24,uint128,bytes)'(
+    "mint(address,int24,int24,uint128,bytes)"(
       recipient: string,
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
@@ -476,7 +546,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'swap(address,bool,int256,uint160,bytes)'(
+    "swap(address,bool,int256,uint160,bytes)"(
       recipient: string,
       zeroForOne: boolean,
       amountSpecified: BigNumberish,
@@ -494,7 +564,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'burn(int24,int24,uint128)'(
+    "burn(int24,int24,uint128)"(
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
       amount: BigNumberish,
@@ -510,7 +580,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'collect(address,int24,int24,uint128,uint128)'(
+    "collect(address,int24,int24,uint128,uint128)"(
       recipient: string,
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
@@ -527,7 +597,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'flash(address,uint256,uint256,bytes)'(
+    "flash(address,uint256,uint256,bytes)"(
       recipient: string,
       amount0: BigNumberish,
       amount1: BigNumberish,
@@ -540,14 +610,17 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'increaseObservationCardinalityNext(uint16)'(
+    "increaseObservationCardinalityNext(uint16)"(
       observationCardinalityNext: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    initialize(sqrtPriceX96: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    initialize(
+      sqrtPriceX96: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'initialize(uint160)'(
+    "initialize(uint160)"(
       sqrtPriceX96: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -561,7 +634,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'mint(address,int24,int24,uint128,bytes)'(
+    "mint(address,int24,int24,uint128,bytes)"(
       recipient: string,
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
@@ -579,7 +652,7 @@ export class IUniswapV3PoolActions extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'swap(address,bool,int256,uint160,bytes)'(
+    "swap(address,bool,int256,uint160,bytes)"(
       recipient: string,
       zeroForOne: boolean,
       amountSpecified: BigNumberish,

@@ -13,20 +13,20 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface ConverterInterface extends ethers.utils.Interface {
   functions: {
-    'convert(address)': FunctionFragment;
+    "convert(address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'convert', values: [string]): string;
+  encodeFunctionData(functionFragment: "convert", values: [string]): string;
 
-  decodeFunctionResult(functionFragment: 'convert', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "convert", data: BytesLike): Result;
 
   events: {};
 }
@@ -75,32 +75,59 @@ export class Converter extends Contract {
   interface: ConverterInterface;
 
   functions: {
-    convert(arg0: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    convert(
+      arg0: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'convert(address)'(arg0: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "convert(address)"(
+      arg0: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
-  convert(arg0: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  convert(
+    arg0: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'convert(address)'(arg0: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "convert(address)"(
+    arg0: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
     convert(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'convert(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "convert(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   filters: {};
 
   estimateGas: {
-    convert(arg0: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    convert(
+      arg0: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'convert(address)'(arg0: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "convert(address)"(
+      arg0: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    convert(arg0: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    convert(
+      arg0: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'convert(address)'(arg0: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "convert(address)"(
+      arg0: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
   };
 }

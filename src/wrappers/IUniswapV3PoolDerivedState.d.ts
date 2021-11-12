@@ -12,23 +12,32 @@ import {
   Contract,
   ContractTransaction,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface IUniswapV3PoolDerivedStateInterface extends ethers.utils.Interface {
   functions: {
-    'observe(uint32[])': FunctionFragment;
-    'snapshotCumulativesInside(int24,int24)': FunctionFragment;
+    "observe(uint32[])": FunctionFragment;
+    "snapshotCumulativesInside(int24,int24)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'observe', values: [BigNumberish[]]): string;
-  encodeFunctionData(functionFragment: 'snapshotCumulativesInside', values: [BigNumberish, BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "observe",
+    values: [BigNumberish[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "snapshotCumulativesInside",
+    values: [BigNumberish, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'observe', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'snapshotCumulativesInside', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "observe", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "snapshotCumulativesInside",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -87,7 +96,7 @@ export class IUniswapV3PoolDerivedState extends Contract {
       }
     >;
 
-    'observe(uint32[])'(
+    "observe(uint32[])"(
       secondsAgos: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<
@@ -109,7 +118,7 @@ export class IUniswapV3PoolDerivedState extends Contract {
       }
     >;
 
-    'snapshotCumulativesInside(int24,int24)'(
+    "snapshotCumulativesInside(int24,int24)"(
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
       overrides?: CallOverrides
@@ -132,7 +141,7 @@ export class IUniswapV3PoolDerivedState extends Contract {
     }
   >;
 
-  'observe(uint32[])'(
+  "observe(uint32[])"(
     secondsAgos: BigNumberish[],
     overrides?: CallOverrides
   ): Promise<
@@ -154,7 +163,7 @@ export class IUniswapV3PoolDerivedState extends Contract {
     }
   >;
 
-  'snapshotCumulativesInside(int24,int24)'(
+  "snapshotCumulativesInside(int24,int24)"(
     tickLower: BigNumberish,
     tickUpper: BigNumberish,
     overrides?: CallOverrides
@@ -177,7 +186,7 @@ export class IUniswapV3PoolDerivedState extends Contract {
       }
     >;
 
-    'observe(uint32[])'(
+    "observe(uint32[])"(
       secondsAgos: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<
@@ -199,7 +208,7 @@ export class IUniswapV3PoolDerivedState extends Contract {
       }
     >;
 
-    'snapshotCumulativesInside(int24,int24)'(
+    "snapshotCumulativesInside(int24,int24)"(
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
       overrides?: CallOverrides
@@ -215,13 +224,23 @@ export class IUniswapV3PoolDerivedState extends Contract {
   filters: {};
 
   estimateGas: {
-    observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<BigNumber>;
+    observe(
+      secondsAgos: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'observe(uint32[])'(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<BigNumber>;
+    "observe(uint32[])"(
+      secondsAgos: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    snapshotCumulativesInside(tickLower: BigNumberish, tickUpper: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    snapshotCumulativesInside(
+      tickLower: BigNumberish,
+      tickUpper: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'snapshotCumulativesInside(int24,int24)'(
+    "snapshotCumulativesInside(int24,int24)"(
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
       overrides?: CallOverrides
@@ -229,13 +248,23 @@ export class IUniswapV3PoolDerivedState extends Contract {
   };
 
   populateTransaction: {
-    observe(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    observe(
+      secondsAgos: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'observe(uint32[])'(secondsAgos: BigNumberish[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "observe(uint32[])"(
+      secondsAgos: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    snapshotCumulativesInside(tickLower: BigNumberish, tickUpper: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    snapshotCumulativesInside(
+      tickLower: BigNumberish,
+      tickUpper: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'snapshotCumulativesInside(int24,int24)'(
+    "snapshotCumulativesInside(int24,int24)"(
       tickLower: BigNumberish,
       tickUpper: BigNumberish,
       overrides?: CallOverrides

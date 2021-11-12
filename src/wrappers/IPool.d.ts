@@ -14,72 +14,114 @@ import {
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface IPoolInterface extends ethers.utils.Interface {
   functions: {
-    'addCollateralInMarginCall(address,uint256,bool)': FunctionFragment;
-    'borrower()': FunctionFragment;
-    'closeLoan()': FunctionFragment;
-    'depositCollateral(uint256,bool)': FunctionFragment;
-    'getBalanceDetails(address)': FunctionFragment;
-    'getLoanStatus()': FunctionFragment;
-    'getMarginCallEndTime(address)': FunctionFragment;
-    'totalSupply()': FunctionFragment;
-    'withdrawBorrowedAmount()': FunctionFragment;
+    "addCollateralInMarginCall(address,uint256,bool)": FunctionFragment;
+    "borrower()": FunctionFragment;
+    "closeLoan()": FunctionFragment;
+    "depositCollateral(uint256,bool)": FunctionFragment;
+    "getBalanceDetails(address)": FunctionFragment;
+    "getLoanStatus()": FunctionFragment;
+    "getMarginCallEndTime(address)": FunctionFragment;
+    "totalSupply()": FunctionFragment;
+    "withdrawBorrowedAmount()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'addCollateralInMarginCall', values: [string, BigNumberish, boolean]): string;
-  encodeFunctionData(functionFragment: 'borrower', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'closeLoan', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'depositCollateral', values: [BigNumberish, boolean]): string;
-  encodeFunctionData(functionFragment: 'getBalanceDetails', values: [string]): string;
-  encodeFunctionData(functionFragment: 'getLoanStatus', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getMarginCallEndTime', values: [string]): string;
-  encodeFunctionData(functionFragment: 'totalSupply', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'withdrawBorrowedAmount', values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "addCollateralInMarginCall",
+    values: [string, BigNumberish, boolean]
+  ): string;
+  encodeFunctionData(functionFragment: "borrower", values?: undefined): string;
+  encodeFunctionData(functionFragment: "closeLoan", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "depositCollateral",
+    values: [BigNumberish, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBalanceDetails",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getLoanStatus",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getMarginCallEndTime",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawBorrowedAmount",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'addCollateralInMarginCall', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'borrower', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'closeLoan', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'depositCollateral', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getBalanceDetails', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getLoanStatus', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getMarginCallEndTime', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'totalSupply', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawBorrowedAmount', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "addCollateralInMarginCall",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "borrower", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "closeLoan", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "depositCollateral",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBalanceDetails",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getLoanStatus",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getMarginCallEndTime",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawBorrowedAmount",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'AmountBorrowed(uint256)': EventFragment;
-    'CollateralAdded(address,uint256,uint256)': EventFragment;
-    'CollateralWithdrawn(address,uint256)': EventFragment;
-    'LenderLiquidated(address,address,uint256)': EventFragment;
-    'LiquiditySupplied(uint256,address)': EventFragment;
-    'LiquidityWithdrawn(uint256,address)': EventFragment;
-    'MarginCallCollateralAdded(address,address,uint256,uint256)': EventFragment;
-    'MarginCalled(address)': EventFragment;
-    'PoolCancelled()': EventFragment;
-    'PoolClosed()': EventFragment;
-    'PoolLiquidated(address)': EventFragment;
-    'PoolTerminated()': EventFragment;
+    "AmountBorrowed(uint256)": EventFragment;
+    "CollateralAdded(address,uint256,uint256)": EventFragment;
+    "CollateralWithdrawn(address,uint256)": EventFragment;
+    "LenderLiquidated(address,address,uint256)": EventFragment;
+    "LiquiditySupplied(uint256,address)": EventFragment;
+    "LiquidityWithdrawn(uint256,address)": EventFragment;
+    "MarginCallCollateralAdded(address,address,uint256,uint256)": EventFragment;
+    "MarginCalled(address)": EventFragment;
+    "PoolCancelled()": EventFragment;
+    "PoolClosed()": EventFragment;
+    "PoolLiquidated(address)": EventFragment;
+    "PoolTerminated()": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'AmountBorrowed'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'CollateralAdded'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'CollateralWithdrawn'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'LenderLiquidated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'LiquiditySupplied'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'LiquidityWithdrawn'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'MarginCallCollateralAdded'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'MarginCalled'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'PoolCancelled'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'PoolClosed'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'PoolLiquidated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'PoolTerminated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AmountBorrowed"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "CollateralAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "CollateralWithdrawn"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LenderLiquidated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LiquiditySupplied"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LiquidityWithdrawn"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MarginCallCollateralAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MarginCalled"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PoolCancelled"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PoolClosed"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PoolLiquidated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PoolTerminated"): EventFragment;
 }
 
 export class IPool extends Contract {
@@ -133,20 +175,28 @@ export class IPool extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'addCollateralInMarginCall(address,uint256,bool)'(
+    "addCollateralInMarginCall(address,uint256,bool)"(
       _lender: string,
       _amount: BigNumberish,
       _isDirect: boolean,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    borrower(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    borrower(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'borrower()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "borrower()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    closeLoan(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    closeLoan(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'closeLoan()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "closeLoan()"(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     depositCollateral(
       _amount: BigNumberish,
@@ -154,34 +204,47 @@ export class IPool extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'depositCollateral(uint256,bool)'(
+    "depositCollateral(uint256,bool)"(
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    getBalanceDetails(_lender: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    getBalanceDetails(
+      _lender: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
-    'getBalanceDetails(address)'(_lender: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    "getBalanceDetails(address)"(
+      _lender: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
     getLoanStatus(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'getLoanStatus()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "getLoanStatus()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    getMarginCallEndTime(_lender: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    getMarginCallEndTime(
+      _lender: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'getMarginCallEndTime(address)'(
+    "getMarginCallEndTime(address)"(
       _lender: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    withdrawBorrowedAmount(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    withdrawBorrowedAmount(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'withdrawBorrowedAmount()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "withdrawBorrowedAmount()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
   addCollateralInMarginCall(
@@ -191,20 +254,28 @@ export class IPool extends Contract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'addCollateralInMarginCall(address,uint256,bool)'(
+  "addCollateralInMarginCall(address,uint256,bool)"(
     _lender: string,
     _amount: BigNumberish,
     _isDirect: boolean,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  borrower(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  borrower(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'borrower()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "borrower()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  closeLoan(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  closeLoan(
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'closeLoan()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "closeLoan()"(
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   depositCollateral(
     _amount: BigNumberish,
@@ -212,39 +283,57 @@ export class IPool extends Contract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'depositCollateral(uint256,bool)'(
+  "depositCollateral(uint256,bool)"(
     _amount: BigNumberish,
     _transferFromSavingsAccount: boolean,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  getBalanceDetails(_lender: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+  getBalanceDetails(
+    _lender: string,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber]>;
 
-  'getBalanceDetails(address)'(_lender: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+  "getBalanceDetails(address)"(
+    _lender: string,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber]>;
 
   getLoanStatus(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'getLoanStatus()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "getLoanStatus()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  getMarginCallEndTime(_lender: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  getMarginCallEndTime(
+    _lender: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'getMarginCallEndTime(address)'(
+  "getMarginCallEndTime(address)"(
     _lender: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  withdrawBorrowedAmount(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  withdrawBorrowedAmount(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'withdrawBorrowedAmount()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "withdrawBorrowedAmount()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
-    addCollateralInMarginCall(_lender: string, _amount: BigNumberish, _isDirect: boolean, overrides?: CallOverrides): Promise<void>;
+    addCollateralInMarginCall(
+      _lender: string,
+      _amount: BigNumberish,
+      _isDirect: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'addCollateralInMarginCall(address,uint256,bool)'(
+    "addCollateralInMarginCall(address,uint256,bool)"(
       _lender: string,
       _amount: BigNumberish,
       _isDirect: boolean,
@@ -253,70 +342,103 @@ export class IPool extends Contract {
 
     borrower(overrides?: CallOverrides): Promise<string>;
 
-    'borrower()'(overrides?: CallOverrides): Promise<string>;
+    "borrower()"(overrides?: CallOverrides): Promise<string>;
 
     closeLoan(overrides?: CallOverrides): Promise<void>;
 
-    'closeLoan()'(overrides?: CallOverrides): Promise<void>;
+    "closeLoan()"(overrides?: CallOverrides): Promise<void>;
 
-    depositCollateral(_amount: BigNumberish, _transferFromSavingsAccount: boolean, overrides?: CallOverrides): Promise<void>;
-
-    'depositCollateral(uint256,bool)'(
+    depositCollateral(
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    getBalanceDetails(_lender: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    "depositCollateral(uint256,bool)"(
+      _amount: BigNumberish,
+      _transferFromSavingsAccount: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'getBalanceDetails(address)'(_lender: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    getBalanceDetails(
+      _lender: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
+
+    "getBalanceDetails(address)"(
+      _lender: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
     getLoanStatus(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getLoanStatus()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getLoanStatus()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getMarginCallEndTime(_lender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getMarginCallEndTime(
+      _lender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getMarginCallEndTime(address)'(_lender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getMarginCallEndTime(address)"(
+      _lender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     withdrawBorrowedAmount(overrides?: CallOverrides): Promise<void>;
 
-    'withdrawBorrowedAmount()'(overrides?: CallOverrides): Promise<void>;
+    "withdrawBorrowedAmount()"(overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
-    AmountBorrowed(amount: null): TypedEventFilter<[BigNumber], { amount: BigNumber }>;
+    AmountBorrowed(
+      amount: null
+    ): TypedEventFilter<[BigNumber], { amount: BigNumber }>;
 
     CollateralAdded(
       borrower: string | null,
       amount: null,
       sharesReceived: null
-    ): TypedEventFilter<[string, BigNumber, BigNumber], { borrower: string; amount: BigNumber; sharesReceived: BigNumber }>;
+    ): TypedEventFilter<
+      [string, BigNumber, BigNumber],
+      { borrower: string; amount: BigNumber; sharesReceived: BigNumber }
+    >;
 
     CollateralWithdrawn(
       borrower: string | null,
       amount: null
-    ): TypedEventFilter<[string, BigNumber], { borrower: string; amount: BigNumber }>;
+    ): TypedEventFilter<
+      [string, BigNumber],
+      { borrower: string; amount: BigNumber }
+    >;
 
     LenderLiquidated(
       liquidator: string | null,
       lender: string | null,
       _tokenReceived: null
-    ): TypedEventFilter<[string, string, BigNumber], { liquidator: string; lender: string; _tokenReceived: BigNumber }>;
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { liquidator: string; lender: string; _tokenReceived: BigNumber }
+    >;
 
     LiquiditySupplied(
       amountSupplied: null,
       lenderAddress: string | null
-    ): TypedEventFilter<[BigNumber, string], { amountSupplied: BigNumber; lenderAddress: string }>;
+    ): TypedEventFilter<
+      [BigNumber, string],
+      { amountSupplied: BigNumber; lenderAddress: string }
+    >;
 
     LiquidityWithdrawn(
       amount: null,
       lenderAddress: string | null
-    ): TypedEventFilter<[BigNumber, string], { amount: BigNumber; lenderAddress: string }>;
+    ): TypedEventFilter<
+      [BigNumber, string],
+      { amount: BigNumber; lenderAddress: string }
+    >;
 
     MarginCallCollateralAdded(
       borrower: string | null,
@@ -333,13 +455,17 @@ export class IPool extends Contract {
       }
     >;
 
-    MarginCalled(lenderAddress: string | null): TypedEventFilter<[string], { lenderAddress: string }>;
+    MarginCalled(
+      lenderAddress: string | null
+    ): TypedEventFilter<[string], { lenderAddress: string }>;
 
     PoolCancelled(): TypedEventFilter<[], {}>;
 
     PoolClosed(): TypedEventFilter<[], {}>;
 
-    PoolLiquidated(liquidator: string | null): TypedEventFilter<[string], { liquidator: string }>;
+    PoolLiquidated(
+      liquidator: string | null
+    ): TypedEventFilter<[string], { liquidator: string }>;
 
     PoolTerminated(): TypedEventFilter<[], {}>;
   };
@@ -352,20 +478,28 @@ export class IPool extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'addCollateralInMarginCall(address,uint256,bool)'(
+    "addCollateralInMarginCall(address,uint256,bool)"(
       _lender: string,
       _amount: BigNumberish,
       _isDirect: boolean,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    borrower(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    borrower(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'borrower()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "borrower()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    closeLoan(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    closeLoan(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'closeLoan()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "closeLoan()"(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     depositCollateral(
       _amount: BigNumberish,
@@ -373,31 +507,47 @@ export class IPool extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'depositCollateral(uint256,bool)'(
+    "depositCollateral(uint256,bool)"(
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    getBalanceDetails(_lender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getBalanceDetails(
+      _lender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getBalanceDetails(address)'(_lender: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getBalanceDetails(address)"(
+      _lender: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getLoanStatus(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getLoanStatus()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "getLoanStatus()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getMarginCallEndTime(_lender: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    getMarginCallEndTime(
+      _lender: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'getMarginCallEndTime(address)'(_lender: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "getMarginCallEndTime(address)"(
+      _lender: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    withdrawBorrowedAmount(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    withdrawBorrowedAmount(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'withdrawBorrowedAmount()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "withdrawBorrowedAmount()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -408,20 +558,28 @@ export class IPool extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'addCollateralInMarginCall(address,uint256,bool)'(
+    "addCollateralInMarginCall(address,uint256,bool)"(
       _lender: string,
       _amount: BigNumberish,
       _isDirect: boolean,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    borrower(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    borrower(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'borrower()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "borrower()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    closeLoan(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    closeLoan(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'closeLoan()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "closeLoan()"(
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     depositCollateral(
       _amount: BigNumberish,
@@ -429,33 +587,46 @@ export class IPool extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'depositCollateral(uint256,bool)'(
+    "depositCollateral(uint256,bool)"(
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    getBalanceDetails(_lender: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getBalanceDetails(
+      _lender: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getBalanceDetails(address)'(_lender: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getBalanceDetails(address)"(
+      _lender: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     getLoanStatus(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'getLoanStatus()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getLoanStatus()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getMarginCallEndTime(_lender: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    getMarginCallEndTime(
+      _lender: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'getMarginCallEndTime(address)'(
+    "getMarginCallEndTime(address)"(
       _lender: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'totalSupply()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    withdrawBorrowedAmount(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    withdrawBorrowedAmount(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'withdrawBorrowedAmount()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "withdrawBorrowedAmount()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
   };
 }

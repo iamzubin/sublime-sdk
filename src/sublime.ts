@@ -10,6 +10,7 @@ import { ExtensionApi } from './api/extension';
 import { RepaymentApi } from './api/repayments';
 import { VerificationAPI } from './api/verification';
 import { TokenApi } from './api/tokenApi';
+import { PriceOracleApi } from "./api/priceOracle"
 
 import { ethers } from 'ethers';
 import { TokenManager } from './tokenManager';
@@ -58,8 +59,13 @@ export class SublimeConnector {
   YieldAndStrategyApi() {
     return new YieldAndStrategyApi(this.signer, this.config, this.tokenManager);
   }
+
   TokenApi(tokenAddress: string) {
     return new TokenApi(this.signer, tokenAddress, this.tokenManager);
+  }
+
+  PriceOracleApi() {
+    return new PriceOracleApi(this.signer, this.config);
   }
 
   public async getBalance(address: string): Promise<string> {

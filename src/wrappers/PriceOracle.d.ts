@@ -13,62 +13,136 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface PriceOracleInterface extends ethers.utils.Interface {
   functions: {
-    'doesFeedExist(address,address)': FunctionFragment;
-    'getChainlinkLatestPrice(address,address)': FunctionFragment;
-    'getLatestPrice(address,address)': FunctionFragment;
-    'getUniswapLatestPrice(address,address)': FunctionFragment;
-    'initialize(address)': FunctionFragment;
-    'owner()': FunctionFragment;
-    'renounceOwnership()': FunctionFragment;
-    'setChainlinkFeedAddress(address,address)': FunctionFragment;
-    'setUniswapFeedAddress(address,address,address)': FunctionFragment;
-    'setUniswapPriceAveragingPeriod(uint32)': FunctionFragment;
-    'transferOwnership(address)': FunctionFragment;
+    "chainlinkFeedAddresses(address)": FunctionFragment;
+    "doesFeedExist(address,address)": FunctionFragment;
+    "getChainlinkLatestPrice(address,address)": FunctionFragment;
+    "getLatestPrice(address,address)": FunctionFragment;
+    "getUniswapLatestPrice(address,address)": FunctionFragment;
+    "initialize(address)": FunctionFragment;
+    "owner()": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
+    "setChainlinkFeedAddress(address,address)": FunctionFragment;
+    "setUniswapFeedAddress(address,address,address)": FunctionFragment;
+    "setUniswapPriceAveragingPeriod(uint32)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "uniswapPools(bytes32)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'doesFeedExist', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'getChainlinkLatestPrice', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'getLatestPrice', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'getUniswapLatestPrice', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'initialize', values: [string]): string;
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'setChainlinkFeedAddress', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'setUniswapFeedAddress', values: [string, string, string]): string;
-  encodeFunctionData(functionFragment: 'setUniswapPriceAveragingPeriod', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "chainlinkFeedAddresses",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "doesFeedExist",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getChainlinkLatestPrice",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getLatestPrice",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getUniswapLatestPrice",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(functionFragment: "initialize", values: [string]): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setChainlinkFeedAddress",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setUniswapFeedAddress",
+    values: [string, string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setUniswapPriceAveragingPeriod",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "uniswapPools",
+    values: [BytesLike]
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'doesFeedExist', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getChainlinkLatestPrice', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getLatestPrice', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getUniswapLatestPrice', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setChainlinkFeedAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setUniswapFeedAddress', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setUniswapPriceAveragingPeriod', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "chainlinkFeedAddresses",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "doesFeedExist",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getChainlinkLatestPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getLatestPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getUniswapLatestPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setChainlinkFeedAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setUniswapFeedAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setUniswapPriceAveragingPeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "uniswapPools",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'ChainlinkFeedUpdated(address,address)': EventFragment;
-    'OwnershipTransferred(address,address)': EventFragment;
-    'UniswapFeedUpdated(address,address,bytes32,address)': EventFragment;
-    'UniswapPriceAveragingPeriodUpdated(uint32)': EventFragment;
+    "ChainlinkFeedUpdated(address,address)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "UniswapFeedUpdated(address,address,bytes32,address)": EventFragment;
+    "UniswapPriceAveragingPeriodUpdated(uint32)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'ChainlinkFeedUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'UniswapFeedUpdated'): EventFragment;
-  getEvent(nameOrSignatureOrTopic: 'UniswapPriceAveragingPeriodUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ChainlinkFeedUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "UniswapFeedUpdated"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "UniswapPriceAveragingPeriodUpdated"
+  ): EventFragment;
 }
 
 export class PriceOracle extends Contract {
@@ -115,33 +189,85 @@ export class PriceOracle extends Contract {
   interface: PriceOracleInterface;
 
   functions: {
-    doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<[boolean]>;
+    chainlinkFeedAddresses(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
 
-    'doesFeedExist(address,address)'(token1: string, token2: string, overrides?: CallOverrides): Promise<[boolean]>;
+    "chainlinkFeedAddresses(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
 
-    getChainlinkLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    doesFeedExist(
+      token1: string,
+      token2: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
-    'getChainlinkLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    "doesFeedExist(address,address)"(
+      token1: string,
+      token2: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
-    getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    getChainlinkLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
-    'getLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    "getChainlinkLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
-    getUniswapLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    getLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
-    'getUniswapLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    "getLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
-    initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    getUniswapLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
-    'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "getUniswapLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
+
+    initialize(
+      _admin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "initialize(address)"(
+      _admin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
-    'owner()'(overrides?: CallOverrides): Promise<[string]>;
+    "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
-    renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     setChainlinkFeedAddress(
       token: string,
@@ -149,7 +275,7 @@ export class PriceOracle extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'setChainlinkFeedAddress(address,address)'(
+    "setChainlinkFeedAddress(address,address)"(
       token: string,
       priceOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -162,7 +288,7 @@ export class PriceOracle extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'setUniswapFeedAddress(address,address,address)'(
+    "setUniswapFeedAddress(address,address,address)"(
       token1: string,
       token2: string,
       pool: string,
@@ -174,46 +300,108 @@ export class PriceOracle extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'setUniswapPriceAveragingPeriod(uint32)'(
+    "setUniswapPriceAveragingPeriod(uint32)"(
       _uniswapPriceAveragingPeriod: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
-
-    'transferOwnership(address)'(
+    transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    uniswapPools(arg0: BytesLike, overrides?: CallOverrides): Promise<[string]>;
+
+    "uniswapPools(bytes32)"(
+      arg0: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
   };
 
-  doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<boolean>;
+  chainlinkFeedAddresses(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
 
-  'doesFeedExist(address,address)'(token1: string, token2: string, overrides?: CallOverrides): Promise<boolean>;
+  "chainlinkFeedAddresses(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
 
-  getChainlinkLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+  doesFeedExist(
+    token1: string,
+    token2: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  'getChainlinkLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+  "doesFeedExist(address,address)"(
+    token1: string,
+    token2: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+  getChainlinkLatestPrice(
+    num: string,
+    den: string,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber]>;
 
-  'getLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+  "getChainlinkLatestPrice(address,address)"(
+    num: string,
+    den: string,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber]>;
 
-  getUniswapLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+  getLatestPrice(
+    num: string,
+    den: string,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber]>;
 
-  'getUniswapLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+  "getLatestPrice(address,address)"(
+    num: string,
+    den: string,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber]>;
 
-  initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  getUniswapLatestPrice(
+    num: string,
+    den: string,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber]>;
 
-  'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "getUniswapLatestPrice(address,address)"(
+    num: string,
+    den: string,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber]>;
+
+  initialize(
+    _admin: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "initialize(address)"(
+    _admin: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
-  'owner()'(overrides?: CallOverrides): Promise<string>;
+  "owner()"(overrides?: CallOverrides): Promise<string>;
 
-  renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  renounceOwnership(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "renounceOwnership()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   setChainlinkFeedAddress(
     token: string,
@@ -221,7 +409,7 @@ export class PriceOracle extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'setChainlinkFeedAddress(address,address)'(
+  "setChainlinkFeedAddress(address,address)"(
     token: string,
     priceOracle: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -234,7 +422,7 @@ export class PriceOracle extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'setUniswapFeedAddress(address,address,address)'(
+  "setUniswapFeedAddress(address,address,address)"(
     token1: string,
     token2: string,
     pool: string,
@@ -246,83 +434,182 @@ export class PriceOracle extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'setUniswapPriceAveragingPeriod(uint32)'(
+  "setUniswapPriceAveragingPeriod(uint32)"(
     _uniswapPriceAveragingPeriod: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  transferOwnership(
+    newOwner: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'transferOwnership(address)'(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "transferOwnership(address)"(
+    newOwner: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  uniswapPools(arg0: BytesLike, overrides?: CallOverrides): Promise<string>;
+
+  "uniswapPools(bytes32)"(
+    arg0: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   callStatic: {
-    doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<boolean>;
+    chainlinkFeedAddresses(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
 
-    'doesFeedExist(address,address)'(token1: string, token2: string, overrides?: CallOverrides): Promise<boolean>;
+    "chainlinkFeedAddresses(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
 
-    getChainlinkLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    doesFeedExist(
+      token1: string,
+      token2: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    'getChainlinkLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    "doesFeedExist(address,address)"(
+      token1: string,
+      token2: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    getChainlinkLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
-    'getLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    "getChainlinkLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
-    getUniswapLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    getLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
-    'getUniswapLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    "getLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
+
+    getUniswapLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
+
+    "getUniswapLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber]>;
 
     initialize(_admin: string, overrides?: CallOverrides): Promise<void>;
 
-    'initialize(address)'(_admin: string, overrides?: CallOverrides): Promise<void>;
+    "initialize(address)"(
+      _admin: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
-    'owner()'(overrides?: CallOverrides): Promise<string>;
+    "owner()"(overrides?: CallOverrides): Promise<string>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
+    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
-    setChainlinkFeedAddress(token: string, priceOracle: string, overrides?: CallOverrides): Promise<void>;
+    setChainlinkFeedAddress(
+      token: string,
+      priceOracle: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setChainlinkFeedAddress(address,address)'(token: string, priceOracle: string, overrides?: CallOverrides): Promise<void>;
+    "setChainlinkFeedAddress(address,address)"(
+      token: string,
+      priceOracle: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setUniswapFeedAddress(token1: string, token2: string, pool: string, overrides?: CallOverrides): Promise<void>;
-
-    'setUniswapFeedAddress(address,address,address)'(
+    setUniswapFeedAddress(
       token1: string,
       token2: string,
       pool: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setUniswapPriceAveragingPeriod(_uniswapPriceAveragingPeriod: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "setUniswapFeedAddress(address,address,address)"(
+      token1: string,
+      token2: string,
+      pool: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setUniswapPriceAveragingPeriod(uint32)'(_uniswapPriceAveragingPeriod: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    setUniswapPriceAveragingPeriod(
+      _uniswapPriceAveragingPeriod: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    "setUniswapPriceAveragingPeriod(uint32)"(
+      _uniswapPriceAveragingPeriod: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    uniswapPools(arg0: BytesLike, overrides?: CallOverrides): Promise<string>;
+
+    "uniswapPools(bytes32)"(
+      arg0: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
     ChainlinkFeedUpdated(
       token: string | null,
       priceOracle: string | null
-    ): TypedEventFilter<[string, string], { token: string; priceOracle: string }>;
+    ): TypedEventFilter<
+      [string, string],
+      { token: string; priceOracle: string }
+    >;
 
     OwnershipTransferred(
       previousOwner: string | null,
       newOwner: string | null
-    ): TypedEventFilter<[string, string], { previousOwner: string; newOwner: string }>;
+    ): TypedEventFilter<
+      [string, string],
+      { previousOwner: string; newOwner: string }
+    >;
 
     UniswapFeedUpdated(
       token1: string | null,
       token2: string | null,
       feedId: null,
       pool: string | null
-    ): TypedEventFilter<[string, string, string, string], { token1: string; token2: string; feedId: string; pool: string }>;
+    ): TypedEventFilter<
+      [string, string, string, string],
+      { token1: string; token2: string; feedId: string; pool: string }
+    >;
 
     UniswapPriceAveragingPeriodUpdated(
       uniswapPriceAveragingPeriod: null
@@ -330,33 +617,85 @@ export class PriceOracle extends Contract {
   };
 
   estimateGas: {
-    doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<BigNumber>;
+    chainlinkFeedAddresses(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'doesFeedExist(address,address)'(token1: string, token2: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "chainlinkFeedAddresses(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getChainlinkLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<BigNumber>;
+    doesFeedExist(
+      token1: string,
+      token2: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getChainlinkLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "doesFeedExist(address,address)"(
+      token1: string,
+      token2: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getChainlinkLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getChainlinkLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getUniswapLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getUniswapLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "getLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    getUniswapLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "getUniswapLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    initialize(
+      _admin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "initialize(address)"(
+      _admin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     setChainlinkFeedAddress(
       token: string,
@@ -364,7 +703,7 @@ export class PriceOracle extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'setChainlinkFeedAddress(address,address)'(
+    "setChainlinkFeedAddress(address,address)"(
       token: string,
       priceOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -377,7 +716,7 @@ export class PriceOracle extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'setUniswapFeedAddress(address,address,address)'(
+    "setUniswapFeedAddress(address,address,address)"(
       token1: string,
       token2: string,
       pool: string,
@@ -389,44 +728,112 @@ export class PriceOracle extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'setUniswapPriceAveragingPeriod(uint32)'(
+    "setUniswapPriceAveragingPeriod(uint32)"(
       _uniswapPriceAveragingPeriod: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    transferOwnership(
+      newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'transferOwnership(address)'(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    uniswapPools(
+      arg0: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "uniswapPools(bytes32)"(
+      arg0: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    chainlinkFeedAddresses(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'doesFeedExist(address,address)'(token1: string, token2: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "chainlinkFeedAddresses(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    getChainlinkLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    doesFeedExist(
+      token1: string,
+      token2: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getChainlinkLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "doesFeedExist(address,address)"(
+      token1: string,
+      token2: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getChainlinkLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getChainlinkLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    getUniswapLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getUniswapLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    getUniswapLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "getUniswapLatestPrice(address,address)"(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    initialize(
+      _admin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "initialize(address)"(
+      _admin: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    renounceOwnership(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "renounceOwnership()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     setChainlinkFeedAddress(
       token: string,
@@ -434,7 +841,7 @@ export class PriceOracle extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'setChainlinkFeedAddress(address,address)'(
+    "setChainlinkFeedAddress(address,address)"(
       token: string,
       priceOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -447,7 +854,7 @@ export class PriceOracle extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'setUniswapFeedAddress(address,address,address)'(
+    "setUniswapFeedAddress(address,address,address)"(
       token1: string,
       token2: string,
       pool: string,
@@ -459,16 +866,29 @@ export class PriceOracle extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'setUniswapPriceAveragingPeriod(uint32)'(
+    "setUniswapPriceAveragingPeriod(uint32)"(
       _uniswapPriceAveragingPeriod: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
-
-    'transferOwnership(address)'(
+    transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "transferOwnership(address)"(
+      newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    uniswapPools(
+      arg0: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "uniswapPools(bytes32)"(
+      arg0: BytesLike,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -13,47 +13,77 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface StrategyInterface extends ethers.utils.Interface {
   functions: {
-    'balanceOf()': FunctionFragment;
-    'controller()': FunctionFragment;
-    'deposit()': FunctionFragment;
-    'governance()': FunctionFragment;
-    'setController(address)': FunctionFragment;
-    'setGovernance(address)': FunctionFragment;
-    'strategist()': FunctionFragment;
-    'want()': FunctionFragment;
-    'withdraw(uint256)': FunctionFragment;
-    'withdrawAll()': FunctionFragment;
+    "balanceOf()": FunctionFragment;
+    "controller()": FunctionFragment;
+    "deposit()": FunctionFragment;
+    "governance()": FunctionFragment;
+    "setController(address)": FunctionFragment;
+    "setGovernance(address)": FunctionFragment;
+    "strategist()": FunctionFragment;
+    "want()": FunctionFragment;
+    "withdraw(uint256)": FunctionFragment;
+    "withdrawAll()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'balanceOf', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'controller', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'deposit', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'governance', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'setController', values: [string]): string;
-  encodeFunctionData(functionFragment: 'setGovernance', values: [string]): string;
-  encodeFunctionData(functionFragment: 'strategist', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'want', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'withdraw', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'withdrawAll', values?: undefined): string;
+  encodeFunctionData(functionFragment: "balanceOf", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "controller",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "deposit", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "governance",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setController",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setGovernance",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "strategist",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "want", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "withdraw",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawAll",
+    values?: undefined
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'controller', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'deposit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'governance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setController', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setGovernance', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'strategist', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'want', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdraw', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'withdrawAll', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "controller", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "governance", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setController",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setGovernance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "strategist", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "want", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawAll",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -104,131 +134,187 @@ export class Strategy extends Contract {
   functions: {
     balanceOf(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'balanceOf()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "balanceOf()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     controller(overrides?: CallOverrides): Promise<[string]>;
 
-    'controller()'(overrides?: CallOverrides): Promise<[string]>;
+    "controller()"(overrides?: CallOverrides): Promise<[string]>;
 
     deposit(overrides?: CallOverrides): Promise<[void]>;
 
-    'deposit()'(overrides?: CallOverrides): Promise<[void]>;
+    "deposit()"(overrides?: CallOverrides): Promise<[void]>;
 
     governance(overrides?: CallOverrides): Promise<[string]>;
 
-    'governance()'(overrides?: CallOverrides): Promise<[string]>;
+    "governance()"(overrides?: CallOverrides): Promise<[string]>;
 
-    setController(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
-
-    'setController(address)'(
+    setController(
       _controller: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "setController(address)"(
+      _controller: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'setGovernance(address)'(
+    setGovernance(
+      _governance: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "setGovernance(address)"(
       _governance: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     strategist(overrides?: CallOverrides): Promise<[string]>;
 
-    'strategist()'(overrides?: CallOverrides): Promise<[string]>;
+    "strategist()"(overrides?: CallOverrides): Promise<[string]>;
 
     want(overrides?: CallOverrides): Promise<[string]>;
 
-    'want()'(overrides?: CallOverrides): Promise<[string]>;
+    "want()"(overrides?: CallOverrides): Promise<[string]>;
 
-    'withdraw(uint256)'(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "withdraw(uint256)"(
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'withdraw(address)'(_asset: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "withdraw(address)"(
+      _asset: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    withdrawAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    withdrawAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'withdrawAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "withdrawAll()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
   balanceOf(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'balanceOf()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "balanceOf()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   controller(overrides?: CallOverrides): Promise<string>;
 
-  'controller()'(overrides?: CallOverrides): Promise<string>;
+  "controller()"(overrides?: CallOverrides): Promise<string>;
 
   deposit(overrides?: CallOverrides): Promise<void>;
 
-  'deposit()'(overrides?: CallOverrides): Promise<void>;
+  "deposit()"(overrides?: CallOverrides): Promise<void>;
 
   governance(overrides?: CallOverrides): Promise<string>;
 
-  'governance()'(overrides?: CallOverrides): Promise<string>;
+  "governance()"(overrides?: CallOverrides): Promise<string>;
 
-  setController(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  setController(
+    _controller: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'setController(address)'(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "setController(address)"(
+    _controller: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  setGovernance(
+    _governance: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'setGovernance(address)'(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "setGovernance(address)"(
+    _governance: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   strategist(overrides?: CallOverrides): Promise<string>;
 
-  'strategist()'(overrides?: CallOverrides): Promise<string>;
+  "strategist()"(overrides?: CallOverrides): Promise<string>;
 
   want(overrides?: CallOverrides): Promise<string>;
 
-  'want()'(overrides?: CallOverrides): Promise<string>;
+  "want()"(overrides?: CallOverrides): Promise<string>;
 
-  'withdraw(uint256)'(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "withdraw(uint256)"(
+    _amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'withdraw(address)'(_asset: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "withdraw(address)"(
+    _asset: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  withdrawAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  withdrawAll(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'withdrawAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "withdrawAll()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
     balanceOf(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'balanceOf()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     controller(overrides?: CallOverrides): Promise<string>;
 
-    'controller()'(overrides?: CallOverrides): Promise<string>;
+    "controller()"(overrides?: CallOverrides): Promise<string>;
 
     deposit(overrides?: CallOverrides): Promise<void>;
 
-    'deposit()'(overrides?: CallOverrides): Promise<void>;
+    "deposit()"(overrides?: CallOverrides): Promise<void>;
 
     governance(overrides?: CallOverrides): Promise<string>;
 
-    'governance()'(overrides?: CallOverrides): Promise<string>;
+    "governance()"(overrides?: CallOverrides): Promise<string>;
 
-    setController(_controller: string, overrides?: CallOverrides): Promise<void>;
+    setController(
+      _controller: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setController(address)'(_controller: string, overrides?: CallOverrides): Promise<void>;
+    "setController(address)"(
+      _controller: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    setGovernance(_governance: string, overrides?: CallOverrides): Promise<void>;
+    setGovernance(
+      _governance: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'setGovernance(address)'(_governance: string, overrides?: CallOverrides): Promise<void>;
+    "setGovernance(address)"(
+      _governance: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     strategist(overrides?: CallOverrides): Promise<string>;
 
-    'strategist()'(overrides?: CallOverrides): Promise<string>;
+    "strategist()"(overrides?: CallOverrides): Promise<string>;
 
     want(overrides?: CallOverrides): Promise<string>;
 
-    'want()'(overrides?: CallOverrides): Promise<string>;
+    "want()"(overrides?: CallOverrides): Promise<string>;
 
-    'withdraw(uint256)'(_amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "withdraw(uint256)"(
+      _amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    'withdraw(address)'(_asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    "withdraw(address)"(
+      _asset: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     withdrawAll(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'withdrawAll()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "withdrawAll()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   filters: {};
@@ -236,90 +322,128 @@ export class Strategy extends Contract {
   estimateGas: {
     balanceOf(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'balanceOf()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "balanceOf()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     controller(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'controller()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "controller()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     deposit(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'deposit()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "deposit()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     governance(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'governance()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "governance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setController(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    setController(
+      _controller: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'setController(address)'(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "setController(address)"(
+      _controller: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    setGovernance(
+      _governance: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'setGovernance(address)'(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "setGovernance(address)"(
+      _governance: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     strategist(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'strategist()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "strategist()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     want(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'want()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "want()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'withdraw(uint256)'(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "withdraw(uint256)"(
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'withdraw(address)'(_asset: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "withdraw(address)"(
+      _asset: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    withdrawAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    withdrawAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'withdrawAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "withdrawAll()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     balanceOf(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'balanceOf()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "balanceOf()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     controller(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'controller()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "controller()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     deposit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'deposit()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "deposit()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     governance(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'governance()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "governance()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    setController(_controller: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
-
-    'setController(address)'(
+    setController(
       _controller: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "setController(address)"(
+      _controller: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'setGovernance(address)'(
+    setGovernance(
+      _governance: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setGovernance(address)"(
       _governance: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     strategist(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'strategist()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "strategist()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     want(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'want()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "want()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'withdraw(uint256)'(_amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "withdraw(uint256)"(
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'withdraw(address)'(_asset: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "withdraw(address)"(
+      _asset: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    withdrawAll(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    withdrawAll(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'withdrawAll()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "withdrawAll()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
   };
 }

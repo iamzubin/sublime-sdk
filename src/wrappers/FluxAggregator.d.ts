@@ -13,38 +13,59 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from 'ethers';
-import { BytesLike } from '@ethersproject/bytes';
-import { Listener, Provider } from '@ethersproject/providers';
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface FluxAggregatorInterface extends ethers.utils.Interface {
   functions: {
-    'decimals()': FunctionFragment;
-    'description()': FunctionFragment;
-    'getRoundData(uint80)': FunctionFragment;
-    'latestRoundData()': FunctionFragment;
-    'setValue(int256)': FunctionFragment;
-    'value()': FunctionFragment;
-    'version()': FunctionFragment;
+    "decimals()": FunctionFragment;
+    "description()": FunctionFragment;
+    "getRoundData(uint80)": FunctionFragment;
+    "latestRoundData()": FunctionFragment;
+    "setValue(int256)": FunctionFragment;
+    "value()": FunctionFragment;
+    "version()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'decimals', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'description', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'getRoundData', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'latestRoundData', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'setValue', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'value', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'version', values?: undefined): string;
+  encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "description",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoundData",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "latestRoundData",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setValue",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "value", values?: undefined): string;
+  encodeFunctionData(functionFragment: "version", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: 'decimals', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'description', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getRoundData', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'latestRoundData', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'setValue', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'value', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'version', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "description",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoundData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "latestRoundData",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "setValue", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "value", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "version", data: BytesLike): Result;
 
   events: {};
 }
@@ -95,20 +116,25 @@ export class FluxAggregator extends Contract {
   functions: {
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
-    'decimals()'(overrides?: CallOverrides): Promise<[number]>;
+    "decimals()"(overrides?: CallOverrides): Promise<[number]>;
 
     description(overrides?: CallOverrides): Promise<[string]>;
 
-    'description()'(overrides?: CallOverrides): Promise<[string]>;
+    "description()"(overrides?: CallOverrides): Promise<[string]>;
 
-    getRoundData(_roundId: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
-
-    'getRoundData(uint80)'(
+    getRoundData(
       _roundId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
 
-    latestRoundData(overrides?: CallOverrides): Promise<
+    "getRoundData(uint80)"(
+      _roundId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
+
+    latestRoundData(
+      overrides?: CallOverrides
+    ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
         roundId: BigNumber;
         answer: BigNumber;
@@ -118,7 +144,9 @@ export class FluxAggregator extends Contract {
       }
     >;
 
-    'latestRoundData()'(overrides?: CallOverrides): Promise<
+    "latestRoundData()"(
+      overrides?: CallOverrides
+    ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
         roundId: BigNumber;
         answer: BigNumber;
@@ -128,35 +156,46 @@ export class FluxAggregator extends Contract {
       }
     >;
 
-    setValue(newVal: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    setValue(
+      newVal: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'setValue(int256)'(newVal: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    "setValue(int256)"(
+      newVal: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     value(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'value()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "value()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     version(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'version()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    "version()"(overrides?: CallOverrides): Promise<[BigNumber]>;
   };
 
   decimals(overrides?: CallOverrides): Promise<number>;
 
-  'decimals()'(overrides?: CallOverrides): Promise<number>;
+  "decimals()"(overrides?: CallOverrides): Promise<number>;
 
   description(overrides?: CallOverrides): Promise<string>;
 
-  'description()'(overrides?: CallOverrides): Promise<string>;
+  "description()"(overrides?: CallOverrides): Promise<string>;
 
-  getRoundData(_roundId: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
-
-  'getRoundData(uint80)'(
+  getRoundData(
     _roundId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
 
-  latestRoundData(overrides?: CallOverrides): Promise<
+  "getRoundData(uint80)"(
+    _roundId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
+
+  latestRoundData(
+    overrides?: CallOverrides
+  ): Promise<
     [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
       roundId: BigNumber;
       answer: BigNumber;
@@ -166,7 +205,9 @@ export class FluxAggregator extends Contract {
     }
   >;
 
-  'latestRoundData()'(overrides?: CallOverrides): Promise<
+  "latestRoundData()"(
+    overrides?: CallOverrides
+  ): Promise<
     [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
       roundId: BigNumber;
       answer: BigNumber;
@@ -176,35 +217,46 @@ export class FluxAggregator extends Contract {
     }
   >;
 
-  setValue(newVal: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  setValue(
+    newVal: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'setValue(int256)'(newVal: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  "setValue(int256)"(
+    newVal: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   value(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'value()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "value()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   version(overrides?: CallOverrides): Promise<BigNumber>;
 
-  'version()'(overrides?: CallOverrides): Promise<BigNumber>;
+  "version()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
     decimals(overrides?: CallOverrides): Promise<number>;
 
-    'decimals()'(overrides?: CallOverrides): Promise<number>;
+    "decimals()"(overrides?: CallOverrides): Promise<number>;
 
     description(overrides?: CallOverrides): Promise<string>;
 
-    'description()'(overrides?: CallOverrides): Promise<string>;
+    "description()"(overrides?: CallOverrides): Promise<string>;
 
-    getRoundData(_roundId: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
-
-    'getRoundData(uint80)'(
+    getRoundData(
       _roundId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
 
-    latestRoundData(overrides?: CallOverrides): Promise<
+    "getRoundData(uint80)"(
+      _roundId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
+
+    latestRoundData(
+      overrides?: CallOverrides
+    ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
         roundId: BigNumber;
         answer: BigNumber;
@@ -214,7 +266,9 @@ export class FluxAggregator extends Contract {
       }
     >;
 
-    'latestRoundData()'(overrides?: CallOverrides): Promise<
+    "latestRoundData()"(
+      overrides?: CallOverrides
+    ): Promise<
       [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
         roundId: BigNumber;
         answer: BigNumber;
@@ -226,15 +280,18 @@ export class FluxAggregator extends Contract {
 
     setValue(newVal: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    'setValue(int256)'(newVal: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    "setValue(int256)"(
+      newVal: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     value(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'value()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "value()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     version(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'version()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "version()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   filters: {};
@@ -242,60 +299,86 @@ export class FluxAggregator extends Contract {
   estimateGas: {
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'decimals()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "decimals()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     description(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'description()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "description()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getRoundData(_roundId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getRoundData(
+      _roundId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    'getRoundData(uint80)'(_roundId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    "getRoundData(uint80)"(
+      _roundId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     latestRoundData(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'latestRoundData()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "latestRoundData()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setValue(newVal: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    setValue(
+      newVal: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'setValue(int256)'(newVal: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    "setValue(int256)"(
+      newVal: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     value(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'value()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "value()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     version(overrides?: CallOverrides): Promise<BigNumber>;
 
-    'version()'(overrides?: CallOverrides): Promise<BigNumber>;
+    "version()"(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'decimals()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "decimals()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     description(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'description()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "description()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getRoundData(_roundId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getRoundData(
+      _roundId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    'getRoundData(uint80)'(_roundId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "getRoundData(uint80)"(
+      _roundId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     latestRoundData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'latestRoundData()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "latestRoundData()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    setValue(newVal: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    setValue(
+      newVal: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'setValue(int256)'(newVal: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    "setValue(int256)"(
+      newVal: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     value(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'value()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "value()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     version(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'version()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "version()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }
