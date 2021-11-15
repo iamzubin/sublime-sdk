@@ -97,7 +97,7 @@ export class CreditLineApi {
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
-    return new BigNumber(_value.toString()).div(new BigNumber(10).pow(borrowDecimal)).toFixed(2);
+    return new BigNumber(_value.toString()).div(new BigNumber(10).pow(borrowDecimal)).toFixed(borrowDecimal);
   }
 
   public async calculateBorrowableAmount(creditLineNumber: BigNumberish): Promise<string> {
@@ -106,7 +106,7 @@ export class CreditLineApi {
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
-    return new BigNumber(_value.toString()).div(new BigNumber(10).pow(borrowDecimal)).toFixed(2);
+    return new BigNumber(_value.toString()).div(new BigNumber(10).pow(borrowDecimal)).toFixed(borrowDecimal);
   }
 
   public async calculateCurrentCollateralRatio(creditLineNumber: BigNumberish): Promise<string> {
@@ -149,7 +149,7 @@ export class CreditLineApi {
     return this.creditLineContract.withdrawCollateral(
       creditLineNumber,
       _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0),
-      toSavingsAccount
+      toSavingsAccount,
     );
   }
 
