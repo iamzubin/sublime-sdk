@@ -13,104 +13,50 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+} from 'ethers';
+import { BytesLike } from '@ethersproject/bytes';
+import { Listener, Provider } from '@ethersproject/providers';
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface ICTokenInterface extends ethers.utils.Interface {
   functions: {
-    "balanceOfUnderlying(address)": FunctionFragment;
-    "exchangeRateCurrent()": FunctionFragment;
-    "exchangeRateStored()": FunctionFragment;
-    "liquidateBorrow(address,uint256,address)": FunctionFragment;
-    "mint(uint256)": FunctionFragment;
-    "redeem(uint256)": FunctionFragment;
-    "redeemUnderlying(uint256)": FunctionFragment;
-    "repayBorrow(uint256)": FunctionFragment;
-    "repayBorrowBehalf(address,uint256)": FunctionFragment;
-    "supplyRatePerBlock()": FunctionFragment;
-    "underlying()": FunctionFragment;
+    'balanceOfUnderlying(address)': FunctionFragment;
+    'exchangeRateCurrent()': FunctionFragment;
+    'exchangeRateStored()': FunctionFragment;
+    'liquidateBorrow(address,uint256,address)': FunctionFragment;
+    'mint(uint256)': FunctionFragment;
+    'redeem(uint256)': FunctionFragment;
+    'redeemUnderlying(uint256)': FunctionFragment;
+    'repayBorrow(uint256)': FunctionFragment;
+    'repayBorrowBehalf(address,uint256)': FunctionFragment;
+    'supplyRatePerBlock()': FunctionFragment;
+    'underlying()': FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "balanceOfUnderlying",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "exchangeRateCurrent",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "exchangeRateStored",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liquidateBorrow",
-    values: [string, BigNumberish, string]
-  ): string;
-  encodeFunctionData(functionFragment: "mint", values: [BigNumberish]): string;
-  encodeFunctionData(
-    functionFragment: "redeem",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "redeemUnderlying",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "repayBorrow",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "repayBorrowBehalf",
-    values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "supplyRatePerBlock",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "underlying",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: 'balanceOfUnderlying', values: [string]): string;
+  encodeFunctionData(functionFragment: 'exchangeRateCurrent', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'exchangeRateStored', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'liquidateBorrow', values: [string, BigNumberish, string]): string;
+  encodeFunctionData(functionFragment: 'mint', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'redeem', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'redeemUnderlying', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'repayBorrow', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'repayBorrowBehalf', values: [string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'supplyRatePerBlock', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'underlying', values?: undefined): string;
 
-  decodeFunctionResult(
-    functionFragment: "balanceOfUnderlying",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "exchangeRateCurrent",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "exchangeRateStored",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidateBorrow",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "redeem", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "redeemUnderlying",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "repayBorrow",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "repayBorrowBehalf",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "supplyRatePerBlock",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "underlying", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'balanceOfUnderlying', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'exchangeRateCurrent', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'exchangeRateStored', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'liquidateBorrow', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'mint', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'redeem', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'redeemUnderlying', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'repayBorrow', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'repayBorrowBehalf', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'supplyRatePerBlock', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'underlying', data: BytesLike): Result;
 
   events: {};
 }
@@ -159,27 +105,20 @@ export class ICToken extends Contract {
   interface: ICTokenInterface;
 
   functions: {
-    balanceOfUnderlying(
+    balanceOfUnderlying(account: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    'balanceOfUnderlying(address)'(
       account: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "balanceOfUnderlying(address)"(
-      account: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    exchangeRateCurrent(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    exchangeRateCurrent(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "exchangeRateCurrent()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'exchangeRateCurrent()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     exchangeRateStored(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "exchangeRateStored()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'exchangeRateStored()'(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     liquidateBorrow(
       borrower: string,
@@ -188,49 +127,34 @@ export class ICToken extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "liquidateBorrow(address,uint256,address)"(
+    'liquidateBorrow(address,uint256,address)'(
       borrower: string,
       amount: BigNumberish,
       collateral: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    mint(
-      mintAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    mint(mintAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "mint(uint256)"(
-      mintAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'mint(uint256)'(mintAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    redeem(
+    redeem(redeemTokens: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    'redeem(uint256)'(
       redeemTokens: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "redeem(uint256)"(
-      redeemTokens: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    redeemUnderlying(arg0: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    redeemUnderlying(
+    'redeemUnderlying(uint256)'(
       arg0: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "redeemUnderlying(uint256)"(
-      arg0: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    repayBorrow(repayAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    repayBorrow(
-      repayAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "repayBorrow(uint256)"(
+    'repayBorrow(uint256)'(
       repayAmount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -241,46 +165,35 @@ export class ICToken extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "repayBorrowBehalf(address,uint256)"(
+    'repayBorrowBehalf(address,uint256)'(
       borrower: string,
       repayAmount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    supplyRatePerBlock(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    supplyRatePerBlock(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "supplyRatePerBlock()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'supplyRatePerBlock()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     underlying(overrides?: CallOverrides): Promise<[string]>;
 
-    "underlying()"(overrides?: CallOverrides): Promise<[string]>;
+    'underlying()'(overrides?: CallOverrides): Promise<[string]>;
   };
 
-  balanceOfUnderlying(
+  balanceOfUnderlying(account: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  'balanceOfUnderlying(address)'(
     account: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "balanceOfUnderlying(address)"(
-    account: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  exchangeRateCurrent(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  exchangeRateCurrent(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "exchangeRateCurrent()"(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'exchangeRateCurrent()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   exchangeRateStored(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "exchangeRateStored()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'exchangeRateStored()'(overrides?: CallOverrides): Promise<BigNumber>;
 
   liquidateBorrow(
     borrower: string,
@@ -289,49 +202,31 @@ export class ICToken extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "liquidateBorrow(address,uint256,address)"(
+  'liquidateBorrow(address,uint256,address)'(
     borrower: string,
     amount: BigNumberish,
     collateral: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  mint(
-    mintAmount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  mint(mintAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "mint(uint256)"(
-    mintAmount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'mint(uint256)'(mintAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  redeem(
-    redeemTokens: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  redeem(redeemTokens: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "redeem(uint256)"(
-    redeemTokens: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'redeem(uint256)'(redeemTokens: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  redeemUnderlying(
+  redeemUnderlying(arg0: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  'redeemUnderlying(uint256)'(
     arg0: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "redeemUnderlying(uint256)"(
-    arg0: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  repayBorrow(repayAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  repayBorrow(
-    repayAmount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "repayBorrow(uint256)"(
+  'repayBorrow(uint256)'(
     repayAmount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -342,142 +237,85 @@ export class ICToken extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "repayBorrowBehalf(address,uint256)"(
+  'repayBorrowBehalf(address,uint256)'(
     borrower: string,
     repayAmount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  supplyRatePerBlock(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  supplyRatePerBlock(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "supplyRatePerBlock()"(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'supplyRatePerBlock()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   underlying(overrides?: CallOverrides): Promise<string>;
 
-  "underlying()"(overrides?: CallOverrides): Promise<string>;
+  'underlying()'(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    balanceOfUnderlying(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    balanceOfUnderlying(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "balanceOfUnderlying(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'balanceOfUnderlying(address)'(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     exchangeRateCurrent(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "exchangeRateCurrent()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'exchangeRateCurrent()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     exchangeRateStored(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "exchangeRateStored()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'exchangeRateStored()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    liquidateBorrow(
+    liquidateBorrow(borrower: string, amount: BigNumberish, collateral: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'liquidateBorrow(address,uint256,address)'(
       borrower: string,
       amount: BigNumberish,
       collateral: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "liquidateBorrow(address,uint256,address)"(
-      borrower: string,
-      amount: BigNumberish,
-      collateral: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    mint(mintAmount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    mint(
-      mintAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'mint(uint256)'(mintAmount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "mint(uint256)"(
-      mintAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    redeem(redeemTokens: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    redeem(
-      redeemTokens: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'redeem(uint256)'(redeemTokens: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "redeem(uint256)"(
-      redeemTokens: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    redeemUnderlying(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    redeemUnderlying(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'redeemUnderlying(uint256)'(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "redeemUnderlying(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    repayBorrow(repayAmount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    repayBorrow(
-      repayAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'repayBorrow(uint256)'(repayAmount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "repayBorrow(uint256)"(
-      repayAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    repayBorrowBehalf(borrower: string, repayAmount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    repayBorrowBehalf(
-      borrower: string,
-      repayAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "repayBorrowBehalf(address,uint256)"(
-      borrower: string,
-      repayAmount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'repayBorrowBehalf(address,uint256)'(borrower: string, repayAmount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     supplyRatePerBlock(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "supplyRatePerBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'supplyRatePerBlock()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     underlying(overrides?: CallOverrides): Promise<string>;
 
-    "underlying()"(overrides?: CallOverrides): Promise<string>;
+    'underlying()'(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {};
 
   estimateGas: {
-    balanceOfUnderlying(
-      account: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    balanceOfUnderlying(account: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "balanceOfUnderlying(address)"(
-      account: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'balanceOfUnderlying(address)'(account: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    exchangeRateCurrent(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    exchangeRateCurrent(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "exchangeRateCurrent()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'exchangeRateCurrent()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     exchangeRateStored(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "exchangeRateStored()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'exchangeRateStored()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     liquidateBorrow(
       borrower: string,
@@ -486,52 +324,28 @@ export class ICToken extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "liquidateBorrow(address,uint256,address)"(
+    'liquidateBorrow(address,uint256,address)'(
       borrower: string,
       amount: BigNumberish,
       collateral: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    mint(
-      mintAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    mint(mintAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "mint(uint256)"(
-      mintAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'mint(uint256)'(mintAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    redeem(
-      redeemTokens: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    redeem(redeemTokens: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "redeem(uint256)"(
-      redeemTokens: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'redeem(uint256)'(redeemTokens: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    redeemUnderlying(
-      arg0: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    redeemUnderlying(arg0: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "redeemUnderlying(uint256)"(
-      arg0: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'redeemUnderlying(uint256)'(arg0: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    repayBorrow(
-      repayAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    repayBorrow(repayAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "repayBorrow(uint256)"(
-      repayAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'repayBorrow(uint256)'(repayAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     repayBorrowBehalf(
       borrower: string,
@@ -539,51 +353,36 @@ export class ICToken extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "repayBorrowBehalf(address,uint256)"(
+    'repayBorrowBehalf(address,uint256)'(
       borrower: string,
       repayAmount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    supplyRatePerBlock(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    supplyRatePerBlock(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "supplyRatePerBlock()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'supplyRatePerBlock()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     underlying(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "underlying()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'underlying()'(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    balanceOfUnderlying(
+    balanceOfUnderlying(account: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    'balanceOfUnderlying(address)'(
       account: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "balanceOfUnderlying(address)"(
-      account: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    exchangeRateCurrent(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    exchangeRateCurrent(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'exchangeRateCurrent()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "exchangeRateCurrent()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    exchangeRateStored(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    exchangeRateStored(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "exchangeRateStored()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'exchangeRateStored()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     liquidateBorrow(
       borrower: string,
@@ -592,49 +391,34 @@ export class ICToken extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "liquidateBorrow(address,uint256,address)"(
+    'liquidateBorrow(address,uint256,address)'(
       borrower: string,
       amount: BigNumberish,
       collateral: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    mint(
-      mintAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    mint(mintAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "mint(uint256)"(
-      mintAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'mint(uint256)'(mintAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    redeem(
+    redeem(redeemTokens: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    'redeem(uint256)'(
       redeemTokens: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "redeem(uint256)"(
-      redeemTokens: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    redeemUnderlying(arg0: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    redeemUnderlying(
+    'redeemUnderlying(uint256)'(
       arg0: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "redeemUnderlying(uint256)"(
-      arg0: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    repayBorrow(repayAmount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    repayBorrow(
-      repayAmount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "repayBorrow(uint256)"(
+    'repayBorrow(uint256)'(
       repayAmount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -645,22 +429,18 @@ export class ICToken extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "repayBorrowBehalf(address,uint256)"(
+    'repayBorrowBehalf(address,uint256)'(
       borrower: string,
       repayAmount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    supplyRatePerBlock(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    supplyRatePerBlock(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "supplyRatePerBlock()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'supplyRatePerBlock()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     underlying(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "underlying()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'underlying()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

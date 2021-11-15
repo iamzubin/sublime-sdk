@@ -2,16 +2,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Contract, Signer } from 'ethers';
+import { Provider } from '@ethersproject/providers';
 
-import type { IScaledBalanceToken } from "../IScaledBalanceToken";
+import type { IScaledBalanceToken } from '../IScaledBalanceToken';
 
 export class IScaledBalanceToken__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): IScaledBalanceToken {
+  static connect(address: string, signerOrProvider: Signer | Provider): IScaledBalanceToken {
     return new Contract(address, _abi, signerOrProvider) as IScaledBalanceToken;
   }
 }
@@ -20,20 +17,20 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "user",
-        type: "address",
+        internalType: 'address',
+        name: 'user',
+        type: 'address',
       },
     ],
-    name: "scaledBalanceOf",
+    name: 'scaledBalanceOf',
     outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
 ];

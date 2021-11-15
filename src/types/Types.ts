@@ -108,7 +108,6 @@ export interface CreditLineDetail {
   idealCollateralRatio: string;
   collateralAsset: Asset;
   borrowAsset: Asset;
-  liquidationThreshold: string;
   autoLiquidate: boolean;
   lender: CreditLineUser;
   borrower: CreditLineUser;

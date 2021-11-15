@@ -149,7 +149,7 @@ export class CreditLineApi {
     return this.creditLineContract.withdrawCollateral(
       creditLineNumber,
       _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0),
-      toSavingsAccount,
+      toSavingsAccount
     );
   }
 
@@ -216,7 +216,7 @@ export class CreditLineApi {
     return this.creditLineContract.repay(
       creditLineNumber,
       _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
-      fromSavingsAccount,
+      fromSavingsAccount
     );
   }
 

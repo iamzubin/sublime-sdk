@@ -13,47 +13,29 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+} from 'ethers';
+import { BytesLike } from '@ethersproject/bytes';
+import { Listener, Provider } from '@ethersproject/providers';
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface AaveLendingPoolInterface extends ethers.utils.Interface {
   functions: {
-    "deposit(address,uint256,address,uint16)": FunctionFragment;
-    "getAddressesProvider()": FunctionFragment;
-    "getReserveData(address)": FunctionFragment;
-    "withdraw(address,uint256,address)": FunctionFragment;
+    'deposit(address,uint256,address,uint16)': FunctionFragment;
+    'getAddressesProvider()': FunctionFragment;
+    'getReserveData(address)': FunctionFragment;
+    'withdraw(address,uint256,address)': FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "deposit",
-    values: [string, BigNumberish, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getAddressesProvider",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getReserveData",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "withdraw",
-    values: [string, BigNumberish, string]
-  ): string;
+  encodeFunctionData(functionFragment: 'deposit', values: [string, BigNumberish, string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'getAddressesProvider', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'getReserveData', values: [string]): string;
+  encodeFunctionData(functionFragment: 'withdraw', values: [string, BigNumberish, string]): string;
 
-  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getAddressesProvider",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getReserveData",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'deposit', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'getAddressesProvider', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'getReserveData', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'withdraw', data: BytesLike): Result;
 
   events: {};
 }
@@ -110,7 +92,7 @@ export class AaveLendingPool extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "deposit(address,uint256,address,uint16)"(
+    'deposit(address,uint256,address,uint16)'(
       asset: string,
       amount: BigNumberish,
       onBehalfOf: string,
@@ -120,7 +102,7 @@ export class AaveLendingPool extends Contract {
 
     getAddressesProvider(overrides?: CallOverrides): Promise<[string]>;
 
-    "getAddressesProvider()"(overrides?: CallOverrides): Promise<[string]>;
+    'getAddressesProvider()'(overrides?: CallOverrides): Promise<[string]>;
 
     getReserveData(
       asset: string,
@@ -157,7 +139,7 @@ export class AaveLendingPool extends Contract {
       ]
     >;
 
-    "getReserveData(address)"(
+    'getReserveData(address)'(
       asset: string,
       overrides?: CallOverrides
     ): Promise<
@@ -199,7 +181,7 @@ export class AaveLendingPool extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "withdraw(address,uint256,address)"(
+    'withdraw(address,uint256,address)'(
       asset: string,
       amount: BigNumberish,
       to: string,
@@ -215,7 +197,7 @@ export class AaveLendingPool extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "deposit(address,uint256,address,uint16)"(
+  'deposit(address,uint256,address,uint16)'(
     asset: string,
     amount: BigNumberish,
     onBehalfOf: string,
@@ -225,7 +207,7 @@ export class AaveLendingPool extends Contract {
 
   getAddressesProvider(overrides?: CallOverrides): Promise<string>;
 
-  "getAddressesProvider()"(overrides?: CallOverrides): Promise<string>;
+  'getAddressesProvider()'(overrides?: CallOverrides): Promise<string>;
 
   getReserveData(
     asset: string,
@@ -260,7 +242,7 @@ export class AaveLendingPool extends Contract {
     }
   >;
 
-  "getReserveData(address)"(
+  'getReserveData(address)'(
     asset: string,
     overrides?: CallOverrides
   ): Promise<
@@ -300,7 +282,7 @@ export class AaveLendingPool extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "withdraw(address,uint256,address)"(
+  'withdraw(address,uint256,address)'(
     asset: string,
     amount: BigNumberish,
     to: string,
@@ -308,15 +290,9 @@ export class AaveLendingPool extends Contract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    deposit(
-      asset: string,
-      amount: BigNumberish,
-      onBehalfOf: string,
-      referralCode: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    deposit(asset: string, amount: BigNumberish, onBehalfOf: string, referralCode: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    "deposit(address,uint256,address,uint16)"(
+    'deposit(address,uint256,address,uint16)'(
       asset: string,
       amount: BigNumberish,
       onBehalfOf: string,
@@ -326,7 +302,7 @@ export class AaveLendingPool extends Contract {
 
     getAddressesProvider(overrides?: CallOverrides): Promise<string>;
 
-    "getAddressesProvider()"(overrides?: CallOverrides): Promise<string>;
+    'getAddressesProvider()'(overrides?: CallOverrides): Promise<string>;
 
     getReserveData(
       asset: string,
@@ -361,7 +337,7 @@ export class AaveLendingPool extends Contract {
       }
     >;
 
-    "getReserveData(address)"(
+    'getReserveData(address)'(
       asset: string,
       overrides?: CallOverrides
     ): Promise<
@@ -394,19 +370,9 @@ export class AaveLendingPool extends Contract {
       }
     >;
 
-    withdraw(
-      asset: string,
-      amount: BigNumberish,
-      to: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    withdraw(asset: string, amount: BigNumberish, to: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "withdraw(address,uint256,address)"(
-      asset: string,
-      amount: BigNumberish,
-      to: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'withdraw(address,uint256,address)'(asset: string, amount: BigNumberish, to: string, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   filters: {};
@@ -420,7 +386,7 @@ export class AaveLendingPool extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "deposit(address,uint256,address,uint16)"(
+    'deposit(address,uint256,address,uint16)'(
       asset: string,
       amount: BigNumberish,
       onBehalfOf: string,
@@ -430,17 +396,11 @@ export class AaveLendingPool extends Contract {
 
     getAddressesProvider(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "getAddressesProvider()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'getAddressesProvider()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getReserveData(
-      asset: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    getReserveData(asset: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "getReserveData(address)"(
-      asset: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'getReserveData(address)'(asset: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     withdraw(
       asset: string,
@@ -449,7 +409,7 @@ export class AaveLendingPool extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "withdraw(address,uint256,address)"(
+    'withdraw(address,uint256,address)'(
       asset: string,
       amount: BigNumberish,
       to: string,
@@ -466,7 +426,7 @@ export class AaveLendingPool extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "deposit(address,uint256,address,uint16)"(
+    'deposit(address,uint256,address,uint16)'(
       asset: string,
       amount: BigNumberish,
       onBehalfOf: string,
@@ -474,23 +434,13 @@ export class AaveLendingPool extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    getAddressesProvider(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    getAddressesProvider(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "getAddressesProvider()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'getAddressesProvider()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getReserveData(
-      asset: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    getReserveData(asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "getReserveData(address)"(
-      asset: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'getReserveData(address)'(asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     withdraw(
       asset: string,
@@ -499,7 +449,7 @@ export class AaveLendingPool extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "withdraw(address,uint256,address)"(
+    'withdraw(address,uint256,address)'(
       asset: string,
       amount: BigNumberish,
       to: string,

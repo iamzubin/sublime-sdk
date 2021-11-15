@@ -2,29 +2,20 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import {
-  ethers,
-  EventFilter,
-  Signer,
-  BigNumber,
-  BigNumberish,
-  PopulatedTransaction,
-  Contract,
-  ContractTransaction,
-} from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction, Contract, ContractTransaction } from 'ethers';
+import { BytesLike } from '@ethersproject/bytes';
+import { Listener, Provider } from '@ethersproject/providers';
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface UpgradeableProxyInterface extends ethers.utils.Interface {
   functions: {};
 
   events: {
-    "Upgraded(address)": EventFragment;
+    'Upgraded(address)': EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "Upgraded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'Upgraded'): EventFragment;
 }
 
 export class UpgradeableProxy extends Contract {
@@ -75,9 +66,7 @@ export class UpgradeableProxy extends Contract {
   callStatic: {};
 
   filters: {
-    Upgraded(
-      implementation: string | null
-    ): TypedEventFilter<[string], { implementation: string }>;
+    Upgraded(implementation: string | null): TypedEventFilter<[string], { implementation: string }>;
   };
 
   estimateGas: {};

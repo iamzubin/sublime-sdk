@@ -2,16 +2,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Contract, Signer } from 'ethers';
+import { Provider } from '@ethersproject/providers';
 
-import type { IRepayment } from "../IRepayment";
+import type { IRepayment } from '../IRepayment';
 
 export class IRepayment__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): IRepayment {
+  static connect(address: string, signerOrProvider: Signer | Provider): IRepayment {
     return new Contract(address, _abi, signerOrProvider) as IRepayment;
   }
 }
@@ -22,292 +19,292 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: "address",
-        name: "poolID",
-        type: "address",
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
       },
       {
         indexed: false,
-        internalType: "uint256",
-        name: "repayAmount",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'repayAmount',
+        type: 'uint256',
       },
     ],
-    name: "ExtensionRepaid",
-    type: "event",
+    name: 'ExtensionRepaid',
+    type: 'event',
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: "uint256",
-        name: "gracePenaltyRate",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'gracePenaltyRate',
+        type: 'uint256',
       },
     ],
-    name: "GracePenaltyRateUpdated",
-    type: "event",
+    name: 'GracePenaltyRateUpdated',
+    type: 'event',
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: "address",
-        name: "poolID",
-        type: "address",
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
       },
       {
         indexed: false,
-        internalType: "uint256",
-        name: "repayAmount",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'repayAmount',
+        type: 'uint256',
       },
     ],
-    name: "GracePenaltyRepaid",
-    type: "event",
+    name: 'GracePenaltyRepaid',
+    type: 'event',
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: "uint256",
-        name: "gracePeriodFraction",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'gracePeriodFraction',
+        type: 'uint256',
       },
     ],
-    name: "GracePeriodFractionUpdated",
-    type: "event",
+    name: 'GracePeriodFractionUpdated',
+    type: 'event',
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: "address",
-        name: "poolID",
-        type: "address",
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
       },
       {
         indexed: false,
-        internalType: "uint256",
-        name: "repayAmount",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'repayAmount',
+        type: 'uint256',
       },
     ],
-    name: "InterestRepaid",
-    type: "event",
+    name: 'InterestRepaid',
+    type: 'event',
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: "address",
-        name: "poolID",
-        type: "address",
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
       },
       {
         indexed: false,
-        internalType: "uint256",
-        name: "repayAmount",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'repayAmount',
+        type: 'uint256',
       },
     ],
-    name: "InterestRepaymentComplete",
-    type: "event",
+    name: 'InterestRepaymentComplete',
+    type: 'event',
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: "address",
-        name: "poolFactory",
-        type: "address",
+        internalType: 'address',
+        name: 'poolFactory',
+        type: 'address',
       },
     ],
-    name: "PoolFactoryUpdated",
-    type: "event",
+    name: 'PoolFactoryUpdated',
+    type: 'event',
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: true,
-        internalType: "address",
-        name: "poolID",
-        type: "address",
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
       },
       {
         indexed: false,
-        internalType: "uint256",
-        name: "repayAmount",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'repayAmount',
+        type: 'uint256',
       },
     ],
-    name: "PrincipalRepaid",
-    type: "event",
+    name: 'PrincipalRepaid',
+    type: 'event',
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_poolID",
-        type: "address",
+        internalType: 'address',
+        name: '_poolID',
+        type: 'address',
       },
     ],
-    name: "didBorrowerDefault",
+    name: 'didBorrowerDefault',
     outputs: [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "poolID",
-        type: "address",
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
       },
     ],
-    name: "getCurrentLoanInterval",
+    name: 'getCurrentLoanInterval',
     outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [],
-    name: "getGracePeriodFraction",
+    name: 'getGracePeriodFraction',
     outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "poolID",
-        type: "address",
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
       },
     ],
-    name: "getInterestCalculationVars",
+    name: 'getInterestCalculationVars',
     outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_poolID",
-        type: "address",
+        internalType: 'address',
+        name: '_poolID',
+        type: 'address',
       },
     ],
-    name: "getNextInstalmentDeadline",
+    name: 'getNextInstalmentDeadline',
     outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "poolID",
-        type: "address",
+        internalType: 'address',
+        name: 'poolID',
+        type: 'address',
       },
     ],
-    name: "getTotalRepaidAmount",
+    name: 'getTotalRepaidAmount',
     outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
     ],
-    stateMutability: "view",
-    type: "function",
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "numberOfTotalRepayments",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'numberOfTotalRepayments',
+        type: 'uint256',
       },
       {
-        internalType: "uint256",
-        name: "repaymentInterval",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'repaymentInterval',
+        type: 'uint256',
       },
       {
-        internalType: "uint256",
-        name: "borrowRate",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'borrowRate',
+        type: 'uint256',
       },
       {
-        internalType: "uint256",
-        name: "loanStartTime",
-        type: "uint256",
+        internalType: 'uint256',
+        name: 'loanStartTime',
+        type: 'uint256',
       },
       {
-        internalType: "address",
-        name: "lentAsset",
-        type: "address",
+        internalType: 'address',
+        name: 'lentAsset',
+        type: 'address',
       },
     ],
-    name: "initializeRepayment",
+    name: 'initializeRepayment',
     outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_poolID",
-        type: "address",
+        internalType: 'address',
+        name: '_poolID',
+        type: 'address',
       },
     ],
-    name: "instalmentDeadlineExtended",
+    name: 'instalmentDeadlineExtended',
     outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
 ];

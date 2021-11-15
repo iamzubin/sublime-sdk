@@ -16,10 +16,10 @@ export class PriceOracleApi {
 
   constructor(signer: Signer, config: SublimeConfig) {
     this.priceOracleContract = new PriceOracle__factory(signer).attach(config.priceOracleContractAddress);
-    config = this.config
+    config = this.config;
   }
 
-  public async getLatestPrice(num: string, den: string) : Promise<string> {
+  public async getLatestPrice(num: string, den: string): Promise<string> {
     return (await this.priceOracleContract.getLatestPrice(num, den)).toString();
   }
 }

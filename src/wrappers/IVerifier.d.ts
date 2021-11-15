@@ -2,31 +2,22 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import {
-  ethers,
-  EventFilter,
-  Signer,
-  BigNumber,
-  BigNumberish,
-  PopulatedTransaction,
-  Contract,
-  ContractTransaction,
-} from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import { ethers, EventFilter, Signer, BigNumber, BigNumberish, PopulatedTransaction, Contract, ContractTransaction } from 'ethers';
+import { BytesLike } from '@ethersproject/bytes';
+import { Listener, Provider } from '@ethersproject/providers';
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface IVerifierInterface extends ethers.utils.Interface {
   functions: {};
 
   events: {
-    "UserRegistered(address,bool,string)": EventFragment;
-    "UserUnregistered(address)": EventFragment;
+    'UserRegistered(address,bool,string)': EventFragment;
+    'UserUnregistered(address)': EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "UserRegistered"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "UserUnregistered"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'UserRegistered'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'UserUnregistered'): EventFragment;
 }
 
 export class IVerifier extends Contract {
@@ -81,10 +72,7 @@ export class IVerifier extends Contract {
       user: null,
       isMasterLinked: null,
       metadata: null
-    ): TypedEventFilter<
-      [string, boolean, string],
-      { user: string; isMasterLinked: boolean; metadata: string }
-    >;
+    ): TypedEventFilter<[string, boolean, string], { user: string; isMasterLinked: boolean; metadata: string }>;
 
     UserUnregistered(user: null): TypedEventFilter<[string], { user: string }>;
   };

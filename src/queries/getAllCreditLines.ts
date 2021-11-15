@@ -1,25 +1,23 @@
 import { fetchData } from '../helpers';
 
-async function _getCreditLinesByBorrower(url: string, status, requestByLender, borrower: string, count, skip): Promise<any[]> {
+async function _getCreditLinesOfBorrower(url: string, status, requestByLender, borrower: string, count, skip): Promise<any[]> {
   borrower = borrower.toLowerCase();
   let allData = [];
   const data = JSON.stringify({
     query: `{
-        creditLines (first:${count}, skip:${skip},where:{Borrower:"${borrower}",requestByLender:${requestByLender}, creditLineStatus:${status}}){
-            id
-            creditLineStatus
-            lender
-            Borrower,
-            requestByLender
-            collateralAmount
-            principal
-            collateralAsset
-            BorrowLimit
-            borrowRate
-            idealCollateralRatio
-            BorrowAsset
-            liquidationThreshold
-            autoLiquidation
+        creditLines (first:${count}, skip:${skip},where:{borrower:"${borrower}",requestByLender:${requestByLender}, status:${status}}){
+          id
+          status	
+          lender
+          borrower
+          requestByLender
+          principal
+          collateralAsset
+          borrowLimit
+          borrowRate
+          idealCollateralRatio
+          borrowAsset
+          autoLiquidation
         }
     }`,
   });
@@ -36,26 +34,24 @@ async function _getCreditLinesByBorrower(url: string, status, requestByLender, b
   return allData;
 }
 
-async function _getCreditLinesByLender(url: string, status, requestByLender, lender: string, count, skip): Promise<any[]> {
+async function _getCreditLinesOfLender(url: string, status, requestByLender, lender: string, count, skip): Promise<any[]> {
   lender = lender.toLowerCase();
   let allData = [];
   const data = JSON.stringify({
     query: `{
-          creditLines (first:${count}, skip:${skip},where:{lender:"${lender}",requestByLender:${requestByLender}, creditLineStatus:${status}}){
-              id
-              creditLineStatus
-              lender
-              Borrower,
-              requestByLender
-              collateralAmount
-              principal
-              collateralAsset
-              BorrowLimit
-              borrowRate
-              idealCollateralRatio
-              BorrowAsset
-              liquidationThreshold
-              autoLiquidation
+          creditLines (first:${count}, skip:${skip},where:{lender:"${lender}",requestByLender:${requestByLender}, status:${status}}){
+            id
+            status	
+            lender
+            borrower
+            requestByLender
+            principal
+            collateralAsset
+            borrowLimit
+            borrowRate
+            idealCollateralRatio
+            borrowAsset
+            autoLiquidation
           }
       }`,
   });
@@ -67,43 +63,85 @@ async function _getCreditLinesByLender(url: string, status, requestByLender, len
   };
 
   let result = await fetchData(options);
-  //   console.log(result);
+  // console.log(result);
   allData.push(...result.data.creditLines);
   return allData;
 }
 
 // creditLineTypes ACTIVE, CLOSED, LIQUIDATED, NOT_CREATED, REQUESTED, CANCELLED
-export async function getCreditLinesByBorrower(url: string, borrower, count, skip): Promise<any[]> {
+export async function getConfirmedCreditLinesOfBorrower(url: string, borrower, count, skip): Promise<any[]> {
   let data = [];
-  let activeOnes = await _getCreditLinesByBorrower(url, 'ACTIVE', false, borrower, count, skip);
-  let closedOnes = await _getCreditLinesByBorrower(url, 'CLOSED', false, borrower, count, skip);
-  let liquidatedOnes = await _getCreditLinesByBorrower(url, 'LIQUIDATED', false, borrower, count, skip);
-  let notCreatedOnes = await _getCreditLinesByLender(url, 'NOT_CREATED', false, borrower, count, skip);
-  data = [...activeOnes, ...closedOnes, ...liquidatedOnes, ...notCreatedOnes];
+  let activeOnes = await _getCreditLinesOfBorrower(url, 'ACTIVE', false, borrower, count, skip);
+  let closedOnes = await _getCreditLinesOfBorrower(url, 'CLOSED', false, borrower, count, skip);
+  let liquidatedOnes = await _getCreditLinesOfBorrower(url, 'LIQUIDATED', false, borrower, count, skip);
+  let notCreatedOnes = await _getCreditLinesOfBorrower(url, 'NOT_CREATED', false, borrower, count, skip);
+
+  let nr_activeOnes = await _getCreditLinesOfBorrower(url, 'ACTIVE', true, borrower, count, skip);
+  let nr_closedOnes = await _getCreditLinesOfBorrower(url, 'CLOSED', true, borrower, count, skip);
+  let nr_liquidatedOnes = await _getCreditLinesOfBorrower(url, 'LIQUIDATED', true, borrower, count, skip);
+  let nr_notCreatedOnes = await _getCreditLinesOfBorrower(url, 'NOT_CREATED', true, borrower, count, skip);
+  data = [
+    ...activeOnes,
+    ...closedOnes,
+    ...liquidatedOnes,
+    ...notCreatedOnes,
+    ...nr_activeOnes,
+    ...nr_closedOnes,
+    ...nr_liquidatedOnes,
+    ...nr_notCreatedOnes,
+  ];
   return data;
 }
 
-export async function getCreditLinesLender(url: string, lender, count, skip): Promise<any[]> {
+export async function getConfirmedCreditLinesOfLender(url: string, lender, count, skip): Promise<any[]> {
   let data = [];
-  let activeOnes = await _getCreditLinesByLender(url, 'ACTIVE', true, lender, count, skip);
-  let closedOnes = await _getCreditLinesByLender(url, 'CLOSED', true, lender, count, skip);
-  let liquidatedOnes = await _getCreditLinesByLender(url, 'LIQUIDATED', true, lender, count, skip);
-  let notCreatedOnes = await _getCreditLinesByLender(url, 'NOT_CREATED', true, lender, count, skip);
-  data = [...activeOnes, ...closedOnes, ...liquidatedOnes, ...notCreatedOnes];
+  let activeOnes = await _getCreditLinesOfLender(url, 'ACTIVE', true, lender, count, skip);
+  let closedOnes = await _getCreditLinesOfLender(url, 'CLOSED', true, lender, count, skip);
+  let liquidatedOnes = await _getCreditLinesOfLender(url, 'LIQUIDATED', true, lender, count, skip);
+  let notCreatedOnes = await _getCreditLinesOfLender(url, 'NOT_CREATED', true, lender, count, skip);
+
+  let nr_activeOnes = await _getCreditLinesOfLender(url, 'ACTIVE', false, lender, count, skip);
+  let nr_closedOnes = await _getCreditLinesOfLender(url, 'CLOSED', false, lender, count, skip);
+  let nr_liquidatedOnes = await _getCreditLinesOfLender(url, 'LIQUIDATED', false, lender, count, skip);
+  let nr_notCreatedOnes = await _getCreditLinesOfLender(url, 'NOT_CREATED', false, lender, count, skip);
+  data = [
+    ...activeOnes,
+    ...closedOnes,
+    ...liquidatedOnes,
+    ...notCreatedOnes,
+    ...nr_activeOnes,
+    ...nr_closedOnes,
+    ...nr_liquidatedOnes,
+    ...nr_notCreatedOnes,
+  ];
+
   return data;
 }
 
-export async function getPendingCreditLinesByBorrower(url: string, lender, count, skip): Promise<any[]> {
+export async function getPendingCreditlinesRequestedByLender(url: string, lender, count, skip): Promise<any[]> {
   let data = [];
-  let pendingBorrow = await _getCreditLinesByBorrower(url, 'REQUESTED', false, lender, count, skip);
-  data = [...pendingBorrow];
+  let lines = await _getCreditLinesOfLender(url, 'REQUESTED', true, lender, count, skip);
+  data = [...lines];
   return data;
 }
 
-export async function getPendingCreditLinesByLender(url: string, lender, count, skip): Promise<any[]> {
+export async function getPendingCreditLinesRequestedToLender(url: string, lender, count, skip): Promise<any[]> {
   let data = [];
-  let pendingLend = await _getCreditLinesByLender(url, 'REQUESTED', true, lender, count, skip);
+  let lines = await _getCreditLinesOfLender(url, 'REQUESTED', false, lender, count, skip);
+  data = [...lines];
+  return data;
+}
 
-  data = [...pendingLend];
+export async function getPendingCreditLinesRequestedByBorrower(url: string, borrower, count, skip): Promise<any[]> {
+  let data = [];
+  let lines = await _getCreditLinesOfBorrower(url, 'REQUESTED', false, borrower, count, skip);
+  data = [...lines];
+  return data;
+}
+
+export async function getPendingCreditLinesRequestedToBorrower(url: string, borrower, count, skip): Promise<any[]> {
+  let data = [];
+  let lines = await _getCreditLinesOfBorrower(url, 'REQUESTED', true, borrower, count, skip);
+  data = [...lines];
   return data;
 }

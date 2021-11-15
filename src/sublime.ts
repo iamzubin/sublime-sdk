@@ -10,7 +10,7 @@ import { ExtensionApi } from './api/extension';
 import { RepaymentApi } from './api/repayments';
 import { VerificationAPI } from './api/verification';
 import { TokenApi } from './api/tokenApi';
-import { PriceOracleApi } from "./api/priceOracle"
+import { PriceOracleApi } from './api/priceOracle';
 
 import { ethers } from 'ethers';
 import { TokenManager } from './tokenManager';

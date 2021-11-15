@@ -13,191 +13,101 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+} from 'ethers';
+import { BytesLike } from '@ethersproject/bytes';
+import { Listener, Provider } from '@ethersproject/providers';
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface ControllerInterface extends ethers.utils.Interface {
   functions: {
-    "approveStrategy(address,address)": FunctionFragment;
-    "approvedStrategies(address,address)": FunctionFragment;
-    "balanceOf(address)": FunctionFragment;
-    "converters(address,address)": FunctionFragment;
-    "earn(address,uint256)": FunctionFragment;
-    "getExpectedReturn(address,address,uint256)": FunctionFragment;
-    "governance()": FunctionFragment;
-    "inCaseStrategyTokenGetStuck(address,address)": FunctionFragment;
-    "inCaseTokensGetStuck(address,uint256)": FunctionFragment;
-    "max()": FunctionFragment;
-    "onesplit()": FunctionFragment;
-    "revokeStrategy(address,address)": FunctionFragment;
-    "rewards()": FunctionFragment;
-    "setConverter(address,address,address)": FunctionFragment;
-    "setGovernance(address)": FunctionFragment;
-    "setOneSplit(address)": FunctionFragment;
-    "setRewards(address)": FunctionFragment;
-    "setSplit(uint256)": FunctionFragment;
-    "setStrategist(address)": FunctionFragment;
-    "setStrategy(address,address)": FunctionFragment;
-    "setVault(address,address)": FunctionFragment;
-    "split()": FunctionFragment;
-    "strategies(address)": FunctionFragment;
-    "strategist()": FunctionFragment;
-    "vaults(address)": FunctionFragment;
-    "withdraw(address,uint256)": FunctionFragment;
-    "withdrawAll(address)": FunctionFragment;
-    "yearn(address,address,uint256)": FunctionFragment;
+    'approveStrategy(address,address)': FunctionFragment;
+    'approvedStrategies(address,address)': FunctionFragment;
+    'balanceOf(address)': FunctionFragment;
+    'converters(address,address)': FunctionFragment;
+    'earn(address,uint256)': FunctionFragment;
+    'getExpectedReturn(address,address,uint256)': FunctionFragment;
+    'governance()': FunctionFragment;
+    'inCaseStrategyTokenGetStuck(address,address)': FunctionFragment;
+    'inCaseTokensGetStuck(address,uint256)': FunctionFragment;
+    'max()': FunctionFragment;
+    'onesplit()': FunctionFragment;
+    'revokeStrategy(address,address)': FunctionFragment;
+    'rewards()': FunctionFragment;
+    'setConverter(address,address,address)': FunctionFragment;
+    'setGovernance(address)': FunctionFragment;
+    'setOneSplit(address)': FunctionFragment;
+    'setRewards(address)': FunctionFragment;
+    'setSplit(uint256)': FunctionFragment;
+    'setStrategist(address)': FunctionFragment;
+    'setStrategy(address,address)': FunctionFragment;
+    'setVault(address,address)': FunctionFragment;
+    'split()': FunctionFragment;
+    'strategies(address)': FunctionFragment;
+    'strategist()': FunctionFragment;
+    'vaults(address)': FunctionFragment;
+    'withdraw(address,uint256)': FunctionFragment;
+    'withdrawAll(address)': FunctionFragment;
+    'yearn(address,address,uint256)': FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "approveStrategy",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "approvedStrategies",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "converters",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "earn",
-    values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getExpectedReturn",
-    values: [string, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "governance",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "inCaseStrategyTokenGetStuck",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "inCaseTokensGetStuck",
-    values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: "max", values?: undefined): string;
-  encodeFunctionData(functionFragment: "onesplit", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "revokeStrategy",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(functionFragment: "rewards", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "setConverter",
-    values: [string, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setGovernance",
-    values: [string]
-  ): string;
-  encodeFunctionData(functionFragment: "setOneSplit", values: [string]): string;
-  encodeFunctionData(functionFragment: "setRewards", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "setSplit",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setStrategist",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setStrategy",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setVault",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(functionFragment: "split", values?: undefined): string;
-  encodeFunctionData(functionFragment: "strategies", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "strategist",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "vaults", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "withdraw",
-    values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: "withdrawAll", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "yearn",
-    values: [string, string, BigNumberish]
-  ): string;
+  encodeFunctionData(functionFragment: 'approveStrategy', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'approvedStrategies', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string;
+  encodeFunctionData(functionFragment: 'converters', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'earn', values: [string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'getExpectedReturn', values: [string, string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'governance', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'inCaseStrategyTokenGetStuck', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'inCaseTokensGetStuck', values: [string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'max', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'onesplit', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'revokeStrategy', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'rewards', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'setConverter', values: [string, string, string]): string;
+  encodeFunctionData(functionFragment: 'setGovernance', values: [string]): string;
+  encodeFunctionData(functionFragment: 'setOneSplit', values: [string]): string;
+  encodeFunctionData(functionFragment: 'setRewards', values: [string]): string;
+  encodeFunctionData(functionFragment: 'setSplit', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'setStrategist', values: [string]): string;
+  encodeFunctionData(functionFragment: 'setStrategy', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'setVault', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'split', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'strategies', values: [string]): string;
+  encodeFunctionData(functionFragment: 'strategist', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'vaults', values: [string]): string;
+  encodeFunctionData(functionFragment: 'withdraw', values: [string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'withdrawAll', values: [string]): string;
+  encodeFunctionData(functionFragment: 'yearn', values: [string, string, BigNumberish]): string;
 
-  decodeFunctionResult(
-    functionFragment: "approveStrategy",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "approvedStrategies",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "converters", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "earn", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getExpectedReturn",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "governance", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "inCaseStrategyTokenGetStuck",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "inCaseTokensGetStuck",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "max", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onesplit", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeStrategy",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "rewards", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setConverter",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setGovernance",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setOneSplit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "setRewards", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setSplit", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setStrategist",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setStrategy",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "setVault", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "split", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "strategies", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "strategist", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "vaults", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "withdrawAll",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "yearn", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'approveStrategy', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'approvedStrategies', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'converters', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'earn', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'getExpectedReturn', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'governance', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'inCaseStrategyTokenGetStuck', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'inCaseTokensGetStuck', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'max', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'onesplit', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'revokeStrategy', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'rewards', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setConverter', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setGovernance', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setOneSplit', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setRewards', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setSplit', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setStrategist', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setStrategy', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setVault', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'split', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'strategies', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'strategist', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'vaults', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'withdraw', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'withdrawAll', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'yearn', data: BytesLike): Result;
 
   events: {};
 }
@@ -252,50 +162,27 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "approveStrategy(address,address)"(
+    'approveStrategy(address,address)'(
       _token: string,
       _strategy: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    approvedStrategies(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    approvedStrategies(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[boolean]>;
 
-    "approvedStrategies(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    'approvedStrategies(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     balanceOf(_token: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "balanceOf(address)"(
-      _token: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    'balanceOf(address)'(_token: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    converters(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+    converters(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[string]>;
 
-    "converters(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+    'converters(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[string]>;
 
-    earn(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    earn(_token: string, _amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "earn(address,uint256)"(
+    'earn(address,uint256)'(
       _token: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -308,7 +195,7 @@ export class Controller extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { expected: BigNumber }>;
 
-    "getExpectedReturn(address,address,uint256)"(
+    'getExpectedReturn(address,address,uint256)'(
       _strategy: string,
       _token: string,
       parts: BigNumberish,
@@ -317,7 +204,7 @@ export class Controller extends Contract {
 
     governance(overrides?: CallOverrides): Promise<[string]>;
 
-    "governance()"(overrides?: CallOverrides): Promise<[string]>;
+    'governance()'(overrides?: CallOverrides): Promise<[string]>;
 
     inCaseStrategyTokenGetStuck(
       _strategy: string,
@@ -325,7 +212,7 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "inCaseStrategyTokenGetStuck(address,address)"(
+    'inCaseStrategyTokenGetStuck(address,address)'(
       _strategy: string,
       _token: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -337,7 +224,7 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "inCaseTokensGetStuck(address,uint256)"(
+    'inCaseTokensGetStuck(address,uint256)'(
       _token: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -345,11 +232,11 @@ export class Controller extends Contract {
 
     max(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "max()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'max()'(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     onesplit(overrides?: CallOverrides): Promise<[string]>;
 
-    "onesplit()"(overrides?: CallOverrides): Promise<[string]>;
+    'onesplit()'(overrides?: CallOverrides): Promise<[string]>;
 
     revokeStrategy(
       _token: string,
@@ -357,7 +244,7 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "revokeStrategy(address,address)"(
+    'revokeStrategy(address,address)'(
       _token: string,
       _strategy: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -365,7 +252,7 @@ export class Controller extends Contract {
 
     rewards(overrides?: CallOverrides): Promise<[string]>;
 
-    "rewards()"(overrides?: CallOverrides): Promise<[string]>;
+    'rewards()'(overrides?: CallOverrides): Promise<[string]>;
 
     setConverter(
       _input: string,
@@ -374,59 +261,35 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "setConverter(address,address,address)"(
+    'setConverter(address,address,address)'(
       _input: string,
       _output: string,
       _converter: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setGovernance(
+    setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    'setGovernance(address)'(
       _governance: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "setGovernance(address)"(
-      _governance: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    setOneSplit(_onesplit: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    setOneSplit(
-      _onesplit: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'setOneSplit(address)'(_onesplit: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "setOneSplit(address)"(
-      _onesplit: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    setRewards(_rewards: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    setRewards(
-      _rewards: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'setRewards(address)'(_rewards: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "setRewards(address)"(
-      _rewards: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    setSplit(_split: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    setSplit(
-      _split: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'setSplit(uint256)'(_split: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "setSplit(uint256)"(
-      _split: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    setStrategist(_strategist: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    setStrategist(
-      _strategist: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "setStrategist(address)"(
+    'setStrategist(address)'(
       _strategist: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -437,19 +300,15 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "setStrategy(address,address)"(
+    'setStrategy(address,address)'(
       _token: string,
       _strategy: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setVault(
-      _token: string,
-      _vault: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    setVault(_token: string, _vault: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "setVault(address,address)"(
+    'setVault(address,address)'(
       _token: string,
       _vault: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -457,25 +316,19 @@ export class Controller extends Contract {
 
     split(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "split()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'split()'(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     strategies(arg0: string, overrides?: CallOverrides): Promise<[string]>;
 
-    "strategies(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+    'strategies(address)'(arg0: string, overrides?: CallOverrides): Promise<[string]>;
 
     strategist(overrides?: CallOverrides): Promise<[string]>;
 
-    "strategist()"(overrides?: CallOverrides): Promise<[string]>;
+    'strategist()'(overrides?: CallOverrides): Promise<[string]>;
 
     vaults(arg0: string, overrides?: CallOverrides): Promise<[string]>;
 
-    "vaults(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+    'vaults(address)'(arg0: string, overrides?: CallOverrides): Promise<[string]>;
 
     withdraw(
       _token: string,
@@ -483,21 +336,15 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "withdraw(address,uint256)"(
+    'withdraw(address,uint256)'(
       _token: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    withdrawAll(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "withdrawAll(address)"(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     yearn(
       _strategy: string,
@@ -506,7 +353,7 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "yearn(address,address,uint256)"(
+    'yearn(address,address,uint256)'(
       _strategy: string,
       _token: string,
       parts: BigNumberish,
@@ -520,63 +367,35 @@ export class Controller extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "approveStrategy(address,address)"(
+  'approveStrategy(address,address)'(
     _token: string,
     _strategy: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  approvedStrategies(
-    arg0: string,
-    arg1: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+  approvedStrategies(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
 
-  "approvedStrategies(address,address)"(
-    arg0: string,
-    arg1: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+  'approvedStrategies(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
 
   balanceOf(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  "balanceOf(address)"(
-    _token: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  'balanceOf(address)'(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  converters(
-    arg0: string,
-    arg1: string,
-    overrides?: CallOverrides
-  ): Promise<string>;
+  converters(arg0: string, arg1: string, overrides?: CallOverrides): Promise<string>;
 
-  "converters(address,address)"(
-    arg0: string,
-    arg1: string,
-    overrides?: CallOverrides
-  ): Promise<string>;
+  'converters(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<string>;
 
-  earn(
+  earn(_token: string, _amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  'earn(address,uint256)'(
     _token: string,
     _amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "earn(address,uint256)"(
-    _token: string,
-    _amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  getExpectedReturn(_strategy: string, _token: string, parts: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-  getExpectedReturn(
-    _strategy: string,
-    _token: string,
-    parts: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "getExpectedReturn(address,address,uint256)"(
+  'getExpectedReturn(address,address,uint256)'(
     _strategy: string,
     _token: string,
     parts: BigNumberish,
@@ -585,7 +404,7 @@ export class Controller extends Contract {
 
   governance(overrides?: CallOverrides): Promise<string>;
 
-  "governance()"(overrides?: CallOverrides): Promise<string>;
+  'governance()'(overrides?: CallOverrides): Promise<string>;
 
   inCaseStrategyTokenGetStuck(
     _strategy: string,
@@ -593,7 +412,7 @@ export class Controller extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "inCaseStrategyTokenGetStuck(address,address)"(
+  'inCaseStrategyTokenGetStuck(address,address)'(
     _strategy: string,
     _token: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -605,7 +424,7 @@ export class Controller extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "inCaseTokensGetStuck(address,uint256)"(
+  'inCaseTokensGetStuck(address,uint256)'(
     _token: string,
     _amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -613,11 +432,11 @@ export class Controller extends Contract {
 
   max(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "max()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'max()'(overrides?: CallOverrides): Promise<BigNumber>;
 
   onesplit(overrides?: CallOverrides): Promise<string>;
 
-  "onesplit()"(overrides?: CallOverrides): Promise<string>;
+  'onesplit()'(overrides?: CallOverrides): Promise<string>;
 
   revokeStrategy(
     _token: string,
@@ -625,7 +444,7 @@ export class Controller extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "revokeStrategy(address,address)"(
+  'revokeStrategy(address,address)'(
     _token: string,
     _strategy: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -633,7 +452,7 @@ export class Controller extends Contract {
 
   rewards(overrides?: CallOverrides): Promise<string>;
 
-  "rewards()"(overrides?: CallOverrides): Promise<string>;
+  'rewards()'(overrides?: CallOverrides): Promise<string>;
 
   setConverter(
     _input: string,
@@ -642,82 +461,44 @@ export class Controller extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "setConverter(address,address,address)"(
+  'setConverter(address,address,address)'(
     _input: string,
     _output: string,
     _converter: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setGovernance(
-    _governance: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "setGovernance(address)"(
-    _governance: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'setGovernance(address)'(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  setOneSplit(
-    _onesplit: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  setOneSplit(_onesplit: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "setOneSplit(address)"(
-    _onesplit: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'setOneSplit(address)'(_onesplit: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  setRewards(
-    _rewards: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  setRewards(_rewards: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "setRewards(address)"(
-    _rewards: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'setRewards(address)'(_rewards: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  setSplit(
-    _split: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  setSplit(_split: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "setSplit(uint256)"(
-    _split: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'setSplit(uint256)'(_split: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  setStrategist(
-    _strategist: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  setStrategist(_strategist: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "setStrategist(address)"(
-    _strategist: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'setStrategist(address)'(_strategist: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  setStrategy(
+  setStrategy(_token: string, _strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  'setStrategy(address,address)'(
     _token: string,
     _strategy: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "setStrategy(address,address)"(
-    _token: string,
-    _strategy: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  setVault(_token: string, _vault: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  setVault(
-    _token: string,
-    _vault: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "setVault(address,address)"(
+  'setVault(address,address)'(
     _token: string,
     _vault: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -725,22 +506,19 @@ export class Controller extends Contract {
 
   split(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "split()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'split()'(overrides?: CallOverrides): Promise<BigNumber>;
 
   strategies(arg0: string, overrides?: CallOverrides): Promise<string>;
 
-  "strategies(address)"(
-    arg0: string,
-    overrides?: CallOverrides
-  ): Promise<string>;
+  'strategies(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
 
   strategist(overrides?: CallOverrides): Promise<string>;
 
-  "strategist()"(overrides?: CallOverrides): Promise<string>;
+  'strategist()'(overrides?: CallOverrides): Promise<string>;
 
   vaults(arg0: string, overrides?: CallOverrides): Promise<string>;
 
-  "vaults(address)"(arg0: string, overrides?: CallOverrides): Promise<string>;
+  'vaults(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
 
   withdraw(
     _token: string,
@@ -748,21 +526,15 @@ export class Controller extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "withdraw(address,uint256)"(
+  'withdraw(address,uint256)'(
     _token: string,
     _amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  withdrawAll(
-    _token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "withdrawAll(address)"(
-    _token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   yearn(
     _strategy: string,
@@ -771,7 +543,7 @@ export class Controller extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "yearn(address,address,uint256)"(
+  'yearn(address,address,uint256)'(
     _strategy: string,
     _token: string,
     parts: BigNumberish,
@@ -779,69 +551,29 @@ export class Controller extends Contract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    approveStrategy(
-      _token: string,
-      _strategy: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    approveStrategy(_token: string, _strategy: string, overrides?: CallOverrides): Promise<void>;
 
-    "approveStrategy(address,address)"(
-      _token: string,
-      _strategy: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'approveStrategy(address,address)'(_token: string, _strategy: string, overrides?: CallOverrides): Promise<void>;
 
-    approvedStrategies(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+    approvedStrategies(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
 
-    "approvedStrategies(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+    'approvedStrategies(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
 
     balanceOf(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "balanceOf(address)"(
-      _token: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'balanceOf(address)'(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    converters(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<string>;
+    converters(arg0: string, arg1: string, overrides?: CallOverrides): Promise<string>;
 
-    "converters(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<string>;
+    'converters(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<string>;
 
-    earn(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    earn(_token: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    "earn(address,uint256)"(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'earn(address,uint256)'(_token: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    getExpectedReturn(
-      _strategy: string,
-      _token: string,
-      parts: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    getExpectedReturn(_strategy: string, _token: string, parts: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "getExpectedReturn(address,address,uint256)"(
+    'getExpectedReturn(address,address,uint256)'(
       _strategy: string,
       _token: string,
       parts: BigNumberish,
@@ -850,254 +582,127 @@ export class Controller extends Contract {
 
     governance(overrides?: CallOverrides): Promise<string>;
 
-    "governance()"(overrides?: CallOverrides): Promise<string>;
+    'governance()'(overrides?: CallOverrides): Promise<string>;
 
-    inCaseStrategyTokenGetStuck(
-      _strategy: string,
-      _token: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    inCaseStrategyTokenGetStuck(_strategy: string, _token: string, overrides?: CallOverrides): Promise<void>;
 
-    "inCaseStrategyTokenGetStuck(address,address)"(
-      _strategy: string,
-      _token: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'inCaseStrategyTokenGetStuck(address,address)'(_strategy: string, _token: string, overrides?: CallOverrides): Promise<void>;
 
-    inCaseTokensGetStuck(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    inCaseTokensGetStuck(_token: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    "inCaseTokensGetStuck(address,uint256)"(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'inCaseTokensGetStuck(address,uint256)'(_token: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     max(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "max()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'max()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     onesplit(overrides?: CallOverrides): Promise<string>;
 
-    "onesplit()"(overrides?: CallOverrides): Promise<string>;
+    'onesplit()'(overrides?: CallOverrides): Promise<string>;
 
-    revokeStrategy(
-      _token: string,
-      _strategy: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    revokeStrategy(_token: string, _strategy: string, overrides?: CallOverrides): Promise<void>;
 
-    "revokeStrategy(address,address)"(
-      _token: string,
-      _strategy: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'revokeStrategy(address,address)'(_token: string, _strategy: string, overrides?: CallOverrides): Promise<void>;
 
     rewards(overrides?: CallOverrides): Promise<string>;
 
-    "rewards()"(overrides?: CallOverrides): Promise<string>;
+    'rewards()'(overrides?: CallOverrides): Promise<string>;
 
-    setConverter(
-      _input: string,
-      _output: string,
-      _converter: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    setConverter(_input: string, _output: string, _converter: string, overrides?: CallOverrides): Promise<void>;
 
-    "setConverter(address,address,address)"(
-      _input: string,
-      _output: string,
-      _converter: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'setConverter(address,address,address)'(_input: string, _output: string, _converter: string, overrides?: CallOverrides): Promise<void>;
 
-    setGovernance(
-      _governance: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    setGovernance(_governance: string, overrides?: CallOverrides): Promise<void>;
 
-    "setGovernance(address)"(
-      _governance: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'setGovernance(address)'(_governance: string, overrides?: CallOverrides): Promise<void>;
 
     setOneSplit(_onesplit: string, overrides?: CallOverrides): Promise<void>;
 
-    "setOneSplit(address)"(
-      _onesplit: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'setOneSplit(address)'(_onesplit: string, overrides?: CallOverrides): Promise<void>;
 
     setRewards(_rewards: string, overrides?: CallOverrides): Promise<void>;
 
-    "setRewards(address)"(
-      _rewards: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'setRewards(address)'(_rewards: string, overrides?: CallOverrides): Promise<void>;
 
     setSplit(_split: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    "setSplit(uint256)"(
-      _split: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'setSplit(uint256)'(_split: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    setStrategist(
-      _strategist: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    setStrategist(_strategist: string, overrides?: CallOverrides): Promise<void>;
 
-    "setStrategist(address)"(
-      _strategist: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'setStrategist(address)'(_strategist: string, overrides?: CallOverrides): Promise<void>;
 
-    setStrategy(
-      _token: string,
-      _strategy: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    setStrategy(_token: string, _strategy: string, overrides?: CallOverrides): Promise<void>;
 
-    "setStrategy(address,address)"(
-      _token: string,
-      _strategy: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'setStrategy(address,address)'(_token: string, _strategy: string, overrides?: CallOverrides): Promise<void>;
 
-    setVault(
-      _token: string,
-      _vault: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    setVault(_token: string, _vault: string, overrides?: CallOverrides): Promise<void>;
 
-    "setVault(address,address)"(
-      _token: string,
-      _vault: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'setVault(address,address)'(_token: string, _vault: string, overrides?: CallOverrides): Promise<void>;
 
     split(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "split()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'split()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     strategies(arg0: string, overrides?: CallOverrides): Promise<string>;
 
-    "strategies(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<string>;
+    'strategies(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
 
     strategist(overrides?: CallOverrides): Promise<string>;
 
-    "strategist()"(overrides?: CallOverrides): Promise<string>;
+    'strategist()'(overrides?: CallOverrides): Promise<string>;
 
     vaults(arg0: string, overrides?: CallOverrides): Promise<string>;
 
-    "vaults(address)"(arg0: string, overrides?: CallOverrides): Promise<string>;
+    'vaults(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
 
-    withdraw(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    withdraw(_token: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    "withdraw(address,uint256)"(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'withdraw(address,uint256)'(_token: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     withdrawAll(_token: string, overrides?: CallOverrides): Promise<void>;
 
-    "withdrawAll(address)"(
-      _token: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'withdrawAll(address)'(_token: string, overrides?: CallOverrides): Promise<void>;
 
-    yearn(
-      _strategy: string,
-      _token: string,
-      parts: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    yearn(_strategy: string, _token: string, parts: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    "yearn(address,address,uint256)"(
-      _strategy: string,
-      _token: string,
-      parts: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'yearn(address,address,uint256)'(_strategy: string, _token: string, parts: BigNumberish, overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
-    approveStrategy(
+    approveStrategy(_token: string, _strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    'approveStrategy(address,address)'(
       _token: string,
       _strategy: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "approveStrategy(address,address)"(
-      _token: string,
-      _strategy: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    approvedStrategies(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    approvedStrategies(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "approvedStrategies(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'approvedStrategies(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     balanceOf(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "balanceOf(address)"(
-      _token: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'balanceOf(address)'(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    converters(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    converters(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "converters(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'converters(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    earn(
+    earn(_token: string, _amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    'earn(address,uint256)'(
       _token: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "earn(address,uint256)"(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    getExpectedReturn(_strategy: string, _token: string, parts: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    getExpectedReturn(
-      _strategy: string,
-      _token: string,
-      parts: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "getExpectedReturn(address,address,uint256)"(
+    'getExpectedReturn(address,address,uint256)'(
       _strategy: string,
       _token: string,
       parts: BigNumberish,
@@ -1106,7 +711,7 @@ export class Controller extends Contract {
 
     governance(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "governance()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'governance()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     inCaseStrategyTokenGetStuck(
       _strategy: string,
@@ -1114,7 +719,7 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "inCaseStrategyTokenGetStuck(address,address)"(
+    'inCaseStrategyTokenGetStuck(address,address)'(
       _strategy: string,
       _token: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1126,7 +731,7 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "inCaseTokensGetStuck(address,uint256)"(
+    'inCaseTokensGetStuck(address,uint256)'(
       _token: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1134,19 +739,15 @@ export class Controller extends Contract {
 
     max(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "max()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'max()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     onesplit(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "onesplit()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'onesplit()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    revokeStrategy(
-      _token: string,
-      _strategy: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    revokeStrategy(_token: string, _strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "revokeStrategy(address,address)"(
+    'revokeStrategy(address,address)'(
       _token: string,
       _strategy: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1154,7 +755,7 @@ export class Controller extends Contract {
 
     rewards(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "rewards()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'rewards()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     setConverter(
       _input: string,
@@ -1163,82 +764,44 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "setConverter(address,address,address)"(
+    'setConverter(address,address,address)'(
       _input: string,
       _output: string,
       _converter: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setGovernance(
-      _governance: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "setGovernance(address)"(
-      _governance: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'setGovernance(address)'(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    setOneSplit(
-      _onesplit: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    setOneSplit(_onesplit: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "setOneSplit(address)"(
-      _onesplit: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'setOneSplit(address)'(_onesplit: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    setRewards(
-      _rewards: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    setRewards(_rewards: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "setRewards(address)"(
-      _rewards: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'setRewards(address)'(_rewards: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    setSplit(
-      _split: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    setSplit(_split: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "setSplit(uint256)"(
-      _split: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'setSplit(uint256)'(_split: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    setStrategist(
-      _strategist: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    setStrategist(_strategist: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "setStrategist(address)"(
-      _strategist: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'setStrategist(address)'(_strategist: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    setStrategy(
+    setStrategy(_token: string, _strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    'setStrategy(address,address)'(
       _token: string,
       _strategy: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "setStrategy(address,address)"(
-      _token: string,
-      _strategy: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    setVault(_token: string, _vault: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    setVault(
-      _token: string,
-      _vault: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "setVault(address,address)"(
+    'setVault(address,address)'(
       _token: string,
       _vault: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1246,47 +809,31 @@ export class Controller extends Contract {
 
     split(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "split()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'split()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     strategies(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "strategies(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'strategies(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     strategist(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "strategist()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'strategist()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     vaults(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "vaults(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'vaults(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    withdraw(
+    withdraw(_token: string, _amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    'withdraw(address,uint256)'(
       _token: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "withdraw(address,uint256)"(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    withdrawAll(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "withdrawAll(address)"(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     yearn(
       _strategy: string,
@@ -1295,7 +842,7 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "yearn(address,address,uint256)"(
+    'yearn(address,address,uint256)'(
       _strategy: string,
       _token: string,
       parts: BigNumberish,
@@ -1310,66 +857,35 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "approveStrategy(address,address)"(
+    'approveStrategy(address,address)'(
       _token: string,
       _strategy: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    approvedStrategies(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    approvedStrategies(arg0: string, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "approvedStrategies(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'approvedStrategies(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    balanceOf(
-      _token: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    balanceOf(_token: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "balanceOf(address)"(
-      _token: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'balanceOf(address)'(_token: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    converters(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    converters(arg0: string, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "converters(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'converters(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    earn(
+    earn(_token: string, _amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    'earn(address,uint256)'(
       _token: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "earn(address,uint256)"(
-      _token: string,
-      _amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    getExpectedReturn(_strategy: string, _token: string, parts: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getExpectedReturn(
-      _strategy: string,
-      _token: string,
-      parts: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "getExpectedReturn(address,address,uint256)"(
+    'getExpectedReturn(address,address,uint256)'(
       _strategy: string,
       _token: string,
       parts: BigNumberish,
@@ -1378,7 +894,7 @@ export class Controller extends Contract {
 
     governance(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "governance()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'governance()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     inCaseStrategyTokenGetStuck(
       _strategy: string,
@@ -1386,7 +902,7 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "inCaseStrategyTokenGetStuck(address,address)"(
+    'inCaseStrategyTokenGetStuck(address,address)'(
       _strategy: string,
       _token: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1398,7 +914,7 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "inCaseTokensGetStuck(address,uint256)"(
+    'inCaseTokensGetStuck(address,uint256)'(
       _token: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1406,11 +922,11 @@ export class Controller extends Contract {
 
     max(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "max()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'max()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     onesplit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "onesplit()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'onesplit()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     revokeStrategy(
       _token: string,
@@ -1418,7 +934,7 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "revokeStrategy(address,address)"(
+    'revokeStrategy(address,address)'(
       _token: string,
       _strategy: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1426,7 +942,7 @@ export class Controller extends Contract {
 
     rewards(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "rewards()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'rewards()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setConverter(
       _input: string,
@@ -1435,59 +951,35 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setConverter(address,address,address)"(
+    'setConverter(address,address,address)'(
       _input: string,
       _output: string,
       _converter: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setGovernance(
+    setGovernance(_governance: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    'setGovernance(address)'(
       _governance: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setGovernance(address)"(
-      _governance: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    setOneSplit(_onesplit: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    setOneSplit(
-      _onesplit: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'setOneSplit(address)'(_onesplit: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "setOneSplit(address)"(
-      _onesplit: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    setRewards(_rewards: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    setRewards(
-      _rewards: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'setRewards(address)'(_rewards: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "setRewards(address)"(
-      _rewards: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    setSplit(_split: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    setSplit(
-      _split: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'setSplit(uint256)'(_split: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "setSplit(uint256)"(
-      _split: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    setStrategist(_strategist: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    setStrategist(
-      _strategist: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "setStrategist(address)"(
+    'setStrategist(address)'(
       _strategist: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -1498,19 +990,15 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setStrategy(address,address)"(
+    'setStrategy(address,address)'(
       _token: string,
       _strategy: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setVault(
-      _token: string,
-      _vault: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    setVault(_token: string, _vault: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "setVault(address,address)"(
+    'setVault(address,address)'(
       _token: string,
       _vault: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1518,31 +1006,19 @@ export class Controller extends Contract {
 
     split(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "split()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'split()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    strategies(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    strategies(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "strategies(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'strategies(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     strategist(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "strategist()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'strategist()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    vaults(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    vaults(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "vaults(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'vaults(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     withdraw(
       _token: string,
@@ -1550,21 +1026,15 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "withdraw(address,uint256)"(
+    'withdraw(address,uint256)'(
       _token: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    withdrawAll(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "withdrawAll(address)"(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     yearn(
       _strategy: string,
@@ -1573,7 +1043,7 @@ export class Controller extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "yearn(address,address,uint256)"(
+    'yearn(address,address,uint256)'(
       _strategy: string,
       _token: string,
       parts: BigNumberish,

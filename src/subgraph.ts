@@ -17,10 +17,12 @@ import {
   getAllPoolsByBorrowerByType,
   getAllPoolsByLenderByType,
   getSavingsAccountTokenDetails,
-  getCreditLinesByBorrower,
-  getCreditLinesLender,
-  getPendingCreditLinesByBorrower,
-  getPendingCreditLinesByLender,
+  getConfirmedCreditLinesOfBorrower,
+  getConfirmedCreditLinesOfLender,
+  getPendingCreditLinesRequestedByBorrower,
+  getPendingCreditLinesRequestedToBorrower,
+  getPendingCreditLinesRequestedToLender,
+  getPendingCreditlinesRequestedByLender,
 } from './queries';
 
 import { Signer } from '@ethersproject/abstract-signer';
@@ -105,9 +107,36 @@ export class SublimeSubgraph {
     return lenders;
   }
 
+  // currentDebt: new BigNumber(a.collateralAmount)
+  //         .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
+  //         .toFixed(2),
+  //       principal: new BigNumber(a.principal).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset))).toFixed(2),
+  //       interestAccrued: new BigNumber(this.getRandomInt(10000)).div(100).toFixed(2),
+  //       collateralAsset: {
+  //         address: a.collateralAsset,
+  //         name: this.tokenManager.getTokenName(a.collateralAsset),
+  //         pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.collateralAsset),
+  //         logo: this.tokenManager.getLogo(a.collateralAsset),
+  //       },
+  //       collateralRatio: new BigNumber(this.getRandomInt(50000)).div(100).toFixed(2),
+  //       creditLimit: new BigNumber(a.BorrowLimit).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.BorrowAsset))).toFixed(2),
+  //       interestRate: new BigNumber(a.borrowRate).div(new BigNumber(10).pow(28)).toFixed(2),
+  //       idealCollateralRatio: new BigNumber(a.idealCollateralRatio).div(new BigNumber(10).pow(28)).toFixed(2),
+  //       borrowAsset: {
+  //         address: a.BorrowAsset,
+  //         name: this.tokenManager.getTokenName(a.BorrowAsset),
+  //         pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.BorrowAsset),
+  //         logo: this.tokenManager.getLogo(a.BorrowAsset),
+  //       },
+  //       liquidationThreshold: new BigNumber(a.liquidationThreshold).div(new BigNumber(10).pow(28)).toFixed(2),
+  //       autoLiquidate: a.autoLiquidation,
+  //       lender: { address: a.lender },
+  //       borrower: { address: a.Borrower },
+  //       type: a.creditLineStatus,
+
   private async transformToCreditLine(data: any[]): Promise<CreditLineDetail[]> {
     let borrowTokens: string[] = data.map((a) => a.collateralAsset);
-    let collateralTokens: string[] = data.map((a) => a.BorrowAsset);
+    let collateralTokens: string[] = data.map((a) => a.borrowAsset);
     let allTokens = [...borrowTokens, ...collateralTokens].filter((value, index, array) => array.indexOf(value) === index);
 
     for (let index = 0; index < allTokens.length; index++) {
@@ -117,32 +146,31 @@ export class SublimeSubgraph {
 
     return data.map((a) => {
       return {
-        currentDebt: new BigNumber(a.collateralAmount)
+        currentDebt: new BigNumber(a.principal)
           .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
           .toFixed(2),
         principal: new BigNumber(a.principal).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset))).toFixed(2),
-        interestAccrued: new BigNumber(this.getRandomInt(10000)).div(100).toFixed(2),
+        interestAccrued: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
+        collateralRatio: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
+        creditLimit: new BigNumber(a.borrowLimit).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.borrowAsset))).toFixed(2),
+        interestRate: new BigNumber(a.borrowRate).div(new BigNumber(10).pow(28)).toFixed(2),
+        idealCollateralRatio: new BigNumber(a.idealCollateralRatio).div(new BigNumber(10).pow(28)).toFixed(2),
+        borrowAsset: {
+          address: a.borrowAsset,
+          name: this.tokenManager.getTokenName(a.borrowAsset),
+          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.borrowAsset),
+          logo: this.tokenManager.getLogo(a.borrowAsset),
+        },
         collateralAsset: {
           address: a.collateralAsset,
           name: this.tokenManager.getTokenName(a.collateralAsset),
           pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.collateralAsset),
           logo: this.tokenManager.getLogo(a.collateralAsset),
         },
-        collateralRatio: new BigNumber(this.getRandomInt(50000)).div(100).toFixed(2),
-        creditLimit: new BigNumber(a.BorrowLimit).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.BorrowAsset))).toFixed(2),
-        interestRate: new BigNumber(a.borrowRate).div(new BigNumber(10).pow(28)).toFixed(2),
-        idealCollateralRatio: new BigNumber(a.idealCollateralRatio).div(new BigNumber(10).pow(28)).toFixed(2),
-        borrowAsset: {
-          address: a.BorrowAsset,
-          name: this.tokenManager.getTokenName(a.BorrowAsset),
-          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.BorrowAsset),
-          logo: this.tokenManager.getLogo(a.BorrowAsset),
-        },
-        liquidationThreshold: new BigNumber(a.liquidationThreshold).div(new BigNumber(10).pow(28)).toFixed(2),
         autoLiquidate: a.autoLiquidation,
         lender: { address: a.lender },
-        borrower: { address: a.Borrower },
-        type: a.creditLineStatus,
+        borrower: { address: a.borrower },
+        type: a.status,
       };
     });
   }
@@ -259,23 +287,33 @@ export class SublimeSubgraph {
     };
   }
 
-  async getCreditLinesByBorrower(address: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
-    let result = await getCreditLinesByBorrower(this.subgraphUrl, address, count, skip);
+  async getConfirmedCreditLinesOfBorrower(borrower: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
+    let result = await getConfirmedCreditLinesOfBorrower(this.subgraphUrl, borrower, count, skip);
     return await this.transformToCreditLine(result);
   }
 
-  async getCreditLinesByLender(address: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
-    let result = await getCreditLinesLender(this.subgraphUrl, address, count, skip);
+  async getConfirmedCreditLinesOfLender(lender: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
+    let result = await getConfirmedCreditLinesOfLender(this.subgraphUrl, lender, count, skip);
     return await this.transformToCreditLine(result);
   }
 
-  async getPendingCreditLinesByLender(address: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
-    let result = await getPendingCreditLinesByLender(this.subgraphUrl, address, count, skip);
+  async getPendingCreditlinesRequestedByLender(lender: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
+    let result = await getPendingCreditlinesRequestedByLender(this.subgraphUrl, lender, count, skip);
     return await this.transformToCreditLine(result);
   }
 
-  async getPendingCreditLinesByBorrower(address: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
-    let result = await getPendingCreditLinesByBorrower(this.subgraphUrl, address, count, skip);
+  async getPendingCreditLinesRequestedByBorrower(borrower: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
+    let result = await getPendingCreditLinesRequestedByBorrower(this.subgraphUrl, borrower, count, skip);
+    return await this.transformToCreditLine(result);
+  }
+
+  async getPendingCreditLinesRequestedToLender(borrower: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
+    let result = await getPendingCreditLinesRequestedToLender(this.subgraphUrl, borrower, count, skip);
+    return await this.transformToCreditLine(result);
+  }
+
+  async getPendingCreditLinesRequestedToBorrower(borrower: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
+    let result = await getPendingCreditLinesRequestedToBorrower(this.subgraphUrl, borrower, count, skip);
     return await this.transformToCreditLine(result);
   }
 
