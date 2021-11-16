@@ -7,6 +7,7 @@ import {
   SavingsAccountOverview,
   SavingsAccountTokenDetail,
   PoolLender,
+  CreditLineOperation,
 } from './types/Types';
 import {
   getAllPools,
@@ -23,6 +24,7 @@ import {
   getPendingCreditLinesRequestedToBorrower,
   getPendingCreditLinesRequestedToLender,
   getPendingCreditlinesRequestedByLender,
+  getCreditLineTimeline,
 } from './queries';
 
 import { Signer } from '@ethersproject/abstract-signer';
@@ -315,6 +317,33 @@ export class SublimeSubgraph {
   async getPendingCreditLinesRequestedToBorrower(borrower: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
     let result = await getPendingCreditLinesRequestedToBorrower(this.subgraphUrl, borrower, count, skip);
     return await this.transformToCreditLine(result);
+  }
+
+  async getCreditLineTimeline(creditLine: string): Promise<CreditLineOperation[]> {
+    let result = await getCreditLineTimeline(this.subgraphUrl, creditLine);
+    if (result.data.creditLines.length == 0) {
+      return [];
+    } else {
+      let cl = result.data.creditLines[0];
+      return await this.transformToCreditLineOperations(cl);
+    }
+  }
+
+  private async transformToCreditLineOperations(cl: any): Promise<CreditLineOperation[]> {
+    await this.tokenManager.updateAll(cl.borrowAsset);
+    let operations: CreditLineOperation[] = cl.creditLineTimeline.map((a) => {
+      return {
+        amount: a.amount
+          ? new BigNumber(a.amount).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(cl.borrowAsset))).toFixed(2)
+          : null,
+        creditLineOperation: a.creditLineOperation,
+        liquidator: a.liquidator,
+        strategy: a.strategy,
+        timestamp: a.timestamp,
+        id: a.id,
+      };
+    });
+    return operations;
   }
 
   private getRandomInt(max) {

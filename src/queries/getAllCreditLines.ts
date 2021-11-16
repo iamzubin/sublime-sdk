@@ -1,5 +1,35 @@
 import { fetchData } from '../helpers';
 
+export async function getCreditLineTimeline(url: string, creditLineNumber: string): Promise<any> {
+  const data = JSON.stringify({
+    query: `{
+      creditLines(where:{id:"${creditLineNumber}"}) {
+        id
+        borrowAsset
+        creditLineTimeline {
+          id
+          timestamp
+          creditLineOperation
+          amount
+          strategy
+          liquidator
+        }
+      }
+    }
+    `,
+  });
+
+  var options = {
+    url,
+    headers: { 'Content-Type': 'application/json' },
+    body: data,
+  };
+
+  let result = await fetchData(options);
+  // console.log(result);
+  return result;
+}
+
 async function _getCreditLinesOfBorrower(url: string, status, requestByLender, borrower: string, count, skip): Promise<any[]> {
   borrower = borrower.toLowerCase();
   let allData = [];

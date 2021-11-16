@@ -11,6 +11,27 @@ export enum StrategyType {
   YearnYield = 'YearnYield',
 }
 
+export enum Operation {
+  NOT_CREATED = 'NOT_CREATED',
+  REQUESTED = 'REQUESTED',
+  ACTIVE = 'ACTIVE',
+  DEPOSIT_COLLATERAL = 'DEPOSIT_COLLATERAL',
+  BORROW = 'BORROW',
+  REPAY = 'REPAY',
+  WITHDRAW_COLLATERAL = 'WITHDRAW_COLLATERAL',
+  CLOSED = 'CLOSED',
+  CANCELLED = 'CANCELLED',
+  RESET = 'RESET',
+  LIQUIDATED = 'LIQUIDATED',
+}
+export interface CreditLineOperation {
+  amount: string;
+  creditLineOperation: Operation;
+  liquidator?: string;
+  strategy?: string;
+  timestamp: string;
+  id: string;
+}
 export interface Strategy {
   name: string;
   address: string;

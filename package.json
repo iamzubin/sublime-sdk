@@ -1,8 +1,8 @@
 {
   "name": "sublime-sdk",
-  "version": "1.0.11",
+  "version": "1.0.14",
   "description": "SDK to interact with set of sublime smart contracts",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "bin": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -33,8 +33,10 @@
     "tslint": "^6.1.3",
     "typescript": "^4.4.2"
   },
+  "resolutions": {
+    "eslint-loader": "3.0.3"
+  },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ]
 }
