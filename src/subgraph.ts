@@ -33,12 +33,18 @@ import { BigNumber } from 'bignumber.js';
 import { sha256 } from '@ethersproject/sha2';
 
 import { TokenManager } from './tokenManager';
+
+import { CreditLine } from './wrappers/CreditLine';
+import { CreditLine__factory } from './wrappers/factories/CreditLine__factory';
+import { SublimeConfig } from './types/sublimeConfig';
 export class SublimeSubgraph {
   private subgraphUrl: string;
   private signer: Signer;
   private tokenManager: TokenManager;
+  private creditLineContract: CreditLine;
 
-  constructor(url: string, signer: Signer, tokenManager: TokenManager) {
+  constructor(url: string, signer: Signer, tokenManager: TokenManager, config: SublimeConfig) {
+    this.creditLineContract = new CreditLine__factory(signer).attach(config.creditLineContractAddress);
     this.subgraphUrl = url;
     this.signer = signer;
     this.tokenManager = tokenManager;
@@ -146,8 +152,21 @@ export class SublimeSubgraph {
       await this.tokenManager.updateAll(element);
     }
 
+    let creditLineTotalCollateralTokens = {};
+
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      creditLineTotalCollateralTokens[element.id] = (
+        await this.creditLineContract.connect(this.signer).callStatic.calculateTotalCollateralTokens(element.id)
+      ).toString();
+      // console.log({tc: creditLineTotalCollateralTokens[element.id], id: element.id})
+    }
+
     return data.map((a) => {
       let interestAccrued: BigNumber = new BigNumber(0);
+      let currentDebt: BigNumber = new BigNumber(0);
+      let collateralRatio: BigNumber = new BigNumber(0);
+
       if (a.lastPrincipalUpdateTime != 0) {
         let timeElapsed: number = Date.now() - a.lastPrincipalUpdateTime;
         interestAccrued = new BigNumber(a.principal)
@@ -156,14 +175,23 @@ export class SublimeSubgraph {
           .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
           .div(new BigNumber(10).pow(30))
           .div(24 * 60 * 60 * 365);
+
+        currentDebt = new BigNumber(a.principal)
+          .plus(interestAccrued)
+          .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.borrowAsset)));
+
+        collateralRatio = new BigNumber(creditLineTotalCollateralTokens[a.id])
+          .multipliedBy(100)
+          .multipliedBy(this.tokenManager.getPricePerAsset(a.collateralAsset))
+          .div(this.tokenManager.getPricePerAsset(a.borrowAsset))
+          .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
+          .div(currentDebt);
       }
       return {
-        currentDebt: new BigNumber(a.principal)
-          .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
-          .toFixed(2),
+        currentDebt: currentDebt.toFixed(2),
         principal: new BigNumber(a.principal).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset))).toFixed(2),
         interestAccrued: interestAccrued.toFixed(2),
-        collateralRatio: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
+        collateralRatio: collateralRatio.toFixed(2),
         creditLimit: new BigNumber(a.borrowLimit).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.borrowAsset))).toFixed(2),
         interestRate: new BigNumber(a.borrowRate).div(new BigNumber(10).pow(28)).toFixed(2),
         idealCollateralRatio: new BigNumber(a.idealCollateralRatio).div(new BigNumber(10).pow(28)).toFixed(2),
