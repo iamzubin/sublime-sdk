@@ -147,12 +147,22 @@ export class SublimeSubgraph {
     }
 
     return data.map((a) => {
+      let interestAccrued: BigNumber = new BigNumber(0);
+      if(a.lastPrincipalUpdateTime != 0) {
+        let timeElapsed: number = Date.now() - a.lastPrincipalUpdateTime;
+        interestAccrued = new BigNumber(a.principal)
+                              .multipliedBy(new BigNumber(a.borrowRate))
+                              .times(timeElapsed)
+                              .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
+                              .div(new BigNumber(10).pow(30))
+                              .div(24*60*60*365);
+      }
       return {
         currentDebt: new BigNumber(a.principal)
           .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
           .toFixed(2),
         principal: new BigNumber(a.principal).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset))).toFixed(2),
-        interestAccrued: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
+        interestAccrued: interestAccrued.toFixed(2),
         collateralRatio: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
         creditLimit: new BigNumber(a.borrowLimit).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.borrowAsset))).toFixed(2),
         interestRate: new BigNumber(a.borrowRate).div(new BigNumber(10).pow(28)).toFixed(2),
