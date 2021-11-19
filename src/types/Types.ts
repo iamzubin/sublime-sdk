@@ -133,6 +133,7 @@ export interface CreditLineDetail {
   lender: CreditLineUser;
   borrower: CreditLineUser;
   type: string;
+  lastPrincipalUpdateTime: string;
 }
 export interface CreditLineUser {
   address: string;

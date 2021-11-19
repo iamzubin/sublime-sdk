@@ -173,6 +173,7 @@ export class SublimeSubgraph {
         lender: { address: a.lender },
         borrower: { address: a.borrower },
         type: a.status,
+        lastPrincipalUpdateTime: a.lastPrincipalUpdateTime,
       };
     });
   }

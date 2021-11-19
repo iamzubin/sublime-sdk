@@ -48,6 +48,7 @@ async function _getCreditLinesOfBorrower(url: string, status, requestByLender, b
           idealCollateralRatio
           borrowAsset
           autoLiquidation
+          lastPrincipalUpdateTime
         }
     }`,
   });
@@ -82,6 +83,7 @@ async function _getCreditLinesOfLender(url: string, status, requestByLender, len
             idealCollateralRatio
             borrowAsset
             autoLiquidation
+            lastPrincipalUpdateTime
           }
       }`,
   });
