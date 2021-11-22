@@ -27,14 +27,14 @@ export class SavingsAccountApi {
 
   public async deposit(amount: string, asset: string, strategy: string, to: string): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(asset);
-    const borrowDecimal = this.tokenManager.getTokenDecimals(asset);
+    const assetDecimals = this.tokenManager.getTokenDecimals(asset);
 
     let _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.deposit(_amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0), asset, strategy, to);
+    return this.savingsAccount.deposit(_amount.multipliedBy(new BigNumber(10).pow(assetDecimals)).toFixed(0), asset, strategy, to);
   }
 
   public async switchStrategy(currentStrategy: string, newStrategy: string, asset: string, amount: string): Promise<ContractTransaction> {

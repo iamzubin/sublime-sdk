@@ -4,9 +4,9 @@ import {
   DashboardOverview,
   PoolDetail,
   ProfileOverview,
-  SavingsAccountOverview,
-  SavingsAccountTokenDetail,
   PoolLender,
+  SavingsAccountUserDetails,
+  SavingsAccountStrategyBalance
 } from './types/Types';
 import {
   getAllPools,
@@ -21,6 +21,7 @@ import {
   getCreditLinesLender,
   getPendingCreditLinesByBorrower,
   getPendingCreditLinesByLender,
+  getBalances,
 } from './queries';
 
 import { Signer } from '@ethersproject/abstract-signer';
@@ -194,12 +195,13 @@ export class SublimeSubgraph {
   }
 
   // to-do
-  async getSavingsAccountOverview(address: string): Promise<SavingsAccountOverview> {
+  async getSavingsAccountOverview(address: string): Promise<SavingsAccountUserDetails> {
+    let balances = await getBalances()
     return {
-      deposited: new BigNumber(this.getRandomInt(10000000)).div(100).toFixed(2),
-      interestEarned: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
-      interestRate: new BigNumber(this.getRandomInt(100)).div(100).toFixed(2),
-    };
+      user: address,
+      balance: ,
+      totalBalance
+    }
   }
 
   async getDashboardOverview(address: string): Promise<DashboardOverview> {
@@ -220,7 +222,7 @@ export class SublimeSubgraph {
     };
   }
 
-  async getSavingsAccountTokenDetail(address: string): Promise<SavingsAccountTokenDetail[]> {
+  async getSavingsAccountTokenDetail(address: string): Promise<SavingsAccountStrategyBalance[]> {
     let result = await getSavingsAccountTokenDetails(this.subgraphUrl, address);
     let collateralTokens: string[] = result.map((a) => a.asset);
     let allTokens = [...collateralTokens].filter((value, index, array) => array.indexOf(value) === index);

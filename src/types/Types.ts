@@ -26,11 +26,25 @@ export interface CreditLineRequest {
   borrowAsset: string;
   collateralAsset: string;
 }
-export interface SavingsAccountTokenDetail {
+
+export interface SavingsAccountStrategyBalance {
+  strategy: string;
+  balance: string;
+  APR: string;
+}
+
+export interface SavingsAccountBalance {
+  user: string;
   token: Asset;
-  deposited: string;
-  interestRate: string;
-  interestEarned: string;
+  balance: string;
+  strategyBalance: [SavingsAccountStrategyBalance];
+  APR: string; // weighted average of all strategy APRs
+}
+
+export interface SavingsAccountUserDetails {
+  user: string;
+  balance: [SavingsAccountBalance];
+  totalBalance: string;
 }
 
 export interface PoolDetail {
@@ -70,12 +84,6 @@ export interface DashboardOverview {
   totalLentRate: string;
 }
 
-export interface SavingsAccountOverview {
-  deposited: string;
-  interestEarned: string;
-  interestRate: string;
-}
-
 export interface CreditLinesOverview {
   creditGranted: string;
   interestAccrued: string;
@@ -90,12 +98,6 @@ export interface ProfileOverview {
   activePools: string;
   timesDefaulted: string;
   totalAmountInBorrow: string;
-}
-export interface SavingsAccountDetail {
-  asset: Asset;
-  amount: string;
-  interestRate: string;
-  interestEarned: string;
 }
 
 export interface CreditLineDetail {
