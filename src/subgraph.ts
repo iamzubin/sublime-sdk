@@ -46,14 +46,14 @@ export class SublimeSubgraph {
   private signer: Signer;
   private tokenManager: TokenManager;
   private creditLineContract: CreditLine;
-  private priceOracleUrl: string;
+  private priceSubgraphUrl: string;
 
-  constructor(url: string, signer: Signer, tokenManager: TokenManager, priceOralceUrl: string, config: SublimeConfig) {
+  constructor(url: string, signer: Signer, tokenManager: TokenManager, priceSubgraphUrl: string, config: SublimeConfig) {
     this.creditLineContract = new CreditLine__factory(signer).attach(config.creditLineContractAddress);
     this.subgraphUrl = url;
     this.signer = signer;
     this.tokenManager = tokenManager;
-    this.priceOracleUrl = priceOralceUrl;
+    this.priceSubgraphUrl = priceSubgraphUrl;
   }
 
   async getPools(): Promise<PoolDetail[]> {
@@ -296,7 +296,7 @@ export class SublimeSubgraph {
       let amountInTokens = (await yieldContract.callStatic.getTokensForShares(shares, token)).toString();
       let price = tokenPrice[token];
       if(!price) {
-        price = await getPrice(this.priceOracleUrl, token);
+        price = await getPrice(this.priceSubgraphUrl, token);
         tokenPrice[token] = price;
       }
       let amount = new BigNumber(amountInTokens).multipliedBy(price);
@@ -360,30 +360,6 @@ export class SublimeSubgraph {
       activeCredit: new BigNumber(this.getRandomInt(5000000)).div(100).toFixed(2),
       interestRate: new BigNumber(this.getRandomInt(1000)).div(100).toFixed(2),
     };
-  }
-
-  async getSavingsAccountTokenDetail(address: string): Promise<SavingsAccountStrategyBalance[]> {
-    let result = await getSavingsAccountTokenDetails(this.subgraphUrl, address);
-    let collateralTokens: string[] = result.map((a) => a.asset);
-    let allTokens = [...collateralTokens].filter((value, index, array) => array.indexOf(value) === index);
-    for (let index = 0; index < allTokens.length; index++) {
-      const element = allTokens[index];
-      await this.tokenManager.updateAll(element);
-    }
-
-    return result.map((a) => {
-      return {
-        token: {
-          address: a.asset,
-          name: this.tokenManager.getTokenName(a.asset),
-          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.asset),
-          logo: this.tokenManager.getLogo(a.asset),
-        },
-        deposited: new BigNumber(this.getRandomInt(10000000)).div(100).toFixed(2),
-        interestEarned: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
-        interestRate: new BigNumber(this.getRandomInt(1000)).div(100).toFixed(2),
-      };
-    });
   }
 
   async getProfileOverview(address: string): Promise<ProfileOverview> {
