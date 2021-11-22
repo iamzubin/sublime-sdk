@@ -13,59 +13,41 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+} from 'ethers';
+import { BytesLike } from '@ethersproject/bytes';
+import { Listener, Provider } from '@ethersproject/providers';
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface IControllerInterface extends ethers.utils.Interface {
   functions: {
-    "approveStrategy(address,address)": FunctionFragment;
-    "balanceOf(address)": FunctionFragment;
-    "earn(address,uint256)": FunctionFragment;
-    "rewards()": FunctionFragment;
-    "setStrategy(address,address)": FunctionFragment;
-    "strategies(address)": FunctionFragment;
-    "vaults(address)": FunctionFragment;
-    "withdraw(address,uint256)": FunctionFragment;
+    'approveStrategy(address,address)': FunctionFragment;
+    'balanceOf(address)': FunctionFragment;
+    'earn(address,uint256)': FunctionFragment;
+    'rewards()': FunctionFragment;
+    'setStrategy(address,address)': FunctionFragment;
+    'strategies(address)': FunctionFragment;
+    'vaults(address)': FunctionFragment;
+    'withdraw(address,uint256)': FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "approveStrategy",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "earn",
-    values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: "rewards", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "setStrategy",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(functionFragment: "strategies", values: [string]): string;
-  encodeFunctionData(functionFragment: "vaults", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "withdraw",
-    values: [string, BigNumberish]
-  ): string;
+  encodeFunctionData(functionFragment: 'approveStrategy', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string;
+  encodeFunctionData(functionFragment: 'earn', values: [string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'rewards', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'setStrategy', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'strategies', values: [string]): string;
+  encodeFunctionData(functionFragment: 'vaults', values: [string]): string;
+  encodeFunctionData(functionFragment: 'withdraw', values: [string, BigNumberish]): string;
 
-  decodeFunctionResult(
-    functionFragment: "approveStrategy",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "earn", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "rewards", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setStrategy",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "strategies", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "vaults", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'approveStrategy', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'earn', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'rewards', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setStrategy', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'strategies', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'vaults', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'withdraw', data: BytesLike): Result;
 
   events: {};
 }
@@ -114,13 +96,9 @@ export class IController extends Contract {
   interface: IControllerInterface;
 
   functions: {
-    approveStrategy(
-      arg0: string,
-      arg1: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    approveStrategy(arg0: string, arg1: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "approveStrategy(address,address)"(
+    'approveStrategy(address,address)'(
       arg0: string,
       arg1: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -128,18 +106,11 @@ export class IController extends Contract {
 
     balanceOf(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "balanceOf(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    'balanceOf(address)'(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    earn(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    earn(arg0: string, arg1: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "earn(address,uint256)"(
+    'earn(address,uint256)'(
       arg0: string,
       arg1: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -147,15 +118,11 @@ export class IController extends Contract {
 
     rewards(overrides?: CallOverrides): Promise<[string]>;
 
-    "rewards()"(overrides?: CallOverrides): Promise<[string]>;
+    'rewards()'(overrides?: CallOverrides): Promise<[string]>;
 
-    setStrategy(
-      arg0: string,
-      arg1: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    setStrategy(arg0: string, arg1: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "setStrategy(address,address)"(
+    'setStrategy(address,address)'(
       arg0: string,
       arg1: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -163,38 +130,24 @@ export class IController extends Contract {
 
     strategies(arg0: string, overrides?: CallOverrides): Promise<[string]>;
 
-    "strategies(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+    'strategies(address)'(arg0: string, overrides?: CallOverrides): Promise<[string]>;
 
     vaults(arg0: string, overrides?: CallOverrides): Promise<[string]>;
 
-    "vaults(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+    'vaults(address)'(arg0: string, overrides?: CallOverrides): Promise<[string]>;
 
-    withdraw(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    withdraw(arg0: string, arg1: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "withdraw(address,uint256)"(
+    'withdraw(address,uint256)'(
       arg0: string,
       arg1: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
-  approveStrategy(
-    arg0: string,
-    arg1: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  approveStrategy(arg0: string, arg1: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "approveStrategy(address,address)"(
+  'approveStrategy(address,address)'(
     arg0: string,
     arg1: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -202,18 +155,11 @@ export class IController extends Contract {
 
   balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  "balanceOf(address)"(
-    arg0: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  'balanceOf(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  earn(
-    arg0: string,
-    arg1: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  earn(arg0: string, arg1: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "earn(address,uint256)"(
+  'earn(address,uint256)'(
     arg0: string,
     arg1: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -221,15 +167,11 @@ export class IController extends Contract {
 
   rewards(overrides?: CallOverrides): Promise<string>;
 
-  "rewards()"(overrides?: CallOverrides): Promise<string>;
+  'rewards()'(overrides?: CallOverrides): Promise<string>;
 
-  setStrategy(
-    arg0: string,
-    arg1: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  setStrategy(arg0: string, arg1: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "setStrategy(address,address)"(
+  'setStrategy(address,address)'(
     arg0: string,
     arg1: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -237,109 +179,60 @@ export class IController extends Contract {
 
   strategies(arg0: string, overrides?: CallOverrides): Promise<string>;
 
-  "strategies(address)"(
-    arg0: string,
-    overrides?: CallOverrides
-  ): Promise<string>;
+  'strategies(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
 
   vaults(arg0: string, overrides?: CallOverrides): Promise<string>;
 
-  "vaults(address)"(arg0: string, overrides?: CallOverrides): Promise<string>;
+  'vaults(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
 
-  withdraw(
-    arg0: string,
-    arg1: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  withdraw(arg0: string, arg1: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "withdraw(address,uint256)"(
+  'withdraw(address,uint256)'(
     arg0: string,
     arg1: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    approveStrategy(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    approveStrategy(arg0: string, arg1: string, overrides?: CallOverrides): Promise<void>;
 
-    "approveStrategy(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'approveStrategy(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<void>;
 
     balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "balanceOf(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'balanceOf(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    earn(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    earn(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    "earn(address,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'earn(address,uint256)'(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     rewards(overrides?: CallOverrides): Promise<string>;
 
-    "rewards()"(overrides?: CallOverrides): Promise<string>;
+    'rewards()'(overrides?: CallOverrides): Promise<string>;
 
-    setStrategy(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    setStrategy(arg0: string, arg1: string, overrides?: CallOverrides): Promise<void>;
 
-    "setStrategy(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'setStrategy(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<void>;
 
     strategies(arg0: string, overrides?: CallOverrides): Promise<string>;
 
-    "strategies(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<string>;
+    'strategies(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
 
     vaults(arg0: string, overrides?: CallOverrides): Promise<string>;
 
-    "vaults(address)"(arg0: string, overrides?: CallOverrides): Promise<string>;
+    'vaults(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
 
-    withdraw(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    withdraw(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    "withdraw(address,uint256)"(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'withdraw(address,uint256)'(arg0: string, arg1: BigNumberish, overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
-    approveStrategy(
-      arg0: string,
-      arg1: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    approveStrategy(arg0: string, arg1: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "approveStrategy(address,address)"(
+    'approveStrategy(address,address)'(
       arg0: string,
       arg1: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -347,18 +240,11 @@ export class IController extends Contract {
 
     balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "balanceOf(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'balanceOf(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    earn(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    earn(arg0: string, arg1: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "earn(address,uint256)"(
+    'earn(address,uint256)'(
       arg0: string,
       arg1: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -366,15 +252,11 @@ export class IController extends Contract {
 
     rewards(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "rewards()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'rewards()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setStrategy(
-      arg0: string,
-      arg1: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    setStrategy(arg0: string, arg1: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "setStrategy(address,address)"(
+    'setStrategy(address,address)'(
       arg0: string,
       arg1: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -382,25 +264,15 @@ export class IController extends Contract {
 
     strategies(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "strategies(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'strategies(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     vaults(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "vaults(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'vaults(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    withdraw(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    withdraw(arg0: string, arg1: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "withdraw(address,uint256)"(
+    'withdraw(address,uint256)'(
       arg0: string,
       arg1: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -408,35 +280,21 @@ export class IController extends Contract {
   };
 
   populateTransaction: {
-    approveStrategy(
+    approveStrategy(arg0: string, arg1: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    'approveStrategy(address,address)'(
       arg0: string,
       arg1: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "approveStrategy(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    balanceOf(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    balanceOf(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'balanceOf(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "balanceOf(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    earn(arg0: string, arg1: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    earn(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "earn(address,uint256)"(
+    'earn(address,uint256)'(
       arg0: string,
       arg1: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -444,47 +302,27 @@ export class IController extends Contract {
 
     rewards(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "rewards()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'rewards()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    setStrategy(
+    setStrategy(arg0: string, arg1: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    'setStrategy(address,address)'(
       arg0: string,
       arg1: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setStrategy(address,address)"(
-      arg0: string,
-      arg1: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    strategies(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    strategies(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'strategies(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "strategies(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    vaults(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    vaults(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'vaults(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "vaults(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    withdraw(arg0: string, arg1: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    withdraw(
-      arg0: string,
-      arg1: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "withdraw(address,uint256)"(
+    'withdraw(address,uint256)'(
       arg0: string,
       arg1: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }

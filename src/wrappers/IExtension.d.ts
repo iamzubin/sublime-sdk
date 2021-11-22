@@ -13,58 +13,40 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+} from 'ethers';
+import { BytesLike } from '@ethersproject/bytes';
+import { Listener, Provider } from '@ethersproject/providers';
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface IExtensionInterface extends ethers.utils.Interface {
   functions: {
-    "closePoolExtension()": FunctionFragment;
-    "initializePoolExtension(uint256)": FunctionFragment;
-    "removeVotes(address,address,uint256)": FunctionFragment;
+    'closePoolExtension()': FunctionFragment;
+    'initializePoolExtension(uint256)': FunctionFragment;
+    'removeVotes(address,address,uint256)': FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "closePoolExtension",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "initializePoolExtension",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "removeVotes",
-    values: [string, string, BigNumberish]
-  ): string;
+  encodeFunctionData(functionFragment: 'closePoolExtension', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'initializePoolExtension', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'removeVotes', values: [string, string, BigNumberish]): string;
 
-  decodeFunctionResult(
-    functionFragment: "closePoolExtension",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "initializePoolExtension",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "removeVotes",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: 'closePoolExtension', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'initializePoolExtension', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'removeVotes', data: BytesLike): Result;
 
   events: {
-    "ExtensionPassed(address)": EventFragment;
-    "ExtensionRequested(uint256)": EventFragment;
-    "LenderVoted(address,uint256,uint256)": EventFragment;
-    "PoolFactoryUpdated(address)": EventFragment;
-    "VotingPassRatioUpdated(uint256)": EventFragment;
+    'ExtensionPassed(address)': EventFragment;
+    'ExtensionRequested(uint256)': EventFragment;
+    'LenderVoted(address,uint256,uint256)': EventFragment;
+    'PoolFactoryUpdated(address)': EventFragment;
+    'VotingPassRatioUpdated(uint256)': EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "ExtensionPassed"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "ExtensionRequested"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LenderVoted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "PoolFactoryUpdated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "VotingPassRatioUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'ExtensionPassed'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'ExtensionRequested'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'LenderVoted'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'PoolFactoryUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'VotingPassRatioUpdated'): EventFragment;
 }
 
 export class IExtension extends Contract {
@@ -111,20 +93,16 @@ export class IExtension extends Contract {
   interface: IExtensionInterface;
 
   functions: {
-    closePoolExtension(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    closePoolExtension(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "closePoolExtension()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'closePoolExtension()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     initializePoolExtension(
       _repaymentInterval: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "initializePoolExtension(uint256)"(
+    'initializePoolExtension(uint256)'(
       _repaymentInterval: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -136,7 +114,7 @@ export class IExtension extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "removeVotes(address,address,uint256)"(
+    'removeVotes(address,address,uint256)'(
       _from: string,
       _to: string,
       _amount: BigNumberish,
@@ -144,20 +122,16 @@ export class IExtension extends Contract {
     ): Promise<ContractTransaction>;
   };
 
-  closePoolExtension(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  closePoolExtension(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "closePoolExtension()"(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'closePoolExtension()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   initializePoolExtension(
     _repaymentInterval: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "initializePoolExtension(uint256)"(
+  'initializePoolExtension(uint256)'(
     _repaymentInterval: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -169,7 +143,7 @@ export class IExtension extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "removeVotes(address,address,uint256)"(
+  'removeVotes(address,address,uint256)'(
     _from: string,
     _to: string,
     _amount: BigNumberish,
@@ -179,41 +153,21 @@ export class IExtension extends Contract {
   callStatic: {
     closePoolExtension(overrides?: CallOverrides): Promise<void>;
 
-    "closePoolExtension()"(overrides?: CallOverrides): Promise<void>;
+    'closePoolExtension()'(overrides?: CallOverrides): Promise<void>;
 
-    initializePoolExtension(
-      _repaymentInterval: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    initializePoolExtension(_repaymentInterval: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    "initializePoolExtension(uint256)"(
-      _repaymentInterval: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'initializePoolExtension(uint256)'(_repaymentInterval: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    removeVotes(
-      _from: string,
-      _to: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    removeVotes(_from: string, _to: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    "removeVotes(address,address,uint256)"(
-      _from: string,
-      _to: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'removeVotes(address,address,uint256)'(_from: string, _to: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
-    ExtensionPassed(
-      poolID: null
-    ): TypedEventFilter<[string], { poolID: string }>;
+    ExtensionPassed(poolID: null): TypedEventFilter<[string], { poolID: string }>;
 
-    ExtensionRequested(
-      extensionVoteEndTime: null
-    ): TypedEventFilter<[BigNumber], { extensionVoteEndTime: BigNumber }>;
+    ExtensionRequested(extensionVoteEndTime: null): TypedEventFilter<[BigNumber], { extensionVoteEndTime: BigNumber }>;
 
     LenderVoted(
       lender: string | null,
@@ -228,30 +182,22 @@ export class IExtension extends Contract {
       }
     >;
 
-    PoolFactoryUpdated(
-      poolFactory: string | null
-    ): TypedEventFilter<[string], { poolFactory: string }>;
+    PoolFactoryUpdated(poolFactory: string | null): TypedEventFilter<[string], { poolFactory: string }>;
 
-    VotingPassRatioUpdated(
-      votingPassRatio: null
-    ): TypedEventFilter<[BigNumber], { votingPassRatio: BigNumber }>;
+    VotingPassRatioUpdated(votingPassRatio: null): TypedEventFilter<[BigNumber], { votingPassRatio: BigNumber }>;
   };
 
   estimateGas: {
-    closePoolExtension(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    closePoolExtension(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "closePoolExtension()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'closePoolExtension()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     initializePoolExtension(
       _repaymentInterval: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "initializePoolExtension(uint256)"(
+    'initializePoolExtension(uint256)'(
       _repaymentInterval: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -263,7 +209,7 @@ export class IExtension extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "removeVotes(address,address,uint256)"(
+    'removeVotes(address,address,uint256)'(
       _from: string,
       _to: string,
       _amount: BigNumberish,
@@ -272,20 +218,16 @@ export class IExtension extends Contract {
   };
 
   populateTransaction: {
-    closePoolExtension(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    closePoolExtension(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "closePoolExtension()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'closePoolExtension()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     initializePoolExtension(
       _repaymentInterval: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "initializePoolExtension(uint256)"(
+    'initializePoolExtension(uint256)'(
       _repaymentInterval: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -297,7 +239,7 @@ export class IExtension extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removeVotes(address,address,uint256)"(
+    'removeVotes(address,address,uint256)'(
       _from: string,
       _to: string,
       _amount: BigNumberish,

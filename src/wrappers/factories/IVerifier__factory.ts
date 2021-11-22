@@ -2,16 +2,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { Contract, Signer } from 'ethers';
+import { Provider } from '@ethersproject/providers';
 
-import type { IVerifier } from "../IVerifier";
+import type { IVerifier } from '../IVerifier';
 
 export class IVerifier__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): IVerifier {
+  static connect(address: string, signerOrProvider: Signer | Provider): IVerifier {
     return new Contract(address, _abi, signerOrProvider) as IVerifier;
   }
 }
@@ -22,37 +19,37 @@ const _abi = [
     inputs: [
       {
         indexed: false,
-        internalType: "address",
-        name: "user",
-        type: "address",
+        internalType: 'address',
+        name: 'user',
+        type: 'address',
       },
       {
         indexed: false,
-        internalType: "bool",
-        name: "isMasterLinked",
-        type: "bool",
+        internalType: 'bool',
+        name: 'isMasterLinked',
+        type: 'bool',
       },
       {
         indexed: false,
-        internalType: "string",
-        name: "metadata",
-        type: "string",
+        internalType: 'string',
+        name: 'metadata',
+        type: 'string',
       },
     ],
-    name: "UserRegistered",
-    type: "event",
+    name: 'UserRegistered',
+    type: 'event',
   },
   {
     anonymous: false,
     inputs: [
       {
         indexed: false,
-        internalType: "address",
-        name: "user",
-        type: "address",
+        internalType: 'address',
+        name: 'user',
+        type: 'address',
       },
     ],
-    name: "UserUnregistered",
-    type: "event",
+    name: 'UserUnregistered',
+    type: 'event',
   },
 ];

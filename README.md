@@ -15,9 +15,10 @@ const privateKey = 'some private key hex';
 const signer = new ethers.Wallet(privateKey, provider);
 
 const graphQlUrl = 'https://api.thegraph.com/subgraphs/name/akshay111meher/sublime-subgraph-august';
+const priceOracleUrl = 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2';
 
 // pass metamask(or any wallet) provider and signer to sdk for UI to connect to sublime
-const instance = new SublimeSdk(provider, signer, graphQlUrl, {
+const instance = new SublimeSdk(provider, signer, graphQlUrl, priceOracleUrl, {
   poolFactoryContractAddress: '0x119cA47EB9116bF902eD945eCFB7c90306017C47',
   creditLineContractAddress: '0xA969469e309339c08937417563001C4c9da20df2',
   poolLogicContractAddress: '0x133F9faBeBd6a720b7e96e522b44660E2Ea1399D',

@@ -3,21 +3,29 @@ import { Token } from './wrappers/Token';
 import { Token__factory } from './wrappers/factories/Token__factory';
 import { Signer } from 'ethers';
 import { BigNumber } from 'bignumber.js';
+import { getPrice } from './queries/prices';
+import { tokenMap } from './config/tokenMapping';
 
 export class TokenManager {
   private decimals = {};
   private names = {};
   private prices = {};
+  private priceLastUpdatedAt = {};
   private logos = {};
+  private addressMapper = {};
 
-  private tempLogoLink: string = 'https://icons.iconarchive.com/icons/cjdowner/cryptocurrency-flat/256/Ethereum-ETH-icon.png';
+  private logoUrlTemplate: string = 'https://tokens.1inch.io/ADDRESS.png';
+  private priceSubgraphUrl: string;
 
+  private priceRefreshInterval: number = 60000;
   private signer: Signer;
 
-  constructor(signer: Signer) {
+  constructor(signer: Signer, priceSubgraphUrl: string) {
     this.decimals[zeroAddress] = 18;
     this.names[zeroAddress] = 'ETH';
     this.signer = signer;
+    this.priceSubgraphUrl = priceSubgraphUrl;
+    this.addressMapper = tokenMap;
   }
 
   async updateAll(tokenAddress: string): Promise<void> {
@@ -51,12 +59,16 @@ export class TokenManager {
 
   async updatePricePerAsset(tokenAddress: string): Promise<void> {
     tokenAddress = tokenAddress.toLowerCase();
-    this.prices[tokenAddress] = new BigNumber(Math.random()).toString();
-    if (tokenAddress in this.prices) {
-      return;
-    } else {
-      return;
+    const now = new Date().valueOf();
+    if (!(tokenAddress in this.prices) || now > this.priceRefreshInterval + this.priceLastUpdatedAt[tokenAddress]) {
+      let mappedAddress = tokenAddress;
+      if (this.addressMapper[tokenAddress]) {
+        mappedAddress = this.addressMapper[tokenAddress];
+      }
+      this.prices[tokenAddress] = await getPrice(this.priceSubgraphUrl, mappedAddress);
+      this.priceLastUpdatedAt[tokenAddress] = new Date().valueOf();
     }
+    return;
   }
 
   async updateLogo(tokenAddress: string): Promise<void> {
@@ -64,7 +76,11 @@ export class TokenManager {
     if (tokenAddress in this.logos) {
       return;
     } else {
-      this.logos[tokenAddress] = this.tempLogoLink;
+      let mappedAddress = tokenAddress;
+      if (this.addressMapper[tokenAddress]) {
+        mappedAddress = this.addressMapper[tokenAddress];
+      }
+      this.logos[tokenAddress] = this.logoUrlTemplate.replace('ADDRESS', mappedAddress);
       return;
     }
   }

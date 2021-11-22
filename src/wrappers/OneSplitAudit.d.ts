@@ -13,39 +13,23 @@ import {
   ContractTransaction,
   PayableOverrides,
   CallOverrides,
-} from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+} from 'ethers';
+import { BytesLike } from '@ethersproject/bytes';
+import { Listener, Provider } from '@ethersproject/providers';
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface OneSplitAuditInterface extends ethers.utils.Interface {
   functions: {
-    "getExpectedReturn(address,address,uint256,uint256,uint256)": FunctionFragment;
-    "swap(address,address,uint256,uint256,uint256[],uint256)": FunctionFragment;
+    'getExpectedReturn(address,address,uint256,uint256,uint256)': FunctionFragment;
+    'swap(address,address,uint256,uint256,uint256[],uint256)': FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "getExpectedReturn",
-    values: [string, string, BigNumberish, BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swap",
-    values: [
-      string,
-      string,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[],
-      BigNumberish
-    ]
-  ): string;
+  encodeFunctionData(functionFragment: 'getExpectedReturn', values: [string, string, BigNumberish, BigNumberish, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'swap', values: [string, string, BigNumberish, BigNumberish, BigNumberish[], BigNumberish]): string;
 
-  decodeFunctionResult(
-    functionFragment: "getExpectedReturn",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'getExpectedReturn', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'swap', data: BytesLike): Result;
 
   events: {};
 }
@@ -108,7 +92,7 @@ export class OneSplitAudit extends Contract {
       }
     >;
 
-    "getExpectedReturn(address,address,uint256,uint256,uint256)"(
+    'getExpectedReturn(address,address,uint256,uint256,uint256)'(
       fromToken: string,
       destToken: string,
       amount: BigNumberish,
@@ -132,7 +116,7 @@ export class OneSplitAudit extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "swap(address,address,uint256,uint256,uint256[],uint256)"(
+    'swap(address,address,uint256,uint256,uint256[],uint256)'(
       fromToken: string,
       destToken: string,
       amount: BigNumberish,
@@ -157,7 +141,7 @@ export class OneSplitAudit extends Contract {
     }
   >;
 
-  "getExpectedReturn(address,address,uint256,uint256,uint256)"(
+  'getExpectedReturn(address,address,uint256,uint256,uint256)'(
     fromToken: string,
     destToken: string,
     amount: BigNumberish,
@@ -181,7 +165,7 @@ export class OneSplitAudit extends Contract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "swap(address,address,uint256,uint256,uint256[],uint256)"(
+  'swap(address,address,uint256,uint256,uint256[],uint256)'(
     fromToken: string,
     destToken: string,
     amount: BigNumberish,
@@ -206,7 +190,7 @@ export class OneSplitAudit extends Contract {
       }
     >;
 
-    "getExpectedReturn(address,address,uint256,uint256,uint256)"(
+    'getExpectedReturn(address,address,uint256,uint256,uint256)'(
       fromToken: string,
       destToken: string,
       amount: BigNumberish,
@@ -230,7 +214,7 @@ export class OneSplitAudit extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "swap(address,address,uint256,uint256,uint256[],uint256)"(
+    'swap(address,address,uint256,uint256,uint256[],uint256)'(
       fromToken: string,
       destToken: string,
       amount: BigNumberish,
@@ -253,7 +237,7 @@ export class OneSplitAudit extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getExpectedReturn(address,address,uint256,uint256,uint256)"(
+    'getExpectedReturn(address,address,uint256,uint256,uint256)'(
       fromToken: string,
       destToken: string,
       amount: BigNumberish,
@@ -272,7 +256,7 @@ export class OneSplitAudit extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "swap(address,address,uint256,uint256,uint256[],uint256)"(
+    'swap(address,address,uint256,uint256,uint256[],uint256)'(
       fromToken: string,
       destToken: string,
       amount: BigNumberish,
@@ -293,7 +277,7 @@ export class OneSplitAudit extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "getExpectedReturn(address,address,uint256,uint256,uint256)"(
+    'getExpectedReturn(address,address,uint256,uint256,uint256)'(
       fromToken: string,
       destToken: string,
       amount: BigNumberish,
@@ -312,7 +296,7 @@ export class OneSplitAudit extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "swap(address,address,uint256,uint256,uint256[],uint256)"(
+    'swap(address,address,uint256,uint256,uint256[],uint256)'(
       fromToken: string,
       destToken: string,
       amount: BigNumberish,

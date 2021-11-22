@@ -13,35 +13,32 @@ import {
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+} from 'ethers';
+import { BytesLike } from '@ethersproject/bytes';
+import { Listener, Provider } from '@ethersproject/providers';
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface GovernanceTesterInterface extends ethers.utils.Interface {
   functions: {
-    "gov()": FunctionFragment;
-    "update(uint256)": FunctionFragment;
-    "value()": FunctionFragment;
+    'gov()': FunctionFragment;
+    'update(uint256)': FunctionFragment;
+    'value()': FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "gov", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "update",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: "value", values?: undefined): string;
+  encodeFunctionData(functionFragment: 'gov', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'update', values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'value', values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: "gov", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "update", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "value", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'gov', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'update', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'value', data: BytesLike): Result;
 
   events: {
-    "valueUpdated(address,address,uint256)": EventFragment;
+    'valueUpdated(address,address,uint256)': EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "valueUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'valueUpdated'): EventFragment;
 }
 
 export class GovernanceTester extends Contract {
@@ -90,56 +87,41 @@ export class GovernanceTester extends Contract {
   functions: {
     gov(overrides?: CallOverrides): Promise<[string]>;
 
-    "gov()"(overrides?: CallOverrides): Promise<[string]>;
+    'gov()'(overrides?: CallOverrides): Promise<[string]>;
 
-    update(
-      _value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    update(_value: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "update(uint256)"(
-      _value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'update(uint256)'(_value: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     value(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "value()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'value()'(overrides?: CallOverrides): Promise<[BigNumber]>;
   };
 
   gov(overrides?: CallOverrides): Promise<string>;
 
-  "gov()"(overrides?: CallOverrides): Promise<string>;
+  'gov()'(overrides?: CallOverrides): Promise<string>;
 
-  update(
-    _value: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  update(_value: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "update(uint256)"(
-    _value: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'update(uint256)'(_value: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   value(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "value()"(overrides?: CallOverrides): Promise<BigNumber>;
+  'value()'(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
     gov(overrides?: CallOverrides): Promise<string>;
 
-    "gov()"(overrides?: CallOverrides): Promise<string>;
+    'gov()'(overrides?: CallOverrides): Promise<string>;
 
     update(_value: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    "update(uint256)"(
-      _value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'update(uint256)'(_value: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     value(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "value()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'value()'(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   filters: {
@@ -147,49 +129,34 @@ export class GovernanceTester extends Contract {
       governance: string | null,
       sender: string | null,
       v: null
-    ): TypedEventFilter<
-      [string, string, BigNumber],
-      { governance: string; sender: string; v: BigNumber }
-    >;
+    ): TypedEventFilter<[string, string, BigNumber], { governance: string; sender: string; v: BigNumber }>;
   };
 
   estimateGas: {
     gov(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "gov()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'gov()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    update(
-      _value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    update(_value: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "update(uint256)"(
-      _value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'update(uint256)'(_value: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     value(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "value()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'value()'(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     gov(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "gov()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'gov()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    update(
-      _value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    update(_value: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "update(uint256)"(
-      _value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'update(uint256)'(_value: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     value(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "value()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'value()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

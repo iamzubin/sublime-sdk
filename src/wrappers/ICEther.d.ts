@@ -13,47 +13,29 @@ import {
   ContractTransaction,
   PayableOverrides,
   CallOverrides,
-} from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+} from 'ethers';
+import { BytesLike } from '@ethersproject/bytes';
+import { Listener, Provider } from '@ethersproject/providers';
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface ICEtherInterface extends ethers.utils.Interface {
   functions: {
-    "liquidateBorrow(address,address)": FunctionFragment;
-    "mint()": FunctionFragment;
-    "repayBorrow()": FunctionFragment;
-    "repayBorrowBehalf(address)": FunctionFragment;
+    'liquidateBorrow(address,address)': FunctionFragment;
+    'mint()': FunctionFragment;
+    'repayBorrow()': FunctionFragment;
+    'repayBorrowBehalf(address)': FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "liquidateBorrow",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(functionFragment: "mint", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "repayBorrow",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "repayBorrowBehalf",
-    values: [string]
-  ): string;
+  encodeFunctionData(functionFragment: 'liquidateBorrow', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'mint', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'repayBorrow', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'repayBorrowBehalf', values: [string]): string;
 
-  decodeFunctionResult(
-    functionFragment: "liquidateBorrow",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "repayBorrow",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "repayBorrowBehalf",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: 'liquidateBorrow', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'mint', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'repayBorrow', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'repayBorrowBehalf', data: BytesLike): Result;
 
   events: {};
 }
@@ -108,34 +90,23 @@ export class ICEther extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "liquidateBorrow(address,address)"(
+    'liquidateBorrow(address,address)'(
       borrower: string,
       cTokenCollateral: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    mint(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    mint(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "mint()"(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'mint()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    repayBorrow(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    repayBorrow(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "repayBorrow()"(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'repayBorrow()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    repayBorrowBehalf(
-      borrower: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    repayBorrowBehalf(borrower: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "repayBorrowBehalf(address)"(
+    'repayBorrowBehalf(address)'(
       borrower: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -147,68 +118,43 @@ export class ICEther extends Contract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "liquidateBorrow(address,address)"(
+  'liquidateBorrow(address,address)'(
     borrower: string,
     cTokenCollateral: string,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  mint(
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  mint(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "mint()"(
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'mint()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  repayBorrow(
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  repayBorrow(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "repayBorrow()"(
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'repayBorrow()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  repayBorrowBehalf(
-    borrower: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  repayBorrowBehalf(borrower: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "repayBorrowBehalf(address)"(
+  'repayBorrowBehalf(address)'(
     borrower: string,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    liquidateBorrow(
-      borrower: string,
-      cTokenCollateral: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    liquidateBorrow(borrower: string, cTokenCollateral: string, overrides?: CallOverrides): Promise<void>;
 
-    "liquidateBorrow(address,address)"(
-      borrower: string,
-      cTokenCollateral: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'liquidateBorrow(address,address)'(borrower: string, cTokenCollateral: string, overrides?: CallOverrides): Promise<void>;
 
     mint(overrides?: CallOverrides): Promise<void>;
 
-    "mint()"(overrides?: CallOverrides): Promise<void>;
+    'mint()'(overrides?: CallOverrides): Promise<void>;
 
     repayBorrow(overrides?: CallOverrides): Promise<void>;
 
-    "repayBorrow()"(overrides?: CallOverrides): Promise<void>;
+    'repayBorrow()'(overrides?: CallOverrides): Promise<void>;
 
-    repayBorrowBehalf(
-      borrower: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    repayBorrowBehalf(borrower: string, overrides?: CallOverrides): Promise<void>;
 
-    "repayBorrowBehalf(address)"(
-      borrower: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'repayBorrowBehalf(address)'(borrower: string, overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {};
@@ -220,37 +166,23 @@ export class ICEther extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "liquidateBorrow(address,address)"(
+    'liquidateBorrow(address,address)'(
       borrower: string,
       cTokenCollateral: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    mint(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    mint(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "mint()"(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'mint()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    repayBorrow(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    repayBorrow(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "repayBorrow()"(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'repayBorrow()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    repayBorrowBehalf(
-      borrower: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    repayBorrowBehalf(borrower: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "repayBorrowBehalf(address)"(
-      borrower: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'repayBorrowBehalf(address)'(borrower: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -260,34 +192,23 @@ export class ICEther extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "liquidateBorrow(address,address)"(
+    'liquidateBorrow(address,address)'(
       borrower: string,
       cTokenCollateral: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    mint(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    mint(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "mint()"(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'mint()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    repayBorrow(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    repayBorrow(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "repayBorrow()"(
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'repayBorrow()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    repayBorrowBehalf(
-      borrower: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    repayBorrowBehalf(borrower: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "repayBorrowBehalf(address)"(
+    'repayBorrowBehalf(address)'(
       borrower: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

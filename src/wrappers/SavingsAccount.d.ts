@@ -14,211 +14,107 @@ import {
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
-import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+} from 'ethers';
+import { BytesLike } from '@ethersproject/bytes';
+import { Listener, Provider } from '@ethersproject/providers';
+import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi';
+import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface SavingsAccountInterface extends ethers.utils.Interface {
   functions: {
-    "allowance(address,address,address)": FunctionFragment;
-    "approve(uint256,address,address)": FunctionFragment;
-    "balanceInShares(address,address,address)": FunctionFragment;
-    "creditLine()": FunctionFragment;
-    "decreaseAllowance(uint256,address,address)": FunctionFragment;
-    "deposit(uint256,address,address,address)": FunctionFragment;
-    "getTotalTokens(address,address)": FunctionFragment;
-    "increaseAllowance(uint256,address,address)": FunctionFragment;
-    "increaseAllowanceToCreditLine(uint256,address,address)": FunctionFragment;
-    "initialize(address,address,address)": FunctionFragment;
-    "owner()": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
-    "strategyRegistry()": FunctionFragment;
-    "switchStrategy(uint256,address,address,address)": FunctionFragment;
-    "transfer(uint256,address,address,address)": FunctionFragment;
-    "transferFrom(uint256,address,address,address,address)": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
-    "updateCreditLine(address)": FunctionFragment;
-    "updateStrategyRegistry(address)": FunctionFragment;
-    "withdraw(uint256,address,address,address,bool)": FunctionFragment;
-    "withdrawAll(address)": FunctionFragment;
-    "withdrawFrom(uint256,address,address,address,address,bool)": FunctionFragment;
+    'allowance(address,address,address)': FunctionFragment;
+    'approve(uint256,address,address)': FunctionFragment;
+    'balanceInShares(address,address,address)': FunctionFragment;
+    'creditLine()': FunctionFragment;
+    'decreaseAllowance(uint256,address,address)': FunctionFragment;
+    'deposit(uint256,address,address,address)': FunctionFragment;
+    'getTotalTokens(address,address)': FunctionFragment;
+    'increaseAllowance(uint256,address,address)': FunctionFragment;
+    'increaseAllowanceToCreditLine(uint256,address,address)': FunctionFragment;
+    'initialize(address,address,address)': FunctionFragment;
+    'owner()': FunctionFragment;
+    'renounceOwnership()': FunctionFragment;
+    'strategyRegistry()': FunctionFragment;
+    'switchStrategy(uint256,address,address,address)': FunctionFragment;
+    'transfer(uint256,address,address,address)': FunctionFragment;
+    'transferFrom(uint256,address,address,address,address)': FunctionFragment;
+    'transferOwnership(address)': FunctionFragment;
+    'updateCreditLine(address)': FunctionFragment;
+    'updateStrategyRegistry(address)': FunctionFragment;
+    'withdraw(uint256,address,address,address,bool)': FunctionFragment;
+    'withdrawAll(address)': FunctionFragment;
+    'withdrawFrom(uint256,address,address,address,address,bool)': FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "allowance",
-    values: [string, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "approve",
-    values: [BigNumberish, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceInShares",
-    values: [string, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "creditLine",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance",
-    values: [BigNumberish, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "deposit",
-    values: [BigNumberish, string, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTotalTokens",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance",
-    values: [BigNumberish, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowanceToCreditLine",
-    values: [BigNumberish, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "initialize",
-    values: [string, string, string]
-  ): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "strategyRegistry",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "switchStrategy",
-    values: [BigNumberish, string, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer",
-    values: [BigNumberish, string, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom",
-    values: [BigNumberish, string, string, string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updateCreditLine",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updateStrategyRegistry",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "withdraw",
-    values: [BigNumberish, string, string, string, boolean]
-  ): string;
-  encodeFunctionData(functionFragment: "withdrawAll", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "withdrawFrom",
-    values: [BigNumberish, string, string, string, string, boolean]
-  ): string;
+  encodeFunctionData(functionFragment: 'allowance', values: [string, string, string]): string;
+  encodeFunctionData(functionFragment: 'approve', values: [BigNumberish, string, string]): string;
+  encodeFunctionData(functionFragment: 'balanceInShares', values: [string, string, string]): string;
+  encodeFunctionData(functionFragment: 'creditLine', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'decreaseAllowance', values: [BigNumberish, string, string]): string;
+  encodeFunctionData(functionFragment: 'deposit', values: [BigNumberish, string, string, string]): string;
+  encodeFunctionData(functionFragment: 'getTotalTokens', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'increaseAllowance', values: [BigNumberish, string, string]): string;
+  encodeFunctionData(functionFragment: 'increaseAllowanceToCreditLine', values: [BigNumberish, string, string]): string;
+  encodeFunctionData(functionFragment: 'initialize', values: [string, string, string]): string;
+  encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'strategyRegistry', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'switchStrategy', values: [BigNumberish, string, string, string]): string;
+  encodeFunctionData(functionFragment: 'transfer', values: [BigNumberish, string, string, string]): string;
+  encodeFunctionData(functionFragment: 'transferFrom', values: [BigNumberish, string, string, string, string]): string;
+  encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
+  encodeFunctionData(functionFragment: 'updateCreditLine', values: [string]): string;
+  encodeFunctionData(functionFragment: 'updateStrategyRegistry', values: [string]): string;
+  encodeFunctionData(functionFragment: 'withdraw', values: [BigNumberish, string, string, string, boolean]): string;
+  encodeFunctionData(functionFragment: 'withdrawAll', values: [string]): string;
+  encodeFunctionData(functionFragment: 'withdrawFrom', values: [BigNumberish, string, string, string, string, boolean]): string;
 
-  decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceInShares",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "creditLine", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getTotalTokens",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowanceToCreditLine",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "strategyRegistry",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "switchStrategy",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateCreditLine",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateStrategyRegistry",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "withdrawAll",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "withdrawFrom",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: 'allowance', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'approve', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'balanceInShares', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'creditLine', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'decreaseAllowance', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'deposit', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'getTotalTokens', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'increaseAllowance', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'increaseAllowanceToCreditLine', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'strategyRegistry', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'switchStrategy', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'transfer', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'transferFrom', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'updateCreditLine', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'updateStrategyRegistry', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'withdraw', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'withdrawAll', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'withdrawFrom', data: BytesLike): Result;
 
   events: {
-    "Approved(address,address,address,uint256)": EventFragment;
-    "CreditLineAllowanceRefreshed(address,address,uint256)": EventFragment;
-    "CreditLineUpdated(address)": EventFragment;
-    "Deposited(address,uint256,address,address)": EventFragment;
-    "OwnershipTransferred(address,address)": EventFragment;
-    "StrategyRegistryUpdated(address)": EventFragment;
-    "StrategySwitched(address,address,address,address)": EventFragment;
-    "Transfer(address,address,address,address,uint256)": EventFragment;
-    "Withdrawn(address,address,uint256,address,address)": EventFragment;
-    "WithdrawnAll(address,uint256,address)": EventFragment;
+    'Approved(address,address,address,uint256)': EventFragment;
+    'CreditLineAllowanceRefreshed(address,address,uint256)': EventFragment;
+    'CreditLineUpdated(address)': EventFragment;
+    'Deposited(address,uint256,address,address)': EventFragment;
+    'OwnershipTransferred(address,address)': EventFragment;
+    'StrategyRegistryUpdated(address)': EventFragment;
+    'StrategySwitched(address,address,address,address)': EventFragment;
+    'Transfer(address,address,address,address,uint256)': EventFragment;
+    'Withdrawn(address,address,uint256,address,address)': EventFragment;
+    'WithdrawnAll(address,uint256,address)': EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "Approved"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "CreditLineAllowanceRefreshed"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "CreditLineUpdated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Deposited"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "StrategyRegistryUpdated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "StrategySwitched"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Withdrawn"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "WithdrawnAll"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'Approved'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'CreditLineAllowanceRefreshed'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'CreditLineUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'Deposited'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'StrategyRegistryUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'StrategySwitched'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'Transfer'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'Withdrawn'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'WithdrawnAll'): EventFragment;
 }
 
 export class SavingsAccount extends Contract {
@@ -265,19 +161,9 @@ export class SavingsAccount extends Contract {
   interface: SavingsAccountInterface;
 
   functions: {
-    allowance(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    allowance(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "allowance(address,address,address)"(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    'allowance(address,address,address)'(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     approve(
       _amount: BigNumberish,
@@ -286,30 +172,20 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "approve(uint256,address,address)"(
+    'approve(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _to: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    balanceInShares(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    balanceInShares(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "balanceInShares(address,address,address)"(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    'balanceInShares(address,address,address)'(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     creditLine(overrides?: CallOverrides): Promise<[string]>;
 
-    "creditLine()"(overrides?: CallOverrides): Promise<[string]>;
+    'creditLine()'(overrides?: CallOverrides): Promise<[string]>;
 
     decreaseAllowance(
       _amount: BigNumberish,
@@ -318,7 +194,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "decreaseAllowance(uint256,address,address)"(
+    'decreaseAllowance(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _to: string,
@@ -333,7 +209,7 @@ export class SavingsAccount extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "deposit(uint256,address,address,address)"(
+    'deposit(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -347,7 +223,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "getTotalTokens(address,address)"(
+    'getTotalTokens(address,address)'(
       _user: string,
       _token: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -360,7 +236,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "increaseAllowance(uint256,address,address)"(
+    'increaseAllowance(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _to: string,
@@ -374,7 +250,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "increaseAllowanceToCreditLine(uint256,address,address)"(
+    'increaseAllowanceToCreditLine(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _from: string,
@@ -388,7 +264,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "initialize(address,address,address)"(
+    'initialize(address,address,address)'(
       _owner: string,
       _strategyRegistry: string,
       _creditLine: string,
@@ -397,19 +273,15 @@ export class SavingsAccount extends Contract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
-    "owner()"(overrides?: CallOverrides): Promise<[string]>;
+    'owner()'(overrides?: CallOverrides): Promise<[string]>;
 
-    renounceOwnership(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     strategyRegistry(overrides?: CallOverrides): Promise<[string]>;
 
-    "strategyRegistry()"(overrides?: CallOverrides): Promise<[string]>;
+    'strategyRegistry()'(overrides?: CallOverrides): Promise<[string]>;
 
     switchStrategy(
       _amount: BigNumberish,
@@ -419,7 +291,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "switchStrategy(uint256,address,address,address)"(
+    'switchStrategy(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _currentStrategy: string,
@@ -435,7 +307,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "transfer(uint256,address,address,address)"(
+    'transfer(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -452,7 +324,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "transferFrom(uint256,address,address,address,address)"(
+    'transferFrom(uint256,address,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -461,22 +333,16 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    transferOwnership(
+    transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    'transferOwnership(address)'(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "transferOwnership(address)"(
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    updateCreditLine(_creditLine: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    updateCreditLine(
-      _creditLine: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "updateCreditLine(address)"(
+    'updateCreditLine(address)'(
       _creditLine: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -486,7 +352,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "updateStrategyRegistry(address)"(
+    'updateStrategyRegistry(address)'(
       _strategyRegistry: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -500,7 +366,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "withdraw(uint256,address,address,address,bool)"(
+    'withdraw(uint256,address,address,address,bool)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -509,15 +375,9 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    withdrawAll(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    "withdrawAll(address)"(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     withdrawFrom(
       _amount: BigNumberish,
@@ -529,7 +389,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "withdrawFrom(uint256,address,address,address,address,bool)"(
+    'withdrawFrom(uint256,address,address,address,address,bool)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -540,19 +400,9 @@ export class SavingsAccount extends Contract {
     ): Promise<ContractTransaction>;
   };
 
-  allowance(
-    arg0: string,
-    arg1: string,
-    arg2: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  allowance(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  "allowance(address,address,address)"(
-    arg0: string,
-    arg1: string,
-    arg2: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  'allowance(address,address,address)'(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   approve(
     _amount: BigNumberish,
@@ -561,30 +411,20 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "approve(uint256,address,address)"(
+  'approve(uint256,address,address)'(
     _amount: BigNumberish,
     _token: string,
     _to: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  balanceInShares(
-    arg0: string,
-    arg1: string,
-    arg2: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  balanceInShares(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  "balanceInShares(address,address,address)"(
-    arg0: string,
-    arg1: string,
-    arg2: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  'balanceInShares(address,address,address)'(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   creditLine(overrides?: CallOverrides): Promise<string>;
 
-  "creditLine()"(overrides?: CallOverrides): Promise<string>;
+  'creditLine()'(overrides?: CallOverrides): Promise<string>;
 
   decreaseAllowance(
     _amount: BigNumberish,
@@ -593,7 +433,7 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "decreaseAllowance(uint256,address,address)"(
+  'decreaseAllowance(uint256,address,address)'(
     _amount: BigNumberish,
     _token: string,
     _to: string,
@@ -608,7 +448,7 @@ export class SavingsAccount extends Contract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "deposit(uint256,address,address,address)"(
+  'deposit(uint256,address,address,address)'(
     _amount: BigNumberish,
     _token: string,
     _strategy: string,
@@ -616,13 +456,9 @@ export class SavingsAccount extends Contract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  getTotalTokens(
-    _user: string,
-    _token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  getTotalTokens(_user: string, _token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "getTotalTokens(address,address)"(
+  'getTotalTokens(address,address)'(
     _user: string,
     _token: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -635,7 +471,7 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "increaseAllowance(uint256,address,address)"(
+  'increaseAllowance(uint256,address,address)'(
     _amount: BigNumberish,
     _token: string,
     _to: string,
@@ -649,7 +485,7 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "increaseAllowanceToCreditLine(uint256,address,address)"(
+  'increaseAllowanceToCreditLine(uint256,address,address)'(
     _amount: BigNumberish,
     _token: string,
     _from: string,
@@ -663,7 +499,7 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "initialize(address,address,address)"(
+  'initialize(address,address,address)'(
     _owner: string,
     _strategyRegistry: string,
     _creditLine: string,
@@ -672,19 +508,15 @@ export class SavingsAccount extends Contract {
 
   owner(overrides?: CallOverrides): Promise<string>;
 
-  "owner()"(overrides?: CallOverrides): Promise<string>;
+  'owner()'(overrides?: CallOverrides): Promise<string>;
 
-  renounceOwnership(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "renounceOwnership()"(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   strategyRegistry(overrides?: CallOverrides): Promise<string>;
 
-  "strategyRegistry()"(overrides?: CallOverrides): Promise<string>;
+  'strategyRegistry()'(overrides?: CallOverrides): Promise<string>;
 
   switchStrategy(
     _amount: BigNumberish,
@@ -694,7 +526,7 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "switchStrategy(uint256,address,address,address)"(
+  'switchStrategy(uint256,address,address,address)'(
     _amount: BigNumberish,
     _token: string,
     _currentStrategy: string,
@@ -710,7 +542,7 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "transfer(uint256,address,address,address)"(
+  'transfer(uint256,address,address,address)'(
     _amount: BigNumberish,
     _token: string,
     _strategy: string,
@@ -727,7 +559,7 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "transferFrom(uint256,address,address,address,address)"(
+  'transferFrom(uint256,address,address,address,address)'(
     _amount: BigNumberish,
     _token: string,
     _strategy: string,
@@ -736,22 +568,13 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  transferOwnership(
-    newOwner: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "transferOwnership(address)"(
-    newOwner: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'transferOwnership(address)'(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  updateCreditLine(
-    _creditLine: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  updateCreditLine(_creditLine: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "updateCreditLine(address)"(
+  'updateCreditLine(address)'(
     _creditLine: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -761,7 +584,7 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "updateStrategyRegistry(address)"(
+  'updateStrategyRegistry(address)'(
     _strategyRegistry: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -775,7 +598,7 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "withdraw(uint256,address,address,address,bool)"(
+  'withdraw(uint256,address,address,address,bool)'(
     _amount: BigNumberish,
     _token: string,
     _strategy: string,
@@ -784,15 +607,9 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  withdrawAll(
-    _token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  "withdrawAll(address)"(
-    _token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   withdrawFrom(
     _amount: BigNumberish,
@@ -804,7 +621,7 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "withdrawFrom(uint256,address,address,address,address,bool)"(
+  'withdrawFrom(uint256,address,address,address,address,bool)'(
     _amount: BigNumberish,
     _token: string,
     _strategy: string,
@@ -815,67 +632,34 @@ export class SavingsAccount extends Contract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    allowance(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    allowance(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "allowance(address,address,address)"(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'allowance(address,address,address)'(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    approve(
-      _amount: BigNumberish,
-      _token: string,
-      _to: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    approve(_amount: BigNumberish, _token: string, _to: string, overrides?: CallOverrides): Promise<void>;
 
-    "approve(uint256,address,address)"(
-      _amount: BigNumberish,
-      _token: string,
-      _to: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'approve(uint256,address,address)'(_amount: BigNumberish, _token: string, _to: string, overrides?: CallOverrides): Promise<void>;
 
-    balanceInShares(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    balanceInShares(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "balanceInShares(address,address,address)"(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'balanceInShares(address,address,address)'(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     creditLine(overrides?: CallOverrides): Promise<string>;
 
-    "creditLine()"(overrides?: CallOverrides): Promise<string>;
+    'creditLine()'(overrides?: CallOverrides): Promise<string>;
 
-    decreaseAllowance(
+    decreaseAllowance(_amount: BigNumberish, _token: string, _to: string, overrides?: CallOverrides): Promise<void>;
+
+    'decreaseAllowance(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _to: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "decreaseAllowance(uint256,address,address)"(
-      _amount: BigNumberish,
-      _token: string,
-      _to: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    deposit(_amount: BigNumberish, _token: string, _strategy: string, _to: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    deposit(
+    'deposit(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -883,62 +667,31 @@ export class SavingsAccount extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "deposit(uint256,address,address,address)"(
-      _amount: BigNumberish,
-      _token: string,
-      _strategy: string,
-      _to: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    getTotalTokens(_user: string, _token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    getTotalTokens(
-      _user: string,
-      _token: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'getTotalTokens(address,address)'(_user: string, _token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "getTotalTokens(address,address)"(
-      _user: string,
-      _token: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    increaseAllowance(_amount: BigNumberish, _token: string, _to: string, overrides?: CallOverrides): Promise<void>;
 
-    increaseAllowance(
+    'increaseAllowance(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _to: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "increaseAllowance(uint256,address,address)"(
-      _amount: BigNumberish,
-      _token: string,
-      _to: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    increaseAllowanceToCreditLine(_amount: BigNumberish, _token: string, _from: string, overrides?: CallOverrides): Promise<void>;
 
-    increaseAllowanceToCreditLine(
+    'increaseAllowanceToCreditLine(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _from: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "increaseAllowanceToCreditLine(uint256,address,address)"(
-      _amount: BigNumberish,
-      _token: string,
-      _from: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    initialize(_owner: string, _strategyRegistry: string, _creditLine: string, overrides?: CallOverrides): Promise<void>;
 
-    initialize(
-      _owner: string,
-      _strategyRegistry: string,
-      _creditLine: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "initialize(address,address,address)"(
+    'initialize(address,address,address)'(
       _owner: string,
       _strategyRegistry: string,
       _creditLine: string,
@@ -947,15 +700,15 @@ export class SavingsAccount extends Contract {
 
     owner(overrides?: CallOverrides): Promise<string>;
 
-    "owner()"(overrides?: CallOverrides): Promise<string>;
+    'owner()'(overrides?: CallOverrides): Promise<string>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
+    'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
     strategyRegistry(overrides?: CallOverrides): Promise<string>;
 
-    "strategyRegistry()"(overrides?: CallOverrides): Promise<string>;
+    'strategyRegistry()'(overrides?: CallOverrides): Promise<string>;
 
     switchStrategy(
       _amount: BigNumberish,
@@ -965,7 +718,7 @@ export class SavingsAccount extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "switchStrategy(uint256,address,address,address)"(
+    'switchStrategy(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _currentStrategy: string,
@@ -973,15 +726,9 @@ export class SavingsAccount extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    transfer(
-      _amount: BigNumberish,
-      _token: string,
-      _strategy: string,
-      _to: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    transfer(_amount: BigNumberish, _token: string, _strategy: string, _to: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "transfer(uint256,address,address,address)"(
+    'transfer(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -998,7 +745,7 @@ export class SavingsAccount extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "transferFrom(uint256,address,address,address,address)"(
+    'transferFrom(uint256,address,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1007,35 +754,17 @@ export class SavingsAccount extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    transferOwnership(
-      newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
 
-    "transferOwnership(address)"(
-      newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
 
-    updateCreditLine(
-      _creditLine: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    updateCreditLine(_creditLine: string, overrides?: CallOverrides): Promise<void>;
 
-    "updateCreditLine(address)"(
-      _creditLine: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'updateCreditLine(address)'(_creditLine: string, overrides?: CallOverrides): Promise<void>;
 
-    updateStrategyRegistry(
-      _strategyRegistry: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    updateStrategyRegistry(_strategyRegistry: string, overrides?: CallOverrides): Promise<void>;
 
-    "updateStrategyRegistry(address)"(
-      _strategyRegistry: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    'updateStrategyRegistry(address)'(_strategyRegistry: string, overrides?: CallOverrides): Promise<void>;
 
     withdraw(
       _amount: BigNumberish,
@@ -1046,7 +775,7 @@ export class SavingsAccount extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "withdraw(uint256,address,address,address,bool)"(
+    'withdraw(uint256,address,address,address,bool)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1057,10 +786,7 @@ export class SavingsAccount extends Contract {
 
     withdrawAll(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "withdrawAll(address)"(
-      _token: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'withdrawAll(address)'(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     withdrawFrom(
       _amount: BigNumberish,
@@ -1072,7 +798,7 @@ export class SavingsAccount extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "withdrawFrom(uint256,address,address,address,address,bool)"(
+    'withdrawFrom(uint256,address,address,address,address,bool)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1089,45 +815,29 @@ export class SavingsAccount extends Contract {
       from: string | null,
       to: string | null,
       amount: null
-    ): TypedEventFilter<
-      [string, string, string, BigNumber],
-      { token: string; from: string; to: string; amount: BigNumber }
-    >;
+    ): TypedEventFilter<[string, string, string, BigNumber], { token: string; from: string; to: string; amount: BigNumber }>;
 
     CreditLineAllowanceRefreshed(
       token: string | null,
       from: string | null,
       amount: null
-    ): TypedEventFilter<
-      [string, string, BigNumber],
-      { token: string; from: string; amount: BigNumber }
-    >;
+    ): TypedEventFilter<[string, string, BigNumber], { token: string; from: string; amount: BigNumber }>;
 
-    CreditLineUpdated(
-      updatedCreditLine: string | null
-    ): TypedEventFilter<[string], { updatedCreditLine: string }>;
+    CreditLineUpdated(updatedCreditLine: string | null): TypedEventFilter<[string], { updatedCreditLine: string }>;
 
     Deposited(
       user: string | null,
       amount: null,
       token: string | null,
       strategy: string | null
-    ): TypedEventFilter<
-      [string, BigNumber, string, string],
-      { user: string; amount: BigNumber; token: string; strategy: string }
-    >;
+    ): TypedEventFilter<[string, BigNumber, string, string], { user: string; amount: BigNumber; token: string; strategy: string }>;
 
     OwnershipTransferred(
       previousOwner: string | null,
       newOwner: string | null
-    ): TypedEventFilter<
-      [string, string],
-      { previousOwner: string; newOwner: string }
-    >;
+    ): TypedEventFilter<[string, string], { previousOwner: string; newOwner: string }>;
 
-    StrategyRegistryUpdated(
-      updatedStrategyRegistry: string | null
-    ): TypedEventFilter<[string], { updatedStrategyRegistry: string }>;
+    StrategyRegistryUpdated(updatedStrategyRegistry: string | null): TypedEventFilter<[string], { updatedStrategyRegistry: string }>;
 
     StrategySwitched(
       user: string | null,
@@ -1182,26 +892,13 @@ export class SavingsAccount extends Contract {
       user: string | null,
       tokenReceived: null,
       token: string | null
-    ): TypedEventFilter<
-      [string, BigNumber, string],
-      { user: string; tokenReceived: BigNumber; token: string }
-    >;
+    ): TypedEventFilter<[string, BigNumber, string], { user: string; tokenReceived: BigNumber; token: string }>;
   };
 
   estimateGas: {
-    allowance(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    allowance(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "allowance(address,address,address)"(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'allowance(address,address,address)'(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
       _amount: BigNumberish,
@@ -1210,30 +907,20 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "approve(uint256,address,address)"(
+    'approve(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _to: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    balanceInShares(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    balanceInShares(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "balanceInShares(address,address,address)"(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'balanceInShares(address,address,address)'(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     creditLine(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "creditLine()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'creditLine()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     decreaseAllowance(
       _amount: BigNumberish,
@@ -1242,7 +929,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "decreaseAllowance(uint256,address,address)"(
+    'decreaseAllowance(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _to: string,
@@ -1257,7 +944,7 @@ export class SavingsAccount extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "deposit(uint256,address,address,address)"(
+    'deposit(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1265,13 +952,9 @@ export class SavingsAccount extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    getTotalTokens(
-      _user: string,
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    getTotalTokens(_user: string, _token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "getTotalTokens(address,address)"(
+    'getTotalTokens(address,address)'(
       _user: string,
       _token: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1284,7 +967,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "increaseAllowance(uint256,address,address)"(
+    'increaseAllowance(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _to: string,
@@ -1298,7 +981,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "increaseAllowanceToCreditLine(uint256,address,address)"(
+    'increaseAllowanceToCreditLine(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _from: string,
@@ -1312,7 +995,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "initialize(address,address,address)"(
+    'initialize(address,address,address)'(
       _owner: string,
       _strategyRegistry: string,
       _creditLine: string,
@@ -1321,19 +1004,15 @@ export class SavingsAccount extends Contract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    renounceOwnership(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     strategyRegistry(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "strategyRegistry()"(overrides?: CallOverrides): Promise<BigNumber>;
+    'strategyRegistry()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     switchStrategy(
       _amount: BigNumberish,
@@ -1343,7 +1022,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "switchStrategy(uint256,address,address,address)"(
+    'switchStrategy(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _currentStrategy: string,
@@ -1359,7 +1038,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "transfer(uint256,address,address,address)"(
+    'transfer(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1376,7 +1055,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "transferFrom(uint256,address,address,address,address)"(
+    'transferFrom(uint256,address,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1385,32 +1064,17 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    transferOwnership(
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "transferOwnership(address)"(
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'transferOwnership(address)'(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    updateCreditLine(
-      _creditLine: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    updateCreditLine(_creditLine: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "updateCreditLine(address)"(
-      _creditLine: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'updateCreditLine(address)'(_creditLine: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    updateStrategyRegistry(
-      _strategyRegistry: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    updateStrategyRegistry(_strategyRegistry: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "updateStrategyRegistry(address)"(
+    'updateStrategyRegistry(address)'(
       _strategyRegistry: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1424,7 +1088,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "withdraw(uint256,address,address,address,bool)"(
+    'withdraw(uint256,address,address,address,bool)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1433,15 +1097,9 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    withdrawAll(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    "withdrawAll(address)"(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     withdrawFrom(
       _amount: BigNumberish,
@@ -1453,7 +1111,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "withdrawFrom(uint256,address,address,address,address,bool)"(
+    'withdrawFrom(uint256,address,address,address,address,bool)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1465,14 +1123,9 @@ export class SavingsAccount extends Contract {
   };
 
   populateTransaction: {
-    allowance(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    allowance(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "allowance(address,address,address)"(
+    'allowance(address,address,address)'(
       arg0: string,
       arg1: string,
       arg2: string,
@@ -1486,21 +1139,16 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "approve(uint256,address,address)"(
+    'approve(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _to: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    balanceInShares(
-      arg0: string,
-      arg1: string,
-      arg2: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    balanceInShares(arg0: string, arg1: string, arg2: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "balanceInShares(address,address,address)"(
+    'balanceInShares(address,address,address)'(
       arg0: string,
       arg1: string,
       arg2: string,
@@ -1509,7 +1157,7 @@ export class SavingsAccount extends Contract {
 
     creditLine(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "creditLine()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'creditLine()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     decreaseAllowance(
       _amount: BigNumberish,
@@ -1518,7 +1166,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "decreaseAllowance(uint256,address,address)"(
+    'decreaseAllowance(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _to: string,
@@ -1533,7 +1181,7 @@ export class SavingsAccount extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "deposit(uint256,address,address,address)"(
+    'deposit(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1547,7 +1195,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "getTotalTokens(address,address)"(
+    'getTotalTokens(address,address)'(
       _user: string,
       _token: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1560,7 +1208,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "increaseAllowance(uint256,address,address)"(
+    'increaseAllowance(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _to: string,
@@ -1574,7 +1222,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "increaseAllowanceToCreditLine(uint256,address,address)"(
+    'increaseAllowanceToCreditLine(uint256,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _from: string,
@@ -1588,7 +1236,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "initialize(address,address,address)"(
+    'initialize(address,address,address)'(
       _owner: string,
       _strategyRegistry: string,
       _creditLine: string,
@@ -1597,21 +1245,15 @@ export class SavingsAccount extends Contract {
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    renounceOwnership(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "renounceOwnership()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     strategyRegistry(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "strategyRegistry()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    'strategyRegistry()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     switchStrategy(
       _amount: BigNumberish,
@@ -1621,7 +1263,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "switchStrategy(uint256,address,address,address)"(
+    'switchStrategy(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _currentStrategy: string,
@@ -1637,7 +1279,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "transfer(uint256,address,address,address)"(
+    'transfer(uint256,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1654,7 +1296,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "transferFrom(uint256,address,address,address,address)"(
+    'transferFrom(uint256,address,address,address,address)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1663,22 +1305,16 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    transferOwnership(
+    transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    'transferOwnership(address)'(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "transferOwnership(address)"(
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    updateCreditLine(_creditLine: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    updateCreditLine(
-      _creditLine: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "updateCreditLine(address)"(
+    'updateCreditLine(address)'(
       _creditLine: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -1688,7 +1324,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "updateStrategyRegistry(address)"(
+    'updateStrategyRegistry(address)'(
       _strategyRegistry: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -1702,7 +1338,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "withdraw(uint256,address,address,address,bool)"(
+    'withdraw(uint256,address,address,address,bool)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
@@ -1711,15 +1347,9 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    withdrawAll(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    "withdrawAll(address)"(
-      _token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     withdrawFrom(
       _amount: BigNumberish,
@@ -1731,7 +1361,7 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "withdrawFrom(uint256,address,address,address,address,bool)"(
+    'withdrawFrom(uint256,address,address,address,address,bool)'(
       _amount: BigNumberish,
       _token: string,
       _strategy: string,
