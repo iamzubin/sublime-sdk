@@ -40,18 +40,20 @@ import { CreditLine__factory } from './wrappers/factories/CreditLine__factory';
 import { SublimeConfig } from './types/sublimeConfig';
 import { IYield, IYield__factory } from 'wrappers';
 import { zeroAddress } from 'config/constants';
+import { getPrice } from 'queries/prices';
 export class SublimeSubgraph {
   private subgraphUrl: string;
   private signer: Signer;
   private tokenManager: TokenManager;
   private creditLineContract: CreditLine;
-  private yield: IYield;
+  private priceOracleUrl: string;
 
-  constructor(url: string, signer: Signer, tokenManager: TokenManager, config: SublimeConfig) {
+  constructor(url: string, signer: Signer, tokenManager: TokenManager, priceOralceUrl: string, config: SublimeConfig) {
     this.creditLineContract = new CreditLine__factory(signer).attach(config.creditLineContractAddress);
     this.subgraphUrl = url;
     this.signer = signer;
     this.tokenManager = tokenManager;
+    this.priceOracleUrl = priceOralceUrl;
   }
 
   async getPools(): Promise<PoolDetail[]> {
@@ -266,6 +268,11 @@ export class SublimeSubgraph {
     return transformedData;
   }
 
+  private async getAPR(strategy: string): Promise<BigNumber> {
+    // TODO: Find APR
+    return new BigNumber(0);
+  }
+
   private async transformToSavingsAccountUserDetails(address: string, data: any[]): Promise<SavingsAccountUserDetails> {
     let savingsAccountUserDetails: SavingsAccountUserDetails = {
       user: address,
@@ -276,6 +283,8 @@ export class SublimeSubgraph {
     let tokenIndex = {};
     let strategyIndex = {};
 
+    let tokenPrice = {};
+
     let yieldContract: IYield = IYield__factory.connect(zeroAddress, this.signer);
 
     for(let i=0; i < data.length; i++) {
@@ -284,7 +293,15 @@ export class SublimeSubgraph {
       let shares = data[i].shares;
 
       yieldContract = await yieldContract.attach(strategy);
-      let amount = (await yieldContract.callStatic.getTokensForShares(shares, token)).toString();
+      let amountInTokens = (await yieldContract.callStatic.getTokensForShares(shares, token)).toString();
+      let price = tokenPrice[token];
+      if(!price) {
+        price = await getPrice(this.priceOracleUrl, token);
+        tokenPrice[token] = price;
+      }
+      let amount = new BigNumber(amountInTokens).multipliedBy(price);
+
+      let apr = await this.getAPR(strategy);
 
       if(savingsAccountUserDetails.balances[tokenIndex[token]]?.token != token) {
         tokenIndex[token] = savingsAccountUserDetails.balances.length;
@@ -304,9 +321,15 @@ export class SublimeSubgraph {
       savingsAccountUserDetails.balances[tokenIndex[token]].strategyBalance[strategyIndex[strategy]] = {
         strategy,
         balance: new BigNumber(amount),
-        APR: new BigNumber(0)
+        APR: apr
       }
 
+      savingsAccountUserDetails.balances[tokenIndex[token]].APR = (
+                                                                    (
+                                                                      savingsAccountUserDetails.balances[tokenIndex[token]].APR
+                                                                      .multipliedBy(savingsAccountUserDetails.totalBalance)  
+                                                                    ).plus(apr.multipliedBy(new BigNumber(amount)))
+                                                                  ).div(savingsAccountUserDetails.totalBalance.plus(amount))
       savingsAccountUserDetails.balances[tokenIndex[token]].balance = savingsAccountUserDetails.balances[tokenIndex[token]].balance.plus(amount);
       savingsAccountUserDetails.totalBalance = savingsAccountUserDetails.totalBalance.plus(amount);
     }
