@@ -25,6 +25,7 @@ import {
   getPendingCreditLinesRequestedToLender,
   getPendingCreditlinesRequestedByLender,
   getCreditLineTimeline,
+  getBalances,
 } from './queries';
 
 import { Signer } from '@ethersproject/abstract-signer';
@@ -37,11 +38,14 @@ import { TokenManager } from './tokenManager';
 import { CreditLine } from './wrappers/CreditLine';
 import { CreditLine__factory } from './wrappers/factories/CreditLine__factory';
 import { SublimeConfig } from './types/sublimeConfig';
+import { IYield, IYield__factory } from 'wrappers';
+import { zeroAddress } from 'config/constants';
 export class SublimeSubgraph {
   private subgraphUrl: string;
   private signer: Signer;
   private tokenManager: TokenManager;
   private creditLineContract: CreditLine;
+  private yield: IYield;
 
   constructor(url: string, signer: Signer, tokenManager: TokenManager, config: SublimeConfig) {
     this.creditLineContract = new CreditLine__factory(signer).attach(config.creditLineContractAddress);
@@ -262,14 +266,59 @@ export class SublimeSubgraph {
     return transformedData;
   }
 
-  // to-do
-  async getSavingsAccountOverview(address: string): Promise<SavingsAccountUserDetails> {
-    let balances = await getBalances()
-    return {
+  private async transformToSavingsAccountUserDetails(address: string, data: any[]): Promise<SavingsAccountUserDetails> {
+    let savingsAccountUserDetails: SavingsAccountUserDetails = {
       user: address,
-      balance: ,
-      totalBalance
+      totalBalance: new BigNumber(0),
+      balances: []
+    };
+
+    let tokenIndex = {};
+    let strategyIndex = {};
+
+    let yieldContract: IYield = IYield__factory.connect(zeroAddress, this.signer);
+
+    for(let i=0; i < data.length; i++) {
+      let strategy = data[i].strategy.address;
+      let token = data[i].token;
+      let shares = data[i].shares;
+
+      yieldContract = await yieldContract.attach(strategy);
+      let amount = (await yieldContract.callStatic.getTokensForShares(shares, token)).toString();
+
+      if(savingsAccountUserDetails.balances[tokenIndex[token]]?.token != token) {
+        tokenIndex[token] = savingsAccountUserDetails.balances.length;
+        savingsAccountUserDetails.balances.push({
+          token,
+          balance: new BigNumber(0),
+          strategyBalance: [],
+          APR: new BigNumber(0)
+        });
+      }
+
+      // 2 elemets with same strategy and token can't exist
+      if(strategyIndex[strategy] != 0) {
+        throw new Error('2 entities in subgraph for same token and strategy');
+      }
+      strategyIndex[strategy] = savingsAccountUserDetails.balances[tokenIndex[token]].strategyBalance.length;
+      savingsAccountUserDetails.balances[tokenIndex[token]].strategyBalance[strategyIndex[strategy]] = {
+        strategy,
+        balance: new BigNumber(amount),
+        APR: new BigNumber(0)
+      }
+
+      savingsAccountUserDetails.balances[tokenIndex[token]].balance = savingsAccountUserDetails.balances[tokenIndex[token]].balance.plus(amount);
+      savingsAccountUserDetails.totalBalance = savingsAccountUserDetails.totalBalance.plus(amount);
     }
+
+    return savingsAccountUserDetails;
+  }
+
+  async getSavingsAccountOverview(address: string): Promise<SavingsAccountUserDetails> {
+    let balances = await getBalances(this.subgraphUrl, address);
+    let savingsAccountUserDetails = await this.transformToSavingsAccountUserDetails(address, balances);
+
+    return savingsAccountUserDetails;
   }
 
   async getDashboardOverview(address: string): Promise<DashboardOverview> {

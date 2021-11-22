@@ -1,3 +1,6 @@
+import { BigNumber } from 'bignumber.js';
+import { BindingName } from 'typescript';
+
 export interface Asset {
   name: string;
   address: string;
@@ -50,22 +53,21 @@ export interface CreditLineRequest {
 
 export interface SavingsAccountStrategyBalance {
   strategy: string;
-  balance: string;
-  APR: string;
+  balance: BigNumber;
+  APR: BigNumber;
 }
 
 export interface SavingsAccountBalance {
-  user: string;
   token: Asset;
-  balance: string;
-  strategyBalance: [SavingsAccountStrategyBalance];
-  APR: string; // weighted average of all strategy APRs
+  balance: BigNumber;
+  strategyBalance: [SavingsAccountStrategyBalance?];
+  APR: BigNumber; // weighted average of all strategy APRs
 }
 
 export interface SavingsAccountUserDetails {
   user: string;
-  balance: [SavingsAccountBalance];
-  totalBalance: string;
+  balances: [SavingsAccountBalance?];
+  totalBalance: BigNumber;
 }
 
 export interface PoolDetail {
