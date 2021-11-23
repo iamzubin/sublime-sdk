@@ -38,9 +38,10 @@ import { TokenManager } from './tokenManager';
 import { CreditLine } from './wrappers/CreditLine';
 import { CreditLine__factory } from './wrappers/factories/CreditLine__factory';
 import { SublimeConfig } from './types/sublimeConfig';
-import { IYield, IYield__factory } from 'wrappers';
+import { ICToken, ICToken__factory, IYield, IYield__factory } from 'wrappers';
 import { zeroAddress } from 'config/constants';
 import { getPrice } from 'queries/prices';
+import { strategies } from 'config/strategies';
 export class SublimeSubgraph {
   private subgraphUrl: string;
   private signer: Signer;
@@ -269,7 +270,18 @@ export class SublimeSubgraph {
   }
 
   private async getAPR(strategy: string): Promise<BigNumber> {
-    // TODO: Find APR
+    const BLOCKS_PER_DAY = 6570; // 13.15 sec block
+    const DAYS_PER_YEAR = 365;
+    if(strategy == strategies.COMPOUND) {
+      // Ref - "Calculating the APY Using Rate Per Block" section in https://compound.finance/docs
+      let cTokenContract: ICToken = ICToken__factory.connect(strategy, this.signer);
+      let supplyRatePerBlock = new BigNumber((await cTokenContract.callStatic.supplyRatePerBlock()).toString());
+      let perDaySupplyRate = (supplyRatePerBlock.div(new BigNumber(10).pow(18)).multipliedBy(BLOCKS_PER_DAY)).plus(1);
+      let perYearSupplyRate = ((perDaySupplyRate.pow(DAYS_PER_YEAR)).minus(1)).multipliedBy(100);
+      return perYearSupplyRate;
+    } else if(strategy == strategies.NO_STRATEGY) {
+      return new BigNumber(0);
+    }
     return new BigNumber(0);
   }
 
