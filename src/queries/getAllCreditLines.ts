@@ -65,6 +65,40 @@ async function _getCreditLinesOfBorrower(url: string, status, requestByLender, b
   return allData;
 }
 
+export async function getCreditLine(url: string, id: string): Promise<any[]> {
+  let allData = [];
+  const data = JSON.stringify({
+    query: `{
+          creditLines (where:{id:"${id}"}){
+            id
+            status	
+            lender
+            borrower
+            requestByLender
+            principal
+            collateralAsset
+            borrowLimit
+            borrowRate
+            idealCollateralRatio
+            borrowAsset
+            autoLiquidation
+            lastPrincipalUpdateTime
+          }
+      }`,
+  });
+
+  var options = {
+    url,
+    headers: { 'Content-Type': 'application/json' },
+    body: data,
+  };
+
+  let result = await fetchData(options);
+  // console.log(result);
+  allData.push(...result.data.creditLines);
+  return allData;
+}
+
 async function _getCreditLinesOfLender(url: string, status, requestByLender, lender: string, count, skip): Promise<any[]> {
   lender = lender.toLowerCase();
   let allData = [];
