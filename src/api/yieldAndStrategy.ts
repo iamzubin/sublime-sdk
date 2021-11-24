@@ -71,7 +71,7 @@ export class YieldAndStrategyApi {
     return new BigNumber(_temp).div(new BigNumber(10).pow(liquidityTokenDecimal)).toFixed(2);
   }
 
-  public async getStrategies(): Promise<Strategy[]> {
+  public getStrategies(): Strategy[] {
     return [
       {
         address: this.config.noStrategyAddress,
@@ -80,10 +80,6 @@ export class YieldAndStrategyApi {
       {
         address: this.config.compoundStrategyContractAddress,
         name: StrategyType.CompounYield,
-      },
-      {
-        address: this.config.yearnStrategyContractAddress,
-        name: StrategyType.YearnYield,
       },
     ];
   }

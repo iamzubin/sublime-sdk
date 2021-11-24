@@ -8,7 +8,7 @@ export interface Asset {
 export enum StrategyType {
   NoYield = 'NoYield',
   CompounYield = 'CompoundYield',
-  YearnYield = 'YearnYield',
+  // YearnYield = 'YearnYield',
 }
 
 export enum Operation {

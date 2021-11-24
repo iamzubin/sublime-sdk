@@ -61,6 +61,12 @@ const _abi = [
         type: 'address',
       },
       {
+        indexed: true,
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
         indexed: false,
         internalType: 'uint256',
         name: 'amount',
@@ -95,7 +101,7 @@ const _abi = [
       {
         indexed: false,
         internalType: 'uint256',
-        name: 'amount',
+        name: 'sharesReceived',
         type: 'uint256',
       },
       {
@@ -141,6 +147,18 @@ const _abi = [
         internalType: 'address',
         name: 'token',
         type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'sharesDecreasedInCurrentStrategy',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'sharesIncreasedInNewStrategy',
+        type: 'uint256',
       },
       {
         indexed: false,
@@ -213,7 +231,7 @@ const _abi = [
       {
         indexed: false,
         internalType: 'uint256',
-        name: 'amountReceived',
+        name: 'sharesWithdrawn',
         type: 'uint256',
       },
       {

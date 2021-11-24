@@ -353,13 +353,12 @@ export class CreditLine extends Contract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [number, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+      [number, BigNumber, BigNumber, BigNumber, BigNumber] & {
         status: number;
         principal: BigNumber;
         totalInterestRepaid: BigNumber;
         lastPrincipalUpdateTime: BigNumber;
         interestAccruedTillLastPrincipalUpdate: BigNumber;
-        collateralAmount: BigNumber;
       }
     >;
 
@@ -367,13 +366,12 @@ export class CreditLine extends Contract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [number, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+      [number, BigNumber, BigNumber, BigNumber, BigNumber] & {
         status: number;
         principal: BigNumber;
         totalInterestRepaid: BigNumber;
         lastPrincipalUpdateTime: BigNumber;
         interestAccruedTillLastPrincipalUpdate: BigNumber;
-        collateralAmount: BigNumber;
       }
     >;
 
@@ -721,13 +719,12 @@ export class CreditLine extends Contract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [number, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+    [number, BigNumber, BigNumber, BigNumber, BigNumber] & {
       status: number;
       principal: BigNumber;
       totalInterestRepaid: BigNumber;
       lastPrincipalUpdateTime: BigNumber;
       interestAccruedTillLastPrincipalUpdate: BigNumber;
-      collateralAmount: BigNumber;
     }
   >;
 
@@ -735,13 +732,12 @@ export class CreditLine extends Contract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [number, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+    [number, BigNumber, BigNumber, BigNumber, BigNumber] & {
       status: number;
       principal: BigNumber;
       totalInterestRepaid: BigNumber;
       lastPrincipalUpdateTime: BigNumber;
       interestAccruedTillLastPrincipalUpdate: BigNumber;
-      collateralAmount: BigNumber;
     }
   >;
 
@@ -1057,13 +1053,12 @@ export class CreditLine extends Contract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [number, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+      [number, BigNumber, BigNumber, BigNumber, BigNumber] & {
         status: number;
         principal: BigNumber;
         totalInterestRepaid: BigNumber;
         lastPrincipalUpdateTime: BigNumber;
         interestAccruedTillLastPrincipalUpdate: BigNumber;
-        collateralAmount: BigNumber;
       }
     >;
 
@@ -1071,13 +1066,12 @@ export class CreditLine extends Contract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [number, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber] & {
+      [number, BigNumber, BigNumber, BigNumber, BigNumber] & {
         status: number;
         principal: BigNumber;
         totalInterestRepaid: BigNumber;
         lastPrincipalUpdateTime: BigNumber;
         interestAccruedTillLastPrincipalUpdate: BigNumber;
-        collateralAmount: BigNumber;
       }
     >;
 

@@ -62,11 +62,13 @@ interface StrategyRegistryInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'updateStrategy', data: BytesLike): Result;
 
   events: {
+    'MaxStrategiesUpdated(uint256)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
     'StrategyAdded(address)': EventFragment;
     'StrategyRemoved(address)': EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: 'MaxStrategiesUpdated'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'StrategyAdded'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'StrategyRemoved'): EventFragment;
@@ -326,6 +328,8 @@ export class StrategyRegistry extends Contract {
   };
 
   filters: {
+    MaxStrategiesUpdated(maxStrategies: null): TypedEventFilter<[BigNumber], { maxStrategies: BigNumber }>;
+
     OwnershipTransferred(
       previousOwner: string | null,
       newOwner: string | null

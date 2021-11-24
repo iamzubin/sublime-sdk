@@ -3,14 +3,16 @@ import { ContractTransaction, Signer } from 'ethers';
 
 import { SavingsAccount } from '../wrappers/SavingsAccount';
 import { SavingsAccount__factory } from '../wrappers/factories/SavingsAccount__factory';
-import { BigNumberish } from '@ethersproject/bignumber';
 import { BigNumber } from 'bignumber.js';
 
-import { zeroAddress } from '../config/constants';
-import { IYield } from '../wrappers';
+import { IYield } from '../wrappers/IYield';
 import { IYield__factory } from '../wrappers/factories/IYield__factory';
+
+import { ERC20Detailed, ERC20Detailed__factory } from '../wrappers';
+
 import { TokenManager } from '../tokenManager';
-import { Asset } from '../types/Types';
+import { Asset, StrategyType } from '../types/Types';
+import { zeroAddress } from '../config/constants';
 
 export class SavingsAccountApi {
   private signer: Signer;
@@ -25,7 +27,9 @@ export class SavingsAccountApi {
     this.tokenManager = tokenManager;
   }
 
-  public async deposit(amount: string, asset: string, strategy: string, to: string): Promise<ContractTransaction> {
+  public async approveTokenForSavingsAccountDeposit(amount: string, asset: string, strategy: StrategyType): Promise<ContractTransaction> {
+    let _strategyContractAddress: string = this.getStrategyAddress(strategy);
+
     await this.tokenManager.updateTokenDecimals(asset);
     const borrowDecimal = this.tokenManager.getTokenDecimals(asset);
 
@@ -34,10 +38,43 @@ export class SavingsAccountApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.deposit(_amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0), asset, strategy, to);
+    let tokenContract: ERC20Detailed = new ERC20Detailed__factory(this.signer).attach(asset);
+    return tokenContract.approve(_strategyContractAddress, _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0));
   }
 
-  public async switchStrategy(currentStrategy: string, newStrategy: string, asset: string, amount: string): Promise<ContractTransaction> {
+  public async deposit(amount: string, asset: string, strategy: StrategyType, to: string): Promise<ContractTransaction> {
+    let _strategyContractAddress: string = this.getStrategyAddress(strategy);
+
+    await this.tokenManager.updateTokenDecimals(asset);
+    const borrowDecimal = this.tokenManager.getTokenDecimals(asset);
+
+    let _amount = new BigNumber(amount);
+    if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
+      throw new Error('amount should be a valid number');
+    }
+
+    return this.savingsAccount.deposit(
+      _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
+      asset,
+      _strategyContractAddress,
+      to,
+      { value: asset === zeroAddress ? _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0) : '0' }
+    );
+  }
+
+  public async switchStrategy(
+    currentStrategy: StrategyType,
+    newStrategy: StrategyType,
+    asset: string,
+    amount: string
+  ): Promise<ContractTransaction> {
+    if (currentStrategy === newStrategy) {
+      throw new Error('Current Strategy and new strategy can not be same');
+    }
+
+    let _currentStrategyAddress = this.getStrategyAddress(currentStrategy);
+    let _newStrategyAddress = this.getStrategyAddress(newStrategy);
+
     await this.tokenManager.updateTokenDecimals(asset);
     const decimal = this.tokenManager.getTokenDecimals(asset);
 
@@ -47,65 +84,63 @@ export class SavingsAccountApi {
     }
 
     return this.savingsAccount.switchStrategy(
-      currentStrategy,
-      newStrategy,
+      _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
       asset,
-      _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0)
+      _currentStrategyAddress,
+      _newStrategyAddress
     );
   }
 
   public async withdraw(
-    withdrawTo: string,
-    shares: string,
-    asset: string,
-    strategy: string,
+    amount: string,
+    token: string,
+    strategy: StrategyType,
+    to: string,
     withdrawShares: boolean
   ): Promise<ContractTransaction> {
-    const yieldContract: IYield = IYield__factory.connect(strategy, this.signer);
-    const liquiditySharesAddress: string = await yieldContract.liquidityToken(asset);
+    let _strategyContractAddress = this.getStrategyAddress(strategy);
 
-    await this.tokenManager.updateTokenDecimals(liquiditySharesAddress);
-    const decimal = this.tokenManager.getTokenDecimals(liquiditySharesAddress);
+    await this.tokenManager.updateTokenDecimals(token);
+    const decimal = this.tokenManager.getTokenDecimals(token);
 
-    let _shares = new BigNumber(shares);
-    if (_shares.isNaN() || _shares.isZero() || _shares.isNegative()) {
-      throw new Error('shares should be a valid number');
+    let _amount = new BigNumber(amount);
+    if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
+      throw new Error('amount should be a valid number');
     }
 
     return this.savingsAccount.withdraw(
-      withdrawTo,
-      _shares.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
-      asset,
-      strategy,
+      _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
+      token,
+      _strategyContractAddress,
+      to,
       withdrawShares
     );
   }
 
   public async withdrawFrom(
+    amount: string,
+    token: string,
+    strategy: StrategyType,
     from: string,
     to: string,
-    shares: string,
-    asset: string,
-    strategy: string,
     withdrawShares: boolean
   ): Promise<ContractTransaction> {
-    const yieldContract: IYield = IYield__factory.connect(strategy, this.signer);
-    const liquiditySharesAddress: string = await yieldContract.liquidityToken(asset);
+    let _strategyContractAddress = this.getStrategyAddress(strategy);
 
-    await this.tokenManager.updateTokenDecimals(liquiditySharesAddress);
-    const decimal = this.tokenManager.getTokenDecimals(liquiditySharesAddress);
+    await this.tokenManager.updateTokenDecimals(token);
+    const decimal = this.tokenManager.getTokenDecimals(token);
 
-    let _shares = new BigNumber(shares);
-    if (_shares.isNaN() || _shares.isZero() || _shares.isNegative()) {
-      throw new Error('shares should be a valid number');
+    let _amount = new BigNumber(amount);
+    if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
+      throw new Error('_amount should be a valid number');
     }
 
     return this.savingsAccount.withdrawFrom(
+      _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
+      token,
+      _strategyContractAddress,
       from,
       to,
-      _shares.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
-      asset,
-      strategy,
       withdrawShares
     );
   }
@@ -114,7 +149,7 @@ export class SavingsAccountApi {
     return this.savingsAccount.withdrawAll(asset);
   }
 
-  public async approve(token: string, to: string, amount: string): Promise<ContractTransaction> {
+  public async approve(amount: string, token: string, to: string): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
@@ -123,7 +158,7 @@ export class SavingsAccountApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.approve(token, to, _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0));
+    return this.savingsAccount.approve(_amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0), token, to);
   }
 
   public async increaseAllowace(token: string, to: string, amount: string): Promise<ContractTransaction> {
@@ -150,7 +185,7 @@ export class SavingsAccountApi {
     return this.savingsAccount.decreaseAllowance(token, to, _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0));
   }
 
-  public async approveFromToCreditLine(token: string, from: string, amount: string): Promise<ContractTransaction> {
+  public async approveTokenForCreditLines(token: string, amount: string): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
@@ -159,10 +194,15 @@ export class SavingsAccountApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.approveFromToCreditLine(token, from, _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0));
+    return this.savingsAccount.approve(
+      token,
+      _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0),
+      this.config.creditLineContractAddress
+    );
   }
 
-  public async transfer(token: string, to: string, strategy: string, amount: string): Promise<ContractTransaction> {
+  public async transfer(amount: string, token: string, strategy: StrategyType, to: string): Promise<ContractTransaction> {
+    let _strategyContractAddress = this.getStrategyAddress(strategy);
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
@@ -171,10 +211,17 @@ export class SavingsAccountApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.transfer(token, to, strategy, _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0));
+    return this.savingsAccount.transfer(
+      _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0),
+      token,
+      _strategyContractAddress,
+      to
+    );
   }
 
-  public async transferFrom(token: string, from: string, to: string, strategy: string, amount: string): Promise<ContractTransaction> {
+  public async transferFrom(amount: string, token: string, strategy: StrategyType, from: string, to: string): Promise<ContractTransaction> {
+    let _strategyContractAddress = this.getStrategyAddress(strategy);
+
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
@@ -183,7 +230,13 @@ export class SavingsAccountApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.transferFrom(token, from, to, strategy, _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0));
+    return this.savingsAccount.transferFrom(
+      _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0),
+      token,
+      _strategyContractAddress,
+      from,
+      to
+    );
   }
 
   public async getTotalTokens(user: string, asset: string): Promise<string> {
@@ -194,19 +247,21 @@ export class SavingsAccountApi {
     return new BigNumber(getTotalTokens).div(new BigNumber(10).pow(decimals)).toFixed(2);
   }
 
-  public async getShares(user: string, asset: string, strategy: string): Promise<string> {
-    const yieldContract: IYield = IYield__factory.connect(strategy, this.signer);
+  public async getShares(user: string, asset: string, strategy: StrategyType): Promise<string> {
+    let _strategyContractAddress = this.getStrategyAddress(strategy);
+    const yieldContract: IYield = IYield__factory.connect(_strategyContractAddress, this.signer);
     const liquiditySharesAddress: string = await yieldContract.liquidityToken(asset);
 
     await this.tokenManager.updateTokenDecimals(liquiditySharesAddress);
     const decimal = this.tokenManager.getTokenDecimals(liquiditySharesAddress);
 
-    let userShares = await (await this.savingsAccount.userLockedBalance(user, asset, strategy)).toString();
-    return new BigNumber(userShares).div(new BigNumber(10).pow(decimal)).toFixed(2);
+    let userShares = await (await this.savingsAccount.balanceInShares(user, asset, _strategyContractAddress)).toString();
+    return new BigNumber(userShares).div(new BigNumber(10).pow(decimal)).toFixed(6);
   }
 
-  public async getLiquidityTokenOfAssetForStrategy(asset: string, strategy: string): Promise<Asset> {
-    const yieldContract: IYield = IYield__factory.connect(strategy, this.signer);
+  public async getLiquidityTokenOfAssetForStrategy(asset: string, strategy: StrategyType): Promise<Asset> {
+    let _strategyContractAddress = this.getStrategyAddress(strategy);
+    const yieldContract: IYield = IYield__factory.connect(_strategyContractAddress, this.signer);
     let liquidityToken: string = await yieldContract.liquidityToken(asset);
     await this.tokenManager.updateAll(liquidityToken);
     return {
@@ -215,5 +270,15 @@ export class SavingsAccountApi {
       pricePerAssetInUSD: this.tokenManager.getPricePerAsset(liquidityToken),
       logo: this.tokenManager.getLogo(liquidityToken),
     };
+  }
+
+  private getStrategyAddress(strategy: StrategyType): string {
+    if (strategy === StrategyType.NoYield) {
+      return this.config.noStrategyAddress;
+    } else if (strategy === StrategyType.CompounYield) {
+      return this.config.compoundStrategyContractAddress;
+    } else {
+      throw new Error(`${strategy} strategy is not supported`);
+    }
   }
 }

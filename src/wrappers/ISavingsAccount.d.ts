@@ -67,11 +67,11 @@ interface ISavingsAccountInterface extends ethers.utils.Interface {
 
   events: {
     'Approved(address,address,address,uint256)': EventFragment;
-    'CreditLineAllowanceRefreshed(address,address,uint256)': EventFragment;
+    'CreditLineAllowanceRefreshed(address,address,address,uint256)': EventFragment;
     'CreditLineUpdated(address)': EventFragment;
     'Deposited(address,uint256,address,address)': EventFragment;
     'StrategyRegistryUpdated(address)': EventFragment;
-    'StrategySwitched(address,address,address,address)': EventFragment;
+    'StrategySwitched(address,address,uint256,uint256,address,address)': EventFragment;
     'Transfer(address,address,address,address,uint256)': EventFragment;
     'Withdrawn(address,address,uint256,address,address)': EventFragment;
     'WithdrawnAll(address,uint256,address)': EventFragment;
@@ -637,30 +637,43 @@ export class ISavingsAccount extends Contract {
     CreditLineAllowanceRefreshed(
       token: string | null,
       from: string | null,
+      to: string | null,
       amount: null
-    ): TypedEventFilter<[string, string, BigNumber], { token: string; from: string; amount: BigNumber }>;
+    ): TypedEventFilter<[string, string, string, BigNumber], { token: string; from: string; to: string; amount: BigNumber }>;
 
     CreditLineUpdated(updatedCreditLine: string | null): TypedEventFilter<[string], { updatedCreditLine: string }>;
 
     Deposited(
       user: string | null,
-      amount: null,
+      sharesReceived: null,
       token: string | null,
       strategy: string | null
-    ): TypedEventFilter<[string, BigNumber, string, string], { user: string; amount: BigNumber; token: string; strategy: string }>;
+    ): TypedEventFilter<
+      [string, BigNumber, string, string],
+      {
+        user: string;
+        sharesReceived: BigNumber;
+        token: string;
+        strategy: string;
+      }
+    >;
 
     StrategyRegistryUpdated(updatedStrategyRegistry: string | null): TypedEventFilter<[string], { updatedStrategyRegistry: string }>;
 
     StrategySwitched(
       user: string | null,
       token: string | null,
+      sharesDecreasedInCurrentStrategy: null,
+      sharesIncreasedInNewStrategy: null,
       currentStrategy: null,
       newStrategy: string | null
     ): TypedEventFilter<
-      [string, string, string, string],
+      [string, string, BigNumber, BigNumber, string, string],
       {
         user: string;
         token: string;
+        sharesDecreasedInCurrentStrategy: BigNumber;
+        sharesIncreasedInNewStrategy: BigNumber;
         currentStrategy: string;
         newStrategy: string;
       }
@@ -686,7 +699,7 @@ export class ISavingsAccount extends Contract {
     Withdrawn(
       from: string | null,
       to: string | null,
-      amountReceived: null,
+      sharesWithdrawn: null,
       token: string | null,
       strategy: null
     ): TypedEventFilter<
@@ -694,7 +707,7 @@ export class ISavingsAccount extends Contract {
       {
         from: string;
         to: string;
-        amountReceived: BigNumber;
+        sharesWithdrawn: BigNumber;
         token: string;
         strategy: string;
       }

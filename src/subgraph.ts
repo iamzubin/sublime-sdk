@@ -142,13 +142,13 @@ export class SublimeSubgraph {
       let collateralRatio: BigNumber = new BigNumber(0);
 
       if (a.lastPrincipalUpdateTime != 0) {
-        let timeElapsed: number = (Date.now() / 1000) - a.lastPrincipalUpdateTime;
+        let timeElapsed: number = Date.now() / 1000 - a.lastPrincipalUpdateTime;
         interestAccrued = new BigNumber(a.principal)
           .multipliedBy(new BigNumber(a.borrowRate))
           .times(timeElapsed)
           .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.borrowAsset)))
           .div(new BigNumber(10).pow(30))
-          .div(24 * 60 * 60 * 365)
+          .div(24 * 60 * 60 * 365);
 
         currentDebt = new BigNumber(a.principal)
           .plus(interestAccrued)

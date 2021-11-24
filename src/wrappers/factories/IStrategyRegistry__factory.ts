@@ -18,6 +18,19 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'maxStrategies',
+        type: 'uint256',
+      },
+    ],
+    name: 'MaxStrategiesUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: true,
         internalType: 'address',
         name: 'strategy',

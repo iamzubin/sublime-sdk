@@ -6,6 +6,7 @@ import { Provider, TransactionReceipt } from '@ethersproject/providers';
 import { Signer } from '@ethersproject/abstract-signer';
 import { SublimeConfig } from './types/sublimeConfig';
 
+import * as types from './types/Types';
 export class SublimeSdk {
   private sublimeConnector: SublimeConnector;
   private sublimeSubgraph: SublimeSubgraph;
@@ -22,5 +23,9 @@ export class SublimeSdk {
 
   Subgraph(): SublimeSubgraph {
     return this.sublimeSubgraph;
+  }
+
+  public static types() {
+    return types;
   }
 }
