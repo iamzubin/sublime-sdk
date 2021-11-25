@@ -38,23 +38,22 @@ import { TokenManager } from './tokenManager';
 import { CreditLine } from './wrappers/CreditLine';
 import { CreditLine__factory } from './wrappers/factories/CreditLine__factory';
 import { SublimeConfig } from './types/sublimeConfig';
-import { ICToken, ICToken__factory, IYield, IYield__factory } from 'wrappers';
-import { zeroAddress } from 'config/constants';
-import { getPrice } from 'queries/prices';
-import { strategies } from 'config/strategies';
+import { ICToken, ICToken__factory, IYield, IYield__factory } from './wrappers';
+import { zeroAddress } from './config/constants';
+import { getPrice } from './queries/prices';
 export class SublimeSubgraph {
   private subgraphUrl: string;
   private signer: Signer;
   private tokenManager: TokenManager;
   private creditLineContract: CreditLine;
-  private priceSubgraphUrl: string;
+  private sublimeAddresses: SublimeConfig;
 
-  constructor(url: string, signer: Signer, tokenManager: TokenManager, priceSubgraphUrl: string, config: SublimeConfig) {
+  constructor(url: string, signer: Signer, tokenManager: TokenManager, config: SublimeConfig) {
     this.creditLineContract = new CreditLine__factory(signer).attach(config.creditLineContractAddress);
     this.subgraphUrl = url;
     this.signer = signer;
     this.tokenManager = tokenManager;
-    this.priceSubgraphUrl = priceSubgraphUrl;
+    this.sublimeAddresses = config;
   }
 
   async getPools(): Promise<PoolDetail[]> {
@@ -169,7 +168,7 @@ export class SublimeSubgraph {
       // console.log({tc: creditLineTotalCollateralTokens[element.id], id: element.id})
     }
 
-    return data.map((a) => {
+    let creditLineDetails:Promise<CreditLineDetail>[] = data.map(async (a) => {
       let interestAccrued: BigNumber = new BigNumber(0);
       let currentDebt: BigNumber = new BigNumber(0);
       let collateralRatio: BigNumber = new BigNumber(0);
@@ -189,8 +188,8 @@ export class SublimeSubgraph {
 
         collateralRatio = new BigNumber(creditLineTotalCollateralTokens[a.id])
           .multipliedBy(100)
-          .multipliedBy(this.tokenManager.getPricePerAsset(a.collateralAsset))
-          .div(this.tokenManager.getPricePerAsset(a.borrowAsset))
+          .multipliedBy((await this.tokenManager.getPricePerAsset(a.collateralAsset)))
+          .div((await this.tokenManager.getPricePerAsset(a.borrowAsset)))
           .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
           .div(currentDebt);
       }
@@ -205,13 +204,13 @@ export class SublimeSubgraph {
         borrowAsset: {
           address: a.borrowAsset,
           name: this.tokenManager.getTokenName(a.borrowAsset),
-          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.borrowAsset),
+          pricePerAssetInUSD: (await this.tokenManager.getPricePerAsset(a.borrowAsset)).toString(),
           logo: this.tokenManager.getLogo(a.borrowAsset),
         },
         collateralAsset: {
           address: a.collateralAsset,
           name: this.tokenManager.getTokenName(a.collateralAsset),
-          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.collateralAsset),
+          pricePerAssetInUSD: (await this.tokenManager.getPricePerAsset(a.collateralAsset)).toString(),
           logo: this.tokenManager.getLogo(a.collateralAsset),
         },
         autoLiquidate: a.autoLiquidation,
@@ -221,6 +220,7 @@ export class SublimeSubgraph {
         lastPrincipalUpdateTime: a.lastPrincipalUpdateTime,
       };
     });
+    return Promise.all(creditLineDetails);
   }
 
   private async transformToPoolDetail(data: any[]): Promise<PoolDetail[]> {
@@ -232,7 +232,7 @@ export class SublimeSubgraph {
       const element = allTokens[index];
       await this.tokenManager.updateAll(element);
     }
-    let transformedData: PoolDetail[] = data.map((a) => {
+    let transformedData: Promise<PoolDetail>[] = data.map(async (a) => {
       return {
         address: a.id,
         poolType: a.loanStatus,
@@ -248,13 +248,13 @@ export class SublimeSubgraph {
         borrowAsset: {
           address: a.borrowAsset,
           name: this.tokenManager.getTokenName(a.borrowAsset),
-          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.borrowAsset),
+          pricePerAssetInUSD: (await this.tokenManager.getPricePerAsset(a.borrowAsset)).toString(),
           logo: this.tokenManager.getLogo(a.borrowAsset),
         },
         collateralAsset: {
           address: a.collateralAsset,
           name: this.tokenManager.getTokenName(a.collateralAsset),
-          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.collateralAsset),
+          pricePerAssetInUSD: (await this.tokenManager.getPricePerAsset(a.collateralAsset)).toString(),
           logo: this.tokenManager.getLogo(a.collateralAsset),
         },
         estimatedEndDate: new BigNumber(this.getRandomInt(1000000)).multipliedBy(new BigNumber(10).pow(4)).toString(),
@@ -266,20 +266,20 @@ export class SublimeSubgraph {
       };
     });
     // console.log({transformedData});
-    return transformedData;
+    return Promise.all(transformedData);
   }
 
   private async getAPR(strategy: string): Promise<BigNumber> {
     const BLOCKS_PER_DAY = 6570; // 13.15 sec block
     const DAYS_PER_YEAR = 365;
-    if(strategy == strategies.COMPOUND) {
+    if(strategy == this.sublimeAddresses.compoundStrategyContractAddress) {
       // Ref - "Calculating the APY Using Rate Per Block" section in https://compound.finance/docs
       let cTokenContract: ICToken = ICToken__factory.connect(strategy, this.signer);
       let supplyRatePerBlock = new BigNumber((await cTokenContract.callStatic.supplyRatePerBlock()).toString());
       let perDaySupplyRate = (supplyRatePerBlock.div(new BigNumber(10).pow(18)).multipliedBy(BLOCKS_PER_DAY)).plus(1);
       let perYearSupplyRate = ((perDaySupplyRate.pow(DAYS_PER_YEAR)).minus(1)).multipliedBy(100);
       return perYearSupplyRate;
-    } else if(strategy == strategies.NO_STRATEGY) {
+    } else if(strategy == this.sublimeAddresses.noStrategyAddress) {
       return new BigNumber(0);
     }
     return new BigNumber(0);
@@ -303,12 +303,18 @@ export class SublimeSubgraph {
       let strategy = data[i].strategy.address;
       let token = data[i].token;
       let shares = data[i].shares;
+      if(!strategyIndex[token]) {
+        strategyIndex[token] = {};
+      }
 
       yieldContract = await yieldContract.attach(strategy);
-      let amountInTokens = (await yieldContract.callStatic.getTokensForShares(shares, token)).toString();
+      await this.tokenManager.updateTokenDecimals(token);
+      let tokenDecimals = new BigNumber(10).pow(this.tokenManager.getTokenDecimals(token));
+      let rawAmountInTokens = (await yieldContract.callStatic.getTokensForShares(shares, token)).toString();
+      let amountInTokens = new BigNumber(rawAmountInTokens).div(tokenDecimals);
       let price = tokenPrice[token];
       if(!price) {
-        price = await getPrice(this.priceSubgraphUrl, token);
+        price = await this.tokenManager.getPricePerAsset(token);
         tokenPrice[token] = price;
       }
       let amount = new BigNumber(amountInTokens).multipliedBy(price);
@@ -319,6 +325,7 @@ export class SublimeSubgraph {
         tokenIndex[token] = savingsAccountUserDetails.balances.length;
         savingsAccountUserDetails.balances.push({
           token,
+          balanceUSD: new BigNumber(0),
           balance: new BigNumber(0),
           strategyBalance: [],
           APR: new BigNumber(0)
@@ -326,13 +333,15 @@ export class SublimeSubgraph {
       }
 
       // 2 elemets with same strategy and token can't exist
-      if(strategyIndex[strategy] != 0) {
+      if(strategyIndex[token][strategy]) {
+        console.log(savingsAccountUserDetails.balances[tokenIndex[token]].strategyBalance[strategyIndex[token][strategy]])
         throw new Error('2 entities in subgraph for same token and strategy');
       }
-      strategyIndex[strategy] = savingsAccountUserDetails.balances[tokenIndex[token]].strategyBalance.length;
-      savingsAccountUserDetails.balances[tokenIndex[token]].strategyBalance[strategyIndex[strategy]] = {
+      strategyIndex[token][strategy] = savingsAccountUserDetails.balances[tokenIndex[token]].strategyBalance.length;
+      savingsAccountUserDetails.balances[tokenIndex[token]].strategyBalance[strategyIndex[token][strategy]] = {
         strategy,
-        balance: new BigNumber(amount),
+        balanceUSD: new BigNumber(amount),
+        balance: new BigNumber(amountInTokens),
         APR: apr
       }
 
@@ -342,7 +351,8 @@ export class SublimeSubgraph {
                                                                       .multipliedBy(savingsAccountUserDetails.totalBalance)  
                                                                     ).plus(apr.multipliedBy(new BigNumber(amount)))
                                                                   ).div(savingsAccountUserDetails.totalBalance.plus(amount))
-      savingsAccountUserDetails.balances[tokenIndex[token]].balance = savingsAccountUserDetails.balances[tokenIndex[token]].balance.plus(amount);
+      savingsAccountUserDetails.balances[tokenIndex[token]].balance = savingsAccountUserDetails.balances[tokenIndex[token]].balance.plus(amountInTokens);
+      savingsAccountUserDetails.balances[tokenIndex[token]].balanceUSD = savingsAccountUserDetails.balances[tokenIndex[token]].balanceUSD.plus(amount);
       savingsAccountUserDetails.totalBalance = savingsAccountUserDetails.totalBalance.plus(amount);
     }
 

@@ -39,12 +39,16 @@ export async function getPrice(url, address: string): Promise<BigNumber> {
 
   let result = await fetchData(options);
 
+  if(!result) {
+    throw new Error('Error while fetching data from subgraph');
+  }
+
   if (result.errors) {
     print(result.errors);
     throw new Error('Error while fetching data from subgraph');
   }
 
-  let price: BigNumber;
+  let price: BigNumber = new BigNumber(0);
 
   if (result.data.price0 && result.data.price0.length != 0) {
     price = result.data.price0[0].token1Price;

@@ -1,4 +1,4 @@
-import { query } from 'utils/subgraph';
+import { query } from '../utils/subgraph';
 import { fetchData, countPerQuery, print } from '../helpers';
 
 export async function getBalances(url, address: string): Promise<any[]> {

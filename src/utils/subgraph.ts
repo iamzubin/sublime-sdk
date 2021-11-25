@@ -1,4 +1,4 @@
-import { fetchData, print } from "helpers";
+import { fetchData, print } from "../helpers";
 
 
 export async function query(url: string, query: any) {

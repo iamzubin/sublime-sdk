@@ -13,7 +13,7 @@ export class SublimeSdk {
   constructor(provider: Provider, signer: Signer, subgraphUrl: string, priceSubgraphUrl: string, config: SublimeConfig) {
     let tokenManager = new TokenManager(signer, priceSubgraphUrl);
     this.sublimeConnector = new SublimeConnector(provider, signer, config, tokenManager);
-    this.sublimeSubgraph = new SublimeSubgraph(subgraphUrl, signer, tokenManager, priceSubgraphUrl, config);
+    this.sublimeSubgraph = new SublimeSubgraph(subgraphUrl, signer, tokenManager, config);
   }
 
   Connector(): SublimeConnector {

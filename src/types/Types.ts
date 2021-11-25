@@ -54,12 +54,14 @@ export interface CreditLineRequest {
 export interface SavingsAccountStrategyBalance {
   strategy: string;
   balance: BigNumber;
+  balanceUSD: BigNumber;
   APR: BigNumber;
 }
 
 export interface SavingsAccountBalance {
   token: Asset;
   balance: BigNumber;
+  balanceUSD: BigNumber;
   strategyBalance: [SavingsAccountStrategyBalance?];
   APR: BigNumber; // weighted average of all strategy APRs
 }
