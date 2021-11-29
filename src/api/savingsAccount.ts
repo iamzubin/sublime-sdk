@@ -141,7 +141,8 @@ export class SavingsAccountApi {
       _strategyContractAddress,
       from,
       to,
-      withdrawShares
+      withdrawShares,
+      {}
     );
   }
 

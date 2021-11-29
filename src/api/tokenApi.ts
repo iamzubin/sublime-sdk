@@ -35,4 +35,16 @@ export class TokenApi {
 
     return this.tokenContract.connect(this.signer).approve(to, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0));
   }
+
+  public async allowance(owner: string, spender: string, prettified = false): Promise<string> {
+    await this.tokenManager.updateTokenDecimals(this.tokenContract.address);
+    let decimal = await this.tokenManager.getTokenDecimals(this.tokenContract.address);
+
+    let allowance = await this.tokenContract.connect(this.signer).allowance(owner, spender);
+    if (prettified) {
+      return new BigNumber(allowance.toString()).div(new BigNumber(10).pow(decimal)).toFixed(2);
+    } else {
+      return allowance.toString();
+    }
+  }
 }
