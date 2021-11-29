@@ -46,7 +46,7 @@ export class SavingsAccountApi {
     let _strategyContractAddress: string = this.getStrategyAddress(strategy);
 
     await this.tokenManager.updateTokenDecimals(asset);
-    const borrowDecimal = this.tokenManager.getTokenDecimals(asset);
+    const assetDecimals = this.tokenManager.getTokenDecimals(asset);
 
     let _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
@@ -54,11 +54,11 @@ export class SavingsAccountApi {
     }
 
     return this.savingsAccount.deposit(
-      _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
+      _amount.multipliedBy(new BigNumber(10).pow(assetDecimals)).toFixed(0),
       asset,
       _strategyContractAddress,
       to,
-      { value: asset === zeroAddress ? _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0) : '0' }
+      { value: asset === zeroAddress ? _amount.multipliedBy(new BigNumber(10).pow(assetDecimals)).toFixed(0) : '0' }
     );
   }
 
@@ -268,7 +268,7 @@ export class SavingsAccountApi {
     return {
       address: liquidityToken,
       name: this.tokenManager.getTokenName(liquidityToken),
-      pricePerAssetInUSD: this.tokenManager.getPricePerAsset(liquidityToken),
+      pricePerAssetInUSD: (await this.tokenManager.getPricePerAsset(liquidityToken)).toString(),
       logo: this.tokenManager.getLogo(liquidityToken),
     };
   }

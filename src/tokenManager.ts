@@ -103,8 +103,9 @@ export class TokenManager {
     }
   }
 
-  getPricePerAsset(tokenAddress: string): string {
+  async getPricePerAsset(tokenAddress: string): Promise<BigNumber> {
     tokenAddress = tokenAddress.toLowerCase();
+    await this.updatePricePerAsset(tokenAddress);
     if (tokenAddress in this.prices) {
       return this.prices[tokenAddress];
     } else {

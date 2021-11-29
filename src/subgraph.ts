@@ -4,9 +4,12 @@ import {
   DashboardOverview,
   PoolDetail,
   ProfileOverview,
-  SavingsAccountOverview,
-  SavingsAccountTokenDetail,
   PoolLender,
+  SavingsAccountUserDetails,
+  SavingAccountUserDetailDisplay,
+  SavingsAccountBalanceDisplay,
+  SavingsAccountStrategyBalanceDisplay,
+  SavingsAccountStrategyBalance,
   CreditLineOperation,
 } from './types/Types';
 import {
@@ -26,6 +29,7 @@ import {
   getPendingCreditlinesRequestedByLender,
   getCreditLineTimeline,
   getCreditLine,
+  getBalances,
 } from './queries';
 
 import { Signer } from '@ethersproject/abstract-signer';
@@ -38,17 +42,22 @@ import { TokenManager } from './tokenManager';
 import { CreditLine } from './wrappers/CreditLine';
 import { CreditLine__factory } from './wrappers/factories/CreditLine__factory';
 import { SublimeConfig } from './types/sublimeConfig';
+import { ICToken, ICToken__factory, IYield, IYield__factory } from './wrappers';
+import { zeroAddress } from './config/constants';
+import { getPrice } from './queries/prices';
 export class SublimeSubgraph {
   private subgraphUrl: string;
   private signer: Signer;
   private tokenManager: TokenManager;
   private creditLineContract: CreditLine;
+  private sublimeAddresses: SublimeConfig;
 
   constructor(url: string, signer: Signer, tokenManager: TokenManager, config: SublimeConfig) {
     this.creditLineContract = new CreditLine__factory(signer).attach(config.creditLineContractAddress);
     this.subgraphUrl = url;
     this.signer = signer;
     this.tokenManager = tokenManager;
+    this.sublimeAddresses = config;
   }
 
   async getPools(): Promise<PoolDetail[]> {
@@ -136,7 +145,7 @@ export class SublimeSubgraph {
       // console.log({tc: creditLineTotalCollateralTokens[element.id], id: element.id})
     }
 
-    return data.map((a) => {
+    let creditLineDetails: Promise<CreditLineDetail>[] = data.map(async (a) => {
       let interestAccrued: BigNumber = new BigNumber(0);
       let currentDebt: BigNumber = new BigNumber(0);
       let collateralRatio: BigNumber = new BigNumber(0);
@@ -156,8 +165,8 @@ export class SublimeSubgraph {
 
         collateralRatio = new BigNumber(creditLineTotalCollateralTokens[a.id])
           .multipliedBy(100)
-          .multipliedBy(this.tokenManager.getPricePerAsset(a.collateralAsset))
-          .div(this.tokenManager.getPricePerAsset(a.borrowAsset))
+          .multipliedBy(await this.tokenManager.getPricePerAsset(a.collateralAsset))
+          .div(await this.tokenManager.getPricePerAsset(a.borrowAsset))
           .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
           .div(currentDebt);
       }
@@ -172,13 +181,13 @@ export class SublimeSubgraph {
         borrowAsset: {
           address: a.borrowAsset,
           name: this.tokenManager.getTokenName(a.borrowAsset),
-          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.borrowAsset),
+          pricePerAssetInUSD: (await this.tokenManager.getPricePerAsset(a.borrowAsset)).toString(),
           logo: this.tokenManager.getLogo(a.borrowAsset),
         },
         collateralAsset: {
           address: a.collateralAsset,
           name: this.tokenManager.getTokenName(a.collateralAsset),
-          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.collateralAsset),
+          pricePerAssetInUSD: (await this.tokenManager.getPricePerAsset(a.collateralAsset)).toString(),
           logo: this.tokenManager.getLogo(a.collateralAsset),
         },
         autoLiquidate: a.autoLiquidation,
@@ -189,6 +198,7 @@ export class SublimeSubgraph {
         id: a.id,
       };
     });
+    return Promise.all(creditLineDetails);
   }
 
   private async transformToPoolDetail(data: any[]): Promise<PoolDetail[]> {
@@ -200,7 +210,7 @@ export class SublimeSubgraph {
       const element = allTokens[index];
       await this.tokenManager.updateAll(element);
     }
-    let transformedData: PoolDetail[] = data.map((a) => {
+    let transformedData: Promise<PoolDetail>[] = data.map(async (a) => {
       return {
         address: a.id,
         poolType: a.loanStatus,
@@ -216,13 +226,13 @@ export class SublimeSubgraph {
         borrowAsset: {
           address: a.borrowAsset,
           name: this.tokenManager.getTokenName(a.borrowAsset),
-          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.borrowAsset),
+          pricePerAssetInUSD: (await this.tokenManager.getPricePerAsset(a.borrowAsset)).toString(),
           logo: this.tokenManager.getLogo(a.borrowAsset),
         },
         collateralAsset: {
           address: a.collateralAsset,
           name: this.tokenManager.getTokenName(a.collateralAsset),
-          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.collateralAsset),
+          pricePerAssetInUSD: (await this.tokenManager.getPricePerAsset(a.collateralAsset)).toString(),
           logo: this.tokenManager.getLogo(a.collateralAsset),
         },
         estimatedEndDate: new BigNumber(this.getRandomInt(1000000)).multipliedBy(new BigNumber(10).pow(4)).toString(),
@@ -234,16 +244,129 @@ export class SublimeSubgraph {
       };
     });
     // console.log({transformedData});
-    return transformedData;
+    return Promise.all(transformedData);
   }
 
-  // to-do
-  async getSavingsAccountOverview(address: string): Promise<SavingsAccountOverview> {
-    return {
-      deposited: new BigNumber(this.getRandomInt(10000000)).div(100).toFixed(2),
-      interestEarned: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
-      interestRate: new BigNumber(this.getRandomInt(100)).div(100).toFixed(2),
+  private async getAPR(strategy: string): Promise<BigNumber> {
+    const BLOCKS_PER_DAY = 6570; // 13.15 sec block
+    const DAYS_PER_YEAR = 365;
+    if (strategy == this.sublimeAddresses.compoundStrategyContractAddress) {
+      // Ref - "Calculating the APY Using Rate Per Block" section in https://compound.finance/docs
+      let cTokenContract: ICToken = ICToken__factory.connect(strategy, this.signer);
+      let supplyRatePerBlock = new BigNumber((await cTokenContract.callStatic.supplyRatePerBlock()).toString());
+      let perDaySupplyRate = supplyRatePerBlock.div(new BigNumber(10).pow(18)).multipliedBy(BLOCKS_PER_DAY).plus(1);
+      let perYearSupplyRate = perDaySupplyRate.pow(DAYS_PER_YEAR).minus(1).multipliedBy(100);
+      return perYearSupplyRate;
+    } else if (strategy == this.sublimeAddresses.noStrategyAddress) {
+      return new BigNumber(0);
+    }
+    return new BigNumber(0);
+  }
+
+  private async transformToSavingsAccountUserDetails(address: string, data: any[]): Promise<SavingAccountUserDetailDisplay> {
+    let savingsAccountUserDetails: SavingsAccountUserDetails = {
+      user: address,
+      totalBalance: new BigNumber(0),
+      balances: [],
     };
+
+    let tokenIndex = {};
+    let strategyIndex = {};
+
+    let tokenPrice = {};
+
+    let yieldContract: IYield = IYield__factory.connect(zeroAddress, this.signer);
+
+    for (let i = 0; i < data.length; i++) {
+      let strategy = data[i].strategy.address;
+      let token = data[i].token;
+      let shares = data[i].shares;
+      if (!strategyIndex[token]) {
+        strategyIndex[token] = {};
+      }
+
+      yieldContract = await yieldContract.attach(strategy);
+      await this.tokenManager.updateTokenDecimals(token);
+      let tokenDecimals = new BigNumber(10).pow(this.tokenManager.getTokenDecimals(token));
+      let rawAmountInTokens = (await yieldContract.callStatic.getTokensForShares(shares, token)).toString();
+      let amountInTokens = new BigNumber(rawAmountInTokens).div(tokenDecimals);
+      let price = tokenPrice[token];
+      if (!price) {
+        price = await this.tokenManager.getPricePerAsset(token);
+        tokenPrice[token] = price;
+      }
+      let amount = new BigNumber(amountInTokens).multipliedBy(price);
+
+      let apr = await this.getAPR(strategy);
+
+      if (savingsAccountUserDetails.balances[tokenIndex[token]]?.token != token) {
+        tokenIndex[token] = savingsAccountUserDetails.balances.length;
+        savingsAccountUserDetails.balances.push({
+          token,
+          balanceUSD: new BigNumber(0),
+          balance: new BigNumber(0),
+          strategyBalance: [],
+          APR: new BigNumber(0),
+        });
+      }
+
+      // 2 elemets with same strategy and token can't exist
+      if (strategyIndex[token][strategy]) {
+        console.log(savingsAccountUserDetails.balances[tokenIndex[token]].strategyBalance[strategyIndex[token][strategy]]);
+        throw new Error('2 entities in subgraph for same token and strategy');
+      }
+      strategyIndex[token][strategy] = savingsAccountUserDetails.balances[tokenIndex[token]].strategyBalance.length;
+      savingsAccountUserDetails.balances[tokenIndex[token]].strategyBalance[strategyIndex[token][strategy]] = {
+        strategy,
+        balanceUSD: new BigNumber(amount),
+        balance: new BigNumber(amountInTokens),
+        APR: apr,
+      };
+
+      savingsAccountUserDetails.balances[tokenIndex[token]].APR = savingsAccountUserDetails.balances[tokenIndex[token]].APR.multipliedBy(
+        savingsAccountUserDetails.totalBalance
+      )
+        .plus(apr.multipliedBy(new BigNumber(amount)))
+        .div(savingsAccountUserDetails.totalBalance.plus(amount));
+      savingsAccountUserDetails.balances[tokenIndex[token]].balance =
+        savingsAccountUserDetails.balances[tokenIndex[token]].balance.plus(amountInTokens);
+      savingsAccountUserDetails.balances[tokenIndex[token]].balanceUSD =
+        savingsAccountUserDetails.balances[tokenIndex[token]].balanceUSD.plus(amount);
+      savingsAccountUserDetails.totalBalance = savingsAccountUserDetails.totalBalance.plus(amount);
+    }
+
+    let savingAccountsUserDetailsDisplay = {} as SavingAccountUserDetailDisplay;
+    // return savingsAccountUserDetails;
+    savingAccountsUserDetailsDisplay.user = savingsAccountUserDetails.user;
+    savingAccountsUserDetailsDisplay.totalBalance = savingsAccountUserDetails.totalBalance.toFixed(2);
+    savingAccountsUserDetailsDisplay.balances = [];
+    savingsAccountUserDetails.balances.forEach((a) => {
+      let strategyBalance: [SavingsAccountStrategyBalanceDisplay?] = [];
+      a.strategyBalance.forEach((b) => {
+        strategyBalance.push({
+          strategy: b.strategy,
+          balance: b.balance.toFixed(2),
+          balanceUSD: b.balanceUSD.toFixed(2),
+          APR: b.APR.toFixed(2),
+        });
+      });
+      savingAccountsUserDetailsDisplay.balances.push({
+        token: a.token,
+        balance: a.balance.toFixed(2),
+        balanceUSD: a.balanceUSD.toFixed(2),
+        APR: a.APR.toFixed(2),
+        strategyBalance,
+      });
+    });
+
+    return savingAccountsUserDetailsDisplay;
+  }
+
+  async getSavingsAccountOverview(address: string): Promise<SavingAccountUserDetailDisplay> {
+    let balances = await getBalances(this.subgraphUrl, address);
+    let savingsAccountUserDetails = await this.transformToSavingsAccountUserDetails(address, balances);
+
+    return savingsAccountUserDetails;
   }
 
   async getDashboardOverview(address: string): Promise<DashboardOverview> {
@@ -262,30 +385,6 @@ export class SublimeSubgraph {
       activeCredit: new BigNumber(this.getRandomInt(5000000)).div(100).toFixed(2),
       interestRate: new BigNumber(this.getRandomInt(1000)).div(100).toFixed(2),
     };
-  }
-
-  async getSavingsAccountTokenDetail(address: string): Promise<SavingsAccountTokenDetail[]> {
-    let result = await getSavingsAccountTokenDetails(this.subgraphUrl, address);
-    let collateralTokens: string[] = result.map((a) => a.asset);
-    let allTokens = [...collateralTokens].filter((value, index, array) => array.indexOf(value) === index);
-    for (let index = 0; index < allTokens.length; index++) {
-      const element = allTokens[index];
-      await this.tokenManager.updateAll(element);
-    }
-
-    return result.map((a) => {
-      return {
-        token: {
-          address: a.asset,
-          name: this.tokenManager.getTokenName(a.asset),
-          pricePerAssetInUSD: this.tokenManager.getPricePerAsset(a.asset),
-          logo: this.tokenManager.getLogo(a.asset),
-        },
-        deposited: new BigNumber(this.getRandomInt(10000000)).div(100).toFixed(2),
-        interestEarned: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
-        interestRate: new BigNumber(this.getRandomInt(1000)).div(100).toFixed(2),
-      };
-    });
   }
 
   async getProfileOverview(address: string): Promise<ProfileOverview> {

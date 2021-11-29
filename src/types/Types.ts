@@ -1,3 +1,6 @@
+import { BigNumber } from 'bignumber.js';
+import { BindingName } from 'typescript';
+
 export interface Asset {
   name: string;
   address: string;
@@ -47,13 +50,49 @@ export interface CreditLineRequest {
   borrowAsset: string;
   collateralAsset: string;
 }
-export interface SavingsAccountTokenDetail {
-  token: Asset;
-  deposited: string;
-  interestRate: string;
-  interestEarned: string;
+
+export interface SavingsAccountStrategyBalance {
+  strategy: string;
+  balance: BigNumber;
+  balanceUSD: BigNumber;
+  APR: BigNumber;
 }
 
+export interface SavingsAccountBalance {
+  token: Asset;
+  balance: BigNumber;
+  balanceUSD: BigNumber;
+  strategyBalance: [SavingsAccountStrategyBalance?];
+  APR: BigNumber; // weighted average of all strategy APRs
+}
+
+export interface SavingsAccountUserDetails {
+  user: string;
+  balances: [SavingsAccountBalance?];
+  totalBalance: BigNumber;
+}
+
+// ---------only for disaply ----------- removeLatter
+export interface SavingsAccountStrategyBalanceDisplay {
+  strategy: string;
+  balance: string;
+  balanceUSD: string;
+  APR: string;
+}
+export interface SavingsAccountBalanceDisplay {
+  token: Asset;
+  balance: string;
+  balanceUSD: string;
+  strategyBalance: [SavingsAccountStrategyBalanceDisplay?];
+  APR: string; // weighted average of all strategy APRs
+}
+export interface SavingAccountUserDetailDisplay {
+  user: string;
+  balances: [SavingsAccountBalanceDisplay?];
+  totalBalance: string;
+}
+
+// ---------only for disaply ----------- removeLatter
 export interface PoolDetail {
   name?: string; // refers to borrower name
   username?: string; // refers to borrower user name
@@ -91,12 +130,6 @@ export interface DashboardOverview {
   totalLentRate: string;
 }
 
-export interface SavingsAccountOverview {
-  deposited: string;
-  interestEarned: string;
-  interestRate: string;
-}
-
 export interface CreditLinesOverview {
   creditGranted: string;
   interestAccrued: string;
@@ -111,12 +144,6 @@ export interface ProfileOverview {
   activePools: string;
   timesDefaulted: string;
   totalAmountInBorrow: string;
-}
-export interface SavingsAccountDetail {
-  asset: Asset;
-  amount: string;
-  interestRate: string;
-  interestEarned: string;
 }
 
 export interface CreditLineDetail {
