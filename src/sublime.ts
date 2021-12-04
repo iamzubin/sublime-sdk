@@ -68,6 +68,10 @@ export class SublimeConnector {
     return new PriceOracleApi(this.signer, this.config);
   }
 
+  public async getChainId(): Promise<number> {
+    return this.signer.getChainId();
+  }
+
   public async getBalance(address: string): Promise<string> {
     const balance = await this.provider.getBalance(address);
     return ethers.utils.formatEther(balance);
