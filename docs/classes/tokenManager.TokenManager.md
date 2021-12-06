@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[tokenManager.ts:64](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L64)
+[tokenManager.ts:64](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L64)
 
 ## Properties
 
@@ -64,7 +64,7 @@
 
 #### Defined in
 
-[tokenManager.ts:42](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L42)
+[tokenManager.ts:42](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L42)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:17](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L17)
+[tokenManager.ts:17](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L17)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:47](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L47)
+[tokenManager.ts:47](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L47)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:37](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L37)
+[tokenManager.ts:37](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L37)
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:22](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L22)
+[tokenManager.ts:22](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L22)
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:32](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L32)
+[tokenManager.ts:32](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L32)
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:57](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L57)
+[tokenManager.ts:57](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L57)
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:52](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L52)
+[tokenManager.ts:52](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L52)
 
 ___
 
@@ -160,7 +160,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:27](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L27)
+[tokenManager.ts:27](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L27)
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:62](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L62)
+[tokenManager.ts:62](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L62)
 
 ## Methods
 
@@ -194,7 +194,7 @@ return url which renders the logo/pic of the token
 
 #### Defined in
 
-[tokenManager.ts:198](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L198)
+[tokenManager.ts:198](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L198)
 
 ___
 
@@ -216,7 +216,7 @@ price of asset
 
 #### Defined in
 
-[tokenManager.ts:184](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L184)
+[tokenManager.ts:184](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L184)
 
 ___
 
@@ -238,7 +238,7 @@ number of token decimals
 
 #### Defined in
 
-[tokenManager.ts:158](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L158)
+[tokenManager.ts:158](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L158)
 
 ___
 
@@ -260,7 +260,7 @@ token name
 
 #### Defined in
 
-[tokenManager.ts:171](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L171)
+[tokenManager.ts:171](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L171)
 
 ___
 
@@ -282,7 +282,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:76](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L76)
+[tokenManager.ts:76](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L76)
 
 ___
 
@@ -304,7 +304,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:140](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L140)
+[tokenManager.ts:140](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L140)
 
 ___
 
@@ -326,7 +326,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:121](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L121)
+[tokenManager.ts:121](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L121)
 
 ___
 
@@ -348,7 +348,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:89](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L89)
+[tokenManager.ts:89](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L89)
 
 ___
 
@@ -370,4 +370,4 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:105](https://github.com/akshay111meher/sublime-sdk/blob/2f51fa9/src/tokenManager.ts#L105)
+[tokenManager.ts:105](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/tokenManager.ts#L105)
