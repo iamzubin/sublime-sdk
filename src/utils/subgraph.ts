@@ -7,7 +7,7 @@ export async function query(url: string, query: any) {
     body: query,
   };
 
-  let result = await fetchData(options);
+  const result = await fetchData(options);
 
   if (result.errors) {
     print(result.errors);

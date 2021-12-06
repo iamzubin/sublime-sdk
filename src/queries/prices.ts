@@ -31,13 +31,13 @@ export async function getPrice(url, address: string): Promise<BigNumber> {
     `,
   });
 
-  var options = {
+  const options = {
     url,
     headers: { 'Content-Type': 'application/json' },
     body: data,
   };
 
-  let result = await fetchData(options);
+  const result = await fetchData(options);
 
   if (!result) {
     throw new Error('Error while fetching data from subgraph');
@@ -59,8 +59,8 @@ export async function getPrice(url, address: string): Promise<BigNumber> {
   }
 
   if (result.data.price0 && result.data.price1 && result.data.price0.length != 0 && result.data.price1.length != 0) {
-    let volume0 = new BigNumber(result.data.price0[0].volumeUSD);
-    let volume1 = new BigNumber(result.data.price1[0].volumeUSD);
+    const volume0 = new BigNumber(result.data.price0[0].volumeUSD);
+    const volume1 = new BigNumber(result.data.price1[0].volumeUSD);
     if (volume0.gt(volume1)) {
       price = result.data.price0[0].token1Price;
     }

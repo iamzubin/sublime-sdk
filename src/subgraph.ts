@@ -44,12 +44,34 @@ import { CreditLine__factory } from './wrappers/factories/CreditLine__factory';
 import { SublimeConfig } from './types/sublimeConfig';
 import { ICToken, ICToken__factory, IYield, IYield__factory } from './wrappers';
 import { zeroAddress } from './config/constants';
-import { getPrice } from './queries/prices';
+
+/**
+ * @class SublimeSubgraph
+ */
 export class SublimeSubgraph {
+  /**
+   * @description subgraph url for fetching the sublime data
+   */
   private subgraphUrl: string;
+
+  /**
+   * @description signer used to sign
+   */
   private signer: Signer;
+
+  /**
+   * @description instance of token manager class that caches and retreives token data
+   */
   private tokenManager: TokenManager;
+
+  /**
+   * @description instance of credit line contract
+   */
   private creditLineContract: CreditLine;
+
+  /**
+   * @description sublime config. (Contains all addresses relevant to sublime ecosystem)
+   */
   private sublimeAddresses: SublimeConfig;
 
   constructor(url: string, signer: Signer, tokenManager: TokenManager, config: SublimeConfig) {
@@ -60,42 +82,77 @@ export class SublimeSubgraph {
     this.sublimeAddresses = config;
   }
 
+  /**
+   *
+   * @returns Array of all pools created on sublime
+   */
   async getPools(): Promise<PoolDetail[]> {
     let result = await getAllPools(this.subgraphUrl);
     return this.transformToPoolDetail(result);
   }
 
+  /**
+   *
+   * @param poolType (possible types of pools include: ACTIVE, CLOSED, REQUESTED, LIQUIDATED)
+   * @returns Array of specific pool types
+   */
   async getAllPoolsByPoolType(poolType: string): Promise<PoolDetail[]> {
     let result = await getAllPoolsByPoolType(this.subgraphUrl, poolType);
     return this.transformToPoolDetail(result);
   }
 
-  async getPool(poolId): Promise<PoolDetail> {
+  /**
+   * @param poolId
+   * @returns pool data if the pool exists, else null
+   */
+  async getPool(poolId: string): Promise<PoolDetail> {
     let result = await getPool(this.subgraphUrl, poolId);
     let poolDetails: PoolDetail[] = await this.transformToPoolDetail(result);
     return poolDetails[0];
   }
 
-  async getPoolByBorrower(borrower): Promise<PoolDetail[]> {
+  /**
+   * @param borrower: address of the borrower
+   * @returns Array of pools for the corresponding borrower
+   */
+  async getPoolByBorrower(borrower: string): Promise<PoolDetail[]> {
     let result = await getAllPoolsByBorrower(this.subgraphUrl, borrower);
     return this.transformToPoolDetail(result);
   }
 
-  async getPoolByLender(lender): Promise<PoolDetail[]> {
+  /**
+   * @param lender: address of the lender
+   * @returns Array of pool for the lender
+   */
+  async getPoolByLender(lender: string): Promise<PoolDetail[]> {
     let result = await getAllPoolsByLender(this.subgraphUrl, lender);
     return this.transformToPoolDetail(result);
   }
 
-  async getPoolByLenderByType(lender, poolType): Promise<PoolDetail[]> {
+  /**
+   * @param lender: address of the lender
+   * @param poolType: type of the pool
+   * @returns Array of pool
+   */
+  async getPoolByLenderByType(lender: string, poolType: string): Promise<PoolDetail[]> {
     let result = await getAllPoolsByLenderByType(this.subgraphUrl, lender, poolType);
     return this.transformToPoolDetail(result);
   }
 
-  async getPoolByBorrowerByType(borrower, poolType): Promise<PoolDetail[]> {
+  /**
+   * @param borrower: address of the borrower
+   * @param poolType: type of the pool
+   * @returns Array of pool
+   */
+  async getPoolByBorrowerByType(borrower: string, poolType: string): Promise<PoolDetail[]> {
     let result = await getAllPoolsByBorrowerByType(this.subgraphUrl, borrower, poolType);
     return this.transformToPoolDetail(result);
   }
 
+  /**
+   * @param poolAddress
+   * @returns All the lenders of a given pool
+   */
   async getAllLendersOfPool(poolAddress: string): Promise<PoolLender[]> {
     let totalNumberOfLenders = 1 + this.getRandomInt(100);
     let lenders: PoolLender[] = [];
@@ -125,6 +182,11 @@ export class SublimeSubgraph {
     return lenders;
   }
 
+  /**
+   *
+   * @param data
+   * @description transaform the data recevied from the subgraph to type
+   */
   private async transformToCreditLine(data: any[]): Promise<CreditLineDetail[]> {
     let borrowTokens: string[] = data.map((a) => a.collateralAsset);
     let collateralTokens: string[] = data.map((a) => a.borrowAsset);
@@ -201,6 +263,10 @@ export class SublimeSubgraph {
     return Promise.all(creditLineDetails);
   }
 
+  /**
+   * @param data
+   * @@description transforms the data received from the subgraph to pool detail
+   */
   private async transformToPoolDetail(data: any[]): Promise<PoolDetail[]> {
     let borrowTokens: string[] = data.map((a) => a.collateralAsset);
     let collateralTokens: string[] = data.map((a) => a.borrowAsset);
@@ -247,6 +313,10 @@ export class SublimeSubgraph {
     return Promise.all(transformedData);
   }
 
+  /**
+   * @param strategy
+   * @@description calulcates the APR for a given strategy
+   */
   private async getAPR(strategy: string): Promise<BigNumber> {
     const BLOCKS_PER_DAY = 6570; // 13.15 sec block
     const DAYS_PER_YEAR = 365;
@@ -263,6 +333,11 @@ export class SublimeSubgraph {
     return new BigNumber(0);
   }
 
+  /**
+   * @param address
+   * @param data
+   * @description Tranforms the data received from the subgraph to type
+   */
   private async transformToSavingsAccountUserDetails(address: string, data: any[]): Promise<SavingAccountUserDetailDisplay> {
     let savingsAccountUserDetails: SavingsAccountUserDetails = {
       user: address,
@@ -362,6 +437,11 @@ export class SublimeSubgraph {
     return savingAccountsUserDetailsDisplay;
   }
 
+  /**
+   *
+   * @param address: address of the user to query
+   * @description Returns savings account overview for a user address
+   */
   async getSavingsAccountOverview(address: string): Promise<SavingAccountUserDetailDisplay> {
     let balances = await getBalances(this.subgraphUrl, address);
     let savingsAccountUserDetails = await this.transformToSavingsAccountUserDetails(address, balances);
@@ -369,6 +449,10 @@ export class SublimeSubgraph {
     return savingsAccountUserDetails;
   }
 
+  /**
+   * @param address: address of the user to query
+   * @description Return the dashboard view type for a user
+   */
   async getDashboardOverview(address: string): Promise<DashboardOverview> {
     return {
       totalBorrowedAmount: new BigNumber(this.getRandomInt(100000000)).div(100).toFixed(2),
@@ -378,6 +462,10 @@ export class SublimeSubgraph {
     };
   }
 
+  /**
+   * @param address: address of the user to query
+   * @description Returns the credit lines overview of the user
+   */
   async getCreditLinesOverview(address: string): Promise<CreditLinesOverview> {
     return {
       creditGranted: new BigNumber(this.getRandomInt(10000000)).div(100).toFixed(2),
@@ -387,6 +475,10 @@ export class SublimeSubgraph {
     };
   }
 
+  /**
+   * @param address: address of the user to query
+   * @description Return the profiel overview of the user
+   */
   async getProfileOverview(address: string): Promise<ProfileOverview> {
     let pools = await this.getPoolByBorrower(address);
     let poolsCreated = pools.length;
@@ -402,36 +494,76 @@ export class SublimeSubgraph {
     };
   }
 
+  /**
+   * @param borrower: address of the borrower
+   * @param count: number of credit lines to query
+   * @param skip: number to credit lines to skip
+   * @description Returns the confirmed credit lines of a borrower
+   */
   async getConfirmedCreditLinesOfBorrower(borrower: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
     let result = await getConfirmedCreditLinesOfBorrower(this.subgraphUrl, borrower, count, skip);
     return await this.transformToCreditLine(result);
   }
 
+  /**
+   * @param lender: address of the lender
+   * @param count: number of credit lines to query
+   * @param skip: number to credit lines to skip
+   * @description Returns the confirmed credit lines of a lender
+   */
   async getConfirmedCreditLinesOfLender(lender: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
     let result = await getConfirmedCreditLinesOfLender(this.subgraphUrl, lender, count, skip);
     return await this.transformToCreditLine(result);
   }
 
+  /**
+   * @param lender: address of the lender
+   * @param count: number of credit lines to query
+   * @param skip: number to credit lines to skip
+   * @description Returns the list of credit lines which have been requested by the lender but not accepted by any borrower
+   */
   async getPendingCreditlinesRequestedByLender(lender: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
     let result = await getPendingCreditlinesRequestedByLender(this.subgraphUrl, lender, count, skip);
     return await this.transformToCreditLine(result);
   }
 
+  /**
+   * @param borrower: address of the borrower
+   * @param count: number of credit lines to query
+   * @param skip: number to credit lines to skip
+   * @description Returns the list of credit lines which have been requests by the borrower but not accpeted by any lender
+   */
   async getPendingCreditLinesRequestedByBorrower(borrower: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
     let result = await getPendingCreditLinesRequestedByBorrower(this.subgraphUrl, borrower, count, skip);
     return await this.transformToCreditLine(result);
   }
 
-  async getPendingCreditLinesRequestedToLender(borrower: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
-    let result = await getPendingCreditLinesRequestedToLender(this.subgraphUrl, borrower, count, skip);
+  /**
+   * @param lender: address of the lender
+   * @param count: number of credit lines to query
+   * @param skip: number to credit lines to skip
+   * @description Returns the list of poending credit lines which have requested to a lender by all other borrowers
+   */
+  async getPendingCreditLinesRequestedToLender(lender: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
+    let result = await getPendingCreditLinesRequestedToLender(this.subgraphUrl, lender, count, skip);
     return await this.transformToCreditLine(result);
   }
 
+  /**
+   * @param borrower: address of the borrower
+   * @param count: number of credit lines to query
+   * @param skip: number to credit lines to skip
+   * @description Returns the list of poending credit lines which have requested to a borrower by all other lenders
+   */
   async getPendingCreditLinesRequestedToBorrower(borrower: string, count: Number, skip: Number): Promise<CreditLineDetail[]> {
     let result = await getPendingCreditLinesRequestedToBorrower(this.subgraphUrl, borrower, count, skip);
     return await this.transformToCreditLine(result);
   }
 
+  /**
+   * @param id
+   * @description returns a detailed information of a single credit line.
+   */
   async getCreditLine(id: string): Promise<CreditLineDetail> {
     let result = await getCreditLine(this.subgraphUrl, id);
     let data = await this.transformToCreditLine(result);
@@ -442,6 +574,10 @@ export class SublimeSubgraph {
     }
   }
 
+  /**
+   * @param creditLine
+   * @description returns the operations made on a credit line in time-wise order
+   */
   async getCreditLineTimeline(creditLine: string): Promise<CreditLineOperation[]> {
     let result = await getCreditLineTimeline(this.subgraphUrl, creditLine);
     if (result.data.creditLines.length == 0) {
@@ -452,6 +588,11 @@ export class SublimeSubgraph {
     }
   }
 
+  /**
+   *
+   * @param cl
+   * @description Transforms the data received from the subgraph into type
+   */
   private async transformToCreditLineOperations(cl: any): Promise<CreditLineOperation[]> {
     await this.tokenManager.updateAll(cl.borrowAsset);
     let operations: CreditLineOperation[] = cl.creditLineTimeline.map((a) => {
@@ -469,6 +610,10 @@ export class SublimeSubgraph {
     return operations;
   }
 
+  /**
+   * @param max
+   * @description Function to generate a random decimals in range (0, max)
+   */
   private getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }

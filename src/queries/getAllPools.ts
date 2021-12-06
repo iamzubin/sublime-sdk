@@ -2,7 +2,7 @@ import { fetchData, countPerQuery, print } from '../helpers';
 
 export async function getAllPools(url): Promise<any[]> {
   let skip = 0;
-  let allData = [];
+  const allData = [];
   for (;;) {
     const data = JSON.stringify({
       query: `{
@@ -21,13 +21,13 @@ export async function getAllPools(url): Promise<any[]> {
       }`,
     });
 
-    var options = {
+    const options = {
       url,
       headers: { 'Content-Type': 'application/json' },
       body: data,
     };
 
-    let result = await fetchData(options);
+    const result = await fetchData(options);
     if (result.errors) {
       print(result.errors);
       throw new Error('Error while fetching data from subgraph');
@@ -42,7 +42,7 @@ export async function getAllPools(url): Promise<any[]> {
 
 export async function getAllPoolsByPoolType(url: string, poolType: string): Promise<any[]> {
   let skip = 0;
-  let allData = [];
+  const allData = [];
   for (;;) {
     const data = JSON.stringify({
       query: `{
@@ -61,13 +61,13 @@ export async function getAllPoolsByPoolType(url: string, poolType: string): Prom
       }`,
     });
 
-    var options = {
+    const options = {
       url,
       headers: { 'Content-Type': 'application/json' },
       body: data,
     };
 
-    let result = await fetchData(options);
+    const result = await fetchData(options);
     if (result.errors) {
       print(result.errors);
       throw new Error('Error while fetching data from subgraph');
@@ -83,7 +83,7 @@ export async function getAllPoolsByPoolType(url: string, poolType: string): Prom
 export async function getAllPoolsByBorrower(url: string, borrower: string): Promise<any[]> {
   borrower = borrower.toLowerCase();
   let skip = 0;
-  let allData = [];
+  const allData = [];
   for (;;) {
     const data = JSON.stringify({
       query: `{
@@ -104,13 +104,13 @@ export async function getAllPoolsByBorrower(url: string, borrower: string): Prom
       }`,
     });
 
-    var options = {
+    const options = {
       url,
       headers: { 'Content-Type': 'application/json' },
       body: data,
     };
 
-    let result = await fetchData(options);
+    const result = await fetchData(options);
     if (result.errors) {
       print(result.errors);
       throw new Error('Error while fetching data from subgraph');
@@ -128,7 +128,7 @@ export async function getAllPoolsByBorrower(url: string, borrower: string): Prom
 export async function getAllPoolsByLender(url: string, lender: string): Promise<any[]> {
   lender = lender.toLowerCase();
   let skip = 0;
-  let allData = [];
+  const allData = [];
   for (;;) {
     const data = JSON.stringify({
       query: `{
@@ -152,13 +152,13 @@ export async function getAllPoolsByLender(url: string, lender: string): Promise<
       }`,
     });
 
-    var options = {
+    const options = {
       url,
       headers: { 'Content-Type': 'application/json' },
       body: data,
     };
 
-    let result = await fetchData(options);
+    const result = await fetchData(options);
     if (result.errors) {
       print(result.errors);
       throw new Error('Error while fetching data from subgraph');
@@ -178,7 +178,7 @@ export async function getAllPoolsByLender(url: string, lender: string): Promise<
 export async function getAllPoolsByLenderByType(url: string, lender: string, poolType: string): Promise<any[]> {
   lender = lender.toLowerCase();
   let skip = 0;
-  let allData = [];
+  const allData = [];
   for (;;) {
     const data = JSON.stringify({
       query: `{
@@ -202,13 +202,13 @@ export async function getAllPoolsByLenderByType(url: string, lender: string, poo
       }`,
     });
 
-    var options = {
+    const options = {
       url,
       headers: { 'Content-Type': 'application/json' },
       body: data,
     };
 
-    let result = await fetchData(options);
+    const result = await fetchData(options);
     if (result.errors) {
       print(result.errors);
       throw new Error('Error while fetching data from subgraph');
@@ -228,7 +228,7 @@ export async function getAllPoolsByLenderByType(url: string, lender: string, poo
 export async function getAllPoolsByBorrowerByType(url: string, borrower: string, poolType: string): Promise<any[]> {
   borrower = borrower.toLowerCase();
   let skip = 0;
-  let allData = [];
+  const allData = [];
   for (;;) {
     const data = JSON.stringify({
       query: `{
@@ -249,13 +249,13 @@ export async function getAllPoolsByBorrowerByType(url: string, borrower: string,
       }`,
     });
 
-    var options = {
+    const options = {
       url,
       headers: { 'Content-Type': 'application/json' },
       body: data,
     };
 
-    let result = await fetchData(options);
+    const result = await fetchData(options);
     if (result.errors) {
       print(result.errors);
       throw new Error('Error while fetching data from subgraph');

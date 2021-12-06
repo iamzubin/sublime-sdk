@@ -1,0 +1,22 @@
+{
+  "entryPoints": [
+    "./src",
+    "./src/sublime.ts",
+    "./src/subgraph.ts",
+    "./src/tokenManager.ts",
+    "./src/types/Types.ts",
+    "./src/types/poolGenerateParam.ts",
+    "./src/types/poolInfo.ts",
+    "./src/types/sublimeConfig.ts",
+    "./src/api/yieldAndStrategy.ts",
+    "./src/api/verification.ts",
+    "./src/api/tokenApi.ts",
+    "./src/api/savingsAccount.ts",
+    "./src/api/repayments.ts",
+    "./src/api/priceOracle.ts",
+    "./src/api/pool.ts",
+    "./src/api/extension.ts",
+    "./src/api/creditLines.ts"
+  ],
+  "out": "docs"
+}

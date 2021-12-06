@@ -1,5 +1,5 @@
 const kovanCDai = () => {
-  let temp = {};
+  const temp = {};
   temp['0xF0d0EB522cfa50B716B3b1604C4F0fA6f04376AD'.toLowerCase()] = '0x5d3a536e4d6dbd6114cc1ead35777bab948e3643'.toLowerCase();
   return temp;
 };

@@ -1,13 +1,15 @@
-import { Signer, BytesLike, BigNumberish, ContractTransaction } from 'ethers';
+import { Signer, ContractTransaction } from 'ethers';
 import { SublimeConfig } from '../types/sublimeConfig';
 
 import { Repayments } from '../wrappers/Repayments';
 import { Repayments__factory } from '../wrappers/factories/Repayments__factory';
-
-import { zeroAddress } from '../config/constants';
 import { BigNumber } from 'bignumber.js';
 
 import { TokenManager } from '../tokenManager';
+
+/**
+ * @class RepaymentApi
+ */
 export class RepaymentApi {
   private signer: Signer;
   private repayments: Repayments;
@@ -25,7 +27,7 @@ export class RepaymentApi {
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
-    let interestPerPeriod = await (await this.repayments.getInterestPerSecond(pool)).toString();
+    const interestPerPeriod = await (await this.repayments.getInterestPerSecond(pool)).toString();
     return new BigNumber(interestPerPeriod).div(new BigNumber(10).pow(decimal)).toFixed(2);
   }
 
@@ -38,7 +40,7 @@ export class RepaymentApi {
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
-    let interestDueTillInstalmentDeadline = await (await this.repayments.getInterestDueTillInstalmentDeadline(pool)).toString();
+    const interestDueTillInstalmentDeadline = await (await this.repayments.getInterestDueTillInstalmentDeadline(pool)).toString();
     return new BigNumber(interestDueTillInstalmentDeadline).div(new BigNumber(10).pow(decimal)).toFixed(2);
   }
 
@@ -67,7 +69,7 @@ export class RepaymentApi {
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
-    let interestLeft = await (await this.repayments.getInterestLeft(pool)).toString();
+    const interestLeft = await (await this.repayments.getInterestLeft(pool)).toString();
     return new BigNumber(interestLeft).div(new BigNumber(10).pow(decimal)).toFixed(2);
   }
 
@@ -76,7 +78,7 @@ export class RepaymentApi {
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
-    let interestOverdue = await (await this.repayments.getInterestOverdue(pool)).toString();
+    const interestOverdue = await (await this.repayments.getInterestOverdue(pool)).toString();
     return new BigNumber(interestOverdue).div(new BigNumber(10).pow(decimal)).toFixed(2);
   }
 
@@ -85,7 +87,7 @@ export class RepaymentApi {
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
@@ -102,12 +104,12 @@ export class RepaymentApi {
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
 
-    let totalRepaidAmount = await (await this.repayments.getTotalRepaidAmount(pool)).toString();
+    const totalRepaidAmount = await (await this.repayments.getTotalRepaidAmount(pool)).toString();
     return new BigNumber(totalRepaidAmount).div(new BigNumber(10).pow(decimal)).toFixed(2);
   }
 
   public async getGracePeriodFraction(pool: string): Promise<string> {
-    let graceFraction = await (await this.repayments.getGracePeriodFraction()).toString();
+    const graceFraction = await (await this.repayments.getGracePeriodFraction()).toString();
     return new BigNumber(graceFraction).div(new BigNumber(10).pow(28)).toFixed(2);
   }
 }

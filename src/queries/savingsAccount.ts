@@ -27,14 +27,14 @@ export async function getBalances(url, address: string): Promise<any[]> {
 export async function getSavingsAccountTokenDetails(url, address: string): Promise<any[]> {
   address = address.toLowerCase();
   let skip = 0;
-  let allData = [];
+  const allData = [];
   for (;;) {
     const data = JSON.stringify({
       query: `{
         savingAccounts(where:{id:"${address}"}) {
           id,
           deposits (first: ${countPerQuery}, skip:${skip * countPerQuery}){
-            id,  
+            id,
             asset
           },
         }
@@ -42,13 +42,13 @@ export async function getSavingsAccountTokenDetails(url, address: string): Promi
     `,
     });
 
-    var options = {
+    const options = {
       url,
       headers: { 'Content-Type': 'application/json' },
       body: data,
     };
 
-    let result = await fetchData(options);
+    const result = await fetchData(options);
     // console.log({result, skip});
     if (result.errors) {
       print(result.errors);

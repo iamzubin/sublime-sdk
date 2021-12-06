@@ -4,6 +4,9 @@ import { ContractTransaction, Signer } from 'ethers';
 import { BigNumber } from 'bignumber.js';
 import { TokenManager } from '../tokenManager';
 
+/**
+ * @class TokenApi
+ */
 export class TokenApi {
   private signer: Signer;
   private tokenContract: Token;
@@ -14,33 +17,52 @@ export class TokenApi {
     this.tokenManager = tokenManager;
   }
 
+  /**
+   * @description Increase Allowance to a another address
+   * @param to
+   * @param amount
+   * @returns Contract Transaction
+   */
   public async IncreaseAllowance(to: string, amount: string): Promise<ContractTransaction> {
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('shares should be a valid number');
     }
     await this.tokenManager.updateTokenDecimals(this.tokenContract.address);
-    let decimal = await this.tokenManager.getTokenDecimals(this.tokenContract.address);
+    const decimal = await this.tokenManager.getTokenDecimals(this.tokenContract.address);
 
     return this.tokenContract.connect(this.signer).increaseAllowance(to, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0));
   }
 
+  /**
+   * @description Approve Allowance to a another address
+   * @param to
+   * @param amount
+   * @returns Contract Transaction
+   */
   public async approve(to: string, amount: string): Promise<ContractTransaction> {
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('shares should be a valid number');
     }
     await this.tokenManager.updateTokenDecimals(this.tokenContract.address);
-    let decimal = await this.tokenManager.getTokenDecimals(this.tokenContract.address);
+    const decimal = await this.tokenManager.getTokenDecimals(this.tokenContract.address);
 
     return this.tokenContract.connect(this.signer).approve(to, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0));
   }
 
+  /**
+   * @description Returns the allowance of spender by owner
+   * @param owner
+   * @param spender
+   * @param prettified, if true, the result will be in easy readable form
+   * @returns number
+   */
   public async allowance(owner: string, spender: string, prettified = false): Promise<string> {
     await this.tokenManager.updateTokenDecimals(this.tokenContract.address);
-    let decimal = await this.tokenManager.getTokenDecimals(this.tokenContract.address);
+    const decimal = await this.tokenManager.getTokenDecimals(this.tokenContract.address);
 
-    let allowance = await this.tokenContract.connect(this.signer).allowance(owner, spender);
+    const allowance = await this.tokenContract.connect(this.signer).allowance(owner, spender);
     if (prettified) {
       return new BigNumber(allowance.toString()).div(new BigNumber(10).pow(decimal)).toFixed(2);
     } else {

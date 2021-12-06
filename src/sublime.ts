@@ -15,6 +15,9 @@ import { PriceOracleApi } from './api/priceOracle';
 import { ethers } from 'ethers';
 import { TokenManager } from './tokenManager';
 
+/**
+ * @class SublimeConnector
+ */
 export class SublimeConnector {
   private provider: Provider;
   private signer: Signer;
@@ -28,43 +31,47 @@ export class SublimeConnector {
     this.tokenManager = tokenManager;
   }
 
-  PoolApi() {
+  PoolApi(): PoolApi {
     return new PoolApi(this.signer, this.config, this.tokenManager);
   }
 
-  CreditLinesApi() {
+  CreditLinesApi(): CreditLineApi {
     return new CreditLineApi(this.signer, this.config, this.tokenManager);
   }
 
-  SavingsAccountApi() {
+  SavingsAccountApi(): SavingsAccountApi {
     return new SavingsAccountApi(this.signer, this.config, this.tokenManager);
   }
 
+  /**
+   *
+   * @returns The current address of the signer
+   */
   Address(): Promise<string> {
     return this.signer.getAddress();
   }
 
-  ExtensionApi() {
+  ExtensionApi(): ExtensionApi {
     return new ExtensionApi(this.signer, this.config);
   }
 
-  RepaymentApi() {
+  RepaymentApi(): RepaymentApi {
     return new RepaymentApi(this.signer, this.config, this.tokenManager);
   }
 
-  VerificationApi() {
+  VerificationApi(): VerificationAPI {
     return new VerificationAPI(this.signer, this.config);
   }
 
-  YieldAndStrategyApi() {
+  YieldAndStrategyApi(): YieldAndStrategyApi {
     return new YieldAndStrategyApi(this.signer, this.config, this.tokenManager);
   }
 
-  TokenApi(tokenAddress: string) {
+  TokenApi(tokenAddress: string): TokenApi {
     return new TokenApi(this.signer, tokenAddress, this.tokenManager);
   }
 
-  PriceOracleApi() {
+  PriceOracleApi(): PriceOracleApi {
     return new PriceOracleApi(this.signer, this.config);
   }
 
@@ -72,11 +79,23 @@ export class SublimeConnector {
     return this.signer.getChainId();
   }
 
+  /**
+   *
+   * @param address
+   * @returns balance in ethers (decimals included)
+   */
   public async getBalance(address: string): Promise<string> {
     const balance = await this.provider.getBalance(address);
     return ethers.utils.formatEther(balance);
   }
 
+  /**
+   *
+   * @param transactionHash
+   * @param confirmations
+   * @param timeout
+   * @returns transaction receipt after waiting for the specified number oif blocks
+   */
   public async waitForTransaction(transactionHash: string, confirmations?: number, timeout?: number): Promise<TransactionReceipt> {
     return await this.provider.waitForTransaction(transactionHash, confirmations, timeout);
   }

@@ -43,37 +43,37 @@ export class PoolApi {
     await this.tokenManager.updateTokenDecimals(params.collateralToken);
     const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(params.collateralToken);
 
-    let borrowAmountRequests = new BigNumber(params.borrowAmountRequests);
+    const borrowAmountRequests = new BigNumber(params.borrowAmountRequests);
     if (borrowAmountRequests.isNaN() || borrowAmountRequests.isZero() || borrowAmountRequests.isNegative()) {
       throw new Error('borrowAmountRequests should be a valid number');
     }
 
-    let collateralVolatilityThreshold = new BigNumber(params.collateralVolatilityThreshold);
+    const collateralVolatilityThreshold = new BigNumber(params.collateralVolatilityThreshold);
     if (collateralVolatilityThreshold.isNaN() || collateralVolatilityThreshold.isZero() || collateralVolatilityThreshold.isNegative()) {
       throw new Error('collateralVolatilityThreshold should be a valid number');
     }
 
-    let collateralRatio = new BigNumber(params.collateralRatio);
+    const collateralRatio = new BigNumber(params.collateralRatio);
     if (collateralRatio.isNaN() || collateralRatio.isZero() || collateralRatio.isNegative()) {
       throw new Error('collateralRatio should be a valid number');
     }
 
-    let borrowRate = new BigNumber(params.borrowRate);
+    const borrowRate = new BigNumber(params.borrowRate);
     if (borrowRate.isNaN() || borrowRate.isZero() || borrowRate.isNegative()) {
       throw new Error('borrowRate should be a valid number');
     }
 
-    let repaymentInterval = new BigNumber(params.repaymentInterval);
+    const repaymentInterval = new BigNumber(params.repaymentInterval);
     if (repaymentInterval.isNaN() || repaymentInterval.isZero() || repaymentInterval.isNegative()) {
       throw new Error('repaymentInterval should be a valid number');
     }
 
-    let noOfRepaymentIntervals = new BigNumber(params.noOfRepaymentIntervals);
+    const noOfRepaymentIntervals = new BigNumber(params.noOfRepaymentIntervals);
     if (noOfRepaymentIntervals.isNaN() || noOfRepaymentIntervals.isZero() || noOfRepaymentIntervals.isNegative()) {
       throw new Error('noOfRepaymentIntervals should be a valid number');
     }
 
-    let collateralAmount = new BigNumber(params.collateralAmount);
+    const collateralAmount = new BigNumber(params.collateralAmount);
     if (collateralAmount.isNaN() || collateralAmount.isZero() || collateralAmount.isNegative()) {
       throw new Error('collateralAmount should be a valid number');
     }
@@ -106,43 +106,43 @@ export class PoolApi {
     await this.tokenManager.updateTokenDecimals(params.collateralToken);
     const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(params.collateralToken);
 
-    let borrowAmountRequests = new BigNumber(params.borrowAmountRequests);
+    const borrowAmountRequests = new BigNumber(params.borrowAmountRequests);
     if (borrowAmountRequests.isNaN() || borrowAmountRequests.isZero() || borrowAmountRequests.isNegative()) {
       throw new Error('borrowAmountRequests should be a valid number');
     }
 
-    let collateralVolatilityThreshold = new BigNumber(params.collateralVolatilityThreshold);
+    const collateralVolatilityThreshold = new BigNumber(params.collateralVolatilityThreshold);
     if (collateralVolatilityThreshold.isNaN() || collateralVolatilityThreshold.isZero() || collateralVolatilityThreshold.isNegative()) {
       throw new Error('collateralVolatilityThreshold should be a valid number');
     }
 
-    let collateralRatio = new BigNumber(params.collateralRatio);
+    const collateralRatio = new BigNumber(params.collateralRatio);
     if (collateralRatio.isNaN() || collateralRatio.isZero() || collateralRatio.isNegative()) {
       throw new Error('collateralRatio should be a valid number');
     }
 
-    let borrowRate = new BigNumber(params.borrowRate);
+    const borrowRate = new BigNumber(params.borrowRate);
     if (borrowRate.isNaN() || borrowRate.isZero() || borrowRate.isNegative()) {
       throw new Error('borrowRate should be a valid number');
     }
 
-    let repaymentInterval = new BigNumber(params.repaymentInterval);
+    const repaymentInterval = new BigNumber(params.repaymentInterval);
     if (repaymentInterval.isNaN() || repaymentInterval.isZero() || repaymentInterval.isNegative()) {
       throw new Error('repaymentInterval should be a valid number');
     }
 
-    let noOfRepaymentIntervals = new BigNumber(params.noOfRepaymentIntervals);
+    const noOfRepaymentIntervals = new BigNumber(params.noOfRepaymentIntervals);
     if (noOfRepaymentIntervals.isNaN() || noOfRepaymentIntervals.isZero() || noOfRepaymentIntervals.isNegative()) {
       throw new Error('noOfRepaymentIntervals should be a valid number');
     }
 
-    let collateralAmount = new BigNumber(params.collateralAmount);
+    const collateralAmount = new BigNumber(params.collateralAmount);
     if (collateralAmount.isNaN() || collateralAmount.isZero() || collateralAmount.isNegative()) {
       throw new Error('collateralAmount should be a valid number');
     }
 
-    let loanWithdrawDuration = await this.poolFactory.matchCollateralRatioInterval();
-    let collectionPeriod = await this.poolFactory.collectionPeriod();
+    const loanWithdrawDuration = await this.poolFactory.matchCollateralRatioInterval();
+    const collectionPeriod = await this.poolFactory.collectionPeriod();
 
     const poolData = _interface.encodeFunctionData(initializeFragement, [
       borrowAmountRequests.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
@@ -182,7 +182,7 @@ export class PoolApi {
     await this.tokenManager.updateTokenDecimals(collateralAsset);
     const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(collateralAsset);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
@@ -203,13 +203,13 @@ export class PoolApi {
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
-    let interestTillNow = await (await pool.interestToPay()).toString();
+    const interestTillNow = await (await pool.interestToPay()).toString();
     return new BigNumber(interestTillNow).div(new BigNumber(10).pow(borrowDecimal.toFixed(0))).toFixed(2);
   }
 
   public async getCurrentCollateralRatio(poolContract: string): Promise<string> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
-    let ccr = await (await pool.callStatic['getCurrentCollateralRatio()']()).toString();
+    const ccr = await (await pool.callStatic['getCurrentCollateralRatio()']()).toString();
     return new BigNumber(ccr).div(new BigNumber(10).pow(28)).toFixed(2);
   }
 
@@ -241,9 +241,9 @@ export class PoolApi {
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
-    let _amount = new BigNumber(amount).multipliedBy(new BigNumber(10).pow(borrowDecimal));
-    let interestPerPeriod = await (await pool.interestPerPeriod(_amount.toFixed(0))).toString();
-    let value = new BigNumber(interestPerPeriod).div(new BigNumber(10).pow(borrowDecimal));
+    const _amount = new BigNumber(amount).multipliedBy(new BigNumber(10).pow(borrowDecimal));
+    const interestPerPeriod = await (await pool.interestPerPeriod(_amount.toFixed(0))).toString();
+    const value = new BigNumber(interestPerPeriod).div(new BigNumber(10).pow(borrowDecimal));
     return value.div(new BigNumber(10).pow(30)).toFixed(2);
   }
 
@@ -254,10 +254,10 @@ export class PoolApi {
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
-    let _amount = new BigNumber(amount).multipliedBy(new BigNumber(10).pow(borrowDecimal));
-    let interestPerSecond = await (await pool.interestPerSecond(_amount.toFixed(0))).toString();
+    const _amount = new BigNumber(amount).multipliedBy(new BigNumber(10).pow(borrowDecimal));
+    const interestPerSecond = await (await pool.interestPerSecond(_amount.toFixed(0))).toString();
 
-    let value = new BigNumber(interestPerSecond).div(new BigNumber(10).pow(borrowDecimal));
+    const value = new BigNumber(interestPerSecond).div(new BigNumber(10).pow(borrowDecimal));
     return value.div(new BigNumber(10).pow(30)).toFixed(2);
   }
 
@@ -273,7 +273,7 @@ export class PoolApi {
 
   public async getLoanStatus(poolContract: string): Promise<LoanStatus> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
-    let _status = (await pool.getLoanStatus()).toString();
+    const _status = (await pool.getLoanStatus()).toString();
     return LoanStatus[_status];
   }
 
@@ -295,7 +295,7 @@ export class PoolApi {
     await this.tokenManager.updateTokenDecimals(poolContract);
     const _decimal: BigNumberish = this.tokenManager.getTokenDecimals(poolContract);
 
-    let totalSupply = await pool.getTotalSupply();
+    const totalSupply = await pool.getTotalSupply();
     return new BigNumber(totalSupply.toString()).div(new BigNumber(10).pow(_decimal)).toFixed(2);
   }
 
@@ -312,7 +312,7 @@ export class PoolApi {
       liquidityToken = await IYield__factory.connect(poolSavingsStrategy, this.signer).liquidityToken(poolConstants.collateralAsset);
     }
 
-    let allTokens = [poolConstants.borrowAsset, poolConstants.collateralAsset, liquidityToken].filter(
+    const allTokens = [poolConstants.borrowAsset, poolConstants.collateralAsset, liquidityToken].filter(
       (value, index, array) => array.indexOf(value) === index
     );
     for (let index = 0; index < allTokens.length; index++) {
@@ -320,7 +320,7 @@ export class PoolApi {
       await this.tokenManager.updateAll(element);
     }
 
-    let minBorrowFraction = await this.poolFactory.minBorrowFraction();
+    const minBorrowFraction = await this.poolFactory.minBorrowFraction();
 
     result.borrowAmountRequested = new BigNumber(poolConstants.borrowAmountRequested.toString())
       .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(poolConstants.borrowAsset.toLowerCase())))

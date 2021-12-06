@@ -1,0 +1,10 @@
+docs
+docs/*
+
+dist
+dist/*
+
+src/artifacts
+src/artifacts/*
+src/wrappers
+src/wrappers/*

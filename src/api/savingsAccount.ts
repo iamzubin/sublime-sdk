@@ -14,6 +14,9 @@ import { TokenManager } from '../tokenManager';
 import { Asset, StrategyType } from '../types/Types';
 import { zeroAddress } from '../config/constants';
 
+/**
+ * @class SavingsAccountApi
+ */
 export class SavingsAccountApi {
   private signer: Signer;
   private savingsAccount: SavingsAccount;
@@ -27,28 +30,43 @@ export class SavingsAccountApi {
     this.tokenManager = tokenManager;
   }
 
+  /**
+   * @description Approve tokens in your wallet for depositing to a strategy
+   * @param amount
+   * @param asset
+   * @param strategy
+   * @returns Contract Transaction
+   */
   public async approveTokenForSavingsAccountDeposit(amount: string, asset: string, strategy: StrategyType): Promise<ContractTransaction> {
-    let _strategyContractAddress: string = this.getStrategyAddress(strategy);
+    const _strategyContractAddress: string = this.getStrategyAddress(strategy);
 
     await this.tokenManager.updateTokenDecimals(asset);
     const borrowDecimal = this.tokenManager.getTokenDecimals(asset);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
 
-    let tokenContract: ERC20Detailed = new ERC20Detailed__factory(this.signer).attach(asset);
+    const tokenContract: ERC20Detailed = new ERC20Detailed__factory(this.signer).attach(asset);
     return tokenContract.approve(_strategyContractAddress, _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0));
   }
 
+  /**
+   * @description: Deposit amount to strategy
+   * @param amount
+   * @param asset
+   * @param strategy
+   * @param to
+   * @returns Contract Transaction
+   */
   public async deposit(amount: string, asset: string, strategy: StrategyType, to: string): Promise<ContractTransaction> {
-    let _strategyContractAddress: string = this.getStrategyAddress(strategy);
+    const _strategyContractAddress: string = this.getStrategyAddress(strategy);
 
     await this.tokenManager.updateTokenDecimals(asset);
     const assetDecimals = this.tokenManager.getTokenDecimals(asset);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
@@ -62,6 +80,14 @@ export class SavingsAccountApi {
     );
   }
 
+  /**
+   * @description Switch amount from one strategy to another
+   * @param currentStrategy
+   * @param newStrategy
+   * @param asset
+   * @param amount
+   * @returns Contract Transaction
+   */
   public async switchStrategy(
     currentStrategy: StrategyType,
     newStrategy: StrategyType,
@@ -72,13 +98,13 @@ export class SavingsAccountApi {
       throw new Error('Current Strategy and new strategy can not be same');
     }
 
-    let _currentStrategyAddress = this.getStrategyAddress(currentStrategy);
-    let _newStrategyAddress = this.getStrategyAddress(newStrategy);
+    const _currentStrategyAddress = this.getStrategyAddress(currentStrategy);
+    const _newStrategyAddress = this.getStrategyAddress(newStrategy);
 
     await this.tokenManager.updateTokenDecimals(asset);
     const decimal = this.tokenManager.getTokenDecimals(asset);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
@@ -91,6 +117,15 @@ export class SavingsAccountApi {
     );
   }
 
+  /**
+   * @description Withdraw amount from a given strategy
+   * @param amount
+   * @param token
+   * @param strategy
+   * @param to
+   * @param withdrawShares: if set to true, the "to" address will receive the shares token directly.
+   * @returns Contract Transaction
+   */
   public async withdraw(
     amount: string,
     token: string,
@@ -98,12 +133,12 @@ export class SavingsAccountApi {
     to: string,
     withdrawShares: boolean
   ): Promise<ContractTransaction> {
-    let _strategyContractAddress = this.getStrategyAddress(strategy);
+    const _strategyContractAddress = this.getStrategyAddress(strategy);
 
     await this.tokenManager.updateTokenDecimals(token);
     const decimal = this.tokenManager.getTokenDecimals(token);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
@@ -117,6 +152,16 @@ export class SavingsAccountApi {
     );
   }
 
+  /**
+   * @description Withdraw amount from another address i.e "from" address here
+   * @param amount
+   * @param token
+   * @param strategy
+   * @param from: address from which you wish to withdraw tokens
+   * @param to
+   * @param withdrawShares: if set to to true, the "to" address received shares directly
+   * @returns Contract Transaction
+   */
   public async withdrawFrom(
     amount: string,
     token: string,
@@ -125,12 +170,12 @@ export class SavingsAccountApi {
     to: string,
     withdrawShares: boolean
   ): Promise<ContractTransaction> {
-    let _strategyContractAddress = this.getStrategyAddress(strategy);
+    const _strategyContractAddress = this.getStrategyAddress(strategy);
 
     await this.tokenManager.updateTokenDecimals(token);
     const decimal = this.tokenManager.getTokenDecimals(token);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('_amount should be a valid number');
     }
@@ -146,15 +191,27 @@ export class SavingsAccountApi {
     );
   }
 
+  /**
+   * @description Withdraw a particular tokens from all strategies
+   * @param asset / token address
+   * @returns Contract Transaction
+   */
   public async withdrawAll(asset: string): Promise<ContractTransaction> {
     return this.savingsAccount.withdrawAll(asset);
   }
 
+  /**
+   * @description Approve tokens in the savings to be used to other address
+   * @param amount
+   * @param token
+   * @param to : Address to which you want to approve
+   * @returns Contract Transaction
+   */
   public async approve(amount: string, token: string, to: string): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
@@ -162,11 +219,18 @@ export class SavingsAccountApi {
     return this.savingsAccount.approve(_amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0), token, to);
   }
 
-  public async increaseAllowace(token: string, to: string, amount: string): Promise<ContractTransaction> {
+  /**
+   * @description Increase the amount of tokens that can be used by "to" address
+   * @param token
+   * @param to
+   * @param amount
+   * @returns Contract Transaction
+   */
+  public async increaseAllowance(token: string, to: string, amount: string): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
@@ -174,11 +238,18 @@ export class SavingsAccountApi {
     return this.savingsAccount.increaseAllowance(_amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0), token, to);
   }
 
+  /**
+   * @description Increase the amount of tokens that can be used by "to" address
+   * @param token
+   * @param to
+   * @param amount
+   * @returns Contract Transaction
+   */
   public async decreaseAllowance(token: string, to: string, amount: string): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
@@ -186,11 +257,17 @@ export class SavingsAccountApi {
     return this.savingsAccount.decreaseAllowance(token, to, _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0));
   }
 
+  /**
+   * @@deprecated
+   * @param token
+   * @param amount
+   * @returns
+   */
   public async approveTokenForCreditLines(token: string, amount: string): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
@@ -202,12 +279,20 @@ export class SavingsAccountApi {
     );
   }
 
+  /**
+   * @description Transfer tokens from one address to another, but within the same strategy
+   * @param amount
+   * @param token
+   * @param strategy
+   * @param to
+   * @returns Contract Transaction
+   */
   public async transfer(amount: string, token: string, strategy: StrategyType, to: string): Promise<ContractTransaction> {
-    let _strategyContractAddress = this.getStrategyAddress(strategy);
+    const _strategyContractAddress = this.getStrategyAddress(strategy);
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
@@ -220,13 +305,22 @@ export class SavingsAccountApi {
     );
   }
 
+  /**
+   * @description Transfer tokens from "from" address to another address
+   * @param amount
+   * @param token
+   * @param strategy
+   * @param from
+   * @param to
+   * @returns Contract Transaction
+   */
   public async transferFrom(amount: string, token: string, strategy: StrategyType, from: string, to: string): Promise<ContractTransaction> {
-    let _strategyContractAddress = this.getStrategyAddress(strategy);
+    const _strategyContractAddress = this.getStrategyAddress(strategy);
 
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
-    let _amount = new BigNumber(amount);
+    const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
@@ -240,30 +334,49 @@ export class SavingsAccountApi {
     );
   }
 
+  /**
+   * @description Get specific token asset locked in savings account. For ex; if asset=dai_addressm then call returns the amount of DAI stored in the savings account for that user
+   * @param user
+   * @param asset
+   * @returns easy read number in string
+   */
   public async getTotalTokens(user: string, asset: string): Promise<string> {
     await this.tokenManager.updateTokenDecimals(asset);
     const decimals = this.tokenManager.getTokenDecimals(asset);
 
-    let getTotalTokens = await (await this.savingsAccount.callStatic.getTotalTokens(user, asset)).toString();
+    const getTotalTokens = await (await this.savingsAccount.callStatic.getTotalTokens(user, asset)).toString();
     return new BigNumber(getTotalTokens).div(new BigNumber(10).pow(decimals)).toFixed(2);
   }
 
+  /**
+   * @description Fet the specific liquidity shares in the savings account for a user.
+   * @param user
+   * @param asset
+   * @param strategy
+   * @returns easy read number in string
+   */
   public async getShares(user: string, asset: string, strategy: StrategyType): Promise<string> {
-    let _strategyContractAddress = this.getStrategyAddress(strategy);
+    const _strategyContractAddress = this.getStrategyAddress(strategy);
     const yieldContract: IYield = IYield__factory.connect(_strategyContractAddress, this.signer);
     const liquiditySharesAddress: string = await yieldContract.liquidityToken(asset);
 
     await this.tokenManager.updateTokenDecimals(liquiditySharesAddress);
     const decimal = this.tokenManager.getTokenDecimals(liquiditySharesAddress);
 
-    let userShares = await (await this.savingsAccount.balanceInShares(user, asset, _strategyContractAddress)).toString();
+    const userShares = await (await this.savingsAccount.balanceInShares(user, asset, _strategyContractAddress)).toString();
     return new BigNumber(userShares).div(new BigNumber(10).pow(decimal)).toFixed(6);
   }
 
+  /**
+   * @description Get the liquidity token for a given tokenb
+   * @param asset
+   * @param strategy
+   * @returns Asset in detail
+   */
   public async getLiquidityTokenOfAssetForStrategy(asset: string, strategy: StrategyType): Promise<Asset> {
-    let _strategyContractAddress = this.getStrategyAddress(strategy);
+    const _strategyContractAddress = this.getStrategyAddress(strategy);
     const yieldContract: IYield = IYield__factory.connect(_strategyContractAddress, this.signer);
-    let liquidityToken: string = await yieldContract.liquidityToken(asset);
+    const liquidityToken: string = await yieldContract.liquidityToken(asset);
     await this.tokenManager.updateAll(liquidityToken);
     return {
       address: liquidityToken,
@@ -273,6 +386,11 @@ export class SavingsAccountApi {
     };
   }
 
+  /**
+   * @description Returns the contract address of a given strategy
+   * @param strategy
+   * @returns
+   */
   private getStrategyAddress(strategy: StrategyType): string {
     if (strategy === StrategyType.NoYield) {
       return this.config.noStrategyAddress;

@@ -3,13 +3,11 @@ import { ContractTransaction, Signer } from 'ethers';
 
 import { PriceOracle } from '../wrappers/PriceOracle';
 import { PriceOracle__factory } from '../wrappers/factories/PriceOracle__factory';
-import { CreditLineRequest, StrategyType } from '../types/Types';
-import { BigNumberish } from '@ethersproject/bignumber';
-import { BigNumber } from 'bignumber.js';
+import { BigNumberish, BigNumber } from '@ethersproject/bignumber';
 
-import { TokenManager } from '../tokenManager';
-import { zeroAddress } from '../config/constants';
-
+/**
+ * @class PriceOracle
+ */
 export class PriceOracleApi {
   private priceOracleContract: PriceOracle;
   private config: SublimeConfig;
@@ -19,7 +17,14 @@ export class PriceOracleApi {
     config = this.config;
   }
 
+  /**
+   * @description Returns the
+   * @param num: first token address
+   * @param den: second token address
+   * @returns price of token1 in terms of token2
+   */
   public async getLatestPrice(num: string, den: string): Promise<string> {
-    return (await this.priceOracleContract.getLatestPrice(num, den)).toString();
+    const [ratio, decimals] = await this.priceOracleContract.getLatestPrice(num, den);
+    return ratio.div(BigNumber.from(10).pow(decimals)).toString();
   }
 }
