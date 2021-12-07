@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[types/Types.ts:173](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/types/Types.ts#L173)
+[types/Types.ts:175](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/types/Types.ts#L175)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:172](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/types/Types.ts#L172)
+[types/Types.ts:174](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/types/Types.ts#L174)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[types/Types.ts:174](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/types/Types.ts#L174)
+[types/Types.ts:176](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/types/Types.ts#L176)

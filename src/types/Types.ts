@@ -61,6 +61,7 @@ export interface SavingsAccountStrategyBalance {
 export interface SavingsAccountBalance {
   token: Asset;
   balance: BigNumber;
+  amountAllocatedToCreditLines: BigNumber;
   balanceUSD: BigNumber;
   strategyBalance: [SavingsAccountStrategyBalance?];
   APR: BigNumber; // weighted average of all strategy APRs
@@ -82,6 +83,7 @@ export interface SavingsAccountStrategyBalanceDisplay {
 export interface SavingsAccountBalanceDisplay {
   token: Asset;
   balance: string;
+  amountAllocatedToCreditLines: string;
   balanceUSD: string;
   strategyBalance: [SavingsAccountStrategyBalanceDisplay?];
   APR: string; // weighted average of all strategy APRs

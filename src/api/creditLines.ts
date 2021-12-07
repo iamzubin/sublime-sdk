@@ -185,7 +185,8 @@ export class CreditLineApi {
    * @description Withdraws the collateral from the credit line
    * @param creditLineNumber
    * @param amount
-   * @param toSavingsAccount: boolean params that enables with withdrawn collateral to be directly transferred from credit line to user's savings account
+   * @param toSavingsAccount: boolean params that enables with withdrawn collateral to be
+   * directly transferred from credit line to user's savings account
    * @returns Contract Transaction
    */
   public async withdrawCollateralFromCreditLine(
@@ -290,10 +291,15 @@ export class CreditLineApi {
       throw new Error('amount should be a valid number');
     }
 
+    let value = new BigNumber(0);
+    if (borrowAsset === zeroAddress) {
+      value = new BigNumber(amount);
+    }
     return this.creditLineContract.repay(
       creditLineNumber,
       _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
-      fromSavingsAccount
+      fromSavingsAccount,
+      { value: value.toString() }
     );
   }
 
@@ -313,6 +319,14 @@ export class CreditLineApi {
    * @returns Contract Transaction
    */
   public async liquidateCreditLine(creditLineNumber: BigNumberish, toSavingsAccount: boolean = false): Promise<ContractTransaction> {
-    return this.creditLineContract.liquidate(creditLineNumber, toSavingsAccount);
+    const debt = await this.creditLineContract.calculateCurrentDebt(creditLineNumber);
+    const borrowAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).borrowAsset;
+
+    let value = new BigNumber(0);
+    if (borrowAsset == zeroAddress) {
+      value = new BigNumber(debt.toString()).multipliedBy(4).div(3);
+    }
+
+    return this.creditLineContract.liquidate(creditLineNumber, toSavingsAccount, { value: value.toString() });
   }
 }

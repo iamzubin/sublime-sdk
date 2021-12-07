@@ -67,3 +67,43 @@ export async function getSavingsAccountTokenDetails(url, address: string): Promi
     }
   }
 }
+
+export async function getAllowances(url, address: string, to: string): Promise<any[]> {
+  address = address.toLowerCase();
+  to = to.toLowerCase();
+  let skip = 0;
+  const allData = [];
+
+  for (;;) {
+    const data = JSON.stringify({
+      query: `{
+        allowances(where:{from:"${address}", to:"${to}"} , first: ${countPerQuery}, skip:${skip * countPerQuery}) {
+          amount
+          from
+          to
+          token
+        }
+      }
+    `,
+    });
+
+    const options = {
+      url,
+      headers: { 'Content-Type': 'application/json' },
+      body: data,
+    };
+
+    const result = await fetchData(options);
+    // console.log({result});
+    // console.log({result, skip});
+    if (result.errors) {
+      print(result.errors);
+      throw new Error('Error while fetching data from subgraph');
+    } else if (result.data.allowances.length == 0) {
+      return allData;
+    } else {
+      skip++;
+      allData.push(...result.data.allowances);
+    }
+  }
+}

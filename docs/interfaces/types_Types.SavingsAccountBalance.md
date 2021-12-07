@@ -9,6 +9,7 @@
 ### Properties
 
 - [APR](types_Types.SavingsAccountBalance.md#apr)
+- [amountAllocatedToCreditLines](types_Types.SavingsAccountBalance.md#amountallocatedtocreditlines)
 - [balance](types_Types.SavingsAccountBalance.md#balance)
 - [balanceUSD](types_Types.SavingsAccountBalance.md#balanceusd)
 - [strategyBalance](types_Types.SavingsAccountBalance.md#strategybalance)
@@ -22,7 +23,17 @@
 
 #### Defined in
 
-[types/Types.ts:66](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/types/Types.ts#L66)
+[types/Types.ts:67](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/types/Types.ts#L67)
+
+___
+
+### amountAllocatedToCreditLines
+
+• **amountAllocatedToCreditLines**: `BigNumber`
+
+#### Defined in
+
+[types/Types.ts:64](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/types/Types.ts#L64)
 
 ___
 
@@ -32,7 +43,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:63](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/types/Types.ts#L63)
+[types/Types.ts:63](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/types/Types.ts#L63)
 
 ___
 
@@ -42,7 +53,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:64](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/types/Types.ts#L64)
+[types/Types.ts:65](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/types/Types.ts#L65)
 
 ___
 
@@ -52,7 +63,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:65](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/types/Types.ts#L65)
+[types/Types.ts:66](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/types/Types.ts#L66)
 
 ___
 
@@ -62,4 +73,4 @@ ___
 
 #### Defined in
 
-[types/Types.ts:62](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/types/Types.ts#L62)
+[types/Types.ts:62](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/types/Types.ts#L62)

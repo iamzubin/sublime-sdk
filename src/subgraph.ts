@@ -7,9 +7,7 @@ import {
   PoolLender,
   SavingsAccountUserDetails,
   SavingAccountUserDetailDisplay,
-  SavingsAccountBalanceDisplay,
   SavingsAccountStrategyBalanceDisplay,
-  SavingsAccountStrategyBalance,
   CreditLineOperation,
 } from './types/Types';
 import {
@@ -20,7 +18,6 @@ import {
   getAllPoolsByLender,
   getAllPoolsByBorrowerByType,
   getAllPoolsByLenderByType,
-  getSavingsAccountTokenDetails,
   getConfirmedCreditLinesOfBorrower,
   getConfirmedCreditLinesOfLender,
   getPendingCreditLinesRequestedByBorrower,
@@ -30,6 +27,7 @@ import {
   getCreditLineTimeline,
   getCreditLine,
   getBalances,
+  getAllowances,
 } from './queries';
 
 import { Signer } from '@ethersproject/abstract-signer';
@@ -339,6 +337,7 @@ export class SublimeSubgraph {
    * @description Tranforms the data received from the subgraph to type
    */
   private async transformToSavingsAccountUserDetails(address: string, data: any[]): Promise<SavingAccountUserDetailDisplay> {
+    let allowances = await getAllowances(this.subgraphUrl, address, this.sublimeAddresses.creditLineContractAddress);
     let savingsAccountUserDetails: SavingsAccountUserDetails = {
       user: address,
       totalBalance: new BigNumber(0),
@@ -365,6 +364,14 @@ export class SublimeSubgraph {
       let tokenDecimals = new BigNumber(10).pow(this.tokenManager.getTokenDecimals(token));
       let rawAmountInTokens = (await yieldContract.callStatic.getTokensForShares(shares, token)).toString();
       let amountInTokens = new BigNumber(rawAmountInTokens).div(tokenDecimals);
+      let allocatedAmountToCreditLines = new BigNumber(0);
+
+      let filteredAllowancesByToken = allowances.filter((a) => a.token == token);
+      if (filteredAllowancesByToken.length > 0) {
+        allocatedAmountToCreditLines = new BigNumber(filteredAllowancesByToken[0].amount);
+        allocatedAmountToCreditLines = allocatedAmountToCreditLines.div(tokenDecimals);
+      }
+
       let price = tokenPrice[token];
       if (!price) {
         price = await this.tokenManager.getPricePerAsset(token);
@@ -380,6 +387,7 @@ export class SublimeSubgraph {
           token,
           balanceUSD: new BigNumber(0),
           balance: new BigNumber(0),
+          amountAllocatedToCreditLines: new BigNumber(allocatedAmountToCreditLines),
           strategyBalance: [],
           APR: new BigNumber(0),
         });
@@ -412,6 +420,7 @@ export class SublimeSubgraph {
 
     let savingAccountsUserDetailsDisplay = {} as SavingAccountUserDetailDisplay;
     // return savingsAccountUserDetails;
+
     savingAccountsUserDetailsDisplay.user = savingsAccountUserDetails.user;
     savingAccountsUserDetailsDisplay.totalBalance = savingsAccountUserDetails.totalBalance.toFixed(2);
     savingAccountsUserDetailsDisplay.balances = [];
@@ -425,9 +434,11 @@ export class SublimeSubgraph {
           APR: b.APR.toFixed(2),
         });
       });
+
       savingAccountsUserDetailsDisplay.balances.push({
         token: a.token,
         balance: a.balance.toFixed(2),
+        amountAllocatedToCreditLines: a.amountAllocatedToCreditLines.toFixed(2),
         balanceUSD: a.balanceUSD.toFixed(2),
         APR: a.APR.toFixed(2),
         strategyBalance,
@@ -588,6 +599,10 @@ export class SublimeSubgraph {
     }
   }
 
+  async getAllowances(): Promise<any[]> {
+    let result = await getAllowances(this.subgraphUrl, await this.signer.getAddress(), this.sublimeAddresses.creditLineContractAddress);
+    return result;
+  }
   /**
    *
    * @param cl

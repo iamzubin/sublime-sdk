@@ -335,7 +335,8 @@ export class SavingsAccountApi {
   }
 
   /**
-   * @description Get specific token asset locked in savings account. For ex; if asset=dai_addressm then call returns the amount of DAI stored in the savings account for that user
+   * @description Get specific token asset locked in savings account. For ex; if asset=dai_address,
+   * then call returns the amount of DAI stored in the savings account for that user
    * @param user
    * @param asset
    * @returns easy read number in string

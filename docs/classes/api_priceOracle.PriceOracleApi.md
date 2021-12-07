@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[api/priceOracle.ts:15](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/priceOracle.ts#L15)
+[api/priceOracle.ts:15](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/api/priceOracle.ts#L15)
 
 ## Properties
 
@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[api/priceOracle.ts:13](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/priceOracle.ts#L13)
+[api/priceOracle.ts:13](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/api/priceOracle.ts#L13)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[api/priceOracle.ts:12](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/priceOracle.ts#L12)
+[api/priceOracle.ts:12](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/api/priceOracle.ts#L12)
 
 ## Methods
 
@@ -79,4 +79,4 @@ price of token1 in terms of token2
 
 #### Defined in
 
-[api/priceOracle.ts:26](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/priceOracle.ts#L26)
+[api/priceOracle.ts:26](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/api/priceOracle.ts#L26)
