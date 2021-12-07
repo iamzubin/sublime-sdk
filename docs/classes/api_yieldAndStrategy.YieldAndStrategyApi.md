@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:24](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/yieldAndStrategy.ts#L24)
+[api/yieldAndStrategy.ts:24](https://github.com/akshay111meher/sublime-sdk/blob/e2731c8/src/api/yieldAndStrategy.ts#L24)
 
 ## Properties
 
@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:21](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/yieldAndStrategy.ts#L21)
+[api/yieldAndStrategy.ts:21](https://github.com/akshay111meher/sublime-sdk/blob/e2731c8/src/api/yieldAndStrategy.ts#L21)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:20](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/yieldAndStrategy.ts#L20)
+[api/yieldAndStrategy.ts:20](https://github.com/akshay111meher/sublime-sdk/blob/e2731c8/src/api/yieldAndStrategy.ts#L20)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:22](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/yieldAndStrategy.ts#L22)
+[api/yieldAndStrategy.ts:22](https://github.com/akshay111meher/sublime-sdk/blob/e2731c8/src/api/yieldAndStrategy.ts#L22)
 
 ## Methods
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:75](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/yieldAndStrategy.ts#L75)
+[api/yieldAndStrategy.ts:75](https://github.com/akshay111meher/sublime-sdk/blob/e2731c8/src/api/yieldAndStrategy.ts#L75)
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:100](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/yieldAndStrategy.ts#L100)
+[api/yieldAndStrategy.ts:100](https://github.com/akshay111meher/sublime-sdk/blob/e2731c8/src/api/yieldAndStrategy.ts#L100)
 
 ___
 
@@ -133,4 +133,4 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:38](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/yieldAndStrategy.ts#L38)
+[api/yieldAndStrategy.ts:38](https://github.com/akshay111meher/sublime-sdk/blob/e2731c8/src/api/yieldAndStrategy.ts#L38)
