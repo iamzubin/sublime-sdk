@@ -6,7 +6,7 @@ export async function getCreditLineTimeline(url: string, creditLineNumber: strin
       creditLines(where:{id:"${creditLineNumber}"}) {
         id
         borrowAsset
-        creditLineTimeline {
+        creditLineTimeline(orderBy:timestamp, orderDirection:desc) {
           id
           timestamp
           creditLineOperation

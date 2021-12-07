@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[api/savingsAccount.ts:26](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L26)
+[api/savingsAccount.ts:26](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L26)
 
 ## Properties
 
@@ -62,7 +62,7 @@
 
 #### Defined in
 
-[api/savingsAccount.ts:23](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L23)
+[api/savingsAccount.ts:23](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L23)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[api/savingsAccount.ts:22](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L22)
+[api/savingsAccount.ts:22](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L22)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-[api/savingsAccount.ts:21](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L21)
+[api/savingsAccount.ts:21](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L21)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[api/savingsAccount.ts:24](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L24)
+[api/savingsAccount.ts:24](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L24)
 
 ## Methods
 
@@ -118,7 +118,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:210](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L210)
+[api/savingsAccount.ts:210](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L210)
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 #### Defined in
 
-[api/savingsAccount.ts:266](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L266)
+[api/savingsAccount.ts:266](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L266)
 
 ___
 
@@ -167,7 +167,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:40](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L40)
+[api/savingsAccount.ts:40](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L40)
 
 ___
 
@@ -193,7 +193,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:248](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L248)
+[api/savingsAccount.ts:248](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L248)
 
 ___
 
@@ -220,7 +220,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:63](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L63)
+[api/savingsAccount.ts:63](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L63)
 
 ___
 
@@ -245,7 +245,7 @@ Asset in detail
 
 #### Defined in
 
-[api/savingsAccount.ts:376](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L376)
+[api/savingsAccount.ts:376](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L376)
 
 ___
 
@@ -271,7 +271,7 @@ easy read number in string
 
 #### Defined in
 
-[api/savingsAccount.ts:358](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L358)
+[api/savingsAccount.ts:358](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L358)
 
 ___
 
@@ -293,7 +293,7 @@ ___
 
 #### Defined in
 
-[api/savingsAccount.ts:394](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L394)
+[api/savingsAccount.ts:394](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L394)
 
 ___
 
@@ -318,7 +318,7 @@ easy read number in string
 
 #### Defined in
 
-[api/savingsAccount.ts:343](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L343)
+[api/savingsAccount.ts:343](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L343)
 
 ___
 
@@ -344,7 +344,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:229](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L229)
+[api/savingsAccount.ts:229](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L229)
 
 ___
 
@@ -371,7 +371,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:91](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L91)
+[api/savingsAccount.ts:91](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L91)
 
 ___
 
@@ -398,7 +398,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:290](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L290)
+[api/savingsAccount.ts:290](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L290)
 
 ___
 
@@ -426,7 +426,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:317](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L317)
+[api/savingsAccount.ts:317](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L317)
 
 ___
 
@@ -454,7 +454,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:129](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L129)
+[api/savingsAccount.ts:129](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L129)
 
 ___
 
@@ -478,7 +478,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:199](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L199)
+[api/savingsAccount.ts:199](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L199)
 
 ___
 
@@ -507,4 +507,4 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:165](https://github.com/akshay111meher/sublime-sdk/blob/c5da400/src/api/savingsAccount.ts#L165)
+[api/savingsAccount.ts:165](https://github.com/akshay111meher/sublime-sdk/blob/50bba98/src/api/savingsAccount.ts#L165)
