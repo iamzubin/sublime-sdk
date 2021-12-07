@@ -4,6 +4,12 @@
 
 ## Table of contents
 
-### Interfaces
+### References
 
-- [SublimeConfig](../interfaces/types_sublimeConfig.SublimeConfig.md)
+- [SublimeConfig](types_sublimeConfig.md#sublimeconfig)
+
+## References
+
+### SublimeConfig
+
+Re-exports [SublimeConfig](../interfaces/types_sublimeConfig.SublimeConfig.md)

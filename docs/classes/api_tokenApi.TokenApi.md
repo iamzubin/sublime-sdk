@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[api/tokenApi.ts:14](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/api/tokenApi.ts#L14)
+[api/tokenApi.ts:14](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/tokenApi.ts#L14)
 
 ## Properties
 
@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[api/tokenApi.ts:11](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/api/tokenApi.ts#L11)
+[api/tokenApi.ts:11](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/tokenApi.ts#L11)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-[api/tokenApi.ts:12](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/api/tokenApi.ts#L12)
+[api/tokenApi.ts:12](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/tokenApi.ts#L12)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[api/tokenApi.ts:13](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/api/tokenApi.ts#L13)
+[api/tokenApi.ts:13](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/tokenApi.ts#L13)
 
 ## Methods
 
@@ -93,7 +93,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/tokenApi.ts:26](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/api/tokenApi.ts#L26)
+[api/tokenApi.ts:26](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/tokenApi.ts#L26)
 
 ___
 
@@ -119,7 +119,7 @@ number
 
 #### Defined in
 
-[api/tokenApi.ts:61](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/api/tokenApi.ts#L61)
+[api/tokenApi.ts:61](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/tokenApi.ts#L61)
 
 ___
 
@@ -144,4 +144,4 @@ Contract Transaction
 
 #### Defined in
 
-[api/tokenApi.ts:43](https://github.com/akshay111meher/sublime-sdk/blob/06a64cf/src/api/tokenApi.ts#L43)
+[api/tokenApi.ts:43](https://github.com/akshay111meher/sublime-sdk/blob/5e69867/src/api/tokenApi.ts#L43)

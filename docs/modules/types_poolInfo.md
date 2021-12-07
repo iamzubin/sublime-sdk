@@ -4,6 +4,12 @@
 
 ## Table of contents
 
-### Interfaces
+### References
 
-- [PoolInfo](../interfaces/types_poolInfo.PoolInfo.md)
+- [PoolInfo](types_poolInfo.md#poolinfo)
+
+## References
+
+### PoolInfo
+
+Re-exports [PoolInfo](../interfaces/types_poolInfo.PoolInfo.md)

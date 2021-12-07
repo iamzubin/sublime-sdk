@@ -16,7 +16,11 @@
     "./src/api/priceOracle.ts",
     "./src/api/pool.ts",
     "./src/api/extension.ts",
-    "./src/api/creditLines.ts"
+    "./src/api/creditLines.ts",
+    "./src/types/poolGenerateParam.ts",
+    "./src/types/poolInfo.ts",
+    "./src/types/sublimeConfig.ts",
+    "./src/types/Types.ts"
   ],
   "out": "docs"
 }

@@ -4,28 +4,145 @@
 
 ## Table of contents
 
-### Enumerations
+### References
 
-- [Operation](../enums/types_Types.Operation.md)
-- [StrategyType](../enums/types_Types.StrategyType.md)
+- [Asset](types_Types.md#asset)
+- [CreditLineDetail](types_Types.md#creditlinedetail)
+- [CreditLineHistory](types_Types.md#creditlinehistory)
+- [CreditLineOperation](types_Types.md#creditlineoperation)
+- [CreditLineRequest](types_Types.md#creditlinerequest)
+- [CreditLineUser](types_Types.md#creditlineuser)
+- [CreditLinesOverview](types_Types.md#creditlinesoverview)
+- [DashboardOverview](types_Types.md#dashboardoverview)
+- [Operation](types_Types.md#operation)
+- [PoolDetail](types_Types.md#pooldetail)
+- [PoolLender](types_Types.md#poollender)
+- [ProfileOverview](types_Types.md#profileoverview)
+- [SavingAccountUserDetailDisplay](types_Types.md#savingaccountuserdetaildisplay)
+- [SavingsAccountBalance](types_Types.md#savingsaccountbalance)
+- [SavingsAccountBalanceDisplay](types_Types.md#savingsaccountbalancedisplay)
+- [SavingsAccountStrategyBalance](types_Types.md#savingsaccountstrategybalance)
+- [SavingsAccountStrategyBalanceDisplay](types_Types.md#savingsaccountstrategybalancedisplay)
+- [SavingsAccountUserDetails](types_Types.md#savingsaccountuserdetails)
+- [Strategy](types_Types.md#strategy)
+- [StrategyType](types_Types.md#strategytype)
 
-### Interfaces
+## References
 
-- [Asset](../interfaces/types_Types.Asset.md)
-- [CreditLineDetail](../interfaces/types_Types.CreditLineDetail.md)
-- [CreditLineHistory](../interfaces/types_Types.CreditLineHistory.md)
-- [CreditLineOperation](../interfaces/types_Types.CreditLineOperation.md)
-- [CreditLineRequest](../interfaces/types_Types.CreditLineRequest.md)
-- [CreditLineUser](../interfaces/types_Types.CreditLineUser.md)
-- [CreditLinesOverview](../interfaces/types_Types.CreditLinesOverview.md)
-- [DashboardOverview](../interfaces/types_Types.DashboardOverview.md)
-- [PoolDetail](../interfaces/types_Types.PoolDetail.md)
-- [PoolLender](../interfaces/types_Types.PoolLender.md)
-- [ProfileOverview](../interfaces/types_Types.ProfileOverview.md)
-- [SavingAccountUserDetailDisplay](../interfaces/types_Types.SavingAccountUserDetailDisplay.md)
-- [SavingsAccountBalance](../interfaces/types_Types.SavingsAccountBalance.md)
-- [SavingsAccountBalanceDisplay](../interfaces/types_Types.SavingsAccountBalanceDisplay.md)
-- [SavingsAccountStrategyBalance](../interfaces/types_Types.SavingsAccountStrategyBalance.md)
-- [SavingsAccountStrategyBalanceDisplay](../interfaces/types_Types.SavingsAccountStrategyBalanceDisplay.md)
-- [SavingsAccountUserDetails](../interfaces/types_Types.SavingsAccountUserDetails.md)
-- [Strategy](../interfaces/types_Types.Strategy.md)
+### Asset
+
+Re-exports [Asset](../interfaces/types_Types.Asset.md)
+
+___
+
+### CreditLineDetail
+
+Re-exports [CreditLineDetail](../interfaces/types_Types.CreditLineDetail.md)
+
+___
+
+### CreditLineHistory
+
+Re-exports [CreditLineHistory](../interfaces/types_Types.CreditLineHistory.md)
+
+___
+
+### CreditLineOperation
+
+Re-exports [CreditLineOperation](../interfaces/types_Types.CreditLineOperation.md)
+
+___
+
+### CreditLineRequest
+
+Re-exports [CreditLineRequest](../interfaces/types_Types.CreditLineRequest.md)
+
+___
+
+### CreditLineUser
+
+Re-exports [CreditLineUser](../interfaces/types_Types.CreditLineUser.md)
+
+___
+
+### CreditLinesOverview
+
+Re-exports [CreditLinesOverview](../interfaces/types_Types.CreditLinesOverview.md)
+
+___
+
+### DashboardOverview
+
+Re-exports [DashboardOverview](../interfaces/types_Types.DashboardOverview.md)
+
+___
+
+### Operation
+
+Re-exports [Operation](../enums/types_Types.Operation.md)
+
+___
+
+### PoolDetail
+
+Re-exports [PoolDetail](../interfaces/types_Types.PoolDetail.md)
+
+___
+
+### PoolLender
+
+Re-exports [PoolLender](../interfaces/types_Types.PoolLender.md)
+
+___
+
+### ProfileOverview
+
+Re-exports [ProfileOverview](../interfaces/types_Types.ProfileOverview.md)
+
+___
+
+### SavingAccountUserDetailDisplay
+
+Re-exports [SavingAccountUserDetailDisplay](../interfaces/types_Types.SavingAccountUserDetailDisplay.md)
+
+___
+
+### SavingsAccountBalance
+
+Re-exports [SavingsAccountBalance](../interfaces/types_Types.SavingsAccountBalance.md)
+
+___
+
+### SavingsAccountBalanceDisplay
+
+Re-exports [SavingsAccountBalanceDisplay](../interfaces/types_Types.SavingsAccountBalanceDisplay.md)
+
+___
+
+### SavingsAccountStrategyBalance
+
+Re-exports [SavingsAccountStrategyBalance](../interfaces/types_Types.SavingsAccountStrategyBalance.md)
+
+___
+
+### SavingsAccountStrategyBalanceDisplay
+
+Re-exports [SavingsAccountStrategyBalanceDisplay](../interfaces/types_Types.SavingsAccountStrategyBalanceDisplay.md)
+
+___
+
+### SavingsAccountUserDetails
+
+Re-exports [SavingsAccountUserDetails](../interfaces/types_Types.SavingsAccountUserDetails.md)
+
+___
+
+### Strategy
+
+Re-exports [Strategy](../interfaces/types_Types.Strategy.md)
+
+___
+
+### StrategyType
+
+Re-exports [StrategyType](../enums/types_Types.StrategyType.md)

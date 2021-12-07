@@ -4,10 +4,19 @@
 
 ## Table of contents
 
-### Enumerations
+### References
 
-- [LoanStatus](../enums/types_poolGenerateParam.LoanStatus.md)
+- [LoanStatus](types_poolGenerateParam.md#loanstatus)
+- [PoolGenerateParams](types_poolGenerateParam.md#poolgenerateparams)
 
-### Interfaces
+## References
 
-- [PoolGenerateParams](../interfaces/types_poolGenerateParam.PoolGenerateParams.md)
+### LoanStatus
+
+Re-exports [LoanStatus](../enums/types_poolGenerateParam.LoanStatus.md)
+
+___
+
+### PoolGenerateParams
+
+Re-exports [PoolGenerateParams](../interfaces/types_poolGenerateParam.PoolGenerateParams.md)
