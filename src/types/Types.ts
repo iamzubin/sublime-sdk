@@ -148,6 +148,12 @@ export interface ProfileOverview {
   totalAmountInBorrow: string;
 }
 
+export interface VerificationDetails {
+  verifier: string;
+  metadata: string;
+  isLinkedAddress: boolean;
+}
+
 export interface CreditLineDetail {
   currentDebt: string;
   principal: string;

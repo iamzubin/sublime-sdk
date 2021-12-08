@@ -9,6 +9,7 @@ import {
   SavingAccountUserDetailDisplay,
   SavingsAccountStrategyBalanceDisplay,
   CreditLineOperation,
+  VerificationDetails,
 } from './types/Types';
 import {
   getAllPools,
@@ -28,6 +29,7 @@ import {
   getCreditLine,
   getBalances,
   getAllowances,
+  getLinkedVerifiers,
 } from './queries';
 
 import { Signer } from '@ethersproject/abstract-signer';
@@ -116,6 +118,11 @@ export class SublimeSubgraph {
   async getPoolByBorrower(borrower: string): Promise<PoolDetail[]> {
     let result = await getAllPoolsByBorrower(this.subgraphUrl, borrower);
     return this.transformToPoolDetail(result);
+  }
+
+  async getLinkedVerifiers(borrower: string): Promise<VerificationDetails[]> {
+    let result = await getLinkedVerifiers(this.subgraphUrl, borrower);
+    return this.transformVerificationDetails(result);
   }
 
   /**
@@ -312,6 +319,14 @@ export class SublimeSubgraph {
   }
 
   /**
+   * @param data
+   * @@description transforms the data received from the subgraph to verification details
+   */
+  private async transformVerificationDetails(data: any[]): Promise<VerificationDetails[]> {
+    
+  }
+
+  /**
    * @param strategy
    * @@description calulcates the APR for a given strategy
    */
@@ -503,6 +518,15 @@ export class SublimeSubgraph {
       timesDefaulted: timesDefaulted.toString(),
       totalAmountInBorrow,
     };
+  }
+
+  /**
+   * @param address: address of the user to query
+   * @description Return the verification details of the user
+   */
+  async getVerificationDetails(address: string): Promise<VerificationDetails[]> {
+    let verifiers = await this.getLinkedVerifiers(address);
+    return verifiers;
   }
 
   /**
