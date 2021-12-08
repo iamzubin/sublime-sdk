@@ -14,6 +14,7 @@
 - [CreditLineUser](types_Types.md#creditlineuser)
 - [CreditLinesOverview](types_Types.md#creditlinesoverview)
 - [DashboardOverview](types_Types.md#dashboardoverview)
+- [InternalTokenMap](types_Types.md#internaltokenmap)
 - [Operation](types_Types.md#operation)
 - [PoolDetail](types_Types.md#pooldetail)
 - [PoolLender](types_Types.md#poollender)
@@ -74,6 +75,12 @@ ___
 ### DashboardOverview
 
 Re-exports [DashboardOverview](../interfaces/types_Types.DashboardOverview.md)
+
+___
+
+### InternalTokenMap
+
+Re-exports [InternalTokenMap](../interfaces/types_Types.InternalTokenMap.md)
 
 ___
 

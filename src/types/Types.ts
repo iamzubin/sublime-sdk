@@ -175,3 +175,11 @@ export interface CreditLineHistory {
   description: string;
   value: string;
 }
+
+export interface InternalTokenMap {
+  address: string;
+  name: string;
+  symbol: string;
+  decimals: number;
+  iconMapping: string;
+}

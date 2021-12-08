@@ -4,7 +4,7 @@ import { Token__factory } from './wrappers/factories/Token__factory';
 import { Signer } from 'ethers';
 import { BigNumber } from 'bignumber.js';
 import { getPrice } from './queries/prices';
-import { tokenMap } from './config/tokenMapping';
+import { tokenData } from './config/tokenMapping';
 
 /**
  * @class TokenManager
@@ -62,11 +62,15 @@ export class TokenManager {
   private signer: Signer;
 
   constructor(signer: Signer, priceSubgraphUrl: string) {
-    this.decimals[zeroAddress] = 18;
-    this.names[zeroAddress] = 'ETH';
     this.signer = signer;
     this.priceSubgraphUrl = priceSubgraphUrl;
-    this.addressMapper = tokenMap;
+
+    for (let index = 0; index < tokenData.length; index++) {
+      const element = tokenData[index];
+      this.addressMapper[element.address.toLowerCase()] = element.iconMapping.toLowerCase();
+      this.decimals[element.address.toLowerCase()] = element.decimals;
+      this.names[element.address.toLowerCase()] = element.symbol;
+    }
   }
 
   /**
