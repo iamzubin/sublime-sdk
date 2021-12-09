@@ -33,7 +33,7 @@ Hold the contract addresses in Sublime App
 
 #### Defined in
 
-[types/sublimeConfig.ts:11](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L11)
+[types/sublimeConfig.ts:11](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L11)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:17](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L17)
+[types/sublimeConfig.ts:17](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L17)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:12](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L12)
+[types/sublimeConfig.ts:12](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L12)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:6](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L6)
+[types/sublimeConfig.ts:6](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L6)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:16](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L16)
+[types/sublimeConfig.ts:16](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L16)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:14](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L14)
+[types/sublimeConfig.ts:14](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L14)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:5](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L5)
+[types/sublimeConfig.ts:5](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L5)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:7](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L7)
+[types/sublimeConfig.ts:7](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L7)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:18](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L18)
+[types/sublimeConfig.ts:18](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L18)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:15](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L15)
+[types/sublimeConfig.ts:15](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L15)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:8](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L8)
+[types/sublimeConfig.ts:8](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L8)
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:9](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L9)
+[types/sublimeConfig.ts:9](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L9)
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:10](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L10)
+[types/sublimeConfig.ts:10](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L10)
 
 ___
 
@@ -163,4 +163,4 @@ ___
 
 #### Defined in
 
-[types/sublimeConfig.ts:13](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/sublimeConfig.ts#L13)
+[types/sublimeConfig.ts:13](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/sublimeConfig.ts#L13)

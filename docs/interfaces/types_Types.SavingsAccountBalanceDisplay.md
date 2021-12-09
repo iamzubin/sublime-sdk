@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[types/Types.ts:89](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/Types.ts#L89)
+[types/Types.ts:89](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/Types.ts#L89)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:86](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/Types.ts#L86)
+[types/Types.ts:86](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/Types.ts#L86)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:85](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/Types.ts#L85)
+[types/Types.ts:85](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/Types.ts#L85)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:87](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/Types.ts#L87)
+[types/Types.ts:87](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/Types.ts#L87)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:88](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/Types.ts#L88)
+[types/Types.ts:88](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/Types.ts#L88)
 
 ___
 
@@ -73,4 +73,4 @@ ___
 
 #### Defined in
 
-[types/Types.ts:84](https://github.com/akshay111meher/sublime-sdk/blob/14369ff/src/types/Types.ts#L84)
+[types/Types.ts:84](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/Types.ts#L84)
