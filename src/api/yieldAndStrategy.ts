@@ -4,6 +4,8 @@ import { BigNumber } from 'bignumber.js';
 import { IYield } from '../wrappers';
 import { IYield__factory } from '../wrappers/factories/IYield__factory';
 
+import { Token } from '../wrappers/Token';
+import { Token__factory } from '../wrappers/factories/Token__factory';
 import { StrategyRegistry } from '../wrappers/StrategyRegistry';
 import { StrategyRegistry__factory } from '../wrappers/factories/StrategyRegistry__factory';
 
@@ -101,12 +103,43 @@ export class YieldAndStrategyApi {
     return [
       {
         address: this.config.noStrategyAddress,
-        name: StrategyType.NoYield,
+        type: StrategyType.NoYield,
       },
       {
         address: this.config.compoundStrategyContractAddress,
-        name: StrategyType.CompounYield,
+        type: StrategyType.CompounYield,
       },
     ];
+  }
+
+  /**
+   * @description Get Strategy address from name
+   * @param strategy
+   * @returns null if invalid strategy name is given
+   */
+  public getStrategyAddress(strategy: StrategyType): string | undefined {
+    if (strategy == StrategyType.NoYield) {
+      return this.config.noStrategyAddress;
+    } else if (strategy == StrategyType.CompounYield) {
+      return this.config.compoundStrategyContractAddress;
+    } else {
+      return undefined;
+    }
+  }
+
+  /**
+   * @description Get Strategy name from given address,
+   * @param address
+   * @returns null if invalid strategy address is given in input
+   */
+  public getStrategy(address: string): StrategyType | undefined {
+    address = address.toLowerCase();
+    if ((address = this.config.noStrategyAddress.toLowerCase())) {
+      return StrategyType.NoYield;
+    } else if (address == this.config.compoundStrategyContractAddress.toLowerCase()) {
+      return StrategyType.CompounYield;
+    } else {
+      return undefined;
+    }
   }
 }

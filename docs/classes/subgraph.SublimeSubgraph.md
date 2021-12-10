@@ -17,6 +17,7 @@
 - [subgraphUrl](subgraph.SublimeSubgraph.md#subgraphurl)
 - [sublimeAddresses](subgraph.SublimeSubgraph.md#sublimeaddresses)
 - [tokenManager](subgraph.SublimeSubgraph.md#tokenmanager)
+- [yieldApi](subgraph.SublimeSubgraph.md#yieldapi)
 
 ### Methods
 
@@ -65,7 +66,7 @@
 
 #### Defined in
 
-[subgraph.ts:75](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L75)
+[subgraph.ts:77](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L77)
 
 ## Properties
 
@@ -77,7 +78,7 @@
 
 #### Defined in
 
-[subgraph.ts:68](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L68)
+[subgraph.ts:69](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L69)
 
 ___
 
@@ -89,7 +90,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:58](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L58)
+[subgraph.ts:59](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L59)
 
 ___
 
@@ -101,7 +102,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:53](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L53)
+[subgraph.ts:54](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L54)
 
 ___
 
@@ -113,7 +114,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:73](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L73)
+[subgraph.ts:75](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L75)
 
 ___
 
@@ -125,7 +126,17 @@ ___
 
 #### Defined in
 
-[subgraph.ts:63](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L63)
+[subgraph.ts:64](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L64)
+
+___
+
+### yieldApi
+
+• `Private` **yieldApi**: [`YieldAndStrategyApi`](api_yieldAndStrategy.YieldAndStrategyApi.md)
+
+#### Defined in
+
+[subgraph.ts:71](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L71)
 
 ## Methods
 
@@ -147,7 +158,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:318](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L318)
+[subgraph.ts:321](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L321)
 
 ___
 
@@ -169,7 +180,7 @@ All the lenders of a given pool
 
 #### Defined in
 
-[subgraph.ts:154](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L154)
+[subgraph.ts:157](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L157)
 
 ___
 
@@ -191,7 +202,7 @@ Array of specific pool types
 
 #### Defined in
 
-[subgraph.ts:97](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L97)
+[subgraph.ts:100](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L100)
 
 ___
 
@@ -205,7 +216,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:602](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L602)
+[subgraph.ts:605](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L605)
 
 ___
 
@@ -229,7 +240,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:514](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L514)
+[subgraph.ts:517](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L517)
 
 ___
 
@@ -253,7 +264,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:525](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L525)
+[subgraph.ts:528](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L528)
 
 ___
 
@@ -275,7 +286,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:578](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L578)
+[subgraph.ts:581](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L581)
 
 ___
 
@@ -297,7 +308,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:592](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L592)
+[subgraph.ts:595](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L595)
 
 ___
 
@@ -319,7 +330,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:480](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L480)
+[subgraph.ts:483](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L483)
 
 ___
 
@@ -341,7 +352,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:467](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L467)
+[subgraph.ts:470](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L470)
 
 ___
 
@@ -365,7 +376,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:547](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L547)
+[subgraph.ts:550](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L550)
 
 ___
 
@@ -389,7 +400,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:569](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L569)
+[subgraph.ts:572](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L572)
 
 ___
 
@@ -413,7 +424,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:558](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L558)
+[subgraph.ts:561](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L561)
 
 ___
 
@@ -437,7 +448,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:536](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L536)
+[subgraph.ts:539](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L539)
 
 ___
 
@@ -459,7 +470,7 @@ pool data if the pool exists, else null
 
 #### Defined in
 
-[subgraph.ts:106](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L106)
+[subgraph.ts:109](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L109)
 
 ___
 
@@ -481,7 +492,7 @@ Array of pools for the corresponding borrower
 
 #### Defined in
 
-[subgraph.ts:116](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L116)
+[subgraph.ts:119](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L119)
 
 ___
 
@@ -504,7 +515,7 @@ Array of pool
 
 #### Defined in
 
-[subgraph.ts:145](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L145)
+[subgraph.ts:148](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L148)
 
 ___
 
@@ -526,7 +537,7 @@ Array of pool for the lender
 
 #### Defined in
 
-[subgraph.ts:125](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L125)
+[subgraph.ts:128](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L128)
 
 ___
 
@@ -549,7 +560,7 @@ Array of pool
 
 #### Defined in
 
-[subgraph.ts:135](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L135)
+[subgraph.ts:138](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L138)
 
 ___
 
@@ -565,7 +576,7 @@ Array of all pools created on sublime
 
 #### Defined in
 
-[subgraph.ts:87](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L87)
+[subgraph.ts:90](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L90)
 
 ___
 
@@ -587,7 +598,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:493](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L493)
+[subgraph.ts:496](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L496)
 
 ___
 
@@ -609,7 +620,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:632](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L632)
+[subgraph.ts:635](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L635)
 
 ___
 
@@ -631,7 +642,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:456](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L456)
+[subgraph.ts:459](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L459)
 
 ___
 
@@ -653,7 +664,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:188](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L188)
+[subgraph.ts:191](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L191)
 
 ___
 
@@ -675,7 +686,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:611](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L611)
+[subgraph.ts:614](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L614)
 
 ___
 
@@ -697,7 +708,7 @@ ___
 
 #### Defined in
 
-[subgraph.ts:268](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L268)
+[subgraph.ts:271](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L271)
 
 ___
 
@@ -720,4 +731,4 @@ ___
 
 #### Defined in
 
-[subgraph.ts:339](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/subgraph.ts#L339)
+[subgraph.ts:342](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/subgraph.ts#L342)

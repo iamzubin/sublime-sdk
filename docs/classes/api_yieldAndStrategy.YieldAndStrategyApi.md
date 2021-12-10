@@ -20,6 +20,8 @@
 
 - [getSharesForTokens](api_yieldAndStrategy.YieldAndStrategyApi.md#getsharesfortokens)
 - [getStrategies](api_yieldAndStrategy.YieldAndStrategyApi.md#getstrategies)
+- [getStrategy](api_yieldAndStrategy.YieldAndStrategyApi.md#getstrategy)
+- [getStrategyAddress](api_yieldAndStrategy.YieldAndStrategyApi.md#getstrategyaddress)
 - [getTokensForShares](api_yieldAndStrategy.YieldAndStrategyApi.md#gettokensforshares)
 
 ## Constructors
@@ -38,7 +40,7 @@
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:24](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/api/yieldAndStrategy.ts#L24)
+[api/yieldAndStrategy.ts:26](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/api/yieldAndStrategy.ts#L26)
 
 ## Properties
 
@@ -48,7 +50,7 @@
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:21](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/api/yieldAndStrategy.ts#L21)
+[api/yieldAndStrategy.ts:23](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/api/yieldAndStrategy.ts#L23)
 
 ___
 
@@ -58,7 +60,7 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:20](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/api/yieldAndStrategy.ts#L20)
+[api/yieldAndStrategy.ts:22](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/api/yieldAndStrategy.ts#L22)
 
 ___
 
@@ -68,7 +70,7 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:22](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/api/yieldAndStrategy.ts#L22)
+[api/yieldAndStrategy.ts:24](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/api/yieldAndStrategy.ts#L24)
 
 ## Methods
 
@@ -92,7 +94,7 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:75](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/api/yieldAndStrategy.ts#L75)
+[api/yieldAndStrategy.ts:77](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/api/yieldAndStrategy.ts#L77)
 
 ___
 
@@ -108,7 +110,55 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:100](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/api/yieldAndStrategy.ts#L100)
+[api/yieldAndStrategy.ts:102](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/api/yieldAndStrategy.ts#L102)
+
+___
+
+### getStrategy
+
+▸ **getStrategy**(`address`): [`StrategyType`](../enums/types_Types.StrategyType.md)
+
+**`description`** Get Strategy name from given address,
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `address` | `string` |
+
+#### Returns
+
+[`StrategyType`](../enums/types_Types.StrategyType.md)
+
+null if invalid strategy address is given in input
+
+#### Defined in
+
+[api/yieldAndStrategy.ts:135](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/api/yieldAndStrategy.ts#L135)
+
+___
+
+### getStrategyAddress
+
+▸ **getStrategyAddress**(`strategy`): `string`
+
+**`description`** Get Strategy address from name
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) |
+
+#### Returns
+
+`string`
+
+null if invalid strategy name is given
+
+#### Defined in
+
+[api/yieldAndStrategy.ts:120](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/api/yieldAndStrategy.ts#L120)
 
 ___
 
@@ -133,4 +183,4 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:38](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/api/yieldAndStrategy.ts#L38)
+[api/yieldAndStrategy.ts:40](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/api/yieldAndStrategy.ts#L40)

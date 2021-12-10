@@ -36,6 +36,7 @@ import { BigNumber } from 'bignumber.js';
 import { sha256 } from '@ethersproject/sha2';
 
 import { TokenManager } from './tokenManager';
+import { YieldAndStrategyApi } from './api/yieldAndStrategy';
 
 import { CreditLine } from './wrappers/CreditLine';
 import { CreditLine__factory } from './wrappers/factories/CreditLine__factory';
@@ -67,6 +68,7 @@ export class SublimeSubgraph {
    */
   private creditLineContract: CreditLine;
 
+  private yieldApi: YieldAndStrategyApi;
   /**
    * @description sublime config. (Contains all addresses relevant to sublime ecosystem)
    */
@@ -78,6 +80,7 @@ export class SublimeSubgraph {
     this.signer = signer;
     this.tokenManager = tokenManager;
     this.sublimeAddresses = config;
+    this.yieldApi = new YieldAndStrategyApi(this.signer, config, this.tokenManager);
   }
 
   /**
@@ -428,7 +431,7 @@ export class SublimeSubgraph {
       let strategyBalance: [SavingsAccountStrategyBalanceDisplay?] = [];
       a.strategyBalance.forEach((b) => {
         strategyBalance.push({
-          strategy: b.strategy,
+          strategy: { address: b.strategy, type: this.yieldApi.getStrategy(b.strategy) },
           balance: b.balance.toFixed(2),
           balanceUSD: b.balanceUSD.toFixed(2),
           APR: b.APR.toFixed(2),

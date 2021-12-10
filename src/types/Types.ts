@@ -11,7 +11,8 @@ export interface Asset {
 export enum StrategyType {
   NoYield = 'NoYield',
   CompounYield = 'CompoundYield',
-  // YearnYield = 'YearnYield',
+  YearnYield = 'YearnYield',
+  AaveYield = 'AaveYield',
 }
 
 export enum Operation {
@@ -36,7 +37,7 @@ export interface CreditLineOperation {
   id: string;
 }
 export interface Strategy {
-  name: string;
+  type: StrategyType;
   address: string;
   token?: Asset;
   liquidityToken?: Asset;
@@ -75,7 +76,7 @@ export interface SavingsAccountUserDetails {
 
 // ---------only for disaply ----------- removeLatter
 export interface SavingsAccountStrategyBalanceDisplay {
-  strategy: string;
+  strategy: Strategy;
   balance: string;
   balanceUSD: string;
   APR: string;

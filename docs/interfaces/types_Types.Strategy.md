@@ -10,8 +10,8 @@
 
 - [address](types_Types.Strategy.md#address)
 - [liquidityToken](types_Types.Strategy.md#liquiditytoken)
-- [name](types_Types.Strategy.md#name)
 - [token](types_Types.Strategy.md#token)
+- [type](types_Types.Strategy.md#type)
 
 ## Properties
 
@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[types/Types.ts:40](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/Types.ts#L40)
+[types/Types.ts:41](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/types/Types.ts#L41)
 
 ___
 
@@ -31,17 +31,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:42](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/Types.ts#L42)
-
-___
-
-### name
-
-• **name**: `string`
-
-#### Defined in
-
-[types/Types.ts:39](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/Types.ts#L39)
+[types/Types.ts:43](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/types/Types.ts#L43)
 
 ___
 
@@ -51,4 +41,14 @@ ___
 
 #### Defined in
 
-[types/Types.ts:41](https://github.com/akshay111meher/sublime-sdk/blob/f53141a/src/types/Types.ts#L41)
+[types/Types.ts:42](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/types/Types.ts#L42)
+
+___
+
+### type
+
+• **type**: [`StrategyType`](../enums/types_Types.StrategyType.md)
+
+#### Defined in
+
+[types/Types.ts:40](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/types/Types.ts#L40)
