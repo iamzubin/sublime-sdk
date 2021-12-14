@@ -37,4 +37,8 @@ export class VerificationAPI {
   public async addVerifier(verifier = this.adminVerifier.address): Promise<ContractTransaction> {
     return this.verification.addVerifier(verifier);
   }
+
+  public async registerMasterAddress(_masterAddress: string, _isMasterLinked: boolean): Promise<ContractTransaction> {
+    return this.verification.registerMasterAddress(_masterAddress, _isMasterLinked);
+  }
 }

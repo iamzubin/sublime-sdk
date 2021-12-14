@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[types/Types.ts:41](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/types/Types.ts#L41)
+[types/Types.ts:41](https://github.com/akshay111meher/sublime-sdk/blob/25ef7a9/src/types/Types.ts#L41)
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:43](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/types/Types.ts#L43)
+[types/Types.ts:43](https://github.com/akshay111meher/sublime-sdk/blob/25ef7a9/src/types/Types.ts#L43)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:42](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/types/Types.ts#L42)
+[types/Types.ts:42](https://github.com/akshay111meher/sublime-sdk/blob/25ef7a9/src/types/Types.ts#L42)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[types/Types.ts:40](https://github.com/akshay111meher/sublime-sdk/blob/ddee479/src/types/Types.ts#L40)
+[types/Types.ts:40](https://github.com/akshay111meher/sublime-sdk/blob/25ef7a9/src/types/Types.ts#L40)
