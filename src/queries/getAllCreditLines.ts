@@ -39,7 +39,25 @@ async function _getCreditLinesOfBorrower(url: string, status, requestByLender, b
           id
           status
           lender
+          lenderWalletDetails {
+            wallet {
+              user {
+                userMetadataPerVerifier {
+                  metadata
+                }
+              }
+            }
+          }
           borrower
+          borrowerWalletDetails {
+            wallet {
+              user {
+                userMetadataPerVerifier {
+                  metadata
+                }
+              }
+            }
+          }
           requestByLender
           principal
           collateralAsset
@@ -74,6 +92,25 @@ export async function getCreditLine(url: string, id: string): Promise<any[]> {
             status
             lender
             borrower
+            lenderWalletDetails {
+              wallet {
+                user {
+                  userMetadataPerVerifier {
+                    metadata
+                  }
+                }
+              }
+            }
+            borrower
+            borrowerWalletDetails {
+              wallet {
+                user {
+                  userMetadataPerVerifier {
+                    metadata
+                  }
+                }
+              }
+            }
             requestByLender
             principal
             collateralAsset
@@ -109,6 +146,25 @@ async function _getCreditLinesOfLender(url: string, status, requestByLender, len
             status
             lender
             borrower
+            lenderWalletDetails {
+              wallet {
+                user {
+                  userMetadataPerVerifier {
+                    metadata
+                  }
+                }
+              }
+            }
+            borrower
+            borrowerWalletDetails {
+              wallet {
+                user {
+                  userMetadataPerVerifier {
+                    metadata
+                  }
+                }
+              }
+            }
             requestByLender
             principal
             collateralAsset
