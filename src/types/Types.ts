@@ -170,7 +170,7 @@ export interface CreditLineUser {
   address: string;
   name?: string;
   username?: string;
-  otherData: object
+  otherData: object;
 }
 export interface CreditLineHistory {
   title: string;

@@ -24,11 +24,14 @@
 - [priceSubgraphUrl](tokenManager.TokenManager.md#pricesubgraphurl)
 - [prices](tokenManager.TokenManager.md#prices)
 - [signer](tokenManager.TokenManager.md#signer)
+- [subgraph](tokenManager.TokenManager.md#subgraph)
 
 ### Methods
 
+- [getCreditlineOverview](tokenManager.TokenManager.md#getcreditlineoverview)
 - [getLogo](tokenManager.TokenManager.md#getlogo)
 - [getPricePerAsset](tokenManager.TokenManager.md#getpriceperasset)
+- [getSavingsAccountOverview](tokenManager.TokenManager.md#getsavingsaccountoverview)
 - [getTokenDecimals](tokenManager.TokenManager.md#gettokendecimals)
 - [getTokenName](tokenManager.TokenManager.md#gettokenname)
 - [updateAll](tokenManager.TokenManager.md#updateall)
@@ -52,7 +55,7 @@
 
 #### Defined in
 
-[tokenManager.ts:64](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L64)
+[tokenManager.ts:68](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L68)
 
 ## Properties
 
@@ -64,7 +67,7 @@
 
 #### Defined in
 
-[tokenManager.ts:42](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L42)
+[tokenManager.ts:44](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L44)
 
 ___
 
@@ -76,7 +79,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L17)
+[tokenManager.ts:19](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L19)
 
 ___
 
@@ -88,7 +91,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:47](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L47)
+[tokenManager.ts:49](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L49)
 
 ___
 
@@ -100,7 +103,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:37](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L37)
+[tokenManager.ts:39](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L39)
 
 ___
 
@@ -112,7 +115,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L22)
+[tokenManager.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L24)
 
 ___
 
@@ -124,7 +127,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:32](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L32)
+[tokenManager.ts:34](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L34)
 
 ___
 
@@ -136,7 +139,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:57](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L57)
+[tokenManager.ts:59](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L59)
 
 ___
 
@@ -148,7 +151,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:52](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L52)
+[tokenManager.ts:54](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L54)
 
 ___
 
@@ -160,7 +163,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:27](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L27)
+[tokenManager.ts:29](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L29)
 
 ___
 
@@ -172,9 +175,39 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:62](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L62)
+[tokenManager.ts:64](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L64)
+
+___
+
+### subgraph
+
+• `Private` **subgraph**: [`SublimeSubgraph`](subgraph.SublimeSubgraph.md)
+
+#### Defined in
+
+[tokenManager.ts:66](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L66)
 
 ## Methods
+
+### getCreditlineOverview
+
+▸ **getCreditlineOverview**(`user`): `Promise`<[`CreditLinesOverview`](../interfaces/types_Types.CreditLinesOverview.md)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `user` | `string` |
+
+#### Returns
+
+`Promise`<[`CreditLinesOverview`](../interfaces/types_Types.CreditLinesOverview.md)\>
+
+#### Defined in
+
+[tokenManager.ts:215](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L215)
+
+___
 
 ### getLogo
 
@@ -194,7 +227,7 @@ return url which renders the logo/pic of the token
 
 #### Defined in
 
-[tokenManager.ts:202](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L202)
+[tokenManager.ts:206](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L206)
 
 ___
 
@@ -216,7 +249,27 @@ price of asset
 
 #### Defined in
 
-[tokenManager.ts:188](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L188)
+[tokenManager.ts:192](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L192)
+
+___
+
+### getSavingsAccountOverview
+
+▸ **getSavingsAccountOverview**(`user`): `Promise`<[`SavingAccountUserDetailDisplay`](../interfaces/types_Types.SavingAccountUserDetailDisplay.md)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `user` | `string` |
+
+#### Returns
+
+`Promise`<[`SavingAccountUserDetailDisplay`](../interfaces/types_Types.SavingAccountUserDetailDisplay.md)\>
+
+#### Defined in
+
+[tokenManager.ts:221](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L221)
 
 ___
 
@@ -238,7 +291,7 @@ number of token decimals
 
 #### Defined in
 
-[tokenManager.ts:162](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L162)
+[tokenManager.ts:166](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L166)
 
 ___
 
@@ -260,7 +313,7 @@ token name
 
 #### Defined in
 
-[tokenManager.ts:175](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L175)
+[tokenManager.ts:179](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L179)
 
 ___
 
@@ -282,7 +335,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:80](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L80)
+[tokenManager.ts:84](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L84)
 
 ___
 
@@ -304,7 +357,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:144](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L144)
+[tokenManager.ts:148](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L148)
 
 ___
 
@@ -326,7 +379,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:125](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L125)
+[tokenManager.ts:129](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L129)
 
 ___
 
@@ -348,7 +401,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:93](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L93)
+[tokenManager.ts:97](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L97)
 
 ___
 
@@ -370,4 +423,4 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:109](https://github.com/sublime-finance/sublime-sdk/blob/14d6290/src/tokenManager.ts#L109)
+[tokenManager.ts:113](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/tokenManager.ts#L113)

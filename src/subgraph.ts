@@ -481,11 +481,44 @@ export class SublimeSubgraph {
    * @description Returns the credit lines overview of the user
    */
   async getCreditLinesOverview(address: string): Promise<CreditLinesOverview> {
+    let creditLineAsborrower = await this.getConfirmedCreditLinesOfBorrower(address, 10, 0);
+    let creditLineAsLender = await this.getConfirmedCreditLinesOfLender(address, 10, 0);
+
+    let creditGranted = new BigNumber(0);
+    let interestAccrued = new BigNumber(0);
+    let activeCredit = new BigNumber(0);
+    let interestRate = new BigNumber(0);
+
+    let borrowedCreditLines = creditLineAsborrower.length;
+
+    for (let i = 0; i < creditLineAsLender.length; i++) {
+      let borrowAsset = creditLineAsLender[i].borrowAsset;
+      let principal = new BigNumber(creditLineAsLender[i].principal);
+      let assetPrice = await this.tokenManager.getPricePerAsset(borrowAsset.toString());
+      creditGranted = creditGranted.plus(principal.multipliedBy(assetPrice));
+    }
+
+    for (let i = 0; i < creditLineAsborrower.length; i++) {
+      let interest = creditLineAsborrower[i].interestRate;
+      let accruedInterest = creditLineAsborrower[i].interestAccrued;
+
+      if (creditLineAsborrower[i].type == 'ACTIVE') {
+        let credit = new BigNumber(creditLineAsborrower[i].principal);
+        let price = await this.tokenManager.getPricePerAsset(creditLineAsLender[i].borrowAsset.toString());
+        activeCredit = activeCredit.plus(credit.multipliedBy(price));
+      }
+
+      interestAccrued = interestAccrued.plus(accruedInterest);
+      interestRate = interestRate.plus(interest);
+    }
+
+    interestRate = interestRate.div(borrowedCreditLines);
+
     return {
-      creditGranted: new BigNumber(this.getRandomInt(10000000)).div(100).toFixed(2),
-      interestAccrued: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
-      activeCredit: new BigNumber(this.getRandomInt(5000000)).div(100).toFixed(2),
-      interestRate: new BigNumber(this.getRandomInt(1000)).div(100).toFixed(2),
+      creditGranted: creditGranted.toFixed(2),
+      interestAccrued: interestAccrued.toFixed(2),
+      activeCredit: activeCredit.toFixed(2),
+      interestRate: interestRate.toFixed(2),
     };
   }
 

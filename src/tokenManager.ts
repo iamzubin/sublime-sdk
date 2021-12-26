@@ -4,6 +4,8 @@ import { Token__factory } from './wrappers/factories/Token__factory';
 import { Signer } from 'ethers';
 import { BigNumber } from 'bignumber.js';
 import { getPrice } from './queries/prices';
+import { SublimeSubgraph } from './subgraph';
+import { CreditLinesOverview, SavingAccountUserDetailDisplay } from './types/Types';
 import { tokenData } from './config/tokenMapping';
 
 /**
@@ -60,6 +62,8 @@ export class TokenManager {
    * @description web3 signer
    */
   private signer: Signer;
+
+  private subgraph: SublimeSubgraph;
 
   constructor(signer: Signer, priceSubgraphUrl: string) {
     this.signer = signer;
@@ -206,5 +210,17 @@ export class TokenManager {
     } else {
       throw new Error('Error in class TokenManager');
     }
+  }
+
+  async getCreditlineOverview(user: string): Promise<CreditLinesOverview> {
+    let userAddress = user.toLowerCase();
+    let creditLineInfo = await this.subgraph.getCreditLinesOverview(userAddress);
+    return creditLineInfo;
+  }
+
+  async getSavingsAccountOverview(user: string): Promise<SavingAccountUserDetailDisplay> {
+    let userAddress = user.toLowerCase();
+    let savingsAccountInfo = await this.subgraph.getSavingsAccountOverview(userAddress);
+    return savingsAccountInfo;
   }
 }
