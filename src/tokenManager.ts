@@ -44,6 +44,31 @@ export class TokenManager {
   private addressMapper = {};
 
   /**
+   * @description used for mapping user with the credit lines
+   */
+  private creditLineMapper = {};
+
+  /**
+   * @description used for mapping user with savings account
+   */
+  private savingsAccountMapper = {};
+
+  /**
+   * @description stores when last time when the credit line was updated
+   */
+   private creditlineLastUpdatedAt = {};
+
+  /**
+   * @description stores when last time when the savings account was updated
+   */
+   private savingsAccountLastUpdatedAt = {};
+
+   /**
+   * @description interval at which user details are refreshed in the SDK
+   */
+  private OverviewRefreshInterval: number = 60000;
+
+  /**
    * @description Base path for logos
    */
   private logoUrlTemplate: string = 'https://tokens.1inch.io/ADDRESS.png';
@@ -216,19 +241,34 @@ export class TokenManager {
    * @param user the address for which the overview is required
    * @returns return credit line information
    */
-  async getCreditlineOverview(user: string): Promise<CreditLinesOverview> {
+  async updateCreditlineOverview(user: string): Promise<CreditLinesOverview> {
     let userAddress = user.toLowerCase();
-    let creditLineInfo = await this.subgraph.getCreditLinesOverview(userAddress);
-    return creditLineInfo;
+    let now = new Date().valueOf();
+    if (!(userAddress in this.creditLineMapper) || now > this.creditlineLastUpdatedAt[userAddress] + this.OverviewRefreshInterval) {
+      this.creditLineMapper[userAddress] = await this.subgraph.getCreditLinesOverview(userAddress);
+      this.creditlineLastUpdatedAt[userAddress] = new Date().valueOf();
+      return this.creditLineMapper[userAddress];
+    }
+    else {
+      return this.creditLineMapper[userAddress];
+    }
+    
   }
 
   /**
    * @param user the address for which the overview is required
    * @returns return savings account information
    */
-  async getSavingsAccountOverview(user: string): Promise<SavingAccountUserDetailDisplay> {
+  async updateSavingsAccountOverview(user: string): Promise<SavingAccountUserDetailDisplay> {
     let userAddress = user.toLowerCase();
-    let savingsAccountInfo = await this.subgraph.getSavingsAccountOverview(userAddress);
-    return savingsAccountInfo;
+    let now = new Date().valueOf();
+    if (!(userAddress in this.savingsAccountMapper) || now > this.savingsAccountLastUpdatedAt[userAddress] + this.OverviewRefreshInterval) {
+      this.savingsAccountMapper[userAddress] = await this.subgraph.getSavingsAccountOverview(userAddress);
+      this.savingsAccountLastUpdatedAt[userAddress] = new Date().valueOf();
+      return this.savingsAccountMapper[userAddress];
+    }
+    else {
+      return this.savingsAccountMapper[userAddress];
+    }
   }
 }
