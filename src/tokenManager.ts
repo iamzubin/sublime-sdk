@@ -56,14 +56,14 @@ export class TokenManager {
   /**
    * @description stores when last time when the credit line was updated
    */
-   private creditlineLastUpdatedAt = {};
+  private creditlineLastUpdatedAt = {};
 
   /**
    * @description stores when last time when the savings account was updated
    */
-   private savingsAccountLastUpdatedAt = {};
+  private savingsAccountLastUpdatedAt = {};
 
-   /**
+  /**
    * @description interval at which user details are refreshed in the SDK
    */
   private OverviewRefreshInterval: number = 60000;
@@ -248,11 +248,9 @@ export class TokenManager {
       this.creditLineMapper[userAddress] = await this.subgraph.getCreditLinesOverview(userAddress);
       this.creditlineLastUpdatedAt[userAddress] = new Date().valueOf();
       return this.creditLineMapper[userAddress];
-    }
-    else {
+    } else {
       return this.creditLineMapper[userAddress];
     }
-    
   }
 
   /**
@@ -266,8 +264,7 @@ export class TokenManager {
       this.savingsAccountMapper[userAddress] = await this.subgraph.getSavingsAccountOverview(userAddress);
       this.savingsAccountLastUpdatedAt[userAddress] = new Date().valueOf();
       return this.savingsAccountMapper[userAddress];
-    }
-    else {
+    } else {
       return this.savingsAccountMapper[userAddress];
     }
   }

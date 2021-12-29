@@ -40,7 +40,7 @@
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/yieldAndStrategy.ts#L26)
+[api/yieldAndStrategy.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/yieldAndStrategy.ts#L26)
 
 ## Properties
 
@@ -50,7 +50,7 @@
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/yieldAndStrategy.ts#L23)
+[api/yieldAndStrategy.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/yieldAndStrategy.ts#L23)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/yieldAndStrategy.ts#L22)
+[api/yieldAndStrategy.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/yieldAndStrategy.ts#L22)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/yieldAndStrategy.ts#L24)
+[api/yieldAndStrategy.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/yieldAndStrategy.ts#L24)
 
 ## Methods
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:77](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/yieldAndStrategy.ts#L77)
+[api/yieldAndStrategy.ts:77](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/yieldAndStrategy.ts#L77)
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:102](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/yieldAndStrategy.ts#L102)
+[api/yieldAndStrategy.ts:102](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/yieldAndStrategy.ts#L102)
 
 ___
 
@@ -134,7 +134,7 @@ null if invalid strategy address is given in input
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:135](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/yieldAndStrategy.ts#L135)
+[api/yieldAndStrategy.ts:135](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/yieldAndStrategy.ts#L135)
 
 ___
 
@@ -158,7 +158,7 @@ null if invalid strategy name is given
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:120](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/yieldAndStrategy.ts#L120)
+[api/yieldAndStrategy.ts:120](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/yieldAndStrategy.ts#L120)
 
 ___
 
@@ -183,4 +183,4 @@ ___
 
 #### Defined in
 
-[api/yieldAndStrategy.ts:40](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/yieldAndStrategy.ts#L40)
+[api/yieldAndStrategy.ts:40](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/yieldAndStrategy.ts#L40)

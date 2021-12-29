@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[api/extension.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/extension.ts#L11)
+[api/extension.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/extension.ts#L11)
 
 ## Properties
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[api/extension.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/extension.ts#L8)
+[api/extension.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/extension.ts#L8)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[api/extension.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/extension.ts#L9)
+[api/extension.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/extension.ts#L9)
 
 ## Methods
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[api/extension.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/extension.ts#L24)
+[api/extension.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/extension.ts#L24)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[api/extension.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/extension.ts#L16)
+[api/extension.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/extension.ts#L16)
 
 ___
 
@@ -110,4 +110,4 @@ ___
 
 #### Defined in
 
-[api/extension.ts:20](https://github.com/sublime-finance/sublime-sdk/blob/afbca70/src/api/extension.ts#L20)
+[api/extension.ts:20](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/api/extension.ts#L20)
