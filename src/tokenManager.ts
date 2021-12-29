@@ -212,12 +212,20 @@ export class TokenManager {
     }
   }
 
+  /**
+   * @param user the address for which the overview is required
+   * @returns return credit line information
+   */
   async getCreditlineOverview(user: string): Promise<CreditLinesOverview> {
     let userAddress = user.toLowerCase();
     let creditLineInfo = await this.subgraph.getCreditLinesOverview(userAddress);
     return creditLineInfo;
   }
 
+  /**
+   * @param user the address for which the overview is required
+   * @returns return savings account information
+   */
   async getSavingsAccountOverview(user: string): Promise<SavingAccountUserDetailDisplay> {
     let userAddress = user.toLowerCase();
     let savingsAccountInfo = await this.subgraph.getSavingsAccountOverview(userAddress);
