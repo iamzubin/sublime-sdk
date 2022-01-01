@@ -14,7 +14,10 @@
 
 ### Properties
 
+- [OverviewRefreshInterval](tokenManager.TokenManager.md#overviewrefreshinterval)
 - [addressMapper](tokenManager.TokenManager.md#addressmapper)
+- [creditLineMapper](tokenManager.TokenManager.md#creditlinemapper)
+- [creditlineLastUpdatedAt](tokenManager.TokenManager.md#creditlinelastupdatedat)
 - [decimals](tokenManager.TokenManager.md#decimals)
 - [logoUrlTemplate](tokenManager.TokenManager.md#logourltemplate)
 - [logos](tokenManager.TokenManager.md#logos)
@@ -23,7 +26,10 @@
 - [priceRefreshInterval](tokenManager.TokenManager.md#pricerefreshinterval)
 - [priceSubgraphUrl](tokenManager.TokenManager.md#pricesubgraphurl)
 - [prices](tokenManager.TokenManager.md#prices)
+- [savingsAccountLastUpdatedAt](tokenManager.TokenManager.md#savingsaccountlastupdatedat)
+- [savingsAccountMapper](tokenManager.TokenManager.md#savingsaccountmapper)
 - [signer](tokenManager.TokenManager.md#signer)
+- [subgraph](tokenManager.TokenManager.md#subgraph)
 
 ### Methods
 
@@ -32,8 +38,10 @@
 - [getTokenDecimals](tokenManager.TokenManager.md#gettokendecimals)
 - [getTokenName](tokenManager.TokenManager.md#gettokenname)
 - [updateAll](tokenManager.TokenManager.md#updateall)
+- [updateCreditlineOverview](tokenManager.TokenManager.md#updatecreditlineoverview)
 - [updateLogo](tokenManager.TokenManager.md#updatelogo)
 - [updatePricePerAsset](tokenManager.TokenManager.md#updatepriceperasset)
+- [updateSavingsAccountOverview](tokenManager.TokenManager.md#updatesavingsaccountoverview)
 - [updateTokenDecimals](tokenManager.TokenManager.md#updatetokendecimals)
 - [updateTokenName](tokenManager.TokenManager.md#updatetokenname)
 
@@ -52,9 +60,21 @@
 
 #### Defined in
 
-[tokenManager.ts:64](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L64)
+[tokenManager.ts:93](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L93)
 
 ## Properties
+
+### OverviewRefreshInterval
+
+• `Private` **OverviewRefreshInterval**: `number` = `60000`
+
+**`description`** interval at which user details are refreshed in the SDK
+
+#### Defined in
+
+[tokenManager.ts:69](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L69)
+
+___
 
 ### addressMapper
 
@@ -64,7 +84,31 @@
 
 #### Defined in
 
-[tokenManager.ts:42](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L42)
+[tokenManager.ts:44](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L44)
+
+___
+
+### creditLineMapper
+
+• `Private` **creditLineMapper**: `Object` = `{}`
+
+**`description`** used for mapping user with the credit lines
+
+#### Defined in
+
+[tokenManager.ts:49](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L49)
+
+___
+
+### creditlineLastUpdatedAt
+
+• `Private` **creditlineLastUpdatedAt**: `Object` = `{}`
+
+**`description`** stores when last time when the credit line was updated
+
+#### Defined in
+
+[tokenManager.ts:59](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L59)
 
 ___
 
@@ -76,7 +120,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:17](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L17)
+[tokenManager.ts:19](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L19)
 
 ___
 
@@ -88,7 +132,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:47](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L47)
+[tokenManager.ts:74](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L74)
 
 ___
 
@@ -100,7 +144,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:37](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L37)
+[tokenManager.ts:39](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L39)
 
 ___
 
@@ -112,7 +156,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:22](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L22)
+[tokenManager.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L24)
 
 ___
 
@@ -124,7 +168,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:32](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L32)
+[tokenManager.ts:34](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L34)
 
 ___
 
@@ -136,7 +180,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:57](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L57)
+[tokenManager.ts:84](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L84)
 
 ___
 
@@ -148,7 +192,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:52](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L52)
+[tokenManager.ts:79](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L79)
 
 ___
 
@@ -160,7 +204,31 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:27](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L27)
+[tokenManager.ts:29](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L29)
+
+___
+
+### savingsAccountLastUpdatedAt
+
+• `Private` **savingsAccountLastUpdatedAt**: `Object` = `{}`
+
+**`description`** stores when last time when the savings account was updated
+
+#### Defined in
+
+[tokenManager.ts:64](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L64)
+
+___
+
+### savingsAccountMapper
+
+• `Private` **savingsAccountMapper**: `Object` = `{}`
+
+**`description`** used for mapping user with savings account
+
+#### Defined in
+
+[tokenManager.ts:54](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L54)
 
 ___
 
@@ -172,7 +240,17 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:62](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L62)
+[tokenManager.ts:89](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L89)
+
+___
+
+### subgraph
+
+• `Private` **subgraph**: [`SublimeSubgraph`](subgraph.SublimeSubgraph.md)
+
+#### Defined in
+
+[tokenManager.ts:91](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L91)
 
 ## Methods
 
@@ -194,7 +272,7 @@ return url which renders the logo/pic of the token
 
 #### Defined in
 
-[tokenManager.ts:202](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L202)
+[tokenManager.ts:231](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L231)
 
 ___
 
@@ -216,7 +294,7 @@ price of asset
 
 #### Defined in
 
-[tokenManager.ts:188](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L188)
+[tokenManager.ts:217](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L217)
 
 ___
 
@@ -238,7 +316,7 @@ number of token decimals
 
 #### Defined in
 
-[tokenManager.ts:162](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L162)
+[tokenManager.ts:191](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L191)
 
 ___
 
@@ -260,7 +338,7 @@ token name
 
 #### Defined in
 
-[tokenManager.ts:175](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L175)
+[tokenManager.ts:204](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L204)
 
 ___
 
@@ -282,7 +360,29 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:80](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L80)
+[tokenManager.ts:109](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L109)
+
+___
+
+### updateCreditlineOverview
+
+▸ **updateCreditlineOverview**(`user`): `Promise`<[`CreditLinesOverview`](../interfaces/types_Types.CreditLinesOverview.md)\>
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `user` | `string` | the address for which the overview is required |
+
+#### Returns
+
+`Promise`<[`CreditLinesOverview`](../interfaces/types_Types.CreditLinesOverview.md)\>
+
+return credit line information
+
+#### Defined in
+
+[tokenManager.ts:244](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L244)
 
 ___
 
@@ -304,7 +404,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:144](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L144)
+[tokenManager.ts:173](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L173)
 
 ___
 
@@ -326,7 +426,29 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:125](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L125)
+[tokenManager.ts:154](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L154)
+
+___
+
+### updateSavingsAccountOverview
+
+▸ **updateSavingsAccountOverview**(`user`): `Promise`<[`SavingAccountUserDetailDisplay`](../interfaces/types_Types.SavingAccountUserDetailDisplay.md)\>
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `user` | `string` | the address for which the overview is required |
+
+#### Returns
+
+`Promise`<[`SavingAccountUserDetailDisplay`](../interfaces/types_Types.SavingAccountUserDetailDisplay.md)\>
+
+return savings account information
+
+#### Defined in
+
+[tokenManager.ts:260](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L260)
 
 ___
 
@@ -348,7 +470,7 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:93](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L93)
+[tokenManager.ts:122](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L122)
 
 ___
 
@@ -370,4 +492,4 @@ ___
 
 #### Defined in
 
-[tokenManager.ts:109](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/tokenManager.ts#L109)
+[tokenManager.ts:138](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/tokenManager.ts#L138)

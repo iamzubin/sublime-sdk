@@ -50,7 +50,7 @@
 
 #### Defined in
 
-[sublime.ts:27](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L27)
+[sublime.ts:27](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L27)
 
 ## Properties
 
@@ -60,7 +60,7 @@
 
 #### Defined in
 
-[sublime.ts:24](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L24)
+[sublime.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L24)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:22](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L22)
+[sublime.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L22)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:23](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L23)
+[sublime.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L23)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:25](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L25)
+[sublime.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L25)
 
 ## Methods
 
@@ -106,7 +106,7 @@ The current address of the signer
 
 #### Defined in
 
-[sublime.ts:50](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L50)
+[sublime.ts:50](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L50)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:38](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L38)
+[sublime.ts:38](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L38)
 
 ___
 
@@ -134,7 +134,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:54](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L54)
+[sublime.ts:54](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L54)
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:34](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L34)
+[sublime.ts:34](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L34)
 
 ___
 
@@ -162,7 +162,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:74](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L74)
+[sublime.ts:74](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L74)
 
 ___
 
@@ -176,7 +176,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:58](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L58)
+[sublime.ts:58](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L58)
 
 ___
 
@@ -190,7 +190,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:42](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L42)
+[sublime.ts:42](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L42)
 
 ___
 
@@ -210,7 +210,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:70](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L70)
+[sublime.ts:70](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L70)
 
 ___
 
@@ -224,7 +224,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:62](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L62)
+[sublime.ts:62](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L62)
 
 ___
 
@@ -238,7 +238,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:66](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L66)
+[sublime.ts:66](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L66)
 
 ___
 
@@ -260,7 +260,7 @@ balance in ethers (decimals included)
 
 #### Defined in
 
-[sublime.ts:87](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L87)
+[sublime.ts:87](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L87)
 
 ___
 
@@ -274,7 +274,7 @@ ___
 
 #### Defined in
 
-[sublime.ts:78](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L78)
+[sublime.ts:78](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L78)
 
 ___
 
@@ -298,4 +298,4 @@ transaction receipt after waiting for the specified number oif blocks
 
 #### Defined in
 
-[sublime.ts:99](https://github.com/akshay111meher/sublime-sdk/blob/6aef92b/src/sublime.ts#L99)
+[sublime.ts:99](https://github.com/sublime-finance/sublime-sdk/blob/1501c54/src/sublime.ts#L99)

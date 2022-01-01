@@ -4,6 +4,8 @@ import { Token__factory } from './wrappers/factories/Token__factory';
 import { Signer } from 'ethers';
 import { BigNumber } from 'bignumber.js';
 import { getPrice } from './queries/prices';
+import { SublimeSubgraph } from './subgraph';
+import { CreditLinesOverview, SavingAccountUserDetailDisplay } from './types/Types';
 import { tokenData } from './config/tokenMapping';
 
 /**
@@ -60,6 +62,8 @@ export class TokenManager {
    * @description web3 signer
    */
   private signer: Signer;
+
+  private subgraph: SublimeSubgraph;
 
   constructor(signer: Signer, priceSubgraphUrl: string) {
     this.signer = signer;
