@@ -134,7 +134,7 @@ export class YieldAndStrategyApi {
    */
   public getStrategy(address: string): StrategyType | undefined {
     address = address.toLowerCase();
-    if ((address == this.config.noStrategyAddress.toLowerCase())) {
+    if (address == this.config.noStrategyAddress.toLowerCase()) {
       return StrategyType.NoYield;
     } else if (address == this.config.compoundStrategyContractAddress.toLowerCase()) {
       return StrategyType.CompounYield;
