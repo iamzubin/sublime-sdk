@@ -39,11 +39,7 @@
 
 #### Defined in
 
-<<<<<<< HEAD
-[index.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/index.ts#L18)
-=======
-[index.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/index.ts#L18)
->>>>>>> main
+[index.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/index.ts#L18)
 
 ## Properties
 
@@ -53,11 +49,7 @@
 
 #### Defined in
 
-<<<<<<< HEAD
-[index.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/index.ts#L15)
-=======
-[index.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/index.ts#L15)
->>>>>>> main
+[index.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/index.ts#L15)
 
 ___
 
@@ -67,11 +59,7 @@ ___
 
 #### Defined in
 
-<<<<<<< HEAD
-[index.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/index.ts#L16)
-=======
-[index.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/index.ts#L16)
->>>>>>> main
+[index.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/index.ts#L16)
 
 ## Methods
 
@@ -87,11 +75,7 @@ Instance of SublimeConnector
 
 #### Defined in
 
-<<<<<<< HEAD
-[index.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/index.ts#L25)
-=======
-[index.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/index.ts#L25)
->>>>>>> main
+[index.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/index.ts#L25)
 
 ___
 
@@ -107,11 +91,7 @@ Instance of SublimeSubgraph
 
 #### Defined in
 
-<<<<<<< HEAD
-[index.ts:30](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/index.ts#L30)
-=======
-[index.ts:30](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/index.ts#L30)
->>>>>>> main
+[index.ts:30](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/index.ts#L30)
 
 ___
 
@@ -127,8 +107,4 @@ types used in the SDK
 
 #### Defined in
 
-<<<<<<< HEAD
-[index.ts:37](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/index.ts#L37)
-=======
-[index.ts:37](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/index.ts#L37)
->>>>>>> main
+[index.ts:37](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/index.ts#L37)

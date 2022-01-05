@@ -512,9 +512,9 @@ export class SublimeSubgraph {
       interestRate = interestRate.plus(interest);
     }
 
-    if(borrowedCreditLines >0){
+    if (borrowedCreditLines > 0) {
       interestRate = interestRate.div(borrowedCreditLines);
-    }else{
+    } else {
       interestRate = new BigNumber(0);
     }
 

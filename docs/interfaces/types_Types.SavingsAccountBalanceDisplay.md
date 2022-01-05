@@ -23,11 +23,7 @@
 
 #### Defined in
 
-<<<<<<< HEAD
-[types/Types.ts:90](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L90)
-=======
-[types/Types.ts:90](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L90)
->>>>>>> main
+[types/Types.ts:90](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/types/Types.ts#L90)
 
 ___
 
@@ -37,11 +33,7 @@ ___
 
 #### Defined in
 
-<<<<<<< HEAD
-[types/Types.ts:87](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L87)
-=======
-[types/Types.ts:87](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L87)
->>>>>>> main
+[types/Types.ts:87](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/types/Types.ts#L87)
 
 ___
 
@@ -51,11 +43,7 @@ ___
 
 #### Defined in
 
-<<<<<<< HEAD
-[types/Types.ts:86](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L86)
-=======
-[types/Types.ts:86](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L86)
->>>>>>> main
+[types/Types.ts:86](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/types/Types.ts#L86)
 
 ___
 
@@ -65,11 +53,7 @@ ___
 
 #### Defined in
 
-<<<<<<< HEAD
-[types/Types.ts:88](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L88)
-=======
-[types/Types.ts:88](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L88)
->>>>>>> main
+[types/Types.ts:88](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/types/Types.ts#L88)
 
 ___
 
@@ -79,11 +63,7 @@ ___
 
 #### Defined in
 
-<<<<<<< HEAD
-[types/Types.ts:89](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L89)
-=======
-[types/Types.ts:89](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L89)
->>>>>>> main
+[types/Types.ts:89](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/types/Types.ts#L89)
 
 ___
 
@@ -93,8 +73,4 @@ ___
 
 #### Defined in
 
-<<<<<<< HEAD
-[types/Types.ts:85](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L85)
-=======
-[types/Types.ts:85](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L85)
->>>>>>> main
+[types/Types.ts:85](https://github.com/sublime-finance/sublime-sdk/blob/618c6db/src/types/Types.ts#L85)
