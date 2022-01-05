@@ -165,6 +165,7 @@ export interface CreditLineDetail {
   type: string;
   lastPrincipalUpdateTime: string;
   id: string;
+  requestByLender: boolean;
 }
 export interface CreditLineUser {
   address: string;

@@ -259,6 +259,7 @@ export class SublimeSubgraph {
         type: a.status,
         lastPrincipalUpdateTime: a.lastPrincipalUpdateTime,
         id: a.id,
+        requestByLender: a.requestByLender,
       };
     });
     return Promise.all(creditLineDetails);
