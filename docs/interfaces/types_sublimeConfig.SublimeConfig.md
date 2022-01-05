@@ -33,7 +33,11 @@ Hold the contract addresses in Sublime App
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L11)
+=======
 [types/sublimeConfig.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L11)
+>>>>>>> main
 
 ___
 
@@ -43,7 +47,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L17)
+=======
 [types/sublimeConfig.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L17)
+>>>>>>> main
 
 ___
 
@@ -53,7 +61,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L12)
+=======
 [types/sublimeConfig.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L12)
+>>>>>>> main
 
 ___
 
@@ -63,7 +75,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:6](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L6)
+=======
 [types/sublimeConfig.ts:6](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L6)
+>>>>>>> main
 
 ___
 
@@ -73,7 +89,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L16)
+=======
 [types/sublimeConfig.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L16)
+>>>>>>> main
 
 ___
 
@@ -83,7 +103,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L14)
+=======
 [types/sublimeConfig.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L14)
+>>>>>>> main
 
 ___
 
@@ -93,7 +117,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:5](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L5)
+=======
 [types/sublimeConfig.ts:5](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L5)
+>>>>>>> main
 
 ___
 
@@ -103,7 +131,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:7](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L7)
+=======
 [types/sublimeConfig.ts:7](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L7)
+>>>>>>> main
 
 ___
 
@@ -113,7 +145,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L18)
+=======
 [types/sublimeConfig.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L18)
+>>>>>>> main
 
 ___
 
@@ -123,7 +159,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L15)
+=======
 [types/sublimeConfig.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L15)
+>>>>>>> main
 
 ___
 
@@ -133,7 +173,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L8)
+=======
 [types/sublimeConfig.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L8)
+>>>>>>> main
 
 ___
 
@@ -143,7 +187,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L9)
+=======
 [types/sublimeConfig.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L9)
+>>>>>>> main
 
 ___
 
@@ -153,7 +201,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:10](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L10)
+=======
 [types/sublimeConfig.ts:10](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L10)
+>>>>>>> main
 
 ___
 
@@ -163,4 +215,8 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/sublimeConfig.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/sublimeConfig.ts#L13)
+=======
 [types/sublimeConfig.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/sublimeConfig.ts#L13)
+>>>>>>> main

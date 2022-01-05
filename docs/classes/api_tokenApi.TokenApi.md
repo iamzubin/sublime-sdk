@@ -43,7 +43,11 @@
 
 #### Defined in
 
+<<<<<<< HEAD
+[api/tokenApi.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/api/tokenApi.ts#L21)
+=======
 [api/tokenApi.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/api/tokenApi.ts#L21)
+>>>>>>> main
 
 ## Properties
 
@@ -53,7 +57,11 @@
 
 #### Defined in
 
+<<<<<<< HEAD
+[api/tokenApi.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/api/tokenApi.ts#L11)
+=======
 [api/tokenApi.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/api/tokenApi.ts#L11)
+>>>>>>> main
 
 ___
 
@@ -63,7 +71,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[api/tokenApi.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/api/tokenApi.ts#L12)
+=======
 [api/tokenApi.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/api/tokenApi.ts#L12)
+>>>>>>> main
 
 ___
 
@@ -73,7 +85,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[api/tokenApi.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/api/tokenApi.ts#L13)
+=======
 [api/tokenApi.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/api/tokenApi.ts#L13)
+>>>>>>> main
 
 ## Methods
 
@@ -98,7 +114,11 @@ Contract Transaction
 
 #### Defined in
 
+<<<<<<< HEAD
+[api/tokenApi.ts:33](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/api/tokenApi.ts#L33)
+=======
 [api/tokenApi.ts:33](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/api/tokenApi.ts#L33)
+>>>>>>> main
 
 ___
 
@@ -119,7 +139,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[api/tokenApi.ts:99](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/api/tokenApi.ts#L99)
+=======
 [api/tokenApi.ts:99](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/api/tokenApi.ts#L99)
+>>>>>>> main
 
 ___
 
@@ -145,7 +169,11 @@ number
 
 #### Defined in
 
+<<<<<<< HEAD
+[api/tokenApi.ts:68](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/api/tokenApi.ts#L68)
+=======
 [api/tokenApi.ts:68](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/api/tokenApi.ts#L68)
+>>>>>>> main
 
 ___
 
@@ -170,7 +198,11 @@ Contract Transaction
 
 #### Defined in
 
+<<<<<<< HEAD
+[api/tokenApi.ts:50](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/api/tokenApi.ts#L50)
+=======
 [api/tokenApi.ts:50](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/api/tokenApi.ts#L50)
+>>>>>>> main
 
 ___
 
@@ -192,7 +224,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[api/tokenApi.ts:85](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/api/tokenApi.ts#L85)
+=======
 [api/tokenApi.ts:85](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/api/tokenApi.ts#L85)
+>>>>>>> main
 
 ___
 
@@ -215,4 +251,8 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[api/tokenApi.ts:95](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/api/tokenApi.ts#L95)
+=======
 [api/tokenApi.ts:95](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/api/tokenApi.ts#L95)
+>>>>>>> main

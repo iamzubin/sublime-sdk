@@ -33,7 +33,11 @@
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:34](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L34)
+=======
 [types/poolInfo.ts:34](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L34)
+>>>>>>> main
 
 ___
 
@@ -43,7 +47,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L23)
+=======
 [types/poolInfo.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L23)
+>>>>>>> main
 
 ___
 
@@ -53,7 +61,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:27](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L27)
+=======
 [types/poolInfo.ts:27](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L27)
+>>>>>>> main
 
 ___
 
@@ -63,7 +75,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:29](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L29)
+=======
 [types/poolInfo.ts:29](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L29)
+>>>>>>> main
 
 ___
 
@@ -73,7 +89,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L22)
+=======
 [types/poolInfo.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L22)
+>>>>>>> main
 
 ___
 
@@ -83,7 +103,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:32](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L32)
+=======
 [types/poolInfo.ts:32](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L32)
+>>>>>>> main
 
 ___
 
@@ -93,7 +117,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:35](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L35)
+=======
 [types/poolInfo.ts:35](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L35)
+>>>>>>> main
 
 ___
 
@@ -103,7 +131,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:28](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L28)
+=======
 [types/poolInfo.ts:28](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L28)
+>>>>>>> main
 
 ___
 
@@ -113,7 +145,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L25)
+=======
 [types/poolInfo.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L25)
+>>>>>>> main
 
 ___
 
@@ -123,7 +159,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:36](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L36)
+=======
 [types/poolInfo.ts:36](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L36)
+>>>>>>> main
 
 ___
 
@@ -133,7 +173,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L26)
+=======
 [types/poolInfo.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L26)
+>>>>>>> main
 
 ___
 
@@ -143,7 +187,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L24)
+=======
 [types/poolInfo.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L24)
+>>>>>>> main
 
 ___
 
@@ -153,7 +201,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:30](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L30)
+=======
 [types/poolInfo.ts:30](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L30)
+>>>>>>> main
 
 ___
 
@@ -163,7 +215,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:37](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L37)
+=======
 [types/poolInfo.ts:37](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L37)
+>>>>>>> main
 
 ___
 
@@ -173,7 +229,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:33](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L33)
+=======
 [types/poolInfo.ts:33](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L33)
+>>>>>>> main
 
 ___
 
@@ -183,4 +243,8 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/poolInfo.ts:31](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolInfo.ts#L31)
+=======
 [types/poolInfo.ts:31](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolInfo.ts#L31)
+>>>>>>> main

@@ -24,7 +24,11 @@
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/Types.ts:46](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L46)
+=======
 [types/Types.ts:46](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L46)
+>>>>>>> main
 
 ___
 
@@ -34,7 +38,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/Types.ts:49](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L49)
+=======
 [types/Types.ts:49](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L49)
+>>>>>>> main
 
 ___
 
@@ -44,7 +52,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/Types.ts:51](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L51)
+=======
 [types/Types.ts:51](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L51)
+>>>>>>> main
 
 ___
 
@@ -54,7 +66,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/Types.ts:47](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L47)
+=======
 [types/Types.ts:47](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L47)
+>>>>>>> main
 
 ___
 
@@ -64,7 +80,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/Types.ts:48](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L48)
+=======
 [types/Types.ts:48](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L48)
+>>>>>>> main
 
 ___
 
@@ -74,7 +94,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/Types.ts:52](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L52)
+=======
 [types/Types.ts:52](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L52)
+>>>>>>> main
 
 ___
 
@@ -84,4 +108,8 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
+[types/Types.ts:50](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L50)
+=======
 [types/Types.ts:50](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L50)
+>>>>>>> main
