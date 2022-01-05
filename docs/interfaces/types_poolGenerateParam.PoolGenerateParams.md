@@ -31,7 +31,11 @@
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:4](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L4)
+=======
+[types/poolGenerateParam.ts:4](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L4)
+>>>>>>> main
 
 ___
 
@@ -41,7 +45,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:5](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L5)
+=======
+[types/poolGenerateParam.ts:5](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L5)
+>>>>>>> main
 
 ___
 
@@ -51,7 +59,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:7](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L7)
+=======
+[types/poolGenerateParam.ts:7](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L7)
+>>>>>>> main
 
 ___
 
@@ -61,7 +73,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:6](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L6)
+=======
+[types/poolGenerateParam.ts:6](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L6)
+>>>>>>> main
 
 ___
 
@@ -71,7 +87,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L14)
+=======
+[types/poolGenerateParam.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L14)
+>>>>>>> main
 
 ___
 
@@ -81,7 +101,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L9)
+=======
+[types/poolGenerateParam.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L9)
+>>>>>>> main
 
 ___
 
@@ -91,7 +115,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L8)
+=======
+[types/poolGenerateParam.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L8)
+>>>>>>> main
 
 ___
 
@@ -101,7 +129,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:10](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L10)
+=======
+[types/poolGenerateParam.ts:10](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L10)
+>>>>>>> main
 
 ___
 
@@ -111,7 +143,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L17)
+=======
+[types/poolGenerateParam.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L17)
+>>>>>>> main
 
 ___
 
@@ -121,7 +157,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L12)
+=======
+[types/poolGenerateParam.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L12)
+>>>>>>> main
 
 ___
 
@@ -131,7 +171,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L11)
+=======
+[types/poolGenerateParam.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L11)
+>>>>>>> main
 
 ___
 
@@ -141,7 +185,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L16)
+=======
+[types/poolGenerateParam.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L16)
+>>>>>>> main
 
 ___
 
@@ -151,7 +199,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L13)
+=======
+[types/poolGenerateParam.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L13)
+>>>>>>> main
 
 ___
 
@@ -161,4 +213,8 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/poolGenerateParam.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/poolGenerateParam.ts#L15)
+=======
+[types/poolGenerateParam.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/poolGenerateParam.ts#L15)
+>>>>>>> main

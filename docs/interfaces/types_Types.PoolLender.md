@@ -24,7 +24,11 @@
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/Types.ts:122](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L122)
+=======
+[types/Types.ts:122](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L122)
+>>>>>>> main
 
 ___
 
@@ -34,7 +38,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/Types.ts:120](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L120)
+=======
+[types/Types.ts:120](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L120)
+>>>>>>> main
 
 ___
 
@@ -44,7 +52,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/Types.ts:124](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L124)
+=======
+[types/Types.ts:124](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L124)
+>>>>>>> main
 
 ___
 
@@ -54,7 +66,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/Types.ts:123](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L123)
+=======
+[types/Types.ts:123](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L123)
+>>>>>>> main
 
 ___
 
@@ -64,7 +80,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/Types.ts:126](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L126)
+=======
+[types/Types.ts:126](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L126)
+>>>>>>> main
 
 ___
 
@@ -74,7 +94,11 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/Types.ts:125](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L125)
+=======
+[types/Types.ts:125](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L125)
+>>>>>>> main
 
 ___
 
@@ -84,4 +108,8 @@ ___
 
 #### Defined in
 
+<<<<<<< HEAD
 [types/Types.ts:121](https://github.com/sublime-finance/sublime-sdk/blob/e03df8a/src/types/Types.ts#L121)
+=======
+[types/Types.ts:121](https://github.com/sublime-finance/sublime-sdk/blob/7f1ca5d/src/types/Types.ts#L121)
+>>>>>>> main
