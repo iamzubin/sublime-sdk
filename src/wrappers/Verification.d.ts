@@ -21,63 +21,84 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface VerificationInterface extends ethers.utils.Interface {
   functions: {
+    'activationDelay()': FunctionFragment;
     'addVerifier(address)': FunctionFragment;
-    'initialize(address)': FunctionFragment;
+    'cancelAddressLinkingRequest(address)': FunctionFragment;
+    'initialize(address,uint256)': FunctionFragment;
     'isUser(address,address)': FunctionFragment;
-    'linkAddress(bytes)': FunctionFragment;
+    'linkAddress(address)': FunctionFragment;
     'linkedAddresses(address)': FunctionFragment;
     'masterAddresses(address,address)': FunctionFragment;
     'owner()': FunctionFragment;
+    'pendingLinkAddresses(address,address)': FunctionFragment;
     'registerMasterAddress(address,bool)': FunctionFragment;
     'removeVerifier(address)': FunctionFragment;
     'renounceOwnership()': FunctionFragment;
+    'requestAddressLinking(address)': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
     'unlinkAddress(address)': FunctionFragment;
     'unregisterMasterAddress(address,address)': FunctionFragment;
+    'updateActivationDelay(uint256)': FunctionFragment;
     'verifiers(address)': FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: 'activationDelay', values?: undefined): string;
   encodeFunctionData(functionFragment: 'addVerifier', values: [string]): string;
-  encodeFunctionData(functionFragment: 'initialize', values: [string]): string;
+  encodeFunctionData(functionFragment: 'cancelAddressLinkingRequest', values: [string]): string;
+  encodeFunctionData(functionFragment: 'initialize', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'isUser', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'linkAddress', values: [BytesLike]): string;
+  encodeFunctionData(functionFragment: 'linkAddress', values: [string]): string;
   encodeFunctionData(functionFragment: 'linkedAddresses', values: [string]): string;
   encodeFunctionData(functionFragment: 'masterAddresses', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'pendingLinkAddresses', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'registerMasterAddress', values: [string, boolean]): string;
   encodeFunctionData(functionFragment: 'removeVerifier', values: [string]): string;
   encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'requestAddressLinking', values: [string]): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'unlinkAddress', values: [string]): string;
   encodeFunctionData(functionFragment: 'unregisterMasterAddress', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'updateActivationDelay', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'verifiers', values: [string]): string;
 
+  decodeFunctionResult(functionFragment: 'activationDelay', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'addVerifier', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'cancelAddressLinkingRequest', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isUser', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'linkAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'linkedAddresses', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'masterAddresses', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'pendingLinkAddresses', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'registerMasterAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'removeVerifier', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'requestAddressLinking', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'unlinkAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'unregisterMasterAddress', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'updateActivationDelay', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'verifiers', data: BytesLike): Result;
 
   events: {
-    'AddressLinked(address,address)': EventFragment;
+    'ActivationDelayUpdated(uint256)': EventFragment;
+    'AddressLinked(address,address,uint256)': EventFragment;
+    'AddressLinkingRequestCancelled(address,address)': EventFragment;
+    'AddressLinkingRequested(address,address)': EventFragment;
     'AddressUnlinked(address,address)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
-    'UserRegistered(address,address,bool)': EventFragment;
+    'UserRegistered(address,address,uint256)': EventFragment;
     'UserUnregistered(address,address,address)': EventFragment;
     'VerifierAdded(address)': EventFragment;
     'VerifierRemoved(address)': EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: 'ActivationDelayUpdated'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'AddressLinked'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'AddressLinkingRequestCancelled'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'AddressLinkingRequested'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'AddressUnlinked'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'UserRegistered'): EventFragment;
@@ -130,33 +151,68 @@ export class Verification extends Contract {
   interface: VerificationInterface;
 
   functions: {
+    activationDelay(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    'activationDelay()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     addVerifier(_verifier: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     'addVerifier(address)'(_verifier: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    cancelAddressLinkingRequest(
+      _linkedAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    'cancelAddressLinkingRequest(address)'(
+      _linkedAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    initialize(
+      _admin: string,
+      _activationDelay: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    'initialize(address,uint256)'(
+      _admin: string,
+      _activationDelay: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     'isUser(address,address)'(_user: string, _verifier: string, overrides?: CallOverrides): Promise<[boolean]>;
 
-    linkAddress(_approval: BytesLike, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    linkAddress(_masterAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    'linkAddress(bytes)'(_approval: BytesLike, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    'linkAddress(address)'(
+      _masterAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    linkedAddresses(arg0: string, overrides?: CallOverrides): Promise<[string]>;
+    linkedAddresses(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
 
-    'linkedAddresses(address)'(arg0: string, overrides?: CallOverrides): Promise<[string]>;
+    'linkedAddresses(address)'(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
 
-    masterAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[boolean]>;
+    masterAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'masterAddresses(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[boolean]>;
+    'masterAddresses(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     'owner()'(overrides?: CallOverrides): Promise<[string]>;
+
+    pendingLinkAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[boolean]>;
+
+    'pendingLinkAddresses(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     registerMasterAddress(
       _masterAddress: string,
@@ -177,6 +233,16 @@ export class Verification extends Contract {
     renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    requestAddressLinking(
+      _linkedAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    'requestAddressLinking(address)'(
+      _linkedAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -204,38 +270,80 @@ export class Verification extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    updateActivationDelay(
+      _activationDelay: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    'updateActivationDelay(uint256)'(
+      _activationDelay: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     verifiers(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     'verifiers(address)'(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
   };
 
+  activationDelay(overrides?: CallOverrides): Promise<BigNumber>;
+
+  'activationDelay()'(overrides?: CallOverrides): Promise<BigNumber>;
+
   addVerifier(_verifier: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   'addVerifier(address)'(_verifier: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  cancelAddressLinkingRequest(
+    _linkedAddress: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  'cancelAddressLinkingRequest(address)'(
+    _linkedAddress: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  initialize(
+    _admin: string,
+    _activationDelay: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  'initialize(address,uint256)'(
+    _admin: string,
+    _activationDelay: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<boolean>;
 
   'isUser(address,address)'(_user: string, _verifier: string, overrides?: CallOverrides): Promise<boolean>;
 
-  linkAddress(_approval: BytesLike, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  linkAddress(_masterAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  'linkAddress(bytes)'(_approval: BytesLike, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  'linkAddress(address)'(_masterAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  linkedAddresses(arg0: string, overrides?: CallOverrides): Promise<string>;
+  linkedAddresses(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
 
-  'linkedAddresses(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
+  'linkedAddresses(address)'(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
 
-  masterAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
+  masterAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  'masterAddresses(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
+  'masterAddresses(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
   'owner()'(overrides?: CallOverrides): Promise<string>;
+
+  pendingLinkAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
+
+  'pendingLinkAddresses(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
 
   registerMasterAddress(
     _masterAddress: string,
@@ -256,6 +364,13 @@ export class Verification extends Contract {
   renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  requestAddressLinking(_linkedAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  'requestAddressLinking(address)'(
+    _linkedAddress: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -280,38 +395,66 @@ export class Verification extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  updateActivationDelay(
+    _activationDelay: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  'updateActivationDelay(uint256)'(
+    _activationDelay: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   verifiers(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
   'verifiers(address)'(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
   callStatic: {
+    activationDelay(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'activationDelay()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     addVerifier(_verifier: string, overrides?: CallOverrides): Promise<void>;
 
     'addVerifier(address)'(_verifier: string, overrides?: CallOverrides): Promise<void>;
 
-    initialize(_admin: string, overrides?: CallOverrides): Promise<void>;
+    cancelAddressLinkingRequest(_linkedAddress: string, overrides?: CallOverrides): Promise<void>;
 
-    'initialize(address)'(_admin: string, overrides?: CallOverrides): Promise<void>;
+    'cancelAddressLinkingRequest(address)'(_linkedAddress: string, overrides?: CallOverrides): Promise<void>;
+
+    initialize(_admin: string, _activationDelay: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    'initialize(address,uint256)'(_admin: string, _activationDelay: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<boolean>;
 
     'isUser(address,address)'(_user: string, _verifier: string, overrides?: CallOverrides): Promise<boolean>;
 
-    linkAddress(_approval: BytesLike, overrides?: CallOverrides): Promise<void>;
+    linkAddress(_masterAddress: string, overrides?: CallOverrides): Promise<void>;
 
-    'linkAddress(bytes)'(_approval: BytesLike, overrides?: CallOverrides): Promise<void>;
+    'linkAddress(address)'(_masterAddress: string, overrides?: CallOverrides): Promise<void>;
 
-    linkedAddresses(arg0: string, overrides?: CallOverrides): Promise<string>;
+    linkedAddresses(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
 
-    'linkedAddresses(address)'(arg0: string, overrides?: CallOverrides): Promise<string>;
+    'linkedAddresses(address)'(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
 
-    masterAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
+    masterAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'masterAddresses(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
+    'masterAddresses(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     'owner()'(overrides?: CallOverrides): Promise<string>;
+
+    pendingLinkAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
+
+    'pendingLinkAddresses(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<boolean>;
 
     registerMasterAddress(_masterAddress: string, _isMasterLinked: boolean, overrides?: CallOverrides): Promise<void>;
 
@@ -325,6 +468,10 @@ export class Verification extends Contract {
 
     'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
+    requestAddressLinking(_linkedAddress: string, overrides?: CallOverrides): Promise<void>;
+
+    'requestAddressLinking(address)'(_linkedAddress: string, overrides?: CallOverrides): Promise<void>;
+
     transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
 
     'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
@@ -337,13 +484,30 @@ export class Verification extends Contract {
 
     'unregisterMasterAddress(address,address)'(_masterAddress: string, _verifier: string, overrides?: CallOverrides): Promise<void>;
 
+    updateActivationDelay(_activationDelay: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    'updateActivationDelay(uint256)'(_activationDelay: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
     verifiers(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
     'verifiers(address)'(arg0: string, overrides?: CallOverrides): Promise<boolean>;
   };
 
   filters: {
+    ActivationDelayUpdated(activationDelay: null): TypedEventFilter<[BigNumber], { activationDelay: BigNumber }>;
+
     AddressLinked(
+      linkedAddress: string | null,
+      masterAddress: string | null,
+      activatesAt: null
+    ): TypedEventFilter<[string, string, BigNumber], { linkedAddress: string; masterAddress: string; activatesAt: BigNumber }>;
+
+    AddressLinkingRequestCancelled(
+      linkedAddress: string | null,
+      masterAddress: string | null
+    ): TypedEventFilter<[string, string], { linkedAddress: string; masterAddress: string }>;
+
+    AddressLinkingRequested(
       linkedAddress: string | null,
       masterAddress: string | null
     ): TypedEventFilter<[string, string], { linkedAddress: string; masterAddress: string }>;
@@ -361,8 +525,8 @@ export class Verification extends Contract {
     UserRegistered(
       masterAddress: string | null,
       verifier: string | null,
-      isMasterLinked: boolean | null
-    ): TypedEventFilter<[string, string, boolean], { masterAddress: string; verifier: string; isMasterLinked: boolean }>;
+      activatesAt: null
+    ): TypedEventFilter<[string, string, BigNumber], { masterAddress: string; verifier: string; activatesAt: BigNumber }>;
 
     UserUnregistered(
       masterAddress: string | null,
@@ -376,21 +540,40 @@ export class Verification extends Contract {
   };
 
   estimateGas: {
+    activationDelay(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'activationDelay()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     addVerifier(_verifier: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     'addVerifier(address)'(_verifier: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    cancelAddressLinkingRequest(_linkedAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'cancelAddressLinkingRequest(address)'(
+      _linkedAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    initialize(
+      _admin: string,
+      _activationDelay: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    'initialize(address,uint256)'(
+      _admin: string,
+      _activationDelay: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'isUser(address,address)'(_user: string, _verifier: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    linkAddress(_approval: BytesLike, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    linkAddress(_masterAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    'linkAddress(bytes)'(_approval: BytesLike, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'linkAddress(address)'(_masterAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     linkedAddresses(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -403,6 +586,10 @@ export class Verification extends Contract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    pendingLinkAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'pendingLinkAddresses(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     registerMasterAddress(
       _masterAddress: string,
@@ -424,6 +611,13 @@ export class Verification extends Contract {
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
+    requestAddressLinking(_linkedAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    'requestAddressLinking(address)'(
+      _linkedAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     'transferOwnership(address)'(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
@@ -444,27 +638,59 @@ export class Verification extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    updateActivationDelay(_activationDelay: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    'updateActivationDelay(uint256)'(
+      _activationDelay: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     verifiers(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'verifiers(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    activationDelay(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'activationDelay()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     addVerifier(_verifier: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     'addVerifier(address)'(_verifier: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    cancelAddressLinkingRequest(
+      _linkedAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    'cancelAddressLinkingRequest(address)'(
+      _linkedAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    initialize(
+      _admin: string,
+      _activationDelay: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    'initialize(address,uint256)'(
+      _admin: string,
+      _activationDelay: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'isUser(address,address)'(_user: string, _verifier: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    linkAddress(_approval: BytesLike, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    linkAddress(_masterAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    'linkAddress(bytes)'(_approval: BytesLike, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    'linkAddress(address)'(
+      _masterAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     linkedAddresses(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -477,6 +703,10 @@ export class Verification extends Contract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    pendingLinkAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'pendingLinkAddresses(address,address)'(arg0: string, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     registerMasterAddress(
       _masterAddress: string,
@@ -501,6 +731,16 @@ export class Verification extends Contract {
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
+    requestAddressLinking(
+      _linkedAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    'requestAddressLinking(address)'(
+      _linkedAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     'transferOwnership(address)'(
@@ -524,6 +764,16 @@ export class Verification extends Contract {
     'unregisterMasterAddress(address,address)'(
       _masterAddress: string,
       _verifier: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updateActivationDelay(
+      _activationDelay: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    'updateActivationDelay(uint256)'(
+      _activationDelay: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

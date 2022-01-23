@@ -18,6 +18,44 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'activationDelay',
+        type: 'uint256',
+      },
+    ],
+    name: 'ActivationDelayUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'linkedAddress',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'masterAddress',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'activatesAt',
+        type: 'uint256',
+      },
+    ],
+    name: 'AddressLinked',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: true,
         internalType: 'address',
         name: 'linkedAddress',
@@ -30,7 +68,26 @@ const _abi = [
         type: 'address',
       },
     ],
-    name: 'AddressLinked',
+    name: 'AddressLinkingRequestCancelled',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'linkedAddress',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'masterAddress',
+        type: 'address',
+      },
+    ],
+    name: 'AddressLinkingRequested',
     type: 'event',
   },
   {
@@ -68,10 +125,10 @@ const _abi = [
         type: 'address',
       },
       {
-        indexed: true,
-        internalType: 'bool',
-        name: 'isMasterLinked',
-        type: 'bool',
+        indexed: false,
+        internalType: 'uint256',
+        name: 'activatesAt',
+        type: 'uint256',
       },
     ],
     name: 'UserRegistered',

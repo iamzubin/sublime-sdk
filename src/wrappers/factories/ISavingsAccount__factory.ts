@@ -246,6 +246,12 @@ const _abi = [
         name: 'strategy',
         type: 'address',
       },
+      {
+        indexed: false,
+        internalType: 'bool',
+        name: 'withdrawShares',
+        type: 'bool',
+      },
     ],
     name: 'Withdrawn',
     type: 'event',
@@ -598,7 +604,31 @@ const _abi = [
     inputs: [
       {
         internalType: 'address',
-        name: '_token',
+        name: 'token',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'strategy',
+        type: 'address',
+      },
+    ],
+    name: 'withdrawAll',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'tokenReceived',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'token',
         type: 'address',
       },
     ],

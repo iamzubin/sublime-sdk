@@ -42,7 +42,7 @@ interface SavingsAccountInterface extends ethers.utils.Interface {
     'updateCreditLine(address)': FunctionFragment;
     'updateStrategyRegistry(address)': FunctionFragment;
     'withdraw(uint256,address,address,address,bool)': FunctionFragment;
-    'withdrawAll(address)': FunctionFragment;
+    'withdrawAll(address,address)': FunctionFragment;
     'withdrawFrom(uint256,address,address,address,address,bool)': FunctionFragment;
   };
 
@@ -66,7 +66,7 @@ interface SavingsAccountInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'updateCreditLine', values: [string]): string;
   encodeFunctionData(functionFragment: 'updateStrategyRegistry', values: [string]): string;
   encodeFunctionData(functionFragment: 'withdraw', values: [BigNumberish, string, string, string, boolean]): string;
-  encodeFunctionData(functionFragment: 'withdrawAll', values: [string]): string;
+  encodeFunctionData(functionFragment: 'withdrawAll', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'withdrawFrom', values: [BigNumberish, string, string, string, string, boolean]): string;
 
   decodeFunctionResult(functionFragment: 'allowance', data: BytesLike): Result;
@@ -101,7 +101,7 @@ interface SavingsAccountInterface extends ethers.utils.Interface {
     'StrategyRegistryUpdated(address)': EventFragment;
     'StrategySwitched(address,address,uint256,uint256,address,address)': EventFragment;
     'Transfer(address,address,address,address,uint256)': EventFragment;
-    'Withdrawn(address,address,uint256,address,address)': EventFragment;
+    'Withdrawn(address,address,uint256,address,address,bool)': EventFragment;
     'WithdrawnAll(address,uint256,address)': EventFragment;
   };
 
@@ -375,7 +375,11 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    'withdrawAll(address,address)'(
+      _token: string,
+      _strategy: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -607,7 +611,11 @@ export class SavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  'withdrawAll(address,address)'(
+    _token: string,
+    _strategy: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -784,7 +792,7 @@ export class SavingsAccount extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    withdrawAll(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'withdrawAll(address,address)'(_token: string, _strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'withdrawAll(address)'(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -889,15 +897,17 @@ export class SavingsAccount extends Contract {
       to: string | null,
       sharesWithdrawn: null,
       token: string | null,
-      strategy: null
+      strategy: null,
+      withdrawShares: null
     ): TypedEventFilter<
-      [string, string, BigNumber, string, string],
+      [string, string, BigNumber, string, string, boolean],
       {
         from: string;
         to: string;
         sharesWithdrawn: BigNumber;
         token: string;
         strategy: string;
+        withdrawShares: boolean;
       }
     >;
 
@@ -1110,7 +1120,11 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'withdrawAll(address,address)'(
+      _token: string,
+      _strategy: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
@@ -1360,7 +1374,11 @@ export class SavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    'withdrawAll(address,address)'(
+      _token: string,
+      _strategy: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 

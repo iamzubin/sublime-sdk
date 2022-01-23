@@ -21,45 +21,53 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface AdminVerifierInterface extends ethers.utils.Interface {
   functions: {
-    'initialize(address,address)': FunctionFragment;
+    'initialize(address,address,address)': FunctionFragment;
     'owner()': FunctionFragment;
-    'registerUser(address,string,bool)': FunctionFragment;
+    'registerSelf(bool,uint8,bytes32,bytes32,string,uint256)': FunctionFragment;
     'renounceOwnership()': FunctionFragment;
+    'signerAddress()': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
-    'unregisterUser(address)': FunctionFragment;
+    'unregisterSelf()': FunctionFragment;
+    'updateSignerAddress(address)': FunctionFragment;
     'updateVerification(address)': FunctionFragment;
     'userData(address)': FunctionFragment;
     'verification()': FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'initialize', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'initialize', values: [string, string, string]): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'registerUser', values: [string, string, boolean]): string;
+  encodeFunctionData(functionFragment: 'registerSelf', values: [boolean, BigNumberish, BytesLike, BytesLike, string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'signerAddress', values?: undefined): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'unregisterUser', values: [string]): string;
+  encodeFunctionData(functionFragment: 'unregisterSelf', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'updateSignerAddress', values: [string]): string;
   encodeFunctionData(functionFragment: 'updateVerification', values: [string]): string;
   encodeFunctionData(functionFragment: 'userData', values: [string]): string;
   encodeFunctionData(functionFragment: 'verification', values?: undefined): string;
 
   decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'registerUser', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'registerSelf', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'signerAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'unregisterUser', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'unregisterSelf', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'updateSignerAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateVerification', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'userData', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'verification', data: BytesLike): Result;
 
   events: {
     'OwnershipTransferred(address,address)': EventFragment;
+    'SignerUpdated(address)': EventFragment;
     'UserRegistered(address,bool,string)': EventFragment;
     'UserUnregistered(address)': EventFragment;
     'VerificationUpdated(address)': EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'SignerUpdated'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'UserRegistered'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'UserUnregistered'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'VerificationUpdated'): EventFragment;
@@ -112,12 +120,14 @@ export class AdminVerifier extends Contract {
     initialize(
       _admin: string,
       _verification: string,
+      _signerAddress: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'initialize(address,address)'(
+    'initialize(address,address,address)'(
       _admin: string,
       _verification: string,
+      _signerAddress: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -125,23 +135,33 @@ export class AdminVerifier extends Contract {
 
     'owner()'(overrides?: CallOverrides): Promise<[string]>;
 
-    registerUser(
-      _user: string,
-      _metadata: string,
+    registerSelf(
       _isMasterLinked: boolean,
+      _v: BigNumberish,
+      _r: BytesLike,
+      _s: BytesLike,
+      _twitterId: string,
+      _deadline: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'registerUser(address,string,bool)'(
-      _user: string,
-      _metadata: string,
+    'registerSelf(bool,uint8,bytes32,bytes32,string,uint256)'(
       _isMasterLinked: boolean,
+      _v: BigNumberish,
+      _r: BytesLike,
+      _s: BytesLike,
+      _twitterId: string,
+      _deadline: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    signerAddress(overrides?: CallOverrides): Promise<[string]>;
+
+    'signerAddress()'(overrides?: CallOverrides): Promise<[string]>;
 
     transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -150,9 +170,16 @@ export class AdminVerifier extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    unregisterUser(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    unregisterSelf(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    'unregisterSelf()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    updateSignerAddress(_signerAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    'updateSignerAddress(address)'(
+      _signerAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     updateVerification(_verification: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -173,12 +200,14 @@ export class AdminVerifier extends Contract {
   initialize(
     _admin: string,
     _verification: string,
+    _signerAddress: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'initialize(address,address)'(
+  'initialize(address,address,address)'(
     _admin: string,
     _verification: string,
+    _signerAddress: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -186,17 +215,23 @@ export class AdminVerifier extends Contract {
 
   'owner()'(overrides?: CallOverrides): Promise<string>;
 
-  registerUser(
-    _user: string,
-    _metadata: string,
+  registerSelf(
     _isMasterLinked: boolean,
+    _v: BigNumberish,
+    _r: BytesLike,
+    _s: BytesLike,
+    _twitterId: string,
+    _deadline: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'registerUser(address,string,bool)'(
-    _user: string,
-    _metadata: string,
+  'registerSelf(bool,uint8,bytes32,bytes32,string,uint256)'(
     _isMasterLinked: boolean,
+    _v: BigNumberish,
+    _r: BytesLike,
+    _s: BytesLike,
+    _twitterId: string,
+    _deadline: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -204,13 +239,24 @@ export class AdminVerifier extends Contract {
 
   'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
+  signerAddress(overrides?: CallOverrides): Promise<string>;
+
+  'signerAddress()'(overrides?: CallOverrides): Promise<string>;
+
   transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   'transferOwnership(address)'(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  unregisterUser(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  unregisterSelf(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  'unregisterSelf()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  updateSignerAddress(_signerAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  'updateSignerAddress(address)'(
+    _signerAddress: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   updateVerification(_verification: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -228,20 +274,36 @@ export class AdminVerifier extends Contract {
   'verification()'(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    initialize(_admin: string, _verification: string, overrides?: CallOverrides): Promise<void>;
+    initialize(_admin: string, _verification: string, _signerAddress: string, overrides?: CallOverrides): Promise<void>;
 
-    'initialize(address,address)'(_admin: string, _verification: string, overrides?: CallOverrides): Promise<void>;
+    'initialize(address,address,address)'(
+      _admin: string,
+      _verification: string,
+      _signerAddress: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     'owner()'(overrides?: CallOverrides): Promise<string>;
 
-    registerUser(_user: string, _metadata: string, _isMasterLinked: boolean, overrides?: CallOverrides): Promise<void>;
-
-    'registerUser(address,string,bool)'(
-      _user: string,
-      _metadata: string,
+    registerSelf(
       _isMasterLinked: boolean,
+      _v: BigNumberish,
+      _r: BytesLike,
+      _s: BytesLike,
+      _twitterId: string,
+      _deadline: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    'registerSelf(bool,uint8,bytes32,bytes32,string,uint256)'(
+      _isMasterLinked: boolean,
+      _v: BigNumberish,
+      _r: BytesLike,
+      _s: BytesLike,
+      _twitterId: string,
+      _deadline: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -249,13 +311,21 @@ export class AdminVerifier extends Contract {
 
     'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
 
+    signerAddress(overrides?: CallOverrides): Promise<string>;
+
+    'signerAddress()'(overrides?: CallOverrides): Promise<string>;
+
     transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
 
     'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
 
-    unregisterUser(_user: string, overrides?: CallOverrides): Promise<void>;
+    unregisterSelf(overrides?: CallOverrides): Promise<void>;
 
-    'unregisterUser(address)'(_user: string, overrides?: CallOverrides): Promise<void>;
+    'unregisterSelf()'(overrides?: CallOverrides): Promise<void>;
+
+    updateSignerAddress(_signerAddress: string, overrides?: CallOverrides): Promise<void>;
+
+    'updateSignerAddress(address)'(_signerAddress: string, overrides?: CallOverrides): Promise<void>;
 
     updateVerification(_verification: string, overrides?: CallOverrides): Promise<void>;
 
@@ -276,6 +346,8 @@ export class AdminVerifier extends Contract {
       newOwner: string | null
     ): TypedEventFilter<[string, string], { previousOwner: string; newOwner: string }>;
 
+    SignerUpdated(signerAddress: string | null): TypedEventFilter<[string], { signerAddress: string }>;
+
     UserRegistered(
       user: null,
       isMasterLinked: null,
@@ -288,11 +360,17 @@ export class AdminVerifier extends Contract {
   };
 
   estimateGas: {
-    initialize(_admin: string, _verification: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'initialize(address,address)'(
+    initialize(
       _admin: string,
       _verification: string,
+      _signerAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    'initialize(address,address,address)'(
+      _admin: string,
+      _verification: string,
+      _signerAddress: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -300,17 +378,23 @@ export class AdminVerifier extends Contract {
 
     'owner()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    registerUser(
-      _user: string,
-      _metadata: string,
+    registerSelf(
       _isMasterLinked: boolean,
+      _v: BigNumberish,
+      _r: BytesLike,
+      _s: BytesLike,
+      _twitterId: string,
+      _deadline: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'registerUser(address,string,bool)'(
-      _user: string,
-      _metadata: string,
+    'registerSelf(bool,uint8,bytes32,bytes32,string,uint256)'(
       _isMasterLinked: boolean,
+      _v: BigNumberish,
+      _r: BytesLike,
+      _s: BytesLike,
+      _twitterId: string,
+      _deadline: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -318,13 +402,21 @@ export class AdminVerifier extends Contract {
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
+    signerAddress(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'signerAddress()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     'transferOwnership(address)'(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    unregisterUser(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    unregisterSelf(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'unregisterSelf()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    updateSignerAddress(_signerAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    'updateSignerAddress(address)'(_signerAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     updateVerification(_verification: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
@@ -343,12 +435,14 @@ export class AdminVerifier extends Contract {
     initialize(
       _admin: string,
       _verification: string,
+      _signerAddress: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'initialize(address,address)'(
+    'initialize(address,address,address)'(
       _admin: string,
       _verification: string,
+      _signerAddress: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -356,23 +450,33 @@ export class AdminVerifier extends Contract {
 
     'owner()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    registerUser(
-      _user: string,
-      _metadata: string,
+    registerSelf(
       _isMasterLinked: boolean,
+      _v: BigNumberish,
+      _r: BytesLike,
+      _s: BytesLike,
+      _twitterId: string,
+      _deadline: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'registerUser(address,string,bool)'(
-      _user: string,
-      _metadata: string,
+    'registerSelf(bool,uint8,bytes32,bytes32,string,uint256)'(
       _isMasterLinked: boolean,
+      _v: BigNumberish,
+      _r: BytesLike,
+      _s: BytesLike,
+      _twitterId: string,
+      _deadline: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    signerAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'signerAddress()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
@@ -381,9 +485,16 @@ export class AdminVerifier extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    unregisterUser(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    unregisterSelf(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    'unregisterSelf()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    updateSignerAddress(_signerAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    'updateSignerAddress(address)'(
+      _signerAddress: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     updateVerification(_verification: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 

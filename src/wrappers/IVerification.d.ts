@@ -35,15 +35,21 @@ interface IVerificationInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'unregisterMasterAddress', data: BytesLike): Result;
 
   events: {
-    'AddressLinked(address,address)': EventFragment;
+    'ActivationDelayUpdated(uint256)': EventFragment;
+    'AddressLinked(address,address,uint256)': EventFragment;
+    'AddressLinkingRequestCancelled(address,address)': EventFragment;
+    'AddressLinkingRequested(address,address)': EventFragment;
     'AddressUnlinked(address,address)': EventFragment;
-    'UserRegistered(address,address,bool)': EventFragment;
+    'UserRegistered(address,address,uint256)': EventFragment;
     'UserUnregistered(address,address,address)': EventFragment;
     'VerifierAdded(address)': EventFragment;
     'VerifierRemoved(address)': EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: 'ActivationDelayUpdated'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'AddressLinked'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'AddressLinkingRequestCancelled'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'AddressLinkingRequested'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'AddressUnlinked'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'UserRegistered'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'UserUnregistered'): EventFragment;
@@ -167,7 +173,20 @@ export class IVerification extends Contract {
   };
 
   filters: {
+    ActivationDelayUpdated(activationDelay: null): TypedEventFilter<[BigNumber], { activationDelay: BigNumber }>;
+
     AddressLinked(
+      linkedAddress: string | null,
+      masterAddress: string | null,
+      activatesAt: null
+    ): TypedEventFilter<[string, string, BigNumber], { linkedAddress: string; masterAddress: string; activatesAt: BigNumber }>;
+
+    AddressLinkingRequestCancelled(
+      linkedAddress: string | null,
+      masterAddress: string | null
+    ): TypedEventFilter<[string, string], { linkedAddress: string; masterAddress: string }>;
+
+    AddressLinkingRequested(
       linkedAddress: string | null,
       masterAddress: string | null
     ): TypedEventFilter<[string, string], { linkedAddress: string; masterAddress: string }>;
@@ -180,8 +199,8 @@ export class IVerification extends Contract {
     UserRegistered(
       masterAddress: string | null,
       verifier: string | null,
-      isMasterLinked: boolean | null
-    ): TypedEventFilter<[string, string, boolean], { masterAddress: string; verifier: string; isMasterLinked: boolean }>;
+      activatesAt: null
+    ): TypedEventFilter<[string, string, BigNumber], { masterAddress: string; verifier: string; activatesAt: BigNumber }>;
 
     UserUnregistered(
       masterAddress: string | null,

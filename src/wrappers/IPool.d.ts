@@ -54,7 +54,7 @@ interface IPoolInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'withdrawBorrowedAmount', data: BytesLike): Result;
 
   events: {
-    'AmountBorrowed(uint256)': EventFragment;
+    'AmountBorrowed(uint256,uint256)': EventFragment;
     'CollateralAdded(address,uint256,uint256)': EventFragment;
     'CollateralWithdrawn(address,uint256)': EventFragment;
     'LenderLiquidated(address,address,uint256)': EventFragment;
@@ -289,7 +289,10 @@ export class IPool extends Contract {
   };
 
   filters: {
-    AmountBorrowed(amount: null): TypedEventFilter<[BigNumber], { amount: BigNumber }>;
+    AmountBorrowed(
+      amount: null,
+      protocolFee: null
+    ): TypedEventFilter<[BigNumber, BigNumber], { amount: BigNumber; protocolFee: BigNumber }>;
 
     CollateralAdded(
       borrower: string | null,

@@ -39,6 +39,7 @@ interface IExtensionInterface extends ethers.utils.Interface {
     'ExtensionRequested(uint256)': EventFragment;
     'LenderVoted(address,uint256,uint256)': EventFragment;
     'PoolFactoryUpdated(address)': EventFragment;
+    'RebalaneVotes(address,address,uint256)': EventFragment;
     'VotingPassRatioUpdated(uint256)': EventFragment;
   };
 
@@ -46,6 +47,7 @@ interface IExtensionInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: 'ExtensionRequested'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'LenderVoted'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'PoolFactoryUpdated'): EventFragment;
+  getEvent(nameOrSignatureOrTopic: 'RebalaneVotes'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'VotingPassRatioUpdated'): EventFragment;
 }
 
@@ -183,6 +185,12 @@ export class IExtension extends Contract {
     >;
 
     PoolFactoryUpdated(poolFactory: string | null): TypedEventFilter<[string], { poolFactory: string }>;
+
+    RebalaneVotes(
+      oldLender: string | null,
+      newLender: string | null,
+      amount: null
+    ): TypedEventFilter<[string, string, BigNumber], { oldLender: string; newLender: string; amount: BigNumber }>;
 
     VotingPassRatioUpdated(votingPassRatio: null): TypedEventFilter<[BigNumber], { votingPassRatio: BigNumber }>;
   };

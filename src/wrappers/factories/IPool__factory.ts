@@ -23,6 +23,12 @@ const _abi = [
         name: 'amount',
         type: 'uint256',
       },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'protocolFee',
+        type: 'uint256',
+      },
     ],
     name: 'AmountBorrowed',
     type: 'event',

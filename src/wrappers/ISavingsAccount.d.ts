@@ -33,7 +33,7 @@ interface ISavingsAccountInterface extends ethers.utils.Interface {
     'transfer(uint256,address,address,address)': FunctionFragment;
     'transferFrom(uint256,address,address,address,address)': FunctionFragment;
     'withdraw(uint256,address,address,address,bool)': FunctionFragment;
-    'withdrawAll(address)': FunctionFragment;
+    'withdrawAll(address,address)': FunctionFragment;
     'withdrawFrom(uint256,address,address,address,address,bool)': FunctionFragment;
   };
 
@@ -48,7 +48,7 @@ interface ISavingsAccountInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'transfer', values: [BigNumberish, string, string, string]): string;
   encodeFunctionData(functionFragment: 'transferFrom', values: [BigNumberish, string, string, string, string]): string;
   encodeFunctionData(functionFragment: 'withdraw', values: [BigNumberish, string, string, string, boolean]): string;
-  encodeFunctionData(functionFragment: 'withdrawAll', values: [string]): string;
+  encodeFunctionData(functionFragment: 'withdrawAll', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'withdrawFrom', values: [BigNumberish, string, string, string, string, boolean]): string;
 
   decodeFunctionResult(functionFragment: 'approve', data: BytesLike): Result;
@@ -73,7 +73,7 @@ interface ISavingsAccountInterface extends ethers.utils.Interface {
     'StrategyRegistryUpdated(address)': EventFragment;
     'StrategySwitched(address,address,uint256,uint256,address,address)': EventFragment;
     'Transfer(address,address,address,address,uint256)': EventFragment;
-    'Withdrawn(address,address,uint256,address,address)': EventFragment;
+    'Withdrawn(address,address,uint256,address,address,bool)': EventFragment;
     'WithdrawnAll(address,uint256,address)': EventFragment;
   };
 
@@ -293,9 +293,13 @@ export class ISavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    'withdrawAll(address,address)'(
+      token: string,
+      strategy: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    'withdrawAll(address)'(token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     withdrawFrom(
       amount: BigNumberish,
@@ -470,9 +474,13 @@ export class ISavingsAccount extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  'withdrawAll(address,address)'(
+    token: string,
+    strategy: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  'withdrawAll(address)'(token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   withdrawFrom(
     amount: BigNumberish,
@@ -601,9 +609,9 @@ export class ISavingsAccount extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    withdrawAll(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'withdrawAll(address,address)'(token: string, strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'withdrawAll(address)'(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'withdrawAll(address)'(token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     withdrawFrom(
       amount: BigNumberish,
@@ -701,15 +709,17 @@ export class ISavingsAccount extends Contract {
       to: string | null,
       sharesWithdrawn: null,
       token: string | null,
-      strategy: null
+      strategy: null,
+      withdrawShares: null
     ): TypedEventFilter<
-      [string, string, BigNumber, string, string],
+      [string, string, BigNumber, string, string, boolean],
       {
         from: string;
         to: string;
         sharesWithdrawn: BigNumber;
         token: string;
         strategy: string;
+        withdrawShares: boolean;
       }
     >;
 
@@ -878,9 +888,13 @@ export class ISavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'withdrawAll(address,address)'(
+      token: string,
+      strategy: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'withdrawAll(address)'(token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     withdrawFrom(
       amount: BigNumberish,
@@ -1065,9 +1079,13 @@ export class ISavingsAccount extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    withdrawAll(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    'withdrawAll(address,address)'(
+      token: string,
+      strategy: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    'withdrawAll(address)'(_token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    'withdrawAll(address)'(token: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     withdrawFrom(
       amount: BigNumberish,
