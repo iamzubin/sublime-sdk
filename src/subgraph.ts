@@ -28,6 +28,7 @@ import {
   getCreditLine,
   getBalances,
   getAllowances,
+  getTwitterId
 } from './queries';
 
 import { Signer } from '@ethersproject/abstract-signer';
@@ -673,4 +674,13 @@ export class SublimeSubgraph {
   private getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
+
+
+  async getVerifiedTwitterId(address: string): Promise<PoolDetail[]> {
+    const addr = address.toLocaleLowerCase()
+    let result = await getTwitterId(this.subgraphUrl, addr);
+    return result;
+  }
+
 }
+
