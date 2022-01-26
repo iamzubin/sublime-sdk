@@ -19,5 +19,10 @@ export async function getTwitterId(url, address: string): Promise<any[]> {
   });
 
   const data = await query(url, queryData);
-  return data.userProfiles;
+  // return data.userProfiles;
+  if (data.userProfiles.length > 0) {
+    return data.userProfiles[0].userMetadataPerVerifier;
+  } else {
+    return [];
+  }
 }

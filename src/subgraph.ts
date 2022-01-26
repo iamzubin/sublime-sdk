@@ -9,6 +9,7 @@ import {
   SavingAccountUserDetailDisplay,
   SavingsAccountStrategyBalanceDisplay,
   CreditLineOperation,
+  TwitterDetails,
 } from './types/Types';
 import {
   getAllPools,
@@ -28,7 +29,7 @@ import {
   getCreditLine,
   getBalances,
   getAllowances,
-  getTwitterId
+  getTwitterId,
 } from './queries';
 
 import { Signer } from '@ethersproject/abstract-signer';
@@ -675,12 +676,19 @@ export class SublimeSubgraph {
     return Math.floor(Math.random() * max);
   }
 
-
-  async getVerifiedTwitterId(address: string): Promise<PoolDetail[]> {
-    const addr = address.toLocaleLowerCase()
+  /**
+   *
+   * @param address Address of the user to fetch
+   * @returns
+   */
+  async getVerifiedTwitterId(address: string): Promise<TwitterDetails[]> {
+    const addr = address.toLocaleLowerCase();
     let result = await getTwitterId(this.subgraphUrl, addr);
-    return result;
+    return [...result].map((a) => {
+      return {
+        id: a.id,
+        metadata: a.metadata,
+      };
+    });
   }
-
 }
-

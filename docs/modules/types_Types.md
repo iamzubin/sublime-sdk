@@ -27,6 +27,7 @@
 - [SavingsAccountUserDetails](types_Types.md#savingsaccountuserdetails)
 - [Strategy](types_Types.md#strategy)
 - [StrategyType](types_Types.md#strategytype)
+- [TwitterDetails](types_Types.md#twitterdetails)
 
 ## References
 
@@ -153,3 +154,9 @@ ___
 ### StrategyType
 
 Re-exports [StrategyType](../enums/types_Types.StrategyType.md)
+
+___
+
+### TwitterDetails
+
+Re-exports [TwitterDetails](../interfaces/types_Types.TwitterDetails.md)

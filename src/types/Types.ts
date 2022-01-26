@@ -186,3 +186,8 @@ export interface InternalTokenMap {
   decimals: number;
   iconMapping: string;
 }
+
+export interface TwitterDetails {
+  id: string;
+  metadata: string;
+}
