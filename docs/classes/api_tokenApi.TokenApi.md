@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[api/tokenApi.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/tokenApi.ts#L21)
+[api/tokenApi.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/tokenApi.ts#L21)
 
 ## Properties
 
@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[api/tokenApi.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/tokenApi.ts#L11)
+[api/tokenApi.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/tokenApi.ts#L11)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[api/tokenApi.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/tokenApi.ts#L12)
+[api/tokenApi.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/tokenApi.ts#L12)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[api/tokenApi.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/tokenApi.ts#L13)
+[api/tokenApi.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/tokenApi.ts#L13)
 
 ## Methods
 
@@ -99,7 +99,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/tokenApi.ts:33](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/tokenApi.ts#L33)
+[api/tokenApi.ts:33](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/tokenApi.ts#L33)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[api/tokenApi.ts:103](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/tokenApi.ts#L103)
+[api/tokenApi.ts:103](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/tokenApi.ts#L103)
 
 ___
 
@@ -146,7 +146,7 @@ number
 
 #### Defined in
 
-[api/tokenApi.ts:72](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/tokenApi.ts#L72)
+[api/tokenApi.ts:72](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/tokenApi.ts#L72)
 
 ___
 
@@ -172,7 +172,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/tokenApi.ts:52](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/tokenApi.ts#L52)
+[api/tokenApi.ts:52](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/tokenApi.ts#L52)
 
 ___
 
@@ -194,7 +194,7 @@ ___
 
 #### Defined in
 
-[api/tokenApi.ts:89](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/tokenApi.ts#L89)
+[api/tokenApi.ts:89](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/tokenApi.ts#L89)
 
 ___
 
@@ -217,4 +217,4 @@ ___
 
 #### Defined in
 
-[api/tokenApi.ts:99](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/tokenApi.ts#L99)
+[api/tokenApi.ts:99](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/tokenApi.ts#L99)

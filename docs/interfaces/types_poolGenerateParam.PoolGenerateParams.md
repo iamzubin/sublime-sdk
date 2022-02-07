@@ -31,7 +31,7 @@
 
 #### Defined in
 
-[types/poolGenerateParam.ts:4](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L4)
+[types/poolGenerateParam.ts:4](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L4)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:5](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L5)
+[types/poolGenerateParam.ts:5](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L5)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:7](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L7)
+[types/poolGenerateParam.ts:7](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L7)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:6](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L6)
+[types/poolGenerateParam.ts:6](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L6)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L14)
+[types/poolGenerateParam.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L14)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L9)
+[types/poolGenerateParam.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L9)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L8)
+[types/poolGenerateParam.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L8)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:10](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L10)
+[types/poolGenerateParam.ts:10](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L10)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L17)
+[types/poolGenerateParam.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L17)
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L12)
+[types/poolGenerateParam.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L12)
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L11)
+[types/poolGenerateParam.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L11)
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L16)
+[types/poolGenerateParam.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L16)
 
 ___
 
@@ -151,7 +151,7 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L13)
+[types/poolGenerateParam.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L13)
 
 ___
 
@@ -161,4 +161,4 @@ ___
 
 #### Defined in
 
-[types/poolGenerateParam.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/poolGenerateParam.ts#L15)
+[types/poolGenerateParam.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/types/poolGenerateParam.ts#L15)
