@@ -18,4 +18,5 @@ export interface SublimeConfig {
   priceOracleContractAddress: string;
   creditLineEthHelperAddress?: string;
   poolUtilsAddress?: string;
+  savingsAccountEthUtilsAddress?: string;
 }

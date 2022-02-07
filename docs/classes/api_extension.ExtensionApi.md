@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[src/api/extension.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/api/extension.ts#L13)
+[src/api/extension.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/extension.ts#L13)
 
 ## Properties
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[src/api/extension.ts:10](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/api/extension.ts#L10)
+[src/api/extension.ts:10](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/extension.ts#L10)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[src/api/extension.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/api/extension.ts#L11)
+[src/api/extension.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/extension.ts#L11)
 
 ## Methods
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[src/api/extension.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/api/extension.ts#L26)
+[src/api/extension.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/extension.ts#L26)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[src/api/extension.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/api/extension.ts#L18)
+[src/api/extension.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/extension.ts#L18)
 
 ___
 
@@ -118,4 +118,4 @@ ___
 
 #### Defined in
 
-[src/api/extension.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/api/extension.ts#L22)
+[src/api/extension.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/extension.ts#L22)

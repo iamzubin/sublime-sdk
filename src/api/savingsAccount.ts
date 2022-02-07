@@ -12,6 +12,7 @@ import { ERC20Detailed, ERC20Detailed__factory } from '../wrappers';
 
 import { TokenManager } from '../tokenManager';
 import { Asset, StrategyType, Options as Overrides } from '../types/Types';
+import { SavingAccountsEthUtils } from './utils/savingsAccountEthUtils';
 
 /**
  * @class SavingsAccountApi
@@ -27,6 +28,14 @@ export class SavingsAccountApi {
     this.config = config;
     this.savingsAccount = new SavingsAccount__factory(signer).attach(config.savingsAccountContractAddress);
     this.tokenManager = tokenManager;
+  }
+
+  /**
+   * @description The returned objet helps in making direct ETH deposits to the savings Account
+   * @returns 
+   */
+  SavingAccountsEthUtils() : SavingAccountsEthUtils {
+    return new SavingAccountsEthUtils(this.signer, this.config, this.tokenManager)
   }
 
   /**

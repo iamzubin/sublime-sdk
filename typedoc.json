@@ -22,7 +22,8 @@
     "./src/types/sublimeConfig.ts",
     "./src/types/Types.ts",
     "./src/api/utils/creditLineEthUtils.ts",
-    "./src/api/utils/poolEthUtils.ts"
+    "./src/api/utils/poolEthUtils.ts",
+    "./src/api/utils/savingsAccountEthUtils.ts"
   ],
   "out": "docs"
 }

@@ -23,6 +23,7 @@ Hold the contract addresses in Sublime App
 - [priceOracleContractAddress](types_sublimeConfig.SublimeConfig.md#priceoraclecontractaddress)
 - [repaymentContractAddress](types_sublimeConfig.SublimeConfig.md#repaymentcontractaddress)
 - [savingsAccountContractAddress](types_sublimeConfig.SublimeConfig.md#savingsaccountcontractaddress)
+- [savingsAccountEthUtilsAddress](types_sublimeConfig.SublimeConfig.md#savingsaccountethutilsaddress)
 - [strategyRegistryContractAddress](types_sublimeConfig.SublimeConfig.md#strategyregistrycontractaddress)
 - [verificationContractAddress](types_sublimeConfig.SublimeConfig.md#verificationcontractaddress)
 - [yearnStrategyContractAddress](types_sublimeConfig.SublimeConfig.md#yearnstrategycontractaddress)
@@ -35,7 +36,7 @@ Hold the contract addresses in Sublime App
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L11)
+[src/types/sublimeConfig.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L11)
 
 ___
 
@@ -45,7 +46,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L17)
+[src/types/sublimeConfig.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L17)
 
 ___
 
@@ -55,7 +56,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L12)
+[src/types/sublimeConfig.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L12)
 
 ___
 
@@ -65,7 +66,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:6](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L6)
+[src/types/sublimeConfig.ts:6](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L6)
 
 ___
 
@@ -75,7 +76,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:19](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L19)
+[src/types/sublimeConfig.ts:19](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L19)
 
 ___
 
@@ -85,7 +86,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L16)
+[src/types/sublimeConfig.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L16)
 
 ___
 
@@ -95,7 +96,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L14)
+[src/types/sublimeConfig.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L14)
 
 ___
 
@@ -105,7 +106,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:5](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L5)
+[src/types/sublimeConfig.ts:5](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L5)
 
 ___
 
@@ -115,7 +116,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:7](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L7)
+[src/types/sublimeConfig.ts:7](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L7)
 
 ___
 
@@ -125,7 +126,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:20](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L20)
+[src/types/sublimeConfig.ts:20](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L20)
 
 ___
 
@@ -135,7 +136,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L18)
+[src/types/sublimeConfig.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L18)
 
 ___
 
@@ -145,7 +146,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L15)
+[src/types/sublimeConfig.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L15)
 
 ___
 
@@ -155,7 +156,17 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L8)
+[src/types/sublimeConfig.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L8)
+
+___
+
+### savingsAccountEthUtilsAddress
+
+• `Optional` **savingsAccountEthUtilsAddress**: `string`
+
+#### Defined in
+
+[src/types/sublimeConfig.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L21)
 
 ___
 
@@ -165,7 +176,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L9)
+[src/types/sublimeConfig.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L9)
 
 ___
 
@@ -175,7 +186,7 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:10](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L10)
+[src/types/sublimeConfig.ts:10](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L10)
 
 ___
 
@@ -185,4 +196,4 @@ ___
 
 #### Defined in
 
-[src/types/sublimeConfig.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/sublimeConfig.ts#L13)
+[src/types/sublimeConfig.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/types/sublimeConfig.ts#L13)

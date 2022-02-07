@@ -15,6 +15,7 @@
 - [api/tokenApi](modules/api_tokenApi.md)
 - [api/utils/creditLineEthUtils](modules/api_utils_creditLineEthUtils.md)
 - [api/utils/poolEthUtils](modules/api_utils_poolEthUtils.md)
+- [api/utils/savingsAccountEthUtils](modules/api_utils_savingsAccountEthUtils.md)
 - [api/verification](modules/api_verification.md)
 - [api/yieldAndStrategy](modules/api_yieldAndStrategy.md)
 - [index](modules/index.md)
