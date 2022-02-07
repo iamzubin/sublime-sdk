@@ -1,5 +1,5 @@
 import { SublimeConfig } from '../types/sublimeConfig';
-import { ContractTransaction, Overrides, Signer } from 'ethers';
+import { ContractTransaction, Signer } from 'ethers';
 
 import { CreditLine } from '../wrappers/CreditLine';
 import { CreditLine__factory } from '../wrappers/factories/CreditLine__factory';
@@ -8,9 +8,8 @@ import { BigNumberish } from '@ethersproject/bignumber';
 import { BigNumber } from 'bignumber.js';
 
 import { TokenManager } from '../tokenManager';
-import { zeroAddress } from '../config/constants';
 
-import { Balance } from '../types/Types';
+import { Balance, Options as Overrides } from '../types/Types';
 
 /**
  * @class CreditLineApi
@@ -28,7 +27,8 @@ export class CreditLineApi {
 
   /**
    * @description Requests a new credit line to lender
-   * @param request: details of the credit line to request
+   * @param request details of the credit line to request
+   * @param options transaction options
    * @returns contract transaction
    */
   public async requestCreditLineToLender(request: CreditLineRequest, options?: Overrides): Promise<ContractTransaction> {

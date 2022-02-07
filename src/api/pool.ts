@@ -1,4 +1,4 @@
-import { BytesLike, ContractTransaction, ethers, Overrides, Signer } from 'ethers';
+import { BytesLike, ContractTransaction, Signer } from 'ethers';
 import { BigNumberish } from '@ethersproject/bignumber';
 import { BigNumber } from 'bignumber.js';
 
@@ -17,6 +17,8 @@ import { IYield__factory } from '../wrappers/factories/IYield__factory';
 import { zeroAddress } from '../config/constants';
 
 import { TokenManager } from '../tokenManager';
+
+import { Options as Overrides } from '../types/Types';
 
 export class PoolApi {
   private signer: Signer;

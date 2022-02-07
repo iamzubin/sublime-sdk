@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[api/extension.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/extension.ts#L11)
+[src/api/extension.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/extension.ts#L13)
 
 ## Properties
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[api/extension.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/extension.ts#L8)
+[src/api/extension.ts:10](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/extension.ts#L10)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[api/extension.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/extension.ts#L9)
+[src/api/extension.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/extension.ts#L11)
 
 ## Methods
 
@@ -68,7 +68,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `Overrides` |
+| `options` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[api/extension.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/extension.ts#L24)
+[src/api/extension.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/extension.ts#L26)
 
 ___
 
@@ -89,7 +89,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `pool` | `string` |
-| `options` | `Overrides` |
+| `options` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[api/extension.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/extension.ts#L16)
+[src/api/extension.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/extension.ts#L18)
 
 ___
 
@@ -110,7 +110,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `pool` | `string` |
-| `options` | `Overrides` |
+| `options` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -118,4 +118,4 @@ ___
 
 #### Defined in
 
-[api/extension.ts:20](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/extension.ts#L20)
+[src/api/extension.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/extension.ts#L22)

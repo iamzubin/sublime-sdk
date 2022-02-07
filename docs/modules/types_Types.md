@@ -17,6 +17,7 @@
 - [DashboardOverview](types_Types.md#dashboardoverview)
 - [InternalTokenMap](types_Types.md#internaltokenmap)
 - [Operation](types_Types.md#operation)
+- [Options](types_Types.md#options)
 - [PoolDetail](types_Types.md#pooldetail)
 - [PoolLender](types_Types.md#poollender)
 - [ProfileOverview](types_Types.md#profileoverview)
@@ -95,6 +96,12 @@ ___
 ### Operation
 
 Re-exports [Operation](../enums/types_Types.Operation.md)
+
+___
+
+### Options
+
+Re-exports [Options](../interfaces/types_Types.Options.md)
 
 ___
 

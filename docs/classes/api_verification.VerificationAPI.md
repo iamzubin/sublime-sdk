@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[api/verification.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L24)
+[src/api/verification.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L25)
 
 ## Properties
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[api/verification.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L18)
+[src/api/verification.ts:19](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L19)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[api/verification.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L16)
+[src/api/verification.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L17)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[api/verification.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L17)
+[src/api/verification.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L18)
 
 ## Methods
 
@@ -85,7 +85,7 @@ ___
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `verifier` | `string` | Address of the verifier contract. (Default is the admin verifier) |
-| `options?` | `Overrides` | - |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) | - |
 
 #### Returns
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[api/verification.ts:51](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L51)
+[src/api/verification.ts:52](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L52)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[api/verification.ts:34](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L34)
+[src/api/verification.ts:35](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L35)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[api/verification.ts:43](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L43)
+[src/api/verification.ts:44](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L44)
 
 ___
 
@@ -147,7 +147,7 @@ ___
 | :------ | :------ | :------ |
 | `_masterAddress` | `string` | Master Address |
 | `_isMasterLinked` | `boolean` | True if the master address is linked |
-| `options?` | `Overrides` | - |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) | - |
 
 #### Returns
 
@@ -155,7 +155,7 @@ ___
 
 #### Defined in
 
-[api/verification.ts:60](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L60)
+[src/api/verification.ts:61](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L61)
 
 ___
 
@@ -173,7 +173,7 @@ ___
 | `_s` | `BytesLike` | S component of the signature |
 | `_twitterId` | `string` | Twitter ID of the user |
 | `_deadline` | `BigNumberish` | Deadline for the registration |
-| `options?` | `Overrides` | - |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) | - |
 
 #### Returns
 
@@ -181,7 +181,7 @@ ___
 
 #### Defined in
 
-[api/verification.ts:73](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L73)
+[src/api/verification.ts:74](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L74)
 
 ___
 
@@ -193,7 +193,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options?` | `Overrides` |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -201,7 +201,7 @@ ___
 
 #### Defined in
 
-[api/verification.ts:88](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L88)
+[src/api/verification.ts:89](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L89)
 
 ___
 
@@ -214,7 +214,7 @@ ___
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `_signerAddress` | `string` | Address of the signer |
-| `options?` | `Overrides` | - |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) | - |
 
 #### Returns
 
@@ -222,7 +222,7 @@ ___
 
 #### Defined in
 
-[api/verification.ts:106](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L106)
+[src/api/verification.ts:107](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L107)
 
 ___
 
@@ -235,7 +235,7 @@ ___
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `_verification` | `string` | Address of the verification contract |
-| `options?` | `Overrides` | - |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) | - |
 
 #### Returns
 
@@ -243,4 +243,4 @@ ___
 
 #### Defined in
 
-[api/verification.ts:97](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/verification.ts#L97)
+[src/api/verification.ts:98](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/verification.ts#L98)

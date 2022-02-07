@@ -1,5 +1,5 @@
 import { SublimeConfig } from '../types/sublimeConfig';
-import { ContractTransaction, Overrides, Signer } from 'ethers';
+import { ContractTransaction, Signer } from 'ethers';
 
 import { SavingsAccount } from '../wrappers/SavingsAccount';
 import { SavingsAccount__factory } from '../wrappers/factories/SavingsAccount__factory';
@@ -11,8 +11,7 @@ import { IYield__factory } from '../wrappers/factories/IYield__factory';
 import { ERC20Detailed, ERC20Detailed__factory } from '../wrappers';
 
 import { TokenManager } from '../tokenManager';
-import { Asset, StrategyType } from '../types/Types';
-import { zeroAddress } from '../config/constants';
+import { Asset, StrategyType, Options as Overrides } from '../types/Types';
 
 /**
  * @class SavingsAccountApi

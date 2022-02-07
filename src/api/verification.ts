@@ -1,4 +1,4 @@
-import { Signer, BytesLike, ContractTransaction, Overrides } from 'ethers';
+import { Signer, BytesLike, ContractTransaction } from 'ethers';
 import { SublimeConfig } from '../types/sublimeConfig';
 
 import { Verification } from '../wrappers/Verification';
@@ -8,6 +8,7 @@ import { AdminVerifier } from '../wrappers/AdminVerifier';
 import { AdminVerifier__factory } from '../wrappers/factories/AdminVerifier__factory';
 
 import { BigNumberish } from '@ethersproject/bignumber';
+import { Options as Overrides } from '../types/Types';
 
 /**
  * @class VerificationAPI

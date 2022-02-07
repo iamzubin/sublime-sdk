@@ -1,4 +1,4 @@
-import { Signer, ContractTransaction, Overrides } from 'ethers';
+import { Signer, ContractTransaction } from 'ethers';
 import { SublimeConfig } from '../types/sublimeConfig';
 
 import { Repayments } from '../wrappers/Repayments';
@@ -6,6 +6,7 @@ import { Repayments__factory } from '../wrappers/factories/Repayments__factory';
 import { BigNumber } from 'bignumber.js';
 
 import { TokenManager } from '../tokenManager';
+import { Options as Overrides } from '../types/Types';
 
 /**
  * @class RepaymentApi

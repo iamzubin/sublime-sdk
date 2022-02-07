@@ -1,7 +1,7 @@
 import { BigNumber } from 'bignumber.js';
-import { BigNumberish } from 'ethers';
-import { BindingName } from 'typescript';
+import { BigNumberish, Overrides } from 'ethers';
 
+export interface Options extends Overrides {}
 export interface Asset {
   name: string;
   address: string;

@@ -1,9 +1,9 @@
 import { SublimeConfig } from '../types/sublimeConfig';
-import { ContractTransaction, Signer } from 'ethers';
+import { Signer } from 'ethers';
 
 import { PriceOracle } from '../wrappers/PriceOracle';
 import { PriceOracle__factory } from '../wrappers/factories/PriceOracle__factory';
-import { BigNumberish, BigNumber } from '@ethersproject/bignumber';
+import { BigNumber } from '@ethersproject/bignumber';
 
 /**
  * @class PriceOracle

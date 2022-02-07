@@ -1,8 +1,9 @@
 import { Token } from '../wrappers/Token';
 import { Token__factory } from '../wrappers/factories/Token__factory';
-import { ContractTransaction, Overrides, Signer } from 'ethers';
+import { ContractTransaction, Signer } from 'ethers';
 import { BigNumber } from 'bignumber.js';
 import { TokenManager } from '../tokenManager';
+import { Options as Overrides } from '../types/Types';
 
 /**
  * @class TokenApi

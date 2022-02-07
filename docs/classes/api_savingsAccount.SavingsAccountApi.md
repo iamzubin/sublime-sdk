@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[api/savingsAccount.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L26)
+[src/api/savingsAccount.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L25)
 
 ## Properties
 
@@ -62,7 +62,7 @@
 
 #### Defined in
 
-[api/savingsAccount.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L23)
+[src/api/savingsAccount.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L22)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[api/savingsAccount.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L22)
+[src/api/savingsAccount.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L21)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-[api/savingsAccount.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L21)
+[src/api/savingsAccount.ts:20](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L20)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[api/savingsAccount.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L24)
+[src/api/savingsAccount.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L23)
 
 ## Methods
 
@@ -109,7 +109,7 @@ ___
 | `amount` | `string` |  |
 | `token` | `string` |  |
 | `to` | `string` | : Address to which you want to approve |
-| `options?` | `Overrides` | - |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) | - |
 
 #### Returns
 
@@ -119,7 +119,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:228](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L228)
+[src/api/savingsAccount.ts:227](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L227)
 
 ___
 
@@ -135,7 +135,7 @@ ___
 | :------ | :------ |
 | `token` | `string` |
 | `amount` | `string` |
-| `options?` | `Overrides` |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -143,7 +143,7 @@ ___
 
 #### Defined in
 
-[api/savingsAccount.ts:288](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L288)
+[src/api/savingsAccount.ts:287](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L287)
 
 ___
 
@@ -160,7 +160,7 @@ ___
 | `amount` | `string` |
 | `asset` | `string` |
 | `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) |
-| `options?` | `Overrides` |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -170,7 +170,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:40](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L40)
+[src/api/savingsAccount.ts:39](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L39)
 
 ___
 
@@ -187,7 +187,7 @@ ___
 | `token` | `string` |
 | `to` | `string` |
 | `amount` | `string` |
-| `options?` | `Overrides` |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -197,7 +197,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:268](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L268)
+[src/api/savingsAccount.ts:267](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L267)
 
 ___
 
@@ -215,7 +215,7 @@ ___
 | `asset` | `string` |
 | `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) |
 | `to` | `string` |
-| `options?` | `Overrides` |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -225,7 +225,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:70](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L70)
+[src/api/savingsAccount.ts:69](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L69)
 
 ___
 
@@ -250,7 +250,7 @@ Asset in detail
 
 #### Defined in
 
-[api/savingsAccount.ts:415](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L415)
+[src/api/savingsAccount.ts:414](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L414)
 
 ___
 
@@ -276,7 +276,7 @@ easy read number in string
 
 #### Defined in
 
-[api/savingsAccount.ts:397](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L397)
+[src/api/savingsAccount.ts:396](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L396)
 
 ___
 
@@ -298,7 +298,7 @@ ___
 
 #### Defined in
 
-[api/savingsAccount.ts:433](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L433)
+[src/api/savingsAccount.ts:432](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L432)
 
 ___
 
@@ -324,7 +324,7 @@ easy read number in string
 
 #### Defined in
 
-[api/savingsAccount.ts:382](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L382)
+[src/api/savingsAccount.ts:381](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L381)
 
 ___
 
@@ -341,7 +341,7 @@ ___
 | `token` | `string` |
 | `to` | `string` |
 | `amount` | `string` |
-| `options?` | `Overrides` |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -351,7 +351,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:247](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L247)
+[src/api/savingsAccount.ts:246](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L246)
 
 ___
 
@@ -369,7 +369,7 @@ ___
 | `newStrategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) |
 | `asset` | `string` |
 | `amount` | `string` |
-| `options?` | `Overrides` |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -379,7 +379,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:104](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L104)
+[src/api/savingsAccount.ts:103](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L103)
 
 ___
 
@@ -397,7 +397,7 @@ ___
 | `token` | `string` |
 | `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) |
 | `to` | `string` |
-| `options?` | `Overrides` |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -407,7 +407,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:313](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L313)
+[src/api/savingsAccount.ts:312](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L312)
 
 ___
 
@@ -426,7 +426,7 @@ ___
 | `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) |
 | `from` | `string` |
 | `to` | `string` |
-| `options?` | `Overrides` |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -436,7 +436,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:347](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L347)
+[src/api/savingsAccount.ts:346](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L346)
 
 ___
 
@@ -455,7 +455,7 @@ ___
 | `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) |
 | `to` | `string` |
 | `withdrawShares` | `boolean` |
-| `options?` | `Overrides` |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -465,7 +465,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:144](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L144)
+[src/api/savingsAccount.ts:143](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L143)
 
 ___
 
@@ -480,7 +480,7 @@ ___
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `asset` | `string` | / token address |
-| `options?` | `Overrides` | - |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) | - |
 
 #### Returns
 
@@ -490,7 +490,7 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:217](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L217)
+[src/api/savingsAccount.ts:216](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L216)
 
 ___
 
@@ -510,7 +510,7 @@ ___
 | `from` | `string` |
 | `to` | `string` |
 | `withdrawShares` | `boolean` |
-| `options?` | `Overrides` |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
 
@@ -520,4 +520,4 @@ Contract Transaction
 
 #### Defined in
 
-[api/savingsAccount.ts:182](https://github.com/sublime-finance/sublime-sdk/blob/7040d02/src/api/savingsAccount.ts#L182)
+[src/api/savingsAccount.ts:181](https://github.com/sublime-finance/sublime-sdk/blob/a849f6d/src/api/savingsAccount.ts#L181)
