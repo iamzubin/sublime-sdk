@@ -20,7 +20,9 @@
     "./src/types/poolGenerateParam.ts",
     "./src/types/poolInfo.ts",
     "./src/types/sublimeConfig.ts",
-    "./src/types/Types.ts"
+    "./src/types/Types.ts",
+    "./src/api/utils/creditLineEthUtils.ts",
+    "./src/api/utils/poolEthUtils.ts"
   ],
   "out": "docs"
 }

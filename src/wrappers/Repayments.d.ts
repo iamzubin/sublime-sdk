@@ -12,7 +12,6 @@ import {
   Contract,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   CallOverrides,
 } from 'ethers';
 import { BytesLike } from '@ethersproject/bytes';
@@ -257,13 +256,13 @@ export class Repayments extends Contract {
     repay(
       _poolID: string,
       _amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'repay(address,uint256)'(
       _poolID: string,
       _amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     repayConstants(
@@ -298,12 +297,9 @@ export class Repayments extends Contract {
       }
     >;
 
-    repayPrincipal(_poolID: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    repayPrincipal(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    'repayPrincipal(address)'(
-      _poolID: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    'repayPrincipal(address)'(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     repayVariables(
       arg0: string,
@@ -448,16 +444,12 @@ export class Repayments extends Contract {
 
   'isGracePenaltyApplicable(address)'(_poolID: string, overrides?: CallOverrides): Promise<boolean>;
 
-  repay(
-    _poolID: string,
-    _amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  repay(_poolID: string, _amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   'repay(address,uint256)'(
     _poolID: string,
     _amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   repayConstants(
@@ -492,12 +484,9 @@ export class Repayments extends Contract {
     }
   >;
 
-  repayPrincipal(_poolID: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  repayPrincipal(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  'repayPrincipal(address)'(
-    _poolID: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  'repayPrincipal(address)'(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   repayVariables(
     arg0: string,
@@ -838,21 +827,21 @@ export class Repayments extends Contract {
 
     'isGracePenaltyApplicable(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    repay(_poolID: string, _amount: BigNumberish, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    repay(_poolID: string, _amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     'repay(address,uint256)'(
       _poolID: string,
       _amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     repayConstants(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'repayConstants(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    repayPrincipal(_poolID: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    repayPrincipal(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    'repayPrincipal(address)'(_poolID: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'repayPrincipal(address)'(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     repayVariables(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -978,25 +967,22 @@ export class Repayments extends Contract {
     repay(
       _poolID: string,
       _amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'repay(address,uint256)'(
       _poolID: string,
       _amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     repayConstants(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'repayConstants(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    repayPrincipal(_poolID: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    repayPrincipal(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    'repayPrincipal(address)'(
-      _poolID: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    'repayPrincipal(address)'(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     repayVariables(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

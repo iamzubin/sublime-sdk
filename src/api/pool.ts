@@ -19,6 +19,7 @@ import { zeroAddress } from '../config/constants';
 import { TokenManager } from '../tokenManager';
 
 import { Options as Overrides } from '../types/Types';
+import { PoolEthUtils } from './utils/poolEthUtils';
 
 export class PoolApi {
   private signer: Signer;
@@ -32,6 +33,10 @@ export class PoolApi {
     this.config = config;
     this.tokenManager = tokenManager;
     this.poolFactory = new PoolFactory__factory(this.signer).attach(config.poolFactoryContractAddress);
+  }
+
+  PoolUtils(): PoolEthUtils {
+    return new PoolEthUtils(this.signer, this.config, this.tokenManager);
   }
 
   public async createPool(params: PoolGenerateParams, options?: Overrides): Promise<ContractTransaction> {

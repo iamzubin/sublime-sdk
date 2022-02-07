@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[src/types/poolGenerateParam.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/1be39aa/src/types/poolGenerateParam.ts#L22)
+[src/types/poolGenerateParam.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/poolGenerateParam.ts#L22)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[src/types/poolGenerateParam.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/1be39aa/src/types/poolGenerateParam.ts#L24)
+[src/types/poolGenerateParam.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/poolGenerateParam.ts#L24)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[src/types/poolGenerateParam.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/1be39aa/src/types/poolGenerateParam.ts#L23)
+[src/types/poolGenerateParam.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/poolGenerateParam.ts#L23)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[src/types/poolGenerateParam.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/1be39aa/src/types/poolGenerateParam.ts#L21)
+[src/types/poolGenerateParam.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/poolGenerateParam.ts#L21)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[src/types/poolGenerateParam.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/1be39aa/src/types/poolGenerateParam.ts#L25)
+[src/types/poolGenerateParam.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/poolGenerateParam.ts#L25)
 
 ___
 
@@ -73,4 +73,4 @@ ___
 
 #### Defined in
 
-[src/types/poolGenerateParam.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/1be39aa/src/types/poolGenerateParam.ts#L26)
+[src/types/poolGenerateParam.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/9e19ccf/src/types/poolGenerateParam.ts#L26)

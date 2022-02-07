@@ -10,6 +10,7 @@ import { BigNumber } from 'bignumber.js';
 import { TokenManager } from '../tokenManager';
 
 import { Balance, Options as Overrides } from '../types/Types';
+import { CreditLineEthUtils } from './utils/creditLineEthUtils';
 
 /**
  * @class CreditLineApi
@@ -18,11 +19,21 @@ export class CreditLineApi {
   private creditLineContract: CreditLine;
   private tokenManager: TokenManager;
   private config: SublimeConfig;
+  private signer: Signer;
 
   constructor(signer: Signer, config: SublimeConfig, tokenManager: TokenManager) {
     this.creditLineContract = new CreditLine__factory(signer).attach(config.creditLineContractAddress);
     this.config = config;
     this.tokenManager = tokenManager;
+    this.signer = signer;
+  }
+
+  /**
+   * @description The returned object helps interact with polls that have ETH as collateral or borrow token
+   * @returns Instance of Credit line Eth Utils.
+   */
+  CreditLineEthUtils(): CreditLineEthUtils {
+    return new CreditLineEthUtils(this.signer, this.config, this.tokenManager);
   }
 
   /**
@@ -240,7 +251,7 @@ export class CreditLineApi {
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
-    let strategyAddress;
+    let strategyAddress: string;
     if (strategy == StrategyType.NoYield) {
       strategyAddress = this.config.noStrategyAddress;
     } else if (strategy == StrategyType.CompounYield) {

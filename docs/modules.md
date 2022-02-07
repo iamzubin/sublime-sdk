@@ -13,6 +13,8 @@
 - [api/repayments](modules/api_repayments.md)
 - [api/savingsAccount](modules/api_savingsAccount.md)
 - [api/tokenApi](modules/api_tokenApi.md)
+- [api/utils/creditLineEthUtils](modules/api_utils_creditLineEthUtils.md)
+- [api/utils/poolEthUtils](modules/api_utils_poolEthUtils.md)
 - [api/verification](modules/api_verification.md)
 - [api/yieldAndStrategy](modules/api_yieldAndStrategy.md)
 - [index](modules/index.md)

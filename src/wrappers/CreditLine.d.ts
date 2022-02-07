@@ -12,7 +12,6 @@ import {
   Contract,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   CallOverrides,
 } from 'ethers';
 import { BytesLike } from '@ethersproject/bytes';
@@ -384,7 +383,7 @@ export class CreditLine extends Contract {
       _strategy: string,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'depositCollateral(uint256,address,uint256,bool)'(
@@ -392,7 +391,7 @@ export class CreditLine extends Contract {
       _strategy: string,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     initialize(
@@ -422,13 +421,13 @@ export class CreditLine extends Contract {
     liquidate(
       _id: BigNumberish,
       _toSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'liquidate(uint256,bool)'(
       _id: BigNumberish,
       _toSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     liquidatorRewardFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -459,14 +458,14 @@ export class CreditLine extends Contract {
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'repay(uint256,uint256,bool)'(
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     request(
@@ -749,7 +748,7 @@ export class CreditLine extends Contract {
     _strategy: string,
     _amount: BigNumberish,
     _fromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'depositCollateral(uint256,address,uint256,bool)'(
@@ -757,7 +756,7 @@ export class CreditLine extends Contract {
     _strategy: string,
     _amount: BigNumberish,
     _fromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   initialize(
@@ -787,13 +786,13 @@ export class CreditLine extends Contract {
   liquidate(
     _id: BigNumberish,
     _toSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'liquidate(uint256,bool)'(
     _id: BigNumberish,
     _toSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   liquidatorRewardFraction(overrides?: CallOverrides): Promise<BigNumber>;
@@ -824,14 +823,14 @@ export class CreditLine extends Contract {
     _id: BigNumberish,
     _amount: BigNumberish,
     _fromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'repay(uint256,uint256,bool)'(
     _id: BigNumberish,
     _amount: BigNumberish,
     _fromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   request(
@@ -1403,7 +1402,7 @@ export class CreditLine extends Contract {
       _strategy: string,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     'depositCollateral(uint256,address,uint256,bool)'(
@@ -1411,7 +1410,7 @@ export class CreditLine extends Contract {
       _strategy: string,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     initialize(
@@ -1441,13 +1440,13 @@ export class CreditLine extends Contract {
     liquidate(
       _id: BigNumberish,
       _toSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     'liquidate(uint256,bool)'(
       _id: BigNumberish,
       _toSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     liquidatorRewardFraction(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1478,14 +1477,14 @@ export class CreditLine extends Contract {
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     'repay(uint256,uint256,bool)'(
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     request(
@@ -1703,7 +1702,7 @@ export class CreditLine extends Contract {
       _strategy: string,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'depositCollateral(uint256,address,uint256,bool)'(
@@ -1711,7 +1710,7 @@ export class CreditLine extends Contract {
       _strategy: string,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     initialize(
@@ -1741,13 +1740,13 @@ export class CreditLine extends Contract {
     liquidate(
       _id: BigNumberish,
       _toSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'liquidate(uint256,bool)'(
       _id: BigNumberish,
       _toSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     liquidatorRewardFraction(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1778,14 +1777,14 @@ export class CreditLine extends Contract {
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'repay(uint256,uint256,bool)'(
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     request(
