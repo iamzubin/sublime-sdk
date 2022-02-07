@@ -160,65 +160,75 @@ export class IPoolFactory extends Contract {
   interface: IPoolFactoryInterface;
 
   functions: {
-    collectionPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
+    collectionPeriod(overrides?: CallOverrides): Promise<[BigNumber] & { collectionPeriod: BigNumber }>;
 
-    'collectionPeriod()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'collectionPeriod()'(overrides?: CallOverrides): Promise<[BigNumber] & { collectionPeriod: BigNumber }>;
 
-    extension(overrides?: CallOverrides): Promise<[string]>;
+    extension(overrides?: CallOverrides): Promise<[string] & { extension: string }>;
 
-    'extension()'(overrides?: CallOverrides): Promise<[string]>;
+    'extension()'(overrides?: CallOverrides): Promise<[string] & { extension: string }>;
 
-    getProtocolFeeData(overrides?: CallOverrides): Promise<[BigNumber, string]>;
+    getProtocolFeeData(overrides?: CallOverrides): Promise<
+      [BigNumber, string] & {
+        protocolFeeFraction: BigNumber;
+        protocolFeeCollector: string;
+      }
+    >;
 
-    'getProtocolFeeData()'(overrides?: CallOverrides): Promise<[BigNumber, string]>;
+    'getProtocolFeeData()'(overrides?: CallOverrides): Promise<
+      [BigNumber, string] & {
+        protocolFeeFraction: BigNumber;
+        protocolFeeCollector: string;
+      }
+    >;
 
-    liquidatorRewardFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
+    liquidatorRewardFraction(overrides?: CallOverrides): Promise<[BigNumber] & { liquidatorRewardFraction: BigNumber }>;
 
-    'liquidatorRewardFraction()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'liquidatorRewardFraction()'(overrides?: CallOverrides): Promise<[BigNumber] & { liquidatorRewardFraction: BigNumber }>;
 
-    loanWithdrawalDuration(overrides?: CallOverrides): Promise<[BigNumber]>;
+    loanWithdrawalDuration(overrides?: CallOverrides): Promise<[BigNumber] & { loanWithdrawalDuration: BigNumber }>;
 
-    'loanWithdrawalDuration()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'loanWithdrawalDuration()'(overrides?: CallOverrides): Promise<[BigNumber] & { loanWithdrawalDuration: BigNumber }>;
 
-    marginCallDuration(overrides?: CallOverrides): Promise<[BigNumber]>;
+    marginCallDuration(overrides?: CallOverrides): Promise<[BigNumber] & { marginCallDuration: BigNumber }>;
 
-    'marginCallDuration()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'marginCallDuration()'(overrides?: CallOverrides): Promise<[BigNumber] & { marginCallDuration: BigNumber }>;
 
-    minBorrowFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
+    minBorrowFraction(overrides?: CallOverrides): Promise<[BigNumber] & { minBorrowFraction: BigNumber }>;
 
-    'minBorrowFraction()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'minBorrowFraction()'(overrides?: CallOverrides): Promise<[BigNumber] & { minBorrowFraction: BigNumber }>;
 
-    noStrategyAddress(overrides?: CallOverrides): Promise<[string]>;
+    noStrategyAddress(overrides?: CallOverrides): Promise<[string] & { noStrategyAddress: string }>;
 
-    'noStrategyAddress()'(overrides?: CallOverrides): Promise<[string]>;
+    'noStrategyAddress()'(overrides?: CallOverrides): Promise<[string] & { noStrategyAddress: string }>;
 
-    owner(overrides?: CallOverrides): Promise<[string]>;
+    owner(overrides?: CallOverrides): Promise<[string] & { owner: string }>;
 
-    'owner()'(overrides?: CallOverrides): Promise<[string]>;
+    'owner()'(overrides?: CallOverrides): Promise<[string] & { owner: string }>;
 
-    poolCancelPenaltyMultiple(overrides?: CallOverrides): Promise<[BigNumber]>;
+    poolCancelPenaltyMultiple(overrides?: CallOverrides): Promise<[BigNumber] & { poolCancelPenaltyMultiple: BigNumber }>;
 
-    'poolCancelPenaltyMultiple()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+    'poolCancelPenaltyMultiple()'(overrides?: CallOverrides): Promise<[BigNumber] & { poolCancelPenaltyMultiple: BigNumber }>;
 
-    poolRegistry(pool: string, overrides?: CallOverrides): Promise<[boolean]>;
+    poolRegistry(pool: string, overrides?: CallOverrides): Promise<[boolean] & { isPoolValid: boolean }>;
 
-    'poolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<[boolean]>;
+    'poolRegistry(address)'(pool: string, overrides?: CallOverrides): Promise<[boolean] & { isPoolValid: boolean }>;
 
-    priceOracle(overrides?: CallOverrides): Promise<[string]>;
+    priceOracle(overrides?: CallOverrides): Promise<[string] & { priceOracle: string }>;
 
-    'priceOracle()'(overrides?: CallOverrides): Promise<[string]>;
+    'priceOracle()'(overrides?: CallOverrides): Promise<[string] & { priceOracle: string }>;
 
-    repaymentImpl(overrides?: CallOverrides): Promise<[string]>;
+    repaymentImpl(overrides?: CallOverrides): Promise<[string] & { repaymentImpl: string }>;
 
-    'repaymentImpl()'(overrides?: CallOverrides): Promise<[string]>;
+    'repaymentImpl()'(overrides?: CallOverrides): Promise<[string] & { repaymentImpl: string }>;
 
-    savingsAccount(overrides?: CallOverrides): Promise<[string]>;
+    savingsAccount(overrides?: CallOverrides): Promise<[string] & { savingsAccount: string }>;
 
-    'savingsAccount()'(overrides?: CallOverrides): Promise<[string]>;
+    'savingsAccount()'(overrides?: CallOverrides): Promise<[string] & { savingsAccount: string }>;
 
-    userRegistry(overrides?: CallOverrides): Promise<[string]>;
+    userRegistry(overrides?: CallOverrides): Promise<[string] & { userRegistry: string }>;
 
-    'userRegistry()'(overrides?: CallOverrides): Promise<[string]>;
+    'userRegistry()'(overrides?: CallOverrides): Promise<[string] & { userRegistry: string }>;
   };
 
   collectionPeriod(overrides?: CallOverrides): Promise<BigNumber>;
@@ -229,9 +239,19 @@ export class IPoolFactory extends Contract {
 
   'extension()'(overrides?: CallOverrides): Promise<string>;
 
-  getProtocolFeeData(overrides?: CallOverrides): Promise<[BigNumber, string]>;
+  getProtocolFeeData(overrides?: CallOverrides): Promise<
+    [BigNumber, string] & {
+      protocolFeeFraction: BigNumber;
+      protocolFeeCollector: string;
+    }
+  >;
 
-  'getProtocolFeeData()'(overrides?: CallOverrides): Promise<[BigNumber, string]>;
+  'getProtocolFeeData()'(overrides?: CallOverrides): Promise<
+    [BigNumber, string] & {
+      protocolFeeFraction: BigNumber;
+      protocolFeeCollector: string;
+    }
+  >;
 
   liquidatorRewardFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -290,9 +310,19 @@ export class IPoolFactory extends Contract {
 
     'extension()'(overrides?: CallOverrides): Promise<string>;
 
-    getProtocolFeeData(overrides?: CallOverrides): Promise<[BigNumber, string]>;
+    getProtocolFeeData(overrides?: CallOverrides): Promise<
+      [BigNumber, string] & {
+        protocolFeeFraction: BigNumber;
+        protocolFeeCollector: string;
+      }
+    >;
 
-    'getProtocolFeeData()'(overrides?: CallOverrides): Promise<[BigNumber, string]>;
+    'getProtocolFeeData()'(overrides?: CallOverrides): Promise<
+      [BigNumber, string] & {
+        protocolFeeFraction: BigNumber;
+        protocolFeeCollector: string;
+      }
+    >;
 
     liquidatorRewardFraction(overrides?: CallOverrides): Promise<BigNumber>;
 

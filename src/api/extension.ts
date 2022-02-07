@@ -1,4 +1,4 @@
-import { Signer, BytesLike, BigNumber, BigNumberish, ContractTransaction } from 'ethers';
+import { Signer, BytesLike, BigNumber, BigNumberish, ContractTransaction, Overrides } from 'ethers';
 import { SublimeConfig } from '../types/sublimeConfig';
 
 import { Extension } from '../wrappers/Extension';
@@ -13,15 +13,15 @@ export class ExtensionApi {
     this.extenstion = new Extension__factory(this.signer).attach(config.extensionContractAddress);
   }
 
-  public async requestExtenstion(pool: string): Promise<ContractTransaction> {
-    return this.extenstion.requestExtension(pool);
+  public async requestExtenstion(pool: string, options: Overrides): Promise<ContractTransaction> {
+    return this.extenstion.requestExtension(pool, { ...options });
   }
 
-  public async voteOnExtension(pool: string): Promise<ContractTransaction> {
-    return this.extenstion.voteOnExtension(pool);
+  public async voteOnExtension(pool: string, options: Overrides): Promise<ContractTransaction> {
+    return this.extenstion.voteOnExtension(pool, { ...options });
   }
 
-  public async closeExtension(): Promise<ContractTransaction> {
-    return this.extenstion.closePoolExtension();
+  public async closeExtension(options: Overrides): Promise<ContractTransaction> {
+    return this.extenstion.closePoolExtension({ ...options });
   }
 }

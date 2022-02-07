@@ -124,9 +124,9 @@ export class IUniswapV3Factory extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    feeAmountTickSpacing(fee: BigNumberish, overrides?: CallOverrides): Promise<[number]>;
+    feeAmountTickSpacing(fee: BigNumberish, overrides?: CallOverrides): Promise<[number] & { tickSpacing: number }>;
 
-    'feeAmountTickSpacing(uint24)'(fee: BigNumberish, overrides?: CallOverrides): Promise<[number]>;
+    'feeAmountTickSpacing(uint24)'(fee: BigNumberish, overrides?: CallOverrides): Promise<[number] & { tickSpacing: number }>;
 
     getPool(tokenA: string, tokenB: string, fee: BigNumberish, overrides?: CallOverrides): Promise<[string] & { pool: string }>;
 
@@ -137,9 +137,9 @@ export class IUniswapV3Factory extends Contract {
       overrides?: CallOverrides
     ): Promise<[string] & { pool: string }>;
 
-    owner(overrides?: CallOverrides): Promise<[string]>;
+    owner(overrides?: CallOverrides): Promise<[string] & { factoryOwner: string }>;
 
-    'owner()'(overrides?: CallOverrides): Promise<[string]>;
+    'owner()'(overrides?: CallOverrides): Promise<[string] & { factoryOwner: string }>;
 
     setOwner(_owner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 

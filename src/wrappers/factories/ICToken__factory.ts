@@ -35,6 +35,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: 'comptroller',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'exchangeRateCurrent',
     outputs: [
       {

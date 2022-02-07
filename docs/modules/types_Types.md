@@ -7,6 +7,7 @@
 ### References
 
 - [Asset](types_Types.md#asset)
+- [Balance](types_Types.md#balance)
 - [CreditLineDetail](types_Types.md#creditlinedetail)
 - [CreditLineHistory](types_Types.md#creditlinehistory)
 - [CreditLineOperation](types_Types.md#creditlineoperation)
@@ -34,6 +35,12 @@
 ### Asset
 
 Re-exports [Asset](../interfaces/types_Types.Asset.md)
+
+___
+
+### Balance
+
+Re-exports [Balance](../interfaces/types_Types.Balance.md)
 
 ___
 

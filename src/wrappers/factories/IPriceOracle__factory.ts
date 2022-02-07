@@ -94,7 +94,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'bool',
-        name: '',
+        name: 'feedExists',
         type: 'bool',
       },
     ],
@@ -118,12 +118,12 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'price',
         type: 'uint256',
       },
       {
         internalType: 'uint256',
-        name: '',
+        name: 'decimals',
         type: 'uint256',
       },
     ],

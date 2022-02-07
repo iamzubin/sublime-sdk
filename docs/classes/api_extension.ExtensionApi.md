@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[api/extension.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/extension.ts#L11)
+[api/extension.ts:11](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/extension.ts#L11)
 
 ## Properties
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[api/extension.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/extension.ts#L8)
+[api/extension.ts:8](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/extension.ts#L8)
 
 ___
 
@@ -56,13 +56,19 @@ ___
 
 #### Defined in
 
-[api/extension.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/extension.ts#L9)
+[api/extension.ts:9](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/extension.ts#L9)
 
 ## Methods
 
 ### closeExtension
 
-▸ **closeExtension**(): `Promise`<`ContractTransaction`\>
+▸ **closeExtension**(`options`): `Promise`<`ContractTransaction`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `Overrides` |
 
 #### Returns
 
@@ -70,19 +76,20 @@ ___
 
 #### Defined in
 
-[api/extension.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/extension.ts#L24)
+[api/extension.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/extension.ts#L24)
 
 ___
 
 ### requestExtenstion
 
-▸ **requestExtenstion**(`pool`): `Promise`<`ContractTransaction`\>
+▸ **requestExtenstion**(`pool`, `options`): `Promise`<`ContractTransaction`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `pool` | `string` |
+| `options` | `Overrides` |
 
 #### Returns
 
@@ -90,19 +97,20 @@ ___
 
 #### Defined in
 
-[api/extension.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/extension.ts#L16)
+[api/extension.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/extension.ts#L16)
 
 ___
 
 ### voteOnExtension
 
-▸ **voteOnExtension**(`pool`): `Promise`<`ContractTransaction`\>
+▸ **voteOnExtension**(`pool`, `options`): `Promise`<`ContractTransaction`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `pool` | `string` |
+| `options` | `Overrides` |
 
 #### Returns
 
@@ -110,4 +118,4 @@ ___
 
 #### Defined in
 
-[api/extension.ts:20](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/extension.ts#L20)
+[api/extension.ts:20](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/extension.ts#L20)

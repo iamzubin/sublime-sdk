@@ -17,31 +17,31 @@
 
 ### activeCredit
 
-• **activeCredit**: `string`
+• **activeCredit**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:139](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L139)
+[types/Types.ts:140](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L140)
 
 ___
 
 ### creditGranted
 
-• **creditGranted**: `string`
+• **creditGranted**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:137](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L137)
+[types/Types.ts:138](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L138)
 
 ___
 
 ### interestAccrued
 
-• **interestAccrued**: `string`
+• **interestAccrued**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:138](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L138)
+[types/Types.ts:139](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L139)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[types/Types.ts:140](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L140)
+[types/Types.ts:141](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L141)

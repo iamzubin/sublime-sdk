@@ -21,27 +21,27 @@
 
 #### Defined in
 
-[types/Types.ts:82](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L82)
+[types/Types.ts:83](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L83)
 
 ___
 
 ### balance
 
-• **balance**: `string`
+• **balance**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:80](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L80)
+[types/Types.ts:81](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L81)
 
 ___
 
 ### balanceUSD
 
-• **balanceUSD**: `string`
+• **balanceUSD**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:81](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L81)
+[types/Types.ts:82](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L82)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[types/Types.ts:79](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L79)
+[types/Types.ts:80](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L80)

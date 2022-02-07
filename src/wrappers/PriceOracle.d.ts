@@ -26,7 +26,7 @@ interface PriceOracleInterface extends ethers.utils.Interface {
     'getChainlinkLatestPrice(address,address)': FunctionFragment;
     'getLatestPrice(address,address)': FunctionFragment;
     'getUniswapLatestPrice(address,address)': FunctionFragment;
-    'initialize(address)': FunctionFragment;
+    'initialize(address,address)': FunctionFragment;
     'owner()': FunctionFragment;
     'renounceOwnership()': FunctionFragment;
     'setChainlinkFeedAddress(address,address)': FunctionFragment;
@@ -34,6 +34,7 @@ interface PriceOracleInterface extends ethers.utils.Interface {
     'setUniswapPriceAveragingPeriod(uint32)': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
     'uniswapPools(bytes32)': FunctionFragment;
+    'weth()': FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: 'chainlinkFeedAddresses', values: [string]): string;
@@ -41,7 +42,7 @@ interface PriceOracleInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'getChainlinkLatestPrice', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'getLatestPrice', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'getUniswapLatestPrice', values: [string, string]): string;
-  encodeFunctionData(functionFragment: 'initialize', values: [string]): string;
+  encodeFunctionData(functionFragment: 'initialize', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'setChainlinkFeedAddress', values: [string, string]): string;
@@ -49,6 +50,7 @@ interface PriceOracleInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'setUniswapPriceAveragingPeriod', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'uniswapPools', values: [BytesLike]): string;
+  encodeFunctionData(functionFragment: 'weth', values?: undefined): string;
 
   decodeFunctionResult(functionFragment: 'chainlinkFeedAddresses', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'doesFeedExist', data: BytesLike): Result;
@@ -63,6 +65,7 @@ interface PriceOracleInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'setUniswapPriceAveragingPeriod', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'uniswapPools', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'weth', data: BytesLike): Result;
 
   events: {
     'ChainlinkFeedUpdated(address,address)': EventFragment;
@@ -144,9 +147,13 @@ export class PriceOracle extends Contract {
 
     'getUniswapLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
-    initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    initialize(_admin: string, _weth: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    'initialize(address,address)'(
+      _admin: string,
+      _weth: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -202,6 +209,10 @@ export class PriceOracle extends Contract {
     uniswapPools(arg0: BytesLike, overrides?: CallOverrides): Promise<[string]>;
 
     'uniswapPools(bytes32)'(arg0: BytesLike, overrides?: CallOverrides): Promise<[string]>;
+
+    weth(overrides?: CallOverrides): Promise<[string]>;
+
+    'weth()'(overrides?: CallOverrides): Promise<[string]>;
   };
 
   chainlinkFeedAddresses(arg0: string, overrides?: CallOverrides): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
@@ -227,9 +238,13 @@ export class PriceOracle extends Contract {
 
   'getUniswapLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
-  initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  initialize(_admin: string, _weth: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  'initialize(address,address)'(
+    _admin: string,
+    _weth: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -283,6 +298,10 @@ export class PriceOracle extends Contract {
 
   'uniswapPools(bytes32)'(arg0: BytesLike, overrides?: CallOverrides): Promise<string>;
 
+  weth(overrides?: CallOverrides): Promise<string>;
+
+  'weth()'(overrides?: CallOverrides): Promise<string>;
+
   callStatic: {
     chainlinkFeedAddresses(arg0: string, overrides?: CallOverrides): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
 
@@ -307,9 +326,9 @@ export class PriceOracle extends Contract {
 
     'getUniswapLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
-    initialize(_admin: string, overrides?: CallOverrides): Promise<void>;
+    initialize(_admin: string, _weth: string, overrides?: CallOverrides): Promise<void>;
 
-    'initialize(address)'(_admin: string, overrides?: CallOverrides): Promise<void>;
+    'initialize(address,address)'(_admin: string, _weth: string, overrides?: CallOverrides): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -343,6 +362,10 @@ export class PriceOracle extends Contract {
     uniswapPools(arg0: BytesLike, overrides?: CallOverrides): Promise<string>;
 
     'uniswapPools(bytes32)'(arg0: BytesLike, overrides?: CallOverrides): Promise<string>;
+
+    weth(overrides?: CallOverrides): Promise<string>;
+
+    'weth()'(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -389,9 +412,13 @@ export class PriceOracle extends Contract {
 
     'getUniswapLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    initialize(_admin: string, _weth: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'initialize(address,address)'(
+      _admin: string,
+      _weth: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -444,6 +471,10 @@ export class PriceOracle extends Contract {
     uniswapPools(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     'uniswapPools(bytes32)'(arg0: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+
+    weth(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'weth()'(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -467,9 +498,13 @@ export class PriceOracle extends Contract {
 
     'getUniswapLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    initialize(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    initialize(_admin: string, _weth: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    'initialize(address)'(_admin: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    'initialize(address,address)'(
+      _admin: string,
+      _weth: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -525,5 +560,9 @@ export class PriceOracle extends Contract {
     uniswapPools(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'uniswapPools(bytes32)'(arg0: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    weth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'weth()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

@@ -20,17 +20,17 @@
 
 #### Defined in
 
-[types/Types.ts:94](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L94)
+[types/Types.ts:95](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L95)
 
 ___
 
 ### totalBalance
 
-• **totalBalance**: `string`
+• **totalBalance**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:95](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L95)
+[types/Types.ts:96](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L96)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[types/Types.ts:93](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L93)
+[types/Types.ts:94](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L94)

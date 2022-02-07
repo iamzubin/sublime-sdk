@@ -195,12 +195,12 @@ export class Verification extends Contract {
     linkedAddresses(
       arg0: string,
       overrides?: CallOverrides
-    ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
+    ): Promise<[BigNumber, string] & { activatesAt: BigNumber; masterAddress: string }>;
 
     'linkedAddresses(address)'(
       arg0: string,
       overrides?: CallOverrides
-    ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
+    ): Promise<[BigNumber, string] & { activatesAt: BigNumber; masterAddress: string }>;
 
     masterAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -326,12 +326,12 @@ export class Verification extends Contract {
   linkedAddresses(
     arg0: string,
     overrides?: CallOverrides
-  ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
+  ): Promise<[BigNumber, string] & { activatesAt: BigNumber; masterAddress: string }>;
 
   'linkedAddresses(address)'(
     arg0: string,
     overrides?: CallOverrides
-  ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
+  ): Promise<[BigNumber, string] & { activatesAt: BigNumber; masterAddress: string }>;
 
   masterAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -437,12 +437,12 @@ export class Verification extends Contract {
     linkedAddresses(
       arg0: string,
       overrides?: CallOverrides
-    ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
+    ): Promise<[BigNumber, string] & { activatesAt: BigNumber; masterAddress: string }>;
 
     'linkedAddresses(address)'(
       arg0: string,
       overrides?: CallOverrides
-    ): Promise<[string, BigNumber] & { masterAddress: string; activatesAt: BigNumber }>;
+    ): Promise<[BigNumber, string] & { activatesAt: BigNumber; masterAddress: string }>;
 
     masterAddresses(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 

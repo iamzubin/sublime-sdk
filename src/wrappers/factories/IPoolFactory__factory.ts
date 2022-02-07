@@ -323,7 +323,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'collectionPeriod',
         type: 'uint256',
       },
     ],
@@ -336,7 +336,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: '',
+        name: 'extension',
         type: 'address',
       },
     ],
@@ -349,12 +349,12 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'protocolFeeFraction',
         type: 'uint256',
       },
       {
         internalType: 'address',
-        name: '',
+        name: 'protocolFeeCollector',
         type: 'address',
       },
     ],
@@ -367,7 +367,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'liquidatorRewardFraction',
         type: 'uint256',
       },
     ],
@@ -380,7 +380,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'loanWithdrawalDuration',
         type: 'uint256',
       },
     ],
@@ -393,7 +393,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'marginCallDuration',
         type: 'uint256',
       },
     ],
@@ -406,7 +406,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'minBorrowFraction',
         type: 'uint256',
       },
     ],
@@ -419,7 +419,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: '',
+        name: 'noStrategyAddress',
         type: 'address',
       },
     ],
@@ -432,7 +432,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: '',
+        name: 'owner',
         type: 'address',
       },
     ],
@@ -445,7 +445,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'poolCancelPenaltyMultiple',
         type: 'uint256',
       },
     ],
@@ -464,7 +464,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'bool',
-        name: '',
+        name: 'isPoolValid',
         type: 'bool',
       },
     ],
@@ -477,7 +477,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: '',
+        name: 'priceOracle',
         type: 'address',
       },
     ],
@@ -490,7 +490,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: '',
+        name: 'repaymentImpl',
         type: 'address',
       },
     ],
@@ -503,7 +503,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: '',
+        name: 'savingsAccount',
         type: 'address',
       },
     ],
@@ -516,7 +516,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: '',
+        name: 'userRegistry',
         type: 'address',
       },
     ],

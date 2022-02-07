@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[types/Types.ts:162](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L162)
+[types/Types.ts:163](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L163)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:161](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L161)
+[types/Types.ts:162](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L162)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:164](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L164)
+[types/Types.ts:165](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L165)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:160](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L160)
+[types/Types.ts:161](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L161)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:156](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L156)
+[types/Types.ts:157](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L157)
 
 ___
 
@@ -83,17 +83,17 @@ ___
 
 #### Defined in
 
-[types/Types.ts:157](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L157)
+[types/Types.ts:158](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L158)
 
 ___
 
 ### currentDebt
 
-• **currentDebt**: `string`
+• **currentDebt**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:153](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L153)
+[types/Types.ts:154](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L154)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:167](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L167)
+[types/Types.ts:168](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L168)
 
 ___
 
@@ -113,17 +113,17 @@ ___
 
 #### Defined in
 
-[types/Types.ts:159](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L159)
+[types/Types.ts:160](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L160)
 
 ___
 
 ### interestAccrued
 
-• **interestAccrued**: `string`
+• **interestAccrued**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:155](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L155)
+[types/Types.ts:156](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L156)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:158](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L158)
+[types/Types.ts:159](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L159)
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:166](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L166)
+[types/Types.ts:167](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L167)
 
 ___
 
@@ -153,17 +153,17 @@ ___
 
 #### Defined in
 
-[types/Types.ts:163](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L163)
+[types/Types.ts:164](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L164)
 
 ___
 
 ### principal
 
-• **principal**: `string`
+• **principal**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:154](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L154)
+[types/Types.ts:155](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L155)
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:168](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L168)
+[types/Types.ts:169](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L169)
 
 ___
 
@@ -183,4 +183,4 @@ ___
 
 #### Defined in
 
-[types/Types.ts:165](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L165)
+[types/Types.ts:166](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L166)

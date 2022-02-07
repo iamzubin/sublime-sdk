@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[types/Types.ts:122](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L122)
+[types/Types.ts:123](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L123)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:120](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L120)
+[types/Types.ts:121](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L121)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:124](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L124)
+[types/Types.ts:125](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L125)
 
 ___
 
@@ -54,17 +54,17 @@ ___
 
 #### Defined in
 
-[types/Types.ts:123](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L123)
+[types/Types.ts:124](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L124)
 
 ___
 
 ### suppliedAmount
 
-• **suppliedAmount**: `string`
+• **suppliedAmount**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:126](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L126)
+[types/Types.ts:127](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L127)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[types/Types.ts:125](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L125)
+[types/Types.ts:126](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L126)
 
 ___
 
@@ -84,4 +84,4 @@ ___
 
 #### Defined in
 
-[types/Types.ts:121](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L121)
+[types/Types.ts:122](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L122)

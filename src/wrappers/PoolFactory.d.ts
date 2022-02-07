@@ -22,11 +22,12 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface PoolFactoryInterface extends ethers.utils.Interface {
   functions: {
+    'beacon()': FunctionFragment;
     'collectionPeriod()': FunctionFragment;
-    'createPool(uint256,uint256,address,address,uint256,uint256,uint256,address,uint256,bool,bytes32,address,address)': FunctionFragment;
+    'createPool(uint256,uint256,address,address,uint256,uint64,uint64,address,uint256,bool,bytes32,address,address)': FunctionFragment;
     'extension()': FunctionFragment;
     'getProtocolFeeData()': FunctionFragment;
-    'initialize(address,uint256,uint256,uint256,bytes4,uint256,uint256,uint256,uint256,address,address)': FunctionFragment;
+    'initialize(address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,address,address,address)': FunctionFragment;
     'liquidatorRewardFraction()': FunctionFragment;
     'loanWithdrawalDuration()': FunctionFragment;
     'marginCallDuration()': FunctionFragment;
@@ -34,14 +35,13 @@ interface PoolFactoryInterface extends ethers.utils.Interface {
     'noStrategyAddress()': FunctionFragment;
     'owner()': FunctionFragment;
     'poolCancelPenaltyMultiple()': FunctionFragment;
-    'poolImpl()': FunctionFragment;
-    'poolInitFuncSelector()': FunctionFragment;
     'poolRegistry(address)': FunctionFragment;
+    'preComputeAddress(address,bytes32)': FunctionFragment;
     'priceOracle()': FunctionFragment;
     'renounceOwnership()': FunctionFragment;
     'repaymentImpl()': FunctionFragment;
     'savingsAccount()': FunctionFragment;
-    'setImplementations(address,address,address,address,address,address,address)': FunctionFragment;
+    'setImplementations(address,address,address,address,address,address)': FunctionFragment;
     'strategyRegistry()': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
     'updateBorrowRateLimit(uint256,uint256)': FunctionFragment;
@@ -53,7 +53,6 @@ interface PoolFactoryInterface extends ethers.utils.Interface {
     'updateNoOfRepaymentIntervalsLimit(uint256,uint256)': FunctionFragment;
     'updateNoStrategy(address)': FunctionFragment;
     'updatePoolCancelPenaltyMultiple(uint256)': FunctionFragment;
-    'updatePoolLogic(address)': FunctionFragment;
     'updatePoolSizeLimit(uint256,uint256)': FunctionFragment;
     'updatePriceoracle(address)': FunctionFragment;
     'updateProtocolFeeCollector(address)': FunctionFragment;
@@ -67,10 +66,10 @@ interface PoolFactoryInterface extends ethers.utils.Interface {
     'updateUserRegistry(address)': FunctionFragment;
     'updatedExtension(address)': FunctionFragment;
     'updateidealCollateralRatioLimit(uint256,uint256)': FunctionFragment;
-    'updatepoolInitFuncSelector(bytes4)': FunctionFragment;
     'userRegistry()': FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: 'beacon', values?: undefined): string;
   encodeFunctionData(functionFragment: 'collectionPeriod', values?: undefined): string;
   encodeFunctionData(
     functionFragment: 'createPool',
@@ -99,11 +98,11 @@ interface PoolFactoryInterface extends ethers.utils.Interface {
       BigNumberish,
       BigNumberish,
       BigNumberish,
-      BytesLike,
       BigNumberish,
       BigNumberish,
       BigNumberish,
       BigNumberish,
+      string,
       string,
       string
     ]
@@ -115,14 +114,13 @@ interface PoolFactoryInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'noStrategyAddress', values?: undefined): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'poolCancelPenaltyMultiple', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'poolImpl', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'poolInitFuncSelector', values?: undefined): string;
   encodeFunctionData(functionFragment: 'poolRegistry', values: [string]): string;
+  encodeFunctionData(functionFragment: 'preComputeAddress', values: [string, BytesLike]): string;
   encodeFunctionData(functionFragment: 'priceOracle', values?: undefined): string;
   encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'repaymentImpl', values?: undefined): string;
   encodeFunctionData(functionFragment: 'savingsAccount', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'setImplementations', values: [string, string, string, string, string, string, string]): string;
+  encodeFunctionData(functionFragment: 'setImplementations', values: [string, string, string, string, string, string]): string;
   encodeFunctionData(functionFragment: 'strategyRegistry', values?: undefined): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'updateBorrowRateLimit', values: [BigNumberish, BigNumberish]): string;
@@ -134,7 +132,6 @@ interface PoolFactoryInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'updateNoOfRepaymentIntervalsLimit', values: [BigNumberish, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'updateNoStrategy', values: [string]): string;
   encodeFunctionData(functionFragment: 'updatePoolCancelPenaltyMultiple', values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'updatePoolLogic', values: [string]): string;
   encodeFunctionData(functionFragment: 'updatePoolSizeLimit', values: [BigNumberish, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'updatePriceoracle', values: [string]): string;
   encodeFunctionData(functionFragment: 'updateProtocolFeeCollector', values: [string]): string;
@@ -148,9 +145,9 @@ interface PoolFactoryInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'updateUserRegistry', values: [string]): string;
   encodeFunctionData(functionFragment: 'updatedExtension', values: [string]): string;
   encodeFunctionData(functionFragment: 'updateidealCollateralRatioLimit', values: [BigNumberish, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'updatepoolInitFuncSelector', values: [BytesLike]): string;
   encodeFunctionData(functionFragment: 'userRegistry', values?: undefined): string;
 
+  decodeFunctionResult(functionFragment: 'beacon', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'collectionPeriod', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'createPool', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'extension', data: BytesLike): Result;
@@ -163,9 +160,8 @@ interface PoolFactoryInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'noStrategyAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'poolCancelPenaltyMultiple', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'poolImpl', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'poolInitFuncSelector', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'poolRegistry', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'preComputeAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'priceOracle', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'repaymentImpl', data: BytesLike): Result;
@@ -182,7 +178,6 @@ interface PoolFactoryInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'updateNoOfRepaymentIntervalsLimit', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateNoStrategy', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updatePoolCancelPenaltyMultiple', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'updatePoolLogic', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updatePoolSizeLimit', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updatePriceoracle', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateProtocolFeeCollector', data: BytesLike): Result;
@@ -196,7 +191,6 @@ interface PoolFactoryInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'updateUserRegistry', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updatedExtension', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateidealCollateralRatioLimit', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'updatepoolInitFuncSelector', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'userRegistry', data: BytesLike): Result;
 
   events: {
@@ -292,6 +286,10 @@ export class PoolFactory extends Contract {
   interface: PoolFactoryInterface;
 
   functions: {
+    beacon(overrides?: CallOverrides): Promise<[string]>;
+
+    'beacon()'(overrides?: CallOverrides): Promise<[string]>;
+
     collectionPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     'collectionPeriod()'(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -313,7 +311,7 @@ export class PoolFactory extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'createPool(uint256,uint256,address,address,uint256,uint256,uint256,address,uint256,bool,bytes32,address,address)'(
+    'createPool(uint256,uint256,address,address,uint256,uint64,uint64,address,uint256,bool,bytes32,address,address)'(
       _poolSize: BigNumberish,
       _borrowRate: BigNumberish,
       _borrowToken: string,
@@ -343,28 +341,28 @@ export class PoolFactory extends Contract {
       _collectionPeriod: BigNumberish,
       _loanWithdrawalDuration: BigNumberish,
       _marginCallDuration: BigNumberish,
-      _poolInitFuncSelector: BytesLike,
       _liquidatorRewardFraction: BigNumberish,
       _poolCancelPenaltyMultiple: BigNumberish,
       _minBorrowFraction: BigNumberish,
       _protocolFeeFraction: BigNumberish,
       _protocolFeeCollector: string,
       _noStrategy: string,
+      _beacon: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'initialize(address,uint256,uint256,uint256,bytes4,uint256,uint256,uint256,uint256,address,address)'(
+    'initialize(address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,address,address,address)'(
       _admin: string,
       _collectionPeriod: BigNumberish,
       _loanWithdrawalDuration: BigNumberish,
       _marginCallDuration: BigNumberish,
-      _poolInitFuncSelector: BytesLike,
       _liquidatorRewardFraction: BigNumberish,
       _poolCancelPenaltyMultiple: BigNumberish,
       _minBorrowFraction: BigNumberish,
       _protocolFeeFraction: BigNumberish,
       _protocolFeeCollector: string,
       _noStrategy: string,
+      _beacon: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -396,17 +394,17 @@ export class PoolFactory extends Contract {
 
     'poolCancelPenaltyMultiple()'(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    poolImpl(overrides?: CallOverrides): Promise<[string]>;
-
-    'poolImpl()'(overrides?: CallOverrides): Promise<[string]>;
-
-    poolInitFuncSelector(overrides?: CallOverrides): Promise<[string]>;
-
-    'poolInitFuncSelector()'(overrides?: CallOverrides): Promise<[string]>;
-
     poolRegistry(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     'poolRegistry(address)'(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
+
+    preComputeAddress(creator: string, salt: BytesLike, overrides?: CallOverrides): Promise<[string] & { predicted: string }>;
+
+    'preComputeAddress(address,bytes32)'(
+      creator: string,
+      salt: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[string] & { predicted: string }>;
 
     priceOracle(overrides?: CallOverrides): Promise<[string]>;
 
@@ -425,7 +423,6 @@ export class PoolFactory extends Contract {
     'savingsAccount()'(overrides?: CallOverrides): Promise<[string]>;
 
     setImplementations(
-      _poolImpl: string,
       _repaymentImpl: string,
       _userRegistry: string,
       _strategyRegistry: string,
@@ -435,8 +432,7 @@ export class PoolFactory extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'setImplementations(address,address,address,address,address,address,address)'(
-      _poolImpl: string,
+    'setImplementations(address,address,address,address,address,address)'(
       _repaymentImpl: string,
       _userRegistry: string,
       _strategyRegistry: string,
@@ -545,13 +541,6 @@ export class PoolFactory extends Contract {
 
     'updatePoolCancelPenaltyMultiple(uint256)'(
       _poolCancelPenaltyMultiple: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    updatePoolLogic(_poolLogic: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
-
-    'updatePoolLogic(address)'(
-      _poolLogic: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -683,20 +672,14 @@ export class PoolFactory extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    updatepoolInitFuncSelector(
-      _functionId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    'updatepoolInitFuncSelector(bytes4)'(
-      _functionId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     userRegistry(overrides?: CallOverrides): Promise<[string]>;
 
     'userRegistry()'(overrides?: CallOverrides): Promise<[string]>;
   };
+
+  beacon(overrides?: CallOverrides): Promise<string>;
+
+  'beacon()'(overrides?: CallOverrides): Promise<string>;
 
   collectionPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -719,7 +702,7 @@ export class PoolFactory extends Contract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'createPool(uint256,uint256,address,address,uint256,uint256,uint256,address,uint256,bool,bytes32,address,address)'(
+  'createPool(uint256,uint256,address,address,uint256,uint64,uint64,address,uint256,bool,bytes32,address,address)'(
     _poolSize: BigNumberish,
     _borrowRate: BigNumberish,
     _borrowToken: string,
@@ -749,28 +732,28 @@ export class PoolFactory extends Contract {
     _collectionPeriod: BigNumberish,
     _loanWithdrawalDuration: BigNumberish,
     _marginCallDuration: BigNumberish,
-    _poolInitFuncSelector: BytesLike,
     _liquidatorRewardFraction: BigNumberish,
     _poolCancelPenaltyMultiple: BigNumberish,
     _minBorrowFraction: BigNumberish,
     _protocolFeeFraction: BigNumberish,
     _protocolFeeCollector: string,
     _noStrategy: string,
+    _beacon: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'initialize(address,uint256,uint256,uint256,bytes4,uint256,uint256,uint256,uint256,address,address)'(
+  'initialize(address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,address,address,address)'(
     _admin: string,
     _collectionPeriod: BigNumberish,
     _loanWithdrawalDuration: BigNumberish,
     _marginCallDuration: BigNumberish,
-    _poolInitFuncSelector: BytesLike,
     _liquidatorRewardFraction: BigNumberish,
     _poolCancelPenaltyMultiple: BigNumberish,
     _minBorrowFraction: BigNumberish,
     _protocolFeeFraction: BigNumberish,
     _protocolFeeCollector: string,
     _noStrategy: string,
+    _beacon: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -802,17 +785,13 @@ export class PoolFactory extends Contract {
 
   'poolCancelPenaltyMultiple()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-  poolImpl(overrides?: CallOverrides): Promise<string>;
-
-  'poolImpl()'(overrides?: CallOverrides): Promise<string>;
-
-  poolInitFuncSelector(overrides?: CallOverrides): Promise<string>;
-
-  'poolInitFuncSelector()'(overrides?: CallOverrides): Promise<string>;
-
   poolRegistry(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
   'poolRegistry(address)'(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
+  preComputeAddress(creator: string, salt: BytesLike, overrides?: CallOverrides): Promise<string>;
+
+  'preComputeAddress(address,bytes32)'(creator: string, salt: BytesLike, overrides?: CallOverrides): Promise<string>;
 
   priceOracle(overrides?: CallOverrides): Promise<string>;
 
@@ -831,7 +810,6 @@ export class PoolFactory extends Contract {
   'savingsAccount()'(overrides?: CallOverrides): Promise<string>;
 
   setImplementations(
-    _poolImpl: string,
     _repaymentImpl: string,
     _userRegistry: string,
     _strategyRegistry: string,
@@ -841,8 +819,7 @@ export class PoolFactory extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'setImplementations(address,address,address,address,address,address,address)'(
-    _poolImpl: string,
+  'setImplementations(address,address,address,address,address,address)'(
     _repaymentImpl: string,
     _userRegistry: string,
     _strategyRegistry: string,
@@ -950,10 +927,6 @@ export class PoolFactory extends Contract {
     _poolCancelPenaltyMultiple: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  updatePoolLogic(_poolLogic: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
-
-  'updatePoolLogic(address)'(_poolLogic: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   updatePoolSizeLimit(
     _min: BigNumberish,
@@ -1080,21 +1053,15 @@ export class PoolFactory extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  updatepoolInitFuncSelector(
-    _functionId: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  'updatepoolInitFuncSelector(bytes4)'(
-    _functionId: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   userRegistry(overrides?: CallOverrides): Promise<string>;
 
   'userRegistry()'(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
+    beacon(overrides?: CallOverrides): Promise<string>;
+
+    'beacon()'(overrides?: CallOverrides): Promise<string>;
+
     collectionPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
     'collectionPeriod()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1116,7 +1083,7 @@ export class PoolFactory extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'createPool(uint256,uint256,address,address,uint256,uint256,uint256,address,uint256,bool,bytes32,address,address)'(
+    'createPool(uint256,uint256,address,address,uint256,uint64,uint64,address,uint256,bool,bytes32,address,address)'(
       _poolSize: BigNumberish,
       _borrowRate: BigNumberish,
       _borrowToken: string,
@@ -1146,28 +1113,28 @@ export class PoolFactory extends Contract {
       _collectionPeriod: BigNumberish,
       _loanWithdrawalDuration: BigNumberish,
       _marginCallDuration: BigNumberish,
-      _poolInitFuncSelector: BytesLike,
       _liquidatorRewardFraction: BigNumberish,
       _poolCancelPenaltyMultiple: BigNumberish,
       _minBorrowFraction: BigNumberish,
       _protocolFeeFraction: BigNumberish,
       _protocolFeeCollector: string,
       _noStrategy: string,
+      _beacon: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'initialize(address,uint256,uint256,uint256,bytes4,uint256,uint256,uint256,uint256,address,address)'(
+    'initialize(address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,address,address,address)'(
       _admin: string,
       _collectionPeriod: BigNumberish,
       _loanWithdrawalDuration: BigNumberish,
       _marginCallDuration: BigNumberish,
-      _poolInitFuncSelector: BytesLike,
       _liquidatorRewardFraction: BigNumberish,
       _poolCancelPenaltyMultiple: BigNumberish,
       _minBorrowFraction: BigNumberish,
       _protocolFeeFraction: BigNumberish,
       _protocolFeeCollector: string,
       _noStrategy: string,
+      _beacon: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1199,17 +1166,13 @@ export class PoolFactory extends Contract {
 
     'poolCancelPenaltyMultiple()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    poolImpl(overrides?: CallOverrides): Promise<string>;
-
-    'poolImpl()'(overrides?: CallOverrides): Promise<string>;
-
-    poolInitFuncSelector(overrides?: CallOverrides): Promise<string>;
-
-    'poolInitFuncSelector()'(overrides?: CallOverrides): Promise<string>;
-
     poolRegistry(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
     'poolRegistry(address)'(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
+    preComputeAddress(creator: string, salt: BytesLike, overrides?: CallOverrides): Promise<string>;
+
+    'preComputeAddress(address,bytes32)'(creator: string, salt: BytesLike, overrides?: CallOverrides): Promise<string>;
 
     priceOracle(overrides?: CallOverrides): Promise<string>;
 
@@ -1228,7 +1191,6 @@ export class PoolFactory extends Contract {
     'savingsAccount()'(overrides?: CallOverrides): Promise<string>;
 
     setImplementations(
-      _poolImpl: string,
       _repaymentImpl: string,
       _userRegistry: string,
       _strategyRegistry: string,
@@ -1238,8 +1200,7 @@ export class PoolFactory extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'setImplementations(address,address,address,address,address,address,address)'(
-      _poolImpl: string,
+    'setImplementations(address,address,address,address,address,address)'(
       _repaymentImpl: string,
       _userRegistry: string,
       _strategyRegistry: string,
@@ -1292,10 +1253,6 @@ export class PoolFactory extends Contract {
     updatePoolCancelPenaltyMultiple(_poolCancelPenaltyMultiple: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     'updatePoolCancelPenaltyMultiple(uint256)'(_poolCancelPenaltyMultiple: BigNumberish, overrides?: CallOverrides): Promise<void>;
-
-    updatePoolLogic(_poolLogic: string, overrides?: CallOverrides): Promise<void>;
-
-    'updatePoolLogic(address)'(_poolLogic: string, overrides?: CallOverrides): Promise<void>;
 
     updatePoolSizeLimit(_min: BigNumberish, _max: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
@@ -1352,10 +1309,6 @@ export class PoolFactory extends Contract {
     updateidealCollateralRatioLimit(_min: BigNumberish, _max: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     'updateidealCollateralRatioLimit(uint256,uint256)'(_min: BigNumberish, _max: BigNumberish, overrides?: CallOverrides): Promise<void>;
-
-    updatepoolInitFuncSelector(_functionId: BytesLike, overrides?: CallOverrides): Promise<void>;
-
-    'updatepoolInitFuncSelector(bytes4)'(_functionId: BytesLike, overrides?: CallOverrides): Promise<void>;
 
     userRegistry(overrides?: CallOverrides): Promise<string>;
 
@@ -1428,6 +1381,10 @@ export class PoolFactory extends Contract {
   };
 
   estimateGas: {
+    beacon(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'beacon()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     collectionPeriod(overrides?: CallOverrides): Promise<BigNumber>;
 
     'collectionPeriod()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1449,7 +1406,7 @@ export class PoolFactory extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'createPool(uint256,uint256,address,address,uint256,uint256,uint256,address,uint256,bool,bytes32,address,address)'(
+    'createPool(uint256,uint256,address,address,uint256,uint64,uint64,address,uint256,bool,bytes32,address,address)'(
       _poolSize: BigNumberish,
       _borrowRate: BigNumberish,
       _borrowToken: string,
@@ -1479,28 +1436,28 @@ export class PoolFactory extends Contract {
       _collectionPeriod: BigNumberish,
       _loanWithdrawalDuration: BigNumberish,
       _marginCallDuration: BigNumberish,
-      _poolInitFuncSelector: BytesLike,
       _liquidatorRewardFraction: BigNumberish,
       _poolCancelPenaltyMultiple: BigNumberish,
       _minBorrowFraction: BigNumberish,
       _protocolFeeFraction: BigNumberish,
       _protocolFeeCollector: string,
       _noStrategy: string,
+      _beacon: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'initialize(address,uint256,uint256,uint256,bytes4,uint256,uint256,uint256,uint256,address,address)'(
+    'initialize(address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,address,address,address)'(
       _admin: string,
       _collectionPeriod: BigNumberish,
       _loanWithdrawalDuration: BigNumberish,
       _marginCallDuration: BigNumberish,
-      _poolInitFuncSelector: BytesLike,
       _liquidatorRewardFraction: BigNumberish,
       _poolCancelPenaltyMultiple: BigNumberish,
       _minBorrowFraction: BigNumberish,
       _protocolFeeFraction: BigNumberish,
       _protocolFeeCollector: string,
       _noStrategy: string,
+      _beacon: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1532,17 +1489,13 @@ export class PoolFactory extends Contract {
 
     'poolCancelPenaltyMultiple()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    poolImpl(overrides?: CallOverrides): Promise<BigNumber>;
-
-    'poolImpl()'(overrides?: CallOverrides): Promise<BigNumber>;
-
-    poolInitFuncSelector(overrides?: CallOverrides): Promise<BigNumber>;
-
-    'poolInitFuncSelector()'(overrides?: CallOverrides): Promise<BigNumber>;
-
     poolRegistry(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'poolRegistry(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    preComputeAddress(creator: string, salt: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'preComputeAddress(address,bytes32)'(creator: string, salt: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     priceOracle(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1561,7 +1514,6 @@ export class PoolFactory extends Contract {
     'savingsAccount()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     setImplementations(
-      _poolImpl: string,
       _repaymentImpl: string,
       _userRegistry: string,
       _strategyRegistry: string,
@@ -1571,8 +1523,7 @@ export class PoolFactory extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'setImplementations(address,address,address,address,address,address,address)'(
-      _poolImpl: string,
+    'setImplementations(address,address,address,address,address,address)'(
       _repaymentImpl: string,
       _userRegistry: string,
       _strategyRegistry: string,
@@ -1677,10 +1628,6 @@ export class PoolFactory extends Contract {
       _poolCancelPenaltyMultiple: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    updatePoolLogic(_poolLogic: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'updatePoolLogic(address)'(_poolLogic: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     updatePoolSizeLimit(
       _min: BigNumberish,
@@ -1789,19 +1736,16 @@ export class PoolFactory extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    updatepoolInitFuncSelector(_functionId: BytesLike, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'updatepoolInitFuncSelector(bytes4)'(
-      _functionId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     userRegistry(overrides?: CallOverrides): Promise<BigNumber>;
 
     'userRegistry()'(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    beacon(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'beacon()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     collectionPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'collectionPeriod()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1823,7 +1767,7 @@ export class PoolFactory extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'createPool(uint256,uint256,address,address,uint256,uint256,uint256,address,uint256,bool,bytes32,address,address)'(
+    'createPool(uint256,uint256,address,address,uint256,uint64,uint64,address,uint256,bool,bytes32,address,address)'(
       _poolSize: BigNumberish,
       _borrowRate: BigNumberish,
       _borrowToken: string,
@@ -1853,28 +1797,28 @@ export class PoolFactory extends Contract {
       _collectionPeriod: BigNumberish,
       _loanWithdrawalDuration: BigNumberish,
       _marginCallDuration: BigNumberish,
-      _poolInitFuncSelector: BytesLike,
       _liquidatorRewardFraction: BigNumberish,
       _poolCancelPenaltyMultiple: BigNumberish,
       _minBorrowFraction: BigNumberish,
       _protocolFeeFraction: BigNumberish,
       _protocolFeeCollector: string,
       _noStrategy: string,
+      _beacon: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'initialize(address,uint256,uint256,uint256,bytes4,uint256,uint256,uint256,uint256,address,address)'(
+    'initialize(address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,address,address,address)'(
       _admin: string,
       _collectionPeriod: BigNumberish,
       _loanWithdrawalDuration: BigNumberish,
       _marginCallDuration: BigNumberish,
-      _poolInitFuncSelector: BytesLike,
       _liquidatorRewardFraction: BigNumberish,
       _poolCancelPenaltyMultiple: BigNumberish,
       _minBorrowFraction: BigNumberish,
       _protocolFeeFraction: BigNumberish,
       _protocolFeeCollector: string,
       _noStrategy: string,
+      _beacon: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1906,17 +1850,13 @@ export class PoolFactory extends Contract {
 
     'poolCancelPenaltyMultiple()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    poolImpl(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    'poolImpl()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    poolInitFuncSelector(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    'poolInitFuncSelector()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     poolRegistry(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'poolRegistry(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    preComputeAddress(creator: string, salt: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'preComputeAddress(address,bytes32)'(creator: string, salt: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     priceOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1935,7 +1875,6 @@ export class PoolFactory extends Contract {
     'savingsAccount()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setImplementations(
-      _poolImpl: string,
       _repaymentImpl: string,
       _userRegistry: string,
       _strategyRegistry: string,
@@ -1945,8 +1884,7 @@ export class PoolFactory extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'setImplementations(address,address,address,address,address,address,address)'(
-      _poolImpl: string,
+    'setImplementations(address,address,address,address,address,address)'(
       _repaymentImpl: string,
       _userRegistry: string,
       _strategyRegistry: string,
@@ -2055,13 +1993,6 @@ export class PoolFactory extends Contract {
 
     'updatePoolCancelPenaltyMultiple(uint256)'(
       _poolCancelPenaltyMultiple: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updatePoolLogic(_poolLogic: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
-
-    'updatePoolLogic(address)'(
-      _poolLogic: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2190,16 +2121,6 @@ export class PoolFactory extends Contract {
     'updateidealCollateralRatioLimit(uint256,uint256)'(
       _min: BigNumberish,
       _max: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updatepoolInitFuncSelector(
-      _functionId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    'updatepoolInitFuncSelector(bytes4)'(
-      _functionId: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

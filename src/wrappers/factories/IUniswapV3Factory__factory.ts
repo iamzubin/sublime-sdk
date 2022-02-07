@@ -148,7 +148,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'int24',
-        name: '',
+        name: 'tickSpacing',
         type: 'int24',
       },
     ],
@@ -190,7 +190,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: '',
+        name: 'factoryOwner',
         type: 'address',
       },
     ],

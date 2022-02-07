@@ -50,7 +50,7 @@
 
 #### Defined in
 
-[api/creditLines.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L21)
+[api/creditLines.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L23)
 
 ## Properties
 
@@ -60,7 +60,7 @@
 
 #### Defined in
 
-[api/creditLines.ts:19](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L19)
+[api/creditLines.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L21)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[api/creditLines.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L17)
+[api/creditLines.ts:19](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L19)
 
 ___
 
@@ -80,13 +80,13 @@ ___
 
 #### Defined in
 
-[api/creditLines.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L18)
+[api/creditLines.ts:20](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L20)
 
 ## Methods
 
 ### acceptCreditLine
 
-▸ **acceptCreditLine**(`creditLine`): `Promise`<`ContractTransaction`\>
+▸ **acceptCreditLine**(`creditLine`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Accpeting a credit line.
 
@@ -95,6 +95,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `creditLine` | `BigNumberish` |
+| `options?` | `Overrides` |
 
 #### Returns
 
@@ -104,13 +105,13 @@ Contract Transaction
 
 #### Defined in
 
-[api/creditLines.ts:100](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L100)
+[api/creditLines.ts:104](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L104)
 
 ___
 
 ### borrowFromCreditLine
 
-▸ **borrowFromCreditLine**(`creditLineNumber`, `amount`): `Promise`<`ContractTransaction`\>
+▸ **borrowFromCreditLine**(`creditLineNumber`, `amount`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Borrow tokens from credit line
 
@@ -120,6 +121,7 @@ ___
 | :------ | :------ |
 | `creditLineNumber` | `BigNumberish` |
 | `amount` | `string` |
+| `options?` | `Overrides` |
 
 #### Returns
 
@@ -129,13 +131,13 @@ Contract Transaction
 
 #### Defined in
 
-[api/creditLines.ts:264](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L264)
+[api/creditLines.ts:267](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L267)
 
 ___
 
 ### calculateBorrowableAmount
 
-▸ **calculateBorrowableAmount**(`creditLineNumber`): `Promise`<`string`\>
+▸ **calculateBorrowableAmount**(`creditLineNumber`): `Promise`<[`Balance`](../interfaces/types_Types.Balance.md)\>
 
 **`description`** Calculate the total amount that can be borrowed from the credit line
 
@@ -147,13 +149,13 @@ ___
 
 #### Returns
 
-`Promise`<`string`\>
+`Promise`<[`Balance`](../interfaces/types_Types.Balance.md)\>
 
 borrowable amount in borrow tokens (easy readable)
 
 #### Defined in
 
-[api/creditLines.ts:137](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L137)
+[api/creditLines.ts:141](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L141)
 
 ___
 
@@ -177,13 +179,13 @@ collateral ratio (easy readable)
 
 #### Defined in
 
-[api/creditLines.ts:151](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L151)
+[api/creditLines.ts:155](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L155)
 
 ___
 
 ### calculateCurrentDebt
 
-▸ **calculateCurrentDebt**(`creditLineNumber`): `Promise`<`string`\>
+▸ **calculateCurrentDebt**(`creditLineNumber`): `Promise`<[`Balance`](../interfaces/types_Types.Balance.md)\>
 
 **`description`** Calcualte the total debt for a credit line till now
 
@@ -195,19 +197,19 @@ ___
 
 #### Returns
 
-`Promise`<`string`\>
+`Promise`<[`Balance`](../interfaces/types_Types.Balance.md)\>
 
-debt in borrow tokens (easy readable)
+debt in borrow tokens
 
 #### Defined in
 
-[api/creditLines.ts:123](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L123)
+[api/creditLines.ts:127](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L127)
 
 ___
 
 ### calculateInterestAccrued
 
-▸ **calculateInterestAccrued**(`creditLineNumber`): `Promise`<`string`\>
+▸ **calculateInterestAccrued**(`creditLineNumber`): `Promise`<[`Balance`](../interfaces/types_Types.Balance.md)\>
 
 **`description`** Calculated the total accrued till now for a credit line
 
@@ -219,19 +221,19 @@ ___
 
 #### Returns
 
-`Promise`<`string`\>
+`Promise`<[`Balance`](../interfaces/types_Types.Balance.md)\>
 
 debt in borrow tokens (easy readable)
 
 #### Defined in
 
-[api/creditLines.ts:109](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L109)
+[api/creditLines.ts:113](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L113)
 
 ___
 
 ### calculateTotalCollateralTokens
 
-▸ **calculateTotalCollateralTokens**(`creditLineNumber`): `Promise`<`string`\>
+▸ **calculateTotalCollateralTokens**(`creditLineNumber`): `Promise`<[`Balance`](../interfaces/types_Types.Balance.md)\>
 
 **`description`** Calculate the total collateral tokens held against a credit line
 
@@ -243,13 +245,13 @@ ___
 
 #### Returns
 
-`Promise`<`string`\>
+`Promise`<[`Balance`](../interfaces/types_Types.Balance.md)\>
 
 collateral tokens number (easy readable)
 
 #### Defined in
 
-[api/creditLines.ts:161](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L161)
+[api/creditLines.ts:165](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L165)
 
 ___
 
@@ -273,13 +275,13 @@ Contract Transaction
 
 #### Defined in
 
-[api/creditLines.ts:311](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L311)
+[api/creditLines.ts:317](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L317)
 
 ___
 
 ### depositCollateral
 
-▸ **depositCollateral**(`creditLineNumber`, `amount`, `strategy`, `fromSavingsAccount`): `Promise`<`ContractTransaction`\>
+▸ **depositCollateral**(`creditLineNumber`, `amount`, `strategy`, `fromSavingsAccount`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Deposit Collateral to a credit line
 
@@ -291,6 +293,7 @@ ___
 | `amount` | `string` |
 | `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) |
 | `fromSavingsAccount` | `boolean` |
+| `options?` | `Overrides` |
 
 #### Returns
 
@@ -300,13 +303,13 @@ Contract Transaction
 
 #### Defined in
 
-[api/creditLines.ts:221](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L221)
+[api/creditLines.ts:228](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L228)
 
 ___
 
 ### liquidateCreditLine
 
-▸ **liquidateCreditLine**(`creditLineNumber`, `toSavingsAccount?`): `Promise`<`ContractTransaction`\>
+▸ **liquidateCreditLine**(`creditLineNumber`, `toSavingsAccount?`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Liquidate a credit line
 
@@ -316,6 +319,7 @@ ___
 | :------ | :------ | :------ |
 | `creditLineNumber` | `BigNumberish` | `undefined` |
 | `toSavingsAccount` | `boolean` | `false` |
+| `options?` | `Overrides` | `undefined` |
 
 #### Returns
 
@@ -325,13 +329,13 @@ Contract Transaction
 
 #### Defined in
 
-[api/creditLines.ts:321](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L321)
+[api/creditLines.ts:327](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L327)
 
 ___
 
 ### repayCreditLine
 
-▸ **repayCreditLine**(`creditLineNumber`, `amount`, `fromSavingsAccount`): `Promise`<`ContractTransaction`\>
+▸ **repayCreditLine**(`creditLineNumber`, `amount`, `fromSavingsAccount`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Repay the amount to credit line
 
@@ -342,6 +346,7 @@ ___
 | `creditLineNumber` | `BigNumberish` |
 | `amount` | `string` |
 | `fromSavingsAccount` | `boolean` |
+| `options?` | `Overrides` |
 
 #### Returns
 
@@ -351,13 +356,13 @@ Contract Transaction
 
 #### Defined in
 
-[api/creditLines.ts:284](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L284)
+[api/creditLines.ts:289](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L289)
 
 ___
 
 ### requestCreditLineToBorrower
 
-▸ **requestCreditLineToBorrower**(`request`): `Promise`<`ContractTransaction`\>
+▸ **requestCreditLineToBorrower**(`request`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Requests a new credit line to borrower
 
@@ -366,6 +371,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `request` | [`CreditLineRequest`](../interfaces/types_Types.CreditLineRequest.md) |
+| `options?` | `Overrides` |
 
 #### Returns
 
@@ -375,13 +381,13 @@ contract transaction
 
 #### Defined in
 
-[api/creditLines.ts:66](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L66)
+[api/creditLines.ts:69](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L69)
 
 ___
 
 ### requestCreditLineToLender
 
-▸ **requestCreditLineToLender**(`request`): `Promise`<`ContractTransaction`\>
+▸ **requestCreditLineToLender**(`request`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Requests a new credit line to lender
 
@@ -390,6 +396,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `request` | [`CreditLineRequest`](../interfaces/types_Types.CreditLineRequest.md) |
+| `options?` | `Overrides` |
 
 #### Returns
 
@@ -399,23 +406,24 @@ contract transaction
 
 #### Defined in
 
-[api/creditLines.ts:32](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L32)
+[api/creditLines.ts:34](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L34)
 
 ___
 
 ### withdrawCollateralFromCreditLine
 
-▸ **withdrawCollateralFromCreditLine**(`creditLineNumber`, `amount`, `toSavingsAccount?`): `Promise`<`ContractTransaction`\>
+▸ **withdrawCollateralFromCreditLine**(`creditLineNumber`, `amount`, `toSavingsAccount?`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Withdraws the collateral from the credit line
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `creditLineNumber` | `BigNumberish` | `undefined` |
-| `amount` | `string` | `undefined` |
-| `toSavingsAccount` | `boolean` | `false` |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `creditLineNumber` | `BigNumberish` | `undefined` |  |
+| `amount` | `string` | `undefined` |  |
+| `toSavingsAccount` | `boolean` | `false` | - |
+| `options?` | `Overrides` | `undefined` | transaction options directly transferred from credit line to user's savings account |
 
 #### Returns
 
@@ -425,13 +433,13 @@ Contract Transaction
 
 #### Defined in
 
-[api/creditLines.ts:192](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L192)
+[api/creditLines.ts:197](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L197)
 
 ___
 
 ### withdrawableCollateral
 
-▸ **withdrawableCollateral**(`creditLineNumber`): `Promise`<`string`\>
+▸ **withdrawableCollateral**(`creditLineNumber`): `Promise`<[`Balance`](../interfaces/types_Types.Balance.md)\>
 
 **`description`** Calculate the amount the collateral that can be withdrawn from the credit line
 
@@ -443,10 +451,10 @@ ___
 
 #### Returns
 
-`Promise`<`string`\>
+`Promise`<[`Balance`](../interfaces/types_Types.Balance.md)\>
 
 collateral tokens (easy readable)
 
 #### Defined in
 
-[api/creditLines.ts:175](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/creditLines.ts#L175)
+[api/creditLines.ts:179](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/creditLines.ts#L179)

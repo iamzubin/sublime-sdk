@@ -1,4 +1,4 @@
-import { Signer, ContractTransaction } from 'ethers';
+import { Signer, ContractTransaction, Overrides } from 'ethers';
 import { SublimeConfig } from '../types/sublimeConfig';
 
 import { Repayments } from '../wrappers/Repayments';
@@ -82,7 +82,7 @@ export class RepaymentApi {
     return new BigNumber(interestOverdue).div(new BigNumber(10).pow(decimal)).toFixed(2);
   }
 
-  public async repayAmount(pool: string, amount: string): Promise<ContractTransaction> {
+  public async repayAmount(pool: string, amount: string, options: Overrides): Promise<ContractTransaction> {
     const poolConstants = await this.repayments.repayInfo(pool);
     await this.tokenManager.updateTokenDecimals(poolConstants.repayAsset);
     const decimal = this.tokenManager.getTokenDecimals(poolConstants.repayAsset);
@@ -92,11 +92,11 @@ export class RepaymentApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.repayments.repay(pool, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0));
+    return this.repayments.repay(pool, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0), { ...options });
   }
 
-  public async repayPrincipal(pool: string): Promise<ContractTransaction> {
-    return this.repayments.repayPrincipal(pool);
+  public async repayPrincipal(pool: string, options?: Overrides): Promise<ContractTransaction> {
+    return this.repayments.repayPrincipal(pool, { ...options });
   }
 
   public async getTotalRepaidAmount(pool: string): Promise<string> {

@@ -101,9 +101,13 @@ export class IVerification extends Contract {
   interface: IVerificationInterface;
 
   functions: {
-    isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<[boolean]>;
+    isUser(_user: string, _verifier: string, overrides?: CallOverrides): Promise<[boolean] & { isMsgSenderUser: boolean }>;
 
-    'isUser(address,address)'(_user: string, _verifier: string, overrides?: CallOverrides): Promise<[boolean]>;
+    'isUser(address,address)'(
+      _user: string,
+      _verifier: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { isMsgSenderUser: boolean }>;
 
     registerMasterAddress(
       _masterAddress: string,

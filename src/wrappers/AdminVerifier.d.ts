@@ -24,10 +24,12 @@ interface AdminVerifierInterface extends ethers.utils.Interface {
     'initialize(address,address,address)': FunctionFragment;
     'owner()': FunctionFragment;
     'registerSelf(bool,uint8,bytes32,bytes32,string,uint256)': FunctionFragment;
+    'registerUser(address,string,bool)': FunctionFragment;
     'renounceOwnership()': FunctionFragment;
     'signerAddress()': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
     'unregisterSelf()': FunctionFragment;
+    'unregisterUser(address)': FunctionFragment;
     'updateSignerAddress(address)': FunctionFragment;
     'updateVerification(address)': FunctionFragment;
     'userData(address)': FunctionFragment;
@@ -37,10 +39,12 @@ interface AdminVerifierInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'initialize', values: [string, string, string]): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'registerSelf', values: [boolean, BigNumberish, BytesLike, BytesLike, string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'registerUser', values: [string, string, boolean]): string;
   encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'signerAddress', values?: undefined): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'unregisterSelf', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'unregisterUser', values: [string]): string;
   encodeFunctionData(functionFragment: 'updateSignerAddress', values: [string]): string;
   encodeFunctionData(functionFragment: 'updateVerification', values: [string]): string;
   encodeFunctionData(functionFragment: 'userData', values: [string]): string;
@@ -49,10 +53,12 @@ interface AdminVerifierInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'registerSelf', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'registerUser', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'signerAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'unregisterSelf', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'unregisterUser', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateSignerAddress', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateVerification', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'userData', data: BytesLike): Result;
@@ -155,6 +161,20 @@ export class AdminVerifier extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    registerUser(
+      _user: string,
+      _metadata: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    'registerUser(address,string,bool)'(
+      _user: string,
+      _metadata: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
@@ -173,6 +193,10 @@ export class AdminVerifier extends Contract {
     unregisterSelf(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     'unregisterSelf()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    unregisterUser(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     updateSignerAddress(_signerAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -235,6 +259,20 @@ export class AdminVerifier extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  registerUser(
+    _user: string,
+    _metadata: string,
+    _isMasterLinked: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  'registerUser(address,string,bool)'(
+    _user: string,
+    _metadata: string,
+    _isMasterLinked: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
@@ -250,6 +288,10 @@ export class AdminVerifier extends Contract {
   unregisterSelf(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   'unregisterSelf()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  unregisterUser(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   updateSignerAddress(_signerAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -307,6 +349,15 @@ export class AdminVerifier extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    registerUser(_user: string, _metadata: string, _isMasterLinked: boolean, overrides?: CallOverrides): Promise<void>;
+
+    'registerUser(address,string,bool)'(
+      _user: string,
+      _metadata: string,
+      _isMasterLinked: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
@@ -322,6 +373,10 @@ export class AdminVerifier extends Contract {
     unregisterSelf(overrides?: CallOverrides): Promise<void>;
 
     'unregisterSelf()'(overrides?: CallOverrides): Promise<void>;
+
+    unregisterUser(_user: string, overrides?: CallOverrides): Promise<void>;
+
+    'unregisterUser(address)'(_user: string, overrides?: CallOverrides): Promise<void>;
 
     updateSignerAddress(_signerAddress: string, overrides?: CallOverrides): Promise<void>;
 
@@ -398,6 +453,20 @@ export class AdminVerifier extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    registerUser(
+      _user: string,
+      _metadata: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    'registerUser(address,string,bool)'(
+      _user: string,
+      _metadata: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
@@ -413,6 +482,10 @@ export class AdminVerifier extends Contract {
     unregisterSelf(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     'unregisterSelf()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    unregisterUser(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     updateSignerAddress(_signerAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
@@ -470,6 +543,20 @@ export class AdminVerifier extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    registerUser(
+      _user: string,
+      _metadata: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    'registerUser(address,string,bool)'(
+      _user: string,
+      _metadata: string,
+      _isMasterLinked: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
@@ -488,6 +575,10 @@ export class AdminVerifier extends Contract {
     unregisterSelf(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     'unregisterSelf()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    unregisterUser(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    'unregisterUser(address)'(_user: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     updateSignerAddress(_signerAddress: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 

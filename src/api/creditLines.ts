@@ -1,5 +1,5 @@
 import { SublimeConfig } from '../types/sublimeConfig';
-import { ContractTransaction, Signer } from 'ethers';
+import { ContractTransaction, Overrides, Signer } from 'ethers';
 
 import { CreditLine } from '../wrappers/CreditLine';
 import { CreditLine__factory } from '../wrappers/factories/CreditLine__factory';
@@ -9,6 +9,8 @@ import { BigNumber } from 'bignumber.js';
 
 import { TokenManager } from '../tokenManager';
 import { zeroAddress } from '../config/constants';
+
+import { Balance } from '../types/Types';
 
 /**
  * @class CreditLineApi
@@ -29,7 +31,7 @@ export class CreditLineApi {
    * @param request: details of the credit line to request
    * @returns contract transaction
    */
-  public async requestCreditLineToLender(request: CreditLineRequest): Promise<ContractTransaction> {
+  public async requestCreditLineToLender(request: CreditLineRequest, options?: Overrides): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(request.borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(request.borrowAsset);
 
@@ -54,7 +56,8 @@ export class CreditLineApi {
       collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       request.borrowAsset,
       request.collateralAsset,
-      false
+      false,
+      { ...options }
     );
   }
 
@@ -63,7 +66,7 @@ export class CreditLineApi {
    * @param request: details of the credit line to request
    * @returns contract transaction
    */
-  public async requestCreditLineToBorrower(request: CreditLineRequest): Promise<ContractTransaction> {
+  public async requestCreditLineToBorrower(request: CreditLineRequest, options?: Overrides): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(request.borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(request.borrowAsset);
 
@@ -88,7 +91,8 @@ export class CreditLineApi {
       collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       request.borrowAsset,
       request.collateralAsset,
-      true
+      true,
+      { ...options }
     );
   }
 
@@ -97,8 +101,8 @@ export class CreditLineApi {
    * @param creditLine
    * @returns Contract Transaction
    */
-  public async acceptCreditLine(creditLine: BigNumberish): Promise<ContractTransaction> {
-    return await this.creditLineContract.accept(creditLine);
+  public async acceptCreditLine(creditLine: BigNumberish, options?: Overrides): Promise<ContractTransaction> {
+    return await this.creditLineContract.accept(creditLine, { ...options });
   }
 
   /**
@@ -106,27 +110,27 @@ export class CreditLineApi {
    * @param creditLineNumber
    * @returns debt in borrow tokens (easy readable)
    */
-  public async calculateInterestAccrued(creditLineNumber: BigNumberish): Promise<string> {
+  public async calculateInterestAccrued(creditLineNumber: BigNumberish): Promise<Balance> {
     const _value = await this.creditLineContract.calculateInterestAccrued(creditLineNumber);
     const borrowAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).borrowAsset;
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
-    return new BigNumber(_value.toString()).div(new BigNumber(10).pow(borrowDecimal)).toFixed(2);
+    return { value: _value.toString(), decimals: borrowDecimal };
   }
 
   /**
    * @description Calcualte the total debt for a credit line till now
    * @param creditLineNumber
-   * @returns debt in borrow tokens (easy readable)
+   * @returns debt in borrow tokens
    */
-  public async calculateCurrentDebt(creditLineNumber: BigNumberish): Promise<string> {
+  public async calculateCurrentDebt(creditLineNumber: BigNumberish): Promise<Balance> {
     const _value = await this.creditLineContract.calculateCurrentDebt(creditLineNumber);
     const borrowAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).borrowAsset;
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
-    return new BigNumber(_value.toString()).div(new BigNumber(10).pow(borrowDecimal)).toFixed(borrowDecimal);
+    return { value: _value.toString(), decimals: borrowDecimal };
   }
 
   /**
@@ -134,13 +138,13 @@ export class CreditLineApi {
    * @param creditLineNumber
    * @returns borrowable amount in borrow tokens (easy readable)
    */
-  public async calculateBorrowableAmount(creditLineNumber: BigNumberish): Promise<string> {
+  public async calculateBorrowableAmount(creditLineNumber: BigNumberish): Promise<Balance> {
     const _value: BigNumberish = await this.creditLineContract.callStatic.calculateBorrowableAmount(creditLineNumber);
     const borrowAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).borrowAsset;
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
 
-    return new BigNumber(_value.toString()).div(new BigNumber(10).pow(borrowDecimal)).toFixed(borrowDecimal);
+    return { value: _value.toString(), decimals: borrowDecimal };
   }
 
   /**
@@ -158,13 +162,13 @@ export class CreditLineApi {
    * @param creditLineNumber
    * @returns collateral tokens number (easy readable)
    */
-  public async calculateTotalCollateralTokens(creditLineNumber: BigNumberish): Promise<string> {
+  public async calculateTotalCollateralTokens(creditLineNumber: BigNumberish): Promise<Balance> {
     const _value: BigNumberish = await this.creditLineContract.callStatic.calculateTotalCollateralTokens(creditLineNumber);
     const collateralAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).collateralAsset;
     await this.tokenManager.updateTokenDecimals(collateralAsset);
     const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(collateralAsset);
 
-    return new BigNumber(_value.toString()).div(new BigNumber(10).pow(collateralDecimal)).toFixed(2);
+    return { value: _value.toString(), decimals: collateralDecimal };
   }
 
   /**
@@ -172,27 +176,29 @@ export class CreditLineApi {
    * @param creditLineNumber
    * @returns collateral tokens (easy readable)
    */
-  public async withdrawableCollateral(creditLineNumber: BigNumberish): Promise<string> {
+  public async withdrawableCollateral(creditLineNumber: BigNumberish): Promise<Balance> {
     const collateralAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).collateralAsset;
     await this.tokenManager.updateTokenDecimals(collateralAsset);
     const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(collateralAsset);
 
     const result = await this.creditLineContract.callStatic.withdrawableCollateral(creditLineNumber);
-    return new BigNumber(result.toString()).div(new BigNumber(10).pow(collateralDecimal)).toFixed(4);
+    return { value: result.toString(), decimals: collateralDecimal };
   }
 
   /**
    * @description Withdraws the collateral from the credit line
    * @param creditLineNumber
    * @param amount
-   * @param toSavingsAccount: boolean params that enables with withdrawn collateral to be
+   * @param toSavingsAccount: boolean params that enables with withdrawn collateral to be. False by default
+   * @param options transaction options
    * directly transferred from credit line to user's savings account
    * @returns Contract Transaction
    */
   public async withdrawCollateralFromCreditLine(
     creditLineNumber: BigNumberish,
     amount: string,
-    toSavingsAccount: boolean = false
+    toSavingsAccount: boolean = false,
+    options?: Overrides
   ): Promise<ContractTransaction> {
     const collateralAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).collateralAsset;
     await this.tokenManager.updateTokenDecimals(collateralAsset);
@@ -206,7 +212,8 @@ export class CreditLineApi {
     return this.creditLineContract.withdrawCollateral(
       creditLineNumber,
       _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0),
-      toSavingsAccount
+      toSavingsAccount,
+      { ...options }
     );
   }
 
@@ -222,7 +229,8 @@ export class CreditLineApi {
     creditLineNumber: BigNumberish,
     amount: string,
     strategy: StrategyType,
-    fromSavingsAccount: boolean
+    fromSavingsAccount: boolean,
+    options?: Overrides
   ): Promise<ContractTransaction> {
     const collateralAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).collateralAsset;
     await this.tokenManager.updateTokenDecimals(collateralAsset);
@@ -241,17 +249,12 @@ export class CreditLineApi {
       strategyAddress = this.config.yearnStrategyContractAddress;
     }
 
-    let msgValue = new BigNumber(0);
-    if (fromSavingsAccount == false && collateralAsset == zeroAddress) {
-      msgValue = _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal));
-    }
-
     return this.creditLineContract.depositCollateral(
       creditLineNumber,
       _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0),
       strategyAddress,
       fromSavingsAccount,
-      { value: msgValue.toString() }
+      { ...options }
     );
   }
 
@@ -261,7 +264,7 @@ export class CreditLineApi {
    * @param amount
    * @returns Contract Transaction
    */
-  public async borrowFromCreditLine(creditLineNumber: BigNumberish, amount: string): Promise<ContractTransaction> {
+  public async borrowFromCreditLine(creditLineNumber: BigNumberish, amount: string, options?: Overrides): Promise<ContractTransaction> {
     const borrowAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).borrowAsset;
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
@@ -271,7 +274,9 @@ export class CreditLineApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.creditLineContract.borrow(creditLineNumber, _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0));
+    return this.creditLineContract.borrow(creditLineNumber, _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0), {
+      ...options,
+    });
   }
 
   /**
@@ -281,7 +286,12 @@ export class CreditLineApi {
    * @param fromSavingsAccount
    * @returns Contract Transaction
    */
-  public async repayCreditLine(creditLineNumber: BigNumberish, amount: string, fromSavingsAccount: boolean): Promise<ContractTransaction> {
+  public async repayCreditLine(
+    creditLineNumber: BigNumberish,
+    amount: string,
+    fromSavingsAccount: boolean,
+    options?: Overrides
+  ): Promise<ContractTransaction> {
     const borrowAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).borrowAsset;
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
@@ -291,15 +301,11 @@ export class CreditLineApi {
       throw new Error('amount should be a valid number');
     }
 
-    let value = new BigNumber(0);
-    if (borrowAsset === zeroAddress) {
-      value = new BigNumber(amount);
-    }
     return this.creditLineContract.repay(
       creditLineNumber,
       _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
       fromSavingsAccount,
-      { value: value.toString() }
+      { ...options }
     );
   }
 
@@ -318,15 +324,11 @@ export class CreditLineApi {
    * @param toSavingsAccount: when true, the collateral liquidated will be sent to savings account directly
    * @returns Contract Transaction
    */
-  public async liquidateCreditLine(creditLineNumber: BigNumberish, toSavingsAccount: boolean = false): Promise<ContractTransaction> {
-    const debt = await this.creditLineContract.calculateCurrentDebt(creditLineNumber);
-    const borrowAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).borrowAsset;
-
-    let value = new BigNumber(0);
-    if (borrowAsset == zeroAddress) {
-      value = new BigNumber(debt.toString()).multipliedBy(4).div(3);
-    }
-
-    return this.creditLineContract.liquidate(creditLineNumber, toSavingsAccount, { value: value.toString() });
+  public async liquidateCreditLine(
+    creditLineNumber: BigNumberish,
+    toSavingsAccount: boolean = false,
+    options?: Overrides
+  ): Promise<ContractTransaction> {
+    return this.creditLineContract.liquidate(creditLineNumber, toSavingsAccount, { ...options });
   }
 }

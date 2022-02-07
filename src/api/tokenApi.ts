@@ -1,6 +1,6 @@
 import { Token } from '../wrappers/Token';
 import { Token__factory } from '../wrappers/factories/Token__factory';
-import { ContractTransaction, Signer } from 'ethers';
+import { ContractTransaction, Overrides, Signer } from 'ethers';
 import { BigNumber } from 'bignumber.js';
 import { TokenManager } from '../tokenManager';
 
@@ -30,7 +30,7 @@ export class TokenApi {
    * @param amount
    * @returns Contract Transaction
    */
-  public async IncreaseAllowance(to: string, amount: string): Promise<ContractTransaction> {
+  public async IncreaseAllowance(to: string, amount: string, options?: Overrides): Promise<ContractTransaction> {
     const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('shares should be a valid number');
@@ -38,7 +38,9 @@ export class TokenApi {
     await this.tokenManager.updateTokenDecimals(this.tokenContract.address);
     const decimal = await this.tokenManager.getTokenDecimals(this.tokenContract.address);
 
-    return this.tokenContract.connect(this.signer).increaseAllowance(to, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0));
+    return this.tokenContract
+      .connect(this.signer)
+      .increaseAllowance(to, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0), { ...options });
   }
 
   /**
@@ -47,7 +49,7 @@ export class TokenApi {
    * @param amount
    * @returns Contract Transaction
    */
-  public async approve(to: string, amount: string): Promise<ContractTransaction> {
+  public async approve(to: string, amount: string, options?: Overrides): Promise<ContractTransaction> {
     const _amount = new BigNumber(amount);
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('shares should be a valid number');
@@ -55,7 +57,9 @@ export class TokenApi {
     await this.tokenManager.updateTokenDecimals(this.tokenContract.address);
     const decimal = await this.tokenManager.getTokenDecimals(this.tokenContract.address);
 
-    return this.tokenContract.connect(this.signer).approve(to, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0));
+    return this.tokenContract
+      .connect(this.signer)
+      .approve(to, _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0), { ...options });
   }
 
   /**

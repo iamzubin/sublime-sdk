@@ -12,7 +12,6 @@ import {
   Contract,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   CallOverrides,
 } from 'ethers';
 import { BytesLike } from '@ethersproject/bytes';
@@ -22,7 +21,7 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface NoYieldInterface extends ethers.utils.Interface {
   functions: {
-    'emergencyWithdraw(address,address)': FunctionFragment;
+    'emergencyWithdraw(address,address,uint256)': FunctionFragment;
     'getSharesForTokens(uint256,address)': FunctionFragment;
     'getTokensForShares(uint256,address)': FunctionFragment;
     'initialize(address,address)': FunctionFragment;
@@ -37,7 +36,7 @@ interface NoYieldInterface extends ethers.utils.Interface {
     'updateSavingsAccount(address)': FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'emergencyWithdraw', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'emergencyWithdraw', values: [string, string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'getSharesForTokens', values: [BigNumberish, string]): string;
   encodeFunctionData(functionFragment: 'getTokensForShares', values: [BigNumberish, string]): string;
   encodeFunctionData(functionFragment: 'initialize', values: [string, string]): string;
@@ -127,30 +126,24 @@ export class NoYield extends Contract {
     emergencyWithdraw(
       _asset: string,
       _wallet: string,
+      _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'emergencyWithdraw(address,address)'(
+    'emergencyWithdraw(address,address,uint256)'(
       _asset: string,
       _wallet: string,
+      _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<[BigNumber] & { shares: BigNumber }>;
+    getSharesForTokens(amount: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'getSharesForTokens(uint256,address)'(
-      amount: BigNumberish,
-      asset: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { shares: BigNumber }>;
+    'getSharesForTokens(uint256,address)'(amount: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<[BigNumber] & { amount: BigNumber }>;
+    getTokensForShares(shares: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'getTokensForShares(uint256,address)'(
-      shares: BigNumberish,
-      asset: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { amount: BigNumber }>;
+    'getTokensForShares(uint256,address)'(shares: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     initialize(
       _owner: string,
@@ -164,22 +157,22 @@ export class NoYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    liquidityToken(_asset: string, overrides?: CallOverrides): Promise<[string] & { _tokenAddress: string }>;
+    liquidityToken(_asset: string, overrides?: CallOverrides): Promise<[string]>;
 
-    'liquidityToken(address)'(_asset: string, overrides?: CallOverrides): Promise<[string] & { _tokenAddress: string }>;
+    'liquidityToken(address)'(_asset: string, overrides?: CallOverrides): Promise<[string]>;
 
     lockTokens(
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'lockTokens(address,address,uint256)'(
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -239,22 +232,24 @@ export class NoYield extends Contract {
   emergencyWithdraw(
     _asset: string,
     _wallet: string,
+    _amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'emergencyWithdraw(address,address)'(
+  'emergencyWithdraw(address,address,uint256)'(
     _asset: string,
     _wallet: string,
+    _amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+  getSharesForTokens(amount: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  'getSharesForTokens(uint256,address)'(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+  'getSharesForTokens(uint256,address)'(amount: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+  getTokensForShares(shares: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  'getTokensForShares(uint256,address)'(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+  'getTokensForShares(uint256,address)'(shares: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   initialize(
     _owner: string,
@@ -276,14 +271,14 @@ export class NoYield extends Contract {
     user: string,
     asset: string,
     amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'lockTokens(address,address,uint256)'(
     user: string,
     asset: string,
     amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
@@ -334,17 +329,22 @@ export class NoYield extends Contract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    emergencyWithdraw(_asset: string, _wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    emergencyWithdraw(_asset: string, _wallet: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'emergencyWithdraw(address,address)'(_asset: string, _wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'emergencyWithdraw(address,address,uint256)'(
+      _asset: string,
+      _wallet: string,
+      _amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getSharesForTokens(amount: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getSharesForTokens(uint256,address)'(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'getSharesForTokens(uint256,address)'(amount: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getTokensForShares(shares: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getTokensForShares(uint256,address)'(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'getTokensForShares(uint256,address)'(shares: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     initialize(_owner: string, _savingsAccount: string, overrides?: CallOverrides): Promise<void>;
 
@@ -413,21 +413,27 @@ export class NoYield extends Contract {
   };
 
   estimateGas: {
-    emergencyWithdraw(_asset: string, _wallet: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'emergencyWithdraw(address,address)'(
+    emergencyWithdraw(
       _asset: string,
       _wallet: string,
+      _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'emergencyWithdraw(address,address,uint256)'(
+      _asset: string,
+      _wallet: string,
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'getSharesForTokens(uint256,address)'(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getSharesForTokens(amount: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    'getSharesForTokens(uint256,address)'(amount: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'getTokensForShares(uint256,address)'(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getTokensForShares(shares: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'getTokensForShares(uint256,address)'(shares: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     initialize(_owner: string, _savingsAccount: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
@@ -445,14 +451,14 @@ export class NoYield extends Contract {
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     'lockTokens(address,address,uint256)'(
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -499,22 +505,24 @@ export class NoYield extends Contract {
     emergencyWithdraw(
       _asset: string,
       _wallet: string,
+      _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'emergencyWithdraw(address,address)'(
+    'emergencyWithdraw(address,address,uint256)'(
       _asset: string,
       _wallet: string,
+      _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getSharesForTokens(amount: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'getSharesForTokens(uint256,address)'(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'getSharesForTokens(uint256,address)'(amount: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getTokensForShares(shares: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    'getTokensForShares(uint256,address)'(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    'getTokensForShares(uint256,address)'(shares: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     initialize(
       _owner: string,
@@ -536,14 +544,14 @@ export class NoYield extends Contract {
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'lockTokens(address,address,uint256)'(
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;

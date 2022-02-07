@@ -167,7 +167,7 @@ export class SublimeSubgraph {
       lenders.push({
         address: sha256(Buffer.from(date + '' + index)).slice(0, 40),
         shareInPool: new BigNumber(this.getRandomInt(3000)).div(100).toFixed(2),
-        suppliedAmount: new BigNumber(this.getRandomInt(100000000)).div(100).toFixed(2),
+        suppliedAmount: { value: new BigNumber(this.getRandomInt(100000000)).div(100).toFixed(2), decimals: 2 },
         poolToken: {
           address: poolToken,
           name: 'Pending...',
@@ -224,9 +224,7 @@ export class SublimeSubgraph {
           .div(new BigNumber(10).pow(30))
           .div(24 * 60 * 60 * 365);
 
-        currentDebt = new BigNumber(a.principal)
-          .plus(interestAccrued)
-          .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.borrowAsset)));
+        currentDebt = new BigNumber(a.principal).plus(interestAccrued);
 
         collateralRatio = new BigNumber(creditLineTotalCollateralTokens[a.id])
           .multipliedBy(100)
@@ -236,9 +234,9 @@ export class SublimeSubgraph {
           .div(currentDebt);
       }
       return {
-        currentDebt: currentDebt.toFixed(2),
-        principal: new BigNumber(a.principal).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset))).toFixed(2),
-        interestAccrued: interestAccrued.toFixed(6),
+        currentDebt: { value: currentDebt.toFixed(0), decimals: this.tokenManager.getTokenDecimals(a.borrowAsset) },
+        principal: { value: new BigNumber(a.principal).toFixed(0), decimals: this.tokenManager.getTokenDecimals(a.borrowAsset) },
+        interestAccrued: { value: interestAccrued.toFixed(0), decimals: this.tokenManager.getTokenDecimals(a.borrowAsset) },
         collateralRatio: collateralRatio.toFixed(2),
         creditLimit: new BigNumber(a.borrowLimit).div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.borrowAsset))).toFixed(2),
         interestRate: new BigNumber(a.borrowRate).div(new BigNumber(10).pow(28)).toFixed(2),
@@ -284,12 +282,11 @@ export class SublimeSubgraph {
       return {
         address: a.id,
         poolType: a.loanStatus,
-        borrowedAmount: new BigNumber(a.borrowAmountRequested)
-          .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.borrowAsset)))
-          .toFixed(2),
-        lentAmount: new BigNumber(a.lentAmount)
-          .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(a.collateralAsset)))
-          .toFixed(2),
+        borrowedAmount: {
+          value: new BigNumber(a.borrowAmountRequested).toFixed(0),
+          decimals: this.tokenManager.getTokenDecimals(a.borrowAsset),
+        },
+        lentAmount: { value: new BigNumber(a.lentAmount).toFixed(0), decimals: this.tokenManager.getTokenDecimals(a.collateralAsset) },
         borrowRate: new BigNumber(a.borrowRate).div(new BigNumber(10).pow(28)).toFixed(2),
         nextPayment: new BigNumber(a.nextRepayTime).toString(),
         repaymentProgress: new BigNumber(this.getRandomInt(10000)).div(100).toFixed(2),
@@ -308,8 +305,8 @@ export class SublimeSubgraph {
         estimatedEndDate: new BigNumber(this.getRandomInt(1000000)).multipliedBy(new BigNumber(10).pow(4)).toString(),
         lockedCollateral: new BigNumber(this.getRandomInt(10000)).div(100).toFixed(2),
         collectionProgress: new BigNumber(this.getRandomInt(100)).toFixed(2),
-        lent: new BigNumber(this.getRandomInt(1000000)).div(100).toFixed(2),
-        profit: new BigNumber(this.getRandomInt(100000)).div(100).toFixed(2),
+        lent: { value: new BigNumber(this.getRandomInt(1000000)).toFixed(0), decimals: 2 },
+        profit: { value: new BigNumber(this.getRandomInt(100000)).toFixed(2), decimals: 2 },
         endedOn: new BigNumber(this.getRandomInt(1000000)).multipliedBy(1000).toString(),
       };
     });
@@ -428,24 +425,24 @@ export class SublimeSubgraph {
     // return savingsAccountUserDetails;
 
     savingAccountsUserDetailsDisplay.user = savingsAccountUserDetails.user;
-    savingAccountsUserDetailsDisplay.totalBalance = savingsAccountUserDetails.totalBalance.toFixed(2);
+    savingAccountsUserDetailsDisplay.totalBalance = { value: savingsAccountUserDetails.totalBalance.toFixed(2), decimals: 0 };
     savingAccountsUserDetailsDisplay.balances = [];
     savingsAccountUserDetails.balances.forEach((a) => {
       let strategyBalance: [SavingsAccountStrategyBalanceDisplay?] = [];
       a.strategyBalance.forEach((b) => {
         strategyBalance.push({
           strategy: { address: b.strategy, type: this.yieldApi.getStrategy(b.strategy) },
-          balance: b.balance.toFixed(2),
-          balanceUSD: b.balanceUSD.toFixed(2),
+          balance: { value: b.balance.toFixed(2), decimals: 0 },
+          balanceUSD: { value: b.balanceUSD.toFixed(2), decimals: 0 },
           APR: b.APR.toFixed(2),
         });
       });
 
       savingAccountsUserDetailsDisplay.balances.push({
         token: a.token,
-        balance: a.balance.toFixed(2),
+        balance: { value: a.balance.toFixed(2), decimals: 0 },
         amountAllocatedToCreditLines: a.amountAllocatedToCreditLines.toFixed(2),
-        balanceUSD: a.balanceUSD.toFixed(2),
+        balanceUSD: { value: a.balanceUSD.toFixed(2), decimals: 0 },
         APR: a.APR.toFixed(2),
         strategyBalance,
       });
@@ -472,8 +469,8 @@ export class SublimeSubgraph {
    */
   async getDashboardOverview(address: string): Promise<DashboardOverview> {
     return {
-      totalBorrowedAmount: new BigNumber(this.getRandomInt(100000000)).div(100).toFixed(2),
-      totalLentAmount: new BigNumber(this.getRandomInt(10000000)).div(100).toFixed(2),
+      totalBorrowedAmount: { value: new BigNumber(this.getRandomInt(100000000)).div(100).toFixed(2), decimals: 2 },
+      totalLentAmount: { value: new BigNumber(this.getRandomInt(10000000)).div(100).toFixed(2), decimals: 2 },
       totalBorrowRate: new BigNumber(this.getRandomInt(1000)).div(100).toFixed(2),
       totalLentRate: new BigNumber(this.getRandomInt(1000)).div(100).toFixed(2),
     };
@@ -496,22 +493,22 @@ export class SublimeSubgraph {
 
     for (let i = 0; i < creditLineAsLender.length; i++) {
       let borrowAsset = creditLineAsLender[i].borrowAsset;
-      let principal = new BigNumber(creditLineAsLender[i].principal);
+      let principal = new BigNumber(creditLineAsLender[i].principal.value.toString());
       let assetPrice = await this.tokenManager.getPricePerAsset(borrowAsset.toString());
       creditGranted = creditGranted.plus(principal.multipliedBy(assetPrice));
     }
 
     for (let i = 0; i < creditLineAsborrower.length; i++) {
       let interest = creditLineAsborrower[i].interestRate;
-      let accruedInterest = creditLineAsborrower[i].interestAccrued;
+      let accruedInterest = creditLineAsborrower[i].interestAccrued.value;
 
       if (creditLineAsborrower[i].type == 'ACTIVE') {
-        let credit = new BigNumber(creditLineAsborrower[i].principal);
+        let credit = new BigNumber(creditLineAsborrower[i].principal.value.toString());
         let price = await this.tokenManager.getPricePerAsset(creditLineAsLender[i].borrowAsset.toString());
         activeCredit = activeCredit.plus(credit.multipliedBy(price));
       }
 
-      interestAccrued = interestAccrued.plus(accruedInterest);
+      interestAccrued = interestAccrued.plus(accruedInterest.toString());
       interestRate = interestRate.plus(interest);
     }
 
@@ -522,9 +519,9 @@ export class SublimeSubgraph {
     }
 
     return {
-      creditGranted: creditGranted.toFixed(2),
-      interestAccrued: interestAccrued.toFixed(2),
-      activeCredit: activeCredit.toFixed(2),
+      creditGranted: { value: creditGranted.toFixed(2), decimals: 2 },
+      interestAccrued: { value: interestAccrued.toFixed(2), decimals: 2 },
+      activeCredit: { value: activeCredit.toFixed(2), decimals: 2 },
       interestRate: interestRate.toFixed(2),
     };
   }

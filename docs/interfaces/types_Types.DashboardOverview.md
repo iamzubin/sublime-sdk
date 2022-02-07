@@ -21,27 +21,27 @@
 
 #### Defined in
 
-[types/Types.ts:132](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L132)
+[types/Types.ts:133](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L133)
 
 ___
 
 ### totalBorrowedAmount
 
-• **totalBorrowedAmount**: `string`
+• **totalBorrowedAmount**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:130](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L130)
+[types/Types.ts:131](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L131)
 
 ___
 
 ### totalLentAmount
 
-• **totalLentAmount**: `string`
+• **totalLentAmount**: [`Balance`](types_Types.Balance.md)
 
 #### Defined in
 
-[types/Types.ts:131](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L131)
+[types/Types.ts:132](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L132)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[types/Types.ts:133](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/types/Types.ts#L133)
+[types/Types.ts:134](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/types/Types.ts#L134)

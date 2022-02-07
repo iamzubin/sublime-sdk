@@ -235,7 +235,7 @@ const _abi = [
     ],
     name: 'addCollateralInMarginCall',
     outputs: [],
-    stateMutability: 'payable',
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -244,7 +244,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: '',
+        name: 'poolBorrower',
         type: 'address',
       },
     ],
@@ -255,7 +255,7 @@ const _abi = [
     inputs: [],
     name: 'closeLoan',
     outputs: [],
-    stateMutability: 'payable',
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -273,7 +273,7 @@ const _abi = [
     ],
     name: 'depositCollateral',
     outputs: [],
-    stateMutability: 'payable',
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -288,12 +288,12 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'lenderPoolTokens',
         type: 'uint256',
       },
       {
         internalType: 'uint256',
-        name: '',
+        name: 'totalPoolTokens',
         type: 'uint256',
       },
     ],
@@ -306,7 +306,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'loanStatus',
         type: 'uint256',
       },
     ],
@@ -325,10 +325,116 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'marginCallEndTimeForLender',
         type: 'uint256',
       },
     ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_borrowAmountRequested',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '_borrowRate',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address',
+        name: '_borrower',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: '_borrowAsset',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: '_collateralAsset',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: '_idealCollateralRatio',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint64',
+        name: '_repaymentInterval',
+        type: 'uint64',
+      },
+      {
+        internalType: 'uint64',
+        name: '_noOfRepaymentIntervals',
+        type: 'uint64',
+      },
+      {
+        internalType: 'address',
+        name: '_poolSavingsStrategy',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: '_collateralAmount',
+        type: 'uint256',
+      },
+      {
+        internalType: 'bool',
+        name: '_transferFromSavingsAccount',
+        type: 'bool',
+      },
+      {
+        internalType: 'address',
+        name: '_lenderVerifier',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: '_loanWithdrawalDuration',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '_collectionPeriod',
+        type: 'uint256',
+      },
+    ],
+    name: 'initialize',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_lender',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: '_amount',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address',
+        name: '_strategy',
+        type: 'address',
+      },
+      {
+        internalType: 'bool',
+        name: '_fromSavingsAccount',
+        type: 'bool',
+      },
+    ],
+    name: 'lend',
+    outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
   },
@@ -338,7 +444,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'totalPoolTokens',
         type: 'uint256',
       },
     ],

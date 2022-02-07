@@ -219,6 +219,43 @@ const _abi = [
       {
         indexed: true,
         internalType: 'address',
+        name: 'token',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'strategy',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'shares',
+        type: 'uint256',
+      },
+    ],
+    name: 'TransferShares',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
         name: 'from',
         type: 'address',
       },
@@ -284,11 +321,6 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-      {
         internalType: 'address',
         name: 'token',
         type: 'address',
@@ -297,6 +329,11 @@ const _abi = [
         internalType: 'address',
         name: 'to',
         type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
       },
     ],
     name: 'approve',
@@ -326,7 +363,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'shareBalance',
         type: 'uint256',
       },
     ],
@@ -335,11 +372,6 @@ const _abi = [
   },
   {
     inputs: [
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
       {
         internalType: 'address',
         name: 'token',
@@ -350,6 +382,11 @@ const _abi = [
         name: 'to',
         type: 'address',
       },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
     ],
     name: 'decreaseAllowance',
     outputs: [],
@@ -358,11 +395,6 @@ const _abi = [
   },
   {
     inputs: [
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
       {
         internalType: 'address',
         name: 'token',
@@ -378,6 +410,11 @@ const _abi = [
         name: 'to',
         type: 'address',
       },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
     ],
     name: 'deposit',
     outputs: [
@@ -387,7 +424,7 @@ const _abi = [
         type: 'uint256',
       },
     ],
-    stateMutability: 'payable',
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -417,11 +454,6 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-      {
         internalType: 'address',
         name: 'token',
         type: 'address',
@@ -430,6 +462,11 @@ const _abi = [
         internalType: 'address',
         name: 'to',
         type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
       },
     ],
     name: 'increaseAllowance',
@@ -440,11 +477,6 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-      {
         internalType: 'address',
         name: 'token',
         type: 'address',
@@ -453,6 +485,11 @@ const _abi = [
         internalType: 'address',
         name: 'from',
         type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
       },
     ],
     name: 'increaseAllowanceToCreditLine',
@@ -463,16 +500,6 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-      {
-        internalType: 'address',
-        name: 'token',
-        type: 'address',
-      },
-      {
         internalType: 'address',
         name: 'currentStrategy',
         type: 'address',
@@ -481,6 +508,16 @@ const _abi = [
         internalType: 'address',
         name: 'newStrategy',
         type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'token',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
       },
     ],
     name: 'switchStrategy',
@@ -491,18 +528,13 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-      {
         internalType: 'address',
         name: 'token',
         type: 'address',
       },
       {
         internalType: 'address',
-        name: 'poolSavingsStrategy',
+        name: 'strategy',
         type: 'address',
       },
       {
@@ -510,12 +542,17 @@ const _abi = [
         name: 'to',
         type: 'address',
       },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
     ],
     name: 'transfer',
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'tokensReceived',
         type: 'uint256',
       },
     ],
@@ -525,18 +562,13 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-      {
         internalType: 'address',
         name: 'token',
         type: 'address',
       },
       {
         internalType: 'address',
-        name: 'poolSavingsStrategy',
+        name: 'strategy',
         type: 'address',
       },
       {
@@ -549,8 +581,47 @@ const _abi = [
         name: 'to',
         type: 'address',
       },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
     ],
     name: 'transferFrom',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'tokensReceived',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_shares',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address',
+        name: '_token',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: '_strategy',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: '_to',
+        type: 'address',
+      },
+    ],
+    name: 'transferShares',
     outputs: [
       {
         internalType: 'uint256',
@@ -565,7 +636,7 @@ const _abi = [
     inputs: [
       {
         internalType: 'uint256',
-        name: 'amount',
+        name: 'shares',
         type: 'uint256',
       },
       {
@@ -579,9 +650,48 @@ const _abi = [
         type: 'address',
       },
       {
-        internalType: 'address payable',
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+    ],
+    name: 'transferSharesFrom',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'token',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'strategy',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
         name: 'withdrawTo',
         type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
       },
       {
         internalType: 'bool',
@@ -593,7 +703,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'amountWithdrawn',
         type: 'uint256',
       },
     ],
@@ -645,11 +755,6 @@ const _abi = [
   },
   {
     inputs: [
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
       {
         internalType: 'address',
         name: 'token',
@@ -666,9 +771,14 @@ const _abi = [
         type: 'address',
       },
       {
-        internalType: 'address payable',
+        internalType: 'address',
         name: 'to',
         type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
       },
       {
         internalType: 'bool',

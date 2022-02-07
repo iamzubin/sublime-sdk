@@ -99,13 +99,13 @@ export class IStrategyRegistry extends Contract {
 
     'addStrategy(address)'(_strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    getStrategies(overrides?: CallOverrides): Promise<[string[]]>;
+    getStrategies(overrides?: CallOverrides): Promise<[string[]] & { strategies: string[] }>;
 
-    'getStrategies()'(overrides?: CallOverrides): Promise<[string[]]>;
+    'getStrategies()'(overrides?: CallOverrides): Promise<[string[]] & { strategies: string[] }>;
 
-    registry(_strategy: string, overrides?: CallOverrides): Promise<[boolean]>;
+    registry(_strategy: string, overrides?: CallOverrides): Promise<[boolean] & { isValidStrategy: boolean }>;
 
-    'registry(address)'(_strategy: string, overrides?: CallOverrides): Promise<[boolean]>;
+    'registry(address)'(_strategy: string, overrides?: CallOverrides): Promise<[boolean] & { isValidStrategy: boolean }>;
 
     removeStrategy(_strategyIndex: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 

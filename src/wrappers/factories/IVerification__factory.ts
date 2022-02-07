@@ -202,7 +202,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'bool',
-        name: '',
+        name: 'isMsgSenderUser',
         type: 'bool',
       },
     ],

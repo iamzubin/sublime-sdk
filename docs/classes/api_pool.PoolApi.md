@@ -25,11 +25,9 @@
 - [generatePoolAddress](api_pool.PoolApi.md#generatepooladdress)
 - [getBalanceDetails](api_pool.PoolApi.md#getbalancedetails)
 - [getCurrentCollateralRatio](api_pool.PoolApi.md#getcurrentcollateralratio)
-- [getInitCodehash](api_pool.PoolApi.md#getinitcodehash)
 - [getLoanStatus](api_pool.PoolApi.md#getloanstatus)
 - [getMarginCallEndTime](api_pool.PoolApi.md#getmargincallendtime)
 - [getPoolInfo](api_pool.PoolApi.md#getpoolinfo)
-- [getSalt](api_pool.PoolApi.md#getsalt)
 - [getTotalSupply](api_pool.PoolApi.md#gettotalsupply)
 - [interestPerPeriod](api_pool.PoolApi.md#interestperperiod)
 - [interestPerSecond](api_pool.PoolApi.md#interestpersecond)
@@ -53,7 +51,7 @@
 
 #### Defined in
 
-[api/pool.ts:32](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L32)
+[api/pool.ts:28](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L28)
 
 ## Properties
 
@@ -63,7 +61,7 @@
 
 #### Defined in
 
-[api/pool.ts:27](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L27)
+[api/pool.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L23)
 
 ___
 
@@ -73,7 +71,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:30](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L30)
+[api/pool.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L26)
 
 ___
 
@@ -83,7 +81,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L26)
+[api/pool.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L22)
 
 ___
 
@@ -93,7 +91,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:28](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L28)
+[api/pool.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L24)
 
 ## Methods
 
@@ -113,19 +111,20 @@ ___
 
 #### Defined in
 
-[api/pool.ts:264](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L264)
+[api/pool.ts:192](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L192)
 
 ___
 
 ### createPool
 
-▸ **createPool**(`params`): `Promise`<`ContractTransaction`\>
+▸ **createPool**(`params`, `options?`): `Promise`<`ContractTransaction`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `params` | [`PoolGenerateParams`](../interfaces/types_poolGenerateParam.PoolGenerateParams.md) |
+| `options?` | `Overrides` |
 
 #### Returns
 
@@ -133,13 +132,13 @@ ___
 
 #### Defined in
 
-[api/pool.ts:39](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L39)
+[api/pool.ts:35](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L35)
 
 ___
 
 ### depositCollateral
 
-▸ **depositCollateral**(`poolContract`, `amount`, `transferFromSavingsAccount`): `Promise`<`ContractTransaction`\>
+▸ **depositCollateral**(`poolContract`, `amount`, `transferFromSavingsAccount`, `options?`): `Promise`<`ContractTransaction`\>
 
 #### Parameters
 
@@ -148,6 +147,7 @@ ___
 | `poolContract` | `string` |
 | `amount` | `string` |
 | `transferFromSavingsAccount` | `boolean` |
+| `options?` | `Overrides` |
 
 #### Returns
 
@@ -155,19 +155,20 @@ ___
 
 #### Defined in
 
-[api/pool.ts:178](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L178)
+[api/pool.ts:101](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L101)
 
 ___
 
 ### generatePoolAddress
 
-▸ **generatePoolAddress**(`params`): `Promise`<`string`\>
+▸ **generatePoolAddress**(`creator`, `salt`): `Promise`<`string`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `params` | [`PoolGenerateParams`](../interfaces/types_poolGenerateParam.PoolGenerateParams.md) |
+| `creator` | `string` |
+| `salt` | `BytesLike` |
 
 #### Returns
 
@@ -175,7 +176,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:102](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L102)
+[api/pool.ts:97](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L97)
 
 ___
 
@@ -196,7 +197,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:280](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L280)
+[api/pool.ts:208](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L208)
 
 ___
 
@@ -216,30 +217,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:210](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L210)
-
-___
-
-### getInitCodehash
-
-▸ `Private` **getInitCodehash**(`proxyBytecode`, `poolImplAddr`, `poolData`, `admin`): `string`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `proxyBytecode` | `BytesLike` |
-| `poolImplAddr` | `string` |
-| `poolData` | `BytesLike` |
-| `admin` | `string` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-[api/pool.ts:372](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L372)
+[api/pool.ts:136](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L136)
 
 ___
 
@@ -259,7 +237,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:274](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L274)
+[api/pool.ts:202](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L202)
 
 ___
 
@@ -280,7 +258,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:269](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L269)
+[api/pool.ts:197](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L197)
 
 ___
 
@@ -300,28 +278,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:302](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L302)
-
-___
-
-### getSalt
-
-▸ `Private` **getSalt**(`address`, `salt`): `string`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `address` | `string` |
-| `salt` | `BytesLike` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-[api/pool.ts:368](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L368)
+[api/pool.ts:230](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L230)
 
 ___
 
@@ -341,7 +298,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:292](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L292)
+[api/pool.ts:220](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L220)
 
 ___
 
@@ -362,7 +319,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:237](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L237)
+[api/pool.ts:165](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L165)
 
 ___
 
@@ -383,7 +340,7 @@ ___
 
 #### Defined in
 
-[api/pool.ts:250](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L250)
+[api/pool.ts:178](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L178)
 
 ___
 
@@ -403,13 +360,13 @@ ___
 
 #### Defined in
 
-[api/pool.ts:199](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L199)
+[api/pool.ts:125](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L125)
 
 ___
 
 ### liquidateLender
 
-▸ **liquidateLender**(`poolContract`, `lender`, `fromSavingsAccount`, `toSavingsAccount`, `recieveLiquidityShare`): `Promise`<`ContractTransaction`\>
+▸ **liquidateLender**(`poolContract`, `lender`, `fromSavingsAccount`, `toSavingsAccount`, `recieveLiquidityShare`, `options?`): `Promise`<`ContractTransaction`\>
 
 #### Parameters
 
@@ -420,6 +377,7 @@ ___
 | `fromSavingsAccount` | `boolean` |
 | `toSavingsAccount` | `boolean` |
 | `recieveLiquidityShare` | `boolean` |
+| `options?` | `Overrides` |
 
 #### Returns
 
@@ -427,13 +385,13 @@ ___
 
 #### Defined in
 
-[api/pool.ts:226](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L226)
+[api/pool.ts:153](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L153)
 
 ___
 
 ### liquidatePool
 
-▸ **liquidatePool**(`poolContract`, `fromSavingsAccount`, `toSavingsAccount`, `recieveLiquidityShare`): `Promise`<`ContractTransaction`\>
+▸ **liquidatePool**(`poolContract`, `fromSavingsAccount`, `toSavingsAccount`, `recieveLiquidityShare`, `options?`): `Promise`<`ContractTransaction`\>
 
 #### Parameters
 
@@ -443,6 +401,7 @@ ___
 | `fromSavingsAccount` | `boolean` |
 | `toSavingsAccount` | `boolean` |
 | `recieveLiquidityShare` | `boolean` |
+| `options?` | `Overrides` |
 
 #### Returns
 
@@ -450,4 +409,4 @@ ___
 
 #### Defined in
 
-[api/pool.ts:216](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/pool.ts#L216)
+[api/pool.ts:142](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/pool.ts#L142)

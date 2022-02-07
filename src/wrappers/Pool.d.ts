@@ -12,7 +12,6 @@ import {
   Contract,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   CallOverrides,
 } from 'ethers';
 import { BytesLike } from '@ethersproject/bytes';
@@ -42,11 +41,11 @@ interface PoolInterface extends ethers.utils.Interface {
     'getLoanStatus()': FunctionFragment;
     'getMarginCallEndTime(address)': FunctionFragment;
     'increaseAllowance(address,uint256)': FunctionFragment;
-    'initialize(uint256,uint256,address,address,address,uint256,uint256,uint256,address,uint256,bool,address,uint256,uint256)': FunctionFragment;
+    'initialize(uint256,uint256,address,address,address,uint256,uint64,uint64,address,uint256,bool,address,uint256,uint256)': FunctionFragment;
     'interestPerPeriod(uint256)': FunctionFragment;
     'interestPerSecond(uint256)': FunctionFragment;
     'interestToPay()': FunctionFragment;
-    'lend(address,uint256,address)': FunctionFragment;
+    'lend(address,uint256,address,bool)': FunctionFragment;
     'lenders(address)': FunctionFragment;
     'liquidateCancelPenalty(bool,bool)': FunctionFragment;
     'liquidateForLender(address,bool,bool,bool)': FunctionFragment;
@@ -108,7 +107,7 @@ interface PoolInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'interestPerPeriod', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'interestPerSecond', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'interestToPay', values?: undefined): string;
-  encodeFunctionData(functionFragment: 'lend', values: [string, BigNumberish, string]): string;
+  encodeFunctionData(functionFragment: 'lend', values: [string, BigNumberish, string, boolean]): string;
   encodeFunctionData(functionFragment: 'lenders', values: [string]): string;
   encodeFunctionData(functionFragment: 'liquidateCancelPenalty', values: [boolean, boolean]): string;
   encodeFunctionData(functionFragment: 'liquidateForLender', values: [string, boolean, boolean, boolean]): string;
@@ -255,14 +254,14 @@ export class Pool extends Contract {
       _lender: string,
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'addCollateralInMarginCall(address,uint256,bool)'(
       _lender: string,
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -313,9 +312,9 @@ export class Pool extends Contract {
 
     'cancelPool()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    closeLoan(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    closeLoan(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    'closeLoan()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    'closeLoan()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     correspondingBorrowTokens(
       _totalCollateralTokens: BigNumberish,
@@ -350,13 +349,13 @@ export class Pool extends Contract {
     depositCollateral(
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'depositCollateral(uint256,bool)'(
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     getBalanceDetails(_lender: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
@@ -414,10 +413,10 @@ export class Pool extends Contract {
       _lenderVerifier: string,
       _loanWithdrawalDuration: BigNumberish,
       _collectionPeriod: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'initialize(uint256,uint256,address,address,address,uint256,uint256,uint256,address,uint256,bool,address,uint256,uint256)'(
+    'initialize(uint256,uint256,address,address,address,uint256,uint64,uint64,address,uint256,bool,address,uint256,uint256)'(
       _borrowAmountRequested: BigNumberish,
       _borrowRate: BigNumberish,
       _borrower: string,
@@ -432,7 +431,7 @@ export class Pool extends Contract {
       _lenderVerifier: string,
       _loanWithdrawalDuration: BigNumberish,
       _collectionPeriod: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     interestPerPeriod(_balance: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -451,14 +450,16 @@ export class Pool extends Contract {
       _lender: string,
       _amount: BigNumberish,
       _strategy: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _fromSavingsAccount: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'lend(address,uint256,address)'(
+    'lend(address,uint256,address,bool)'(
       _lender: string,
       _amount: BigNumberish,
       _strategy: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _fromSavingsAccount: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     lenders(
@@ -466,8 +467,8 @@ export class Pool extends Contract {
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber] & {
-        effectiveInterestWithdrawn: BigNumber;
         marginCallEndTime: BigNumber;
+        effectiveInterestWithdrawn: BigNumber;
         extraLiquidityShares: BigNumber;
       }
     >;
@@ -477,8 +478,8 @@ export class Pool extends Contract {
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber] & {
-        effectiveInterestWithdrawn: BigNumber;
         marginCallEndTime: BigNumber;
+        effectiveInterestWithdrawn: BigNumber;
         extraLiquidityShares: BigNumber;
       }
     >;
@@ -500,7 +501,7 @@ export class Pool extends Contract {
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'liquidateForLender(address,bool,bool,bool)'(
@@ -508,21 +509,21 @@ export class Pool extends Contract {
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     liquidatePool(
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'liquidatePool(bool,bool,bool)'(
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
@@ -534,53 +535,53 @@ export class Pool extends Contract {
     'paused()'(overrides?: CallOverrides): Promise<[boolean]>;
 
     poolConstants(overrides?: CallOverrides): Promise<
-      [string, BigNumber, BigNumber, BigNumber, string, BigNumber, BigNumber, BigNumber, BigNumber, string, string, string] & {
-        borrower: string;
-        borrowAmountRequested: BigNumber;
+      [BigNumber, BigNumber, BigNumber, BigNumber, string, string, string, string, string, BigNumber, BigNumber, BigNumber] & {
         loanStartTime: BigNumber;
         loanWithdrawalDeadline: BigNumber;
-        borrowAsset: string;
-        idealCollateralRatio: BigNumber;
-        borrowRate: BigNumber;
         noOfRepaymentIntervals: BigNumber;
         repaymentInterval: BigNumber;
+        borrower: string;
         collateralAsset: string;
+        borrowAsset: string;
         poolSavingsStrategy: string;
         lenderVerifier: string;
+        borrowRate: BigNumber;
+        idealCollateralRatio: BigNumber;
+        borrowAmountRequested: BigNumber;
       }
     >;
 
     'poolConstants()'(overrides?: CallOverrides): Promise<
-      [string, BigNumber, BigNumber, BigNumber, string, BigNumber, BigNumber, BigNumber, BigNumber, string, string, string] & {
-        borrower: string;
-        borrowAmountRequested: BigNumber;
+      [BigNumber, BigNumber, BigNumber, BigNumber, string, string, string, string, string, BigNumber, BigNumber, BigNumber] & {
         loanStartTime: BigNumber;
         loanWithdrawalDeadline: BigNumber;
-        borrowAsset: string;
-        idealCollateralRatio: BigNumber;
-        borrowRate: BigNumber;
         noOfRepaymentIntervals: BigNumber;
         repaymentInterval: BigNumber;
+        borrower: string;
         collateralAsset: string;
+        borrowAsset: string;
         poolSavingsStrategy: string;
         lenderVerifier: string;
+        borrowRate: BigNumber;
+        idealCollateralRatio: BigNumber;
+        borrowAmountRequested: BigNumber;
       }
     >;
 
     poolVariables(overrides?: CallOverrides): Promise<
-      [BigNumber, BigNumber, number, BigNumber] & {
+      [number, BigNumber, BigNumber, BigNumber] & {
+        loanStatus: number;
         baseLiquidityShares: BigNumber;
         extraLiquidityShares: BigNumber;
-        loanStatus: number;
         penaltyLiquidityAmount: BigNumber;
       }
     >;
 
     'poolVariables()'(overrides?: CallOverrides): Promise<
-      [BigNumber, BigNumber, number, BigNumber] & {
+      [number, BigNumber, BigNumber, BigNumber] & {
+        loanStatus: number;
         baseLiquidityShares: BigNumber;
         extraLiquidityShares: BigNumber;
-        loanStatus: number;
         penaltyLiquidityAmount: BigNumber;
       }
     >;
@@ -644,14 +645,14 @@ export class Pool extends Contract {
     _lender: string,
     _amount: BigNumberish,
     _transferFromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'addCollateralInMarginCall(address,uint256,bool)'(
     _lender: string,
     _amount: BigNumberish,
     _transferFromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -698,9 +699,9 @@ export class Pool extends Contract {
 
   'cancelPool()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  closeLoan(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  closeLoan(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  'closeLoan()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  'closeLoan()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   correspondingBorrowTokens(
     _totalCollateralTokens: BigNumberish,
@@ -735,13 +736,13 @@ export class Pool extends Contract {
   depositCollateral(
     _amount: BigNumberish,
     _transferFromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'depositCollateral(uint256,bool)'(
     _amount: BigNumberish,
     _transferFromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   getBalanceDetails(_lender: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
@@ -799,10 +800,10 @@ export class Pool extends Contract {
     _lenderVerifier: string,
     _loanWithdrawalDuration: BigNumberish,
     _collectionPeriod: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'initialize(uint256,uint256,address,address,address,uint256,uint256,uint256,address,uint256,bool,address,uint256,uint256)'(
+  'initialize(uint256,uint256,address,address,address,uint256,uint64,uint64,address,uint256,bool,address,uint256,uint256)'(
     _borrowAmountRequested: BigNumberish,
     _borrowRate: BigNumberish,
     _borrower: string,
@@ -817,7 +818,7 @@ export class Pool extends Contract {
     _lenderVerifier: string,
     _loanWithdrawalDuration: BigNumberish,
     _collectionPeriod: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   interestPerPeriod(_balance: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
@@ -836,14 +837,16 @@ export class Pool extends Contract {
     _lender: string,
     _amount: BigNumberish,
     _strategy: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    _fromSavingsAccount: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'lend(address,uint256,address)'(
+  'lend(address,uint256,address,bool)'(
     _lender: string,
     _amount: BigNumberish,
     _strategy: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    _fromSavingsAccount: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   lenders(
@@ -851,8 +854,8 @@ export class Pool extends Contract {
     overrides?: CallOverrides
   ): Promise<
     [BigNumber, BigNumber, BigNumber] & {
-      effectiveInterestWithdrawn: BigNumber;
       marginCallEndTime: BigNumber;
+      effectiveInterestWithdrawn: BigNumber;
       extraLiquidityShares: BigNumber;
     }
   >;
@@ -862,8 +865,8 @@ export class Pool extends Contract {
     overrides?: CallOverrides
   ): Promise<
     [BigNumber, BigNumber, BigNumber] & {
-      effectiveInterestWithdrawn: BigNumber;
       marginCallEndTime: BigNumber;
+      effectiveInterestWithdrawn: BigNumber;
       extraLiquidityShares: BigNumber;
     }
   >;
@@ -885,7 +888,7 @@ export class Pool extends Contract {
     _fromSavingsAccount: boolean,
     _toSavingsAccount: boolean,
     _recieveLiquidityShare: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'liquidateForLender(address,bool,bool,bool)'(
@@ -893,21 +896,21 @@ export class Pool extends Contract {
     _fromSavingsAccount: boolean,
     _toSavingsAccount: boolean,
     _recieveLiquidityShare: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   liquidatePool(
     _fromSavingsAccount: boolean,
     _toSavingsAccount: boolean,
     _recieveLiquidityShare: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'liquidatePool(bool,bool,bool)'(
     _fromSavingsAccount: boolean,
     _toSavingsAccount: boolean,
     _recieveLiquidityShare: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   name(overrides?: CallOverrides): Promise<string>;
@@ -919,53 +922,53 @@ export class Pool extends Contract {
   'paused()'(overrides?: CallOverrides): Promise<boolean>;
 
   poolConstants(overrides?: CallOverrides): Promise<
-    [string, BigNumber, BigNumber, BigNumber, string, BigNumber, BigNumber, BigNumber, BigNumber, string, string, string] & {
-      borrower: string;
-      borrowAmountRequested: BigNumber;
+    [BigNumber, BigNumber, BigNumber, BigNumber, string, string, string, string, string, BigNumber, BigNumber, BigNumber] & {
       loanStartTime: BigNumber;
       loanWithdrawalDeadline: BigNumber;
-      borrowAsset: string;
-      idealCollateralRatio: BigNumber;
-      borrowRate: BigNumber;
       noOfRepaymentIntervals: BigNumber;
       repaymentInterval: BigNumber;
+      borrower: string;
       collateralAsset: string;
+      borrowAsset: string;
       poolSavingsStrategy: string;
       lenderVerifier: string;
+      borrowRate: BigNumber;
+      idealCollateralRatio: BigNumber;
+      borrowAmountRequested: BigNumber;
     }
   >;
 
   'poolConstants()'(overrides?: CallOverrides): Promise<
-    [string, BigNumber, BigNumber, BigNumber, string, BigNumber, BigNumber, BigNumber, BigNumber, string, string, string] & {
-      borrower: string;
-      borrowAmountRequested: BigNumber;
+    [BigNumber, BigNumber, BigNumber, BigNumber, string, string, string, string, string, BigNumber, BigNumber, BigNumber] & {
       loanStartTime: BigNumber;
       loanWithdrawalDeadline: BigNumber;
-      borrowAsset: string;
-      idealCollateralRatio: BigNumber;
-      borrowRate: BigNumber;
       noOfRepaymentIntervals: BigNumber;
       repaymentInterval: BigNumber;
+      borrower: string;
       collateralAsset: string;
+      borrowAsset: string;
       poolSavingsStrategy: string;
       lenderVerifier: string;
+      borrowRate: BigNumber;
+      idealCollateralRatio: BigNumber;
+      borrowAmountRequested: BigNumber;
     }
   >;
 
   poolVariables(overrides?: CallOverrides): Promise<
-    [BigNumber, BigNumber, number, BigNumber] & {
+    [number, BigNumber, BigNumber, BigNumber] & {
+      loanStatus: number;
       baseLiquidityShares: BigNumber;
       extraLiquidityShares: BigNumber;
-      loanStatus: number;
       penaltyLiquidityAmount: BigNumber;
     }
   >;
 
   'poolVariables()'(overrides?: CallOverrides): Promise<
-    [BigNumber, BigNumber, number, BigNumber] & {
+    [number, BigNumber, BigNumber, BigNumber] & {
+      loanStatus: number;
       baseLiquidityShares: BigNumber;
       extraLiquidityShares: BigNumber;
-      loanStatus: number;
       penaltyLiquidityAmount: BigNumber;
     }
   >;
@@ -1156,7 +1159,7 @@ export class Pool extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'initialize(uint256,uint256,address,address,address,uint256,uint256,uint256,address,uint256,bool,address,uint256,uint256)'(
+    'initialize(uint256,uint256,address,address,address,uint256,uint64,uint64,address,uint256,bool,address,uint256,uint256)'(
       _borrowAmountRequested: BigNumberish,
       _borrowRate: BigNumberish,
       _borrower: string,
@@ -1186,17 +1189,23 @@ export class Pool extends Contract {
 
     'interestToPay()'(overrides?: CallOverrides): Promise<BigNumber>;
 
-    lend(_lender: string, _amount: BigNumberish, _strategy: string, overrides?: CallOverrides): Promise<void>;
+    lend(_lender: string, _amount: BigNumberish, _strategy: string, _fromSavingsAccount: boolean, overrides?: CallOverrides): Promise<void>;
 
-    'lend(address,uint256,address)'(_lender: string, _amount: BigNumberish, _strategy: string, overrides?: CallOverrides): Promise<void>;
+    'lend(address,uint256,address,bool)'(
+      _lender: string,
+      _amount: BigNumberish,
+      _strategy: string,
+      _fromSavingsAccount: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     lenders(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber] & {
-        effectiveInterestWithdrawn: BigNumber;
         marginCallEndTime: BigNumber;
+        effectiveInterestWithdrawn: BigNumber;
         extraLiquidityShares: BigNumber;
       }
     >;
@@ -1206,8 +1215,8 @@ export class Pool extends Contract {
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber] & {
-        effectiveInterestWithdrawn: BigNumber;
         marginCallEndTime: BigNumber;
+        effectiveInterestWithdrawn: BigNumber;
         extraLiquidityShares: BigNumber;
       }
     >;
@@ -1259,53 +1268,53 @@ export class Pool extends Contract {
     'paused()'(overrides?: CallOverrides): Promise<boolean>;
 
     poolConstants(overrides?: CallOverrides): Promise<
-      [string, BigNumber, BigNumber, BigNumber, string, BigNumber, BigNumber, BigNumber, BigNumber, string, string, string] & {
-        borrower: string;
-        borrowAmountRequested: BigNumber;
+      [BigNumber, BigNumber, BigNumber, BigNumber, string, string, string, string, string, BigNumber, BigNumber, BigNumber] & {
         loanStartTime: BigNumber;
         loanWithdrawalDeadline: BigNumber;
-        borrowAsset: string;
-        idealCollateralRatio: BigNumber;
-        borrowRate: BigNumber;
         noOfRepaymentIntervals: BigNumber;
         repaymentInterval: BigNumber;
+        borrower: string;
         collateralAsset: string;
+        borrowAsset: string;
         poolSavingsStrategy: string;
         lenderVerifier: string;
+        borrowRate: BigNumber;
+        idealCollateralRatio: BigNumber;
+        borrowAmountRequested: BigNumber;
       }
     >;
 
     'poolConstants()'(overrides?: CallOverrides): Promise<
-      [string, BigNumber, BigNumber, BigNumber, string, BigNumber, BigNumber, BigNumber, BigNumber, string, string, string] & {
-        borrower: string;
-        borrowAmountRequested: BigNumber;
+      [BigNumber, BigNumber, BigNumber, BigNumber, string, string, string, string, string, BigNumber, BigNumber, BigNumber] & {
         loanStartTime: BigNumber;
         loanWithdrawalDeadline: BigNumber;
-        borrowAsset: string;
-        idealCollateralRatio: BigNumber;
-        borrowRate: BigNumber;
         noOfRepaymentIntervals: BigNumber;
         repaymentInterval: BigNumber;
+        borrower: string;
         collateralAsset: string;
+        borrowAsset: string;
         poolSavingsStrategy: string;
         lenderVerifier: string;
+        borrowRate: BigNumber;
+        idealCollateralRatio: BigNumber;
+        borrowAmountRequested: BigNumber;
       }
     >;
 
     poolVariables(overrides?: CallOverrides): Promise<
-      [BigNumber, BigNumber, number, BigNumber] & {
+      [number, BigNumber, BigNumber, BigNumber] & {
+        loanStatus: number;
         baseLiquidityShares: BigNumber;
         extraLiquidityShares: BigNumber;
-        loanStatus: number;
         penaltyLiquidityAmount: BigNumber;
       }
     >;
 
     'poolVariables()'(overrides?: CallOverrides): Promise<
-      [BigNumber, BigNumber, number, BigNumber] & {
+      [number, BigNumber, BigNumber, BigNumber] & {
+        loanStatus: number;
         baseLiquidityShares: BigNumber;
         extraLiquidityShares: BigNumber;
-        loanStatus: number;
         penaltyLiquidityAmount: BigNumber;
       }
     >;
@@ -1432,14 +1441,14 @@ export class Pool extends Contract {
       _lender: string,
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     'addCollateralInMarginCall(address,uint256,bool)'(
       _lender: string,
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1486,9 +1495,9 @@ export class Pool extends Contract {
 
     'cancelPool()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    closeLoan(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    closeLoan(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    'closeLoan()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'closeLoan()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     correspondingBorrowTokens(
       _totalCollateralTokens: BigNumberish,
@@ -1523,13 +1532,13 @@ export class Pool extends Contract {
     depositCollateral(
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     'depositCollateral(uint256,bool)'(
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     getBalanceDetails(_lender: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1584,10 +1593,10 @@ export class Pool extends Contract {
       _lenderVerifier: string,
       _loanWithdrawalDuration: BigNumberish,
       _collectionPeriod: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'initialize(uint256,uint256,address,address,address,uint256,uint256,uint256,address,uint256,bool,address,uint256,uint256)'(
+    'initialize(uint256,uint256,address,address,address,uint256,uint64,uint64,address,uint256,bool,address,uint256,uint256)'(
       _borrowAmountRequested: BigNumberish,
       _borrowRate: BigNumberish,
       _borrower: string,
@@ -1602,7 +1611,7 @@ export class Pool extends Contract {
       _lenderVerifier: string,
       _loanWithdrawalDuration: BigNumberish,
       _collectionPeriod: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     interestPerPeriod(_balance: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1621,14 +1630,16 @@ export class Pool extends Contract {
       _lender: string,
       _amount: BigNumberish,
       _strategy: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _fromSavingsAccount: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'lend(address,uint256,address)'(
+    'lend(address,uint256,address,bool)'(
       _lender: string,
       _amount: BigNumberish,
       _strategy: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _fromSavingsAccount: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     lenders(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1652,7 +1663,7 @@ export class Pool extends Contract {
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     'liquidateForLender(address,bool,bool,bool)'(
@@ -1660,21 +1671,21 @@ export class Pool extends Contract {
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     liquidatePool(
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     'liquidatePool(bool,bool,bool)'(
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1749,14 +1760,14 @@ export class Pool extends Contract {
       _lender: string,
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'addCollateralInMarginCall(address,uint256,bool)'(
       _lender: string,
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1807,9 +1818,9 @@ export class Pool extends Contract {
 
     'cancelPool()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    closeLoan(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    closeLoan(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    'closeLoan()'(overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    'closeLoan()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     correspondingBorrowTokens(
       _totalCollateralTokens: BigNumberish,
@@ -1844,13 +1855,13 @@ export class Pool extends Contract {
     depositCollateral(
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'depositCollateral(uint256,bool)'(
       _amount: BigNumberish,
       _transferFromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     getBalanceDetails(_lender: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1908,10 +1919,10 @@ export class Pool extends Contract {
       _lenderVerifier: string,
       _loanWithdrawalDuration: BigNumberish,
       _collectionPeriod: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'initialize(uint256,uint256,address,address,address,uint256,uint256,uint256,address,uint256,bool,address,uint256,uint256)'(
+    'initialize(uint256,uint256,address,address,address,uint256,uint64,uint64,address,uint256,bool,address,uint256,uint256)'(
       _borrowAmountRequested: BigNumberish,
       _borrowRate: BigNumberish,
       _borrower: string,
@@ -1926,7 +1937,7 @@ export class Pool extends Contract {
       _lenderVerifier: string,
       _loanWithdrawalDuration: BigNumberish,
       _collectionPeriod: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     interestPerPeriod(_balance: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1945,14 +1956,16 @@ export class Pool extends Contract {
       _lender: string,
       _amount: BigNumberish,
       _strategy: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _fromSavingsAccount: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'lend(address,uint256,address)'(
+    'lend(address,uint256,address,bool)'(
       _lender: string,
       _amount: BigNumberish,
       _strategy: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _fromSavingsAccount: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     lenders(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1976,7 +1989,7 @@ export class Pool extends Contract {
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'liquidateForLender(address,bool,bool,bool)'(
@@ -1984,21 +1997,21 @@ export class Pool extends Contract {
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     liquidatePool(
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'liquidatePool(bool,bool,bool)'(
       _fromSavingsAccount: boolean,
       _toSavingsAccount: boolean,
       _recieveLiquidityShare: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;

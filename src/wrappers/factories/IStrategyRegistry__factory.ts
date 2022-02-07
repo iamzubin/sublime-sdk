@@ -72,7 +72,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address[]',
-        name: '',
+        name: 'strategies',
         type: 'address[]',
       },
     ],
@@ -91,7 +91,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'bool',
-        name: '',
+        name: 'isValidStrategy',
         type: 'bool',
       },
     ],

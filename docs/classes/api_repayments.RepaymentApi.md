@@ -49,7 +49,7 @@
 
 #### Defined in
 
-[api/repayments.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L18)
+[api/repayments.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L18)
 
 ## Properties
 
@@ -59,7 +59,7 @@
 
 #### Defined in
 
-[api/repayments.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L15)
+[api/repayments.ts:15](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L15)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L14)
+[api/repayments.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L14)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L16)
+[api/repayments.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L16)
 
 ## Methods
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:63](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L63)
+[api/repayments.ts:63](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L63)
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:51](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L51)
+[api/repayments.ts:51](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L51)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:55](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L55)
+[api/repayments.ts:55](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L55)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:111](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L111)
+[api/repayments.ts:111](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L111)
 
 ___
 
@@ -179,7 +179,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:34](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L34)
+[api/repayments.ts:34](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L34)
 
 ___
 
@@ -199,7 +199,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:38](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L38)
+[api/repayments.ts:38](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L38)
 
 ___
 
@@ -219,7 +219,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:67](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L67)
+[api/repayments.ts:67](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L67)
 
 ___
 
@@ -239,7 +239,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:76](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L76)
+[api/repayments.ts:76](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L76)
 
 ___
 
@@ -259,7 +259,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L25)
+[api/repayments.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L25)
 
 ___
 
@@ -279,7 +279,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:47](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L47)
+[api/repayments.ts:47](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L47)
 
 ___
 
@@ -299,7 +299,7 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:102](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L102)
+[api/repayments.ts:102](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L102)
 
 ___
 
@@ -319,13 +319,13 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:59](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L59)
+[api/repayments.ts:59](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L59)
 
 ___
 
 ### repayAmount
 
-▸ **repayAmount**(`pool`, `amount`): `Promise`<`ContractTransaction`\>
+▸ **repayAmount**(`pool`, `amount`, `options`): `Promise`<`ContractTransaction`\>
 
 #### Parameters
 
@@ -333,6 +333,7 @@ ___
 | :------ | :------ |
 | `pool` | `string` |
 | `amount` | `string` |
+| `options` | `Overrides` |
 
 #### Returns
 
@@ -340,19 +341,20 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:85](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L85)
+[api/repayments.ts:85](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L85)
 
 ___
 
 ### repayPrincipal
 
-▸ **repayPrincipal**(`pool`): `Promise`<`ContractTransaction`\>
+▸ **repayPrincipal**(`pool`, `options?`): `Promise`<`ContractTransaction`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `pool` | `string` |
+| `options?` | `Overrides` |
 
 #### Returns
 
@@ -360,4 +362,4 @@ ___
 
 #### Defined in
 
-[api/repayments.ts:98](https://github.com/sublime-finance/sublime-sdk/blob/8d25170/src/api/repayments.ts#L98)
+[api/repayments.ts:98](https://github.com/sublime-finance/sublime-sdk/blob/c4b3a81/src/api/repayments.ts#L98)

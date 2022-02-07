@@ -1,4 +1,4 @@
-import { Signer, BytesLike, ContractTransaction } from 'ethers';
+import { Signer, BytesLike, ContractTransaction, Overrides } from 'ethers';
 import { SublimeConfig } from '../types/sublimeConfig';
 
 import { Verification } from '../wrappers/Verification';
@@ -48,8 +48,8 @@ export class VerificationAPI {
    * @param verifier Address of the verifier contract. (Default is the admin verifier)
    * @returns
    */
-  public async addVerifier(verifier: string = this.adminVerifier.address): Promise<ContractTransaction> {
-    return this.verification.addVerifier(verifier);
+  public async addVerifier(verifier: string = this.adminVerifier.address, options?: Overrides): Promise<ContractTransaction> {
+    return this.verification.addVerifier(verifier, { ...options });
   }
   /**
    *
@@ -57,8 +57,8 @@ export class VerificationAPI {
    * @param _isMasterLinked True if the master address is linked
    * @returns
    */
-  public async registerMasterAddress(_masterAddress: string, _isMasterLinked: boolean): Promise<ContractTransaction> {
-    return this.verification.registerMasterAddress(_masterAddress, _isMasterLinked);
+  public async registerMasterAddress(_masterAddress: string, _isMasterLinked: boolean, options?: Overrides): Promise<ContractTransaction> {
+    return this.verification.registerMasterAddress(_masterAddress, _isMasterLinked, { ...options });
   }
 
   /**
@@ -76,16 +76,17 @@ export class VerificationAPI {
     _r: BytesLike,
     _s: BytesLike,
     _twitterId: string,
-    _deadline: BigNumberish
+    _deadline: BigNumberish,
+    options?: Overrides
   ): Promise<ContractTransaction> {
-    return this.adminVerifier.registerSelf(_isMasterLinked, _v, _r, _s, _twitterId, _deadline);
+    return this.adminVerifier.registerSelf(_isMasterLinked, _v, _r, _s, _twitterId, _deadline, { ...options });
   }
 
   /**
    * @returns
    */
-  public unregisterSelfUsingAdminVerifier(): Promise<ContractTransaction> {
-    return this.adminVerifier.unregisterSelf();
+  public unregisterSelfUsingAdminVerifier(options?: Overrides): Promise<ContractTransaction> {
+    return this.adminVerifier.unregisterSelf({ ...options });
   }
 
   /**
@@ -93,8 +94,8 @@ export class VerificationAPI {
    * @param _verification Address of the verification contract
    * @returns
    */
-  public updateVerification(_verification: string): Promise<ContractTransaction> {
-    return this.adminVerifier.updateVerification(_verification);
+  public updateVerification(_verification: string, options?: Overrides): Promise<ContractTransaction> {
+    return this.adminVerifier.updateVerification(_verification, { ...options });
   }
 
   /**
@@ -102,7 +103,7 @@ export class VerificationAPI {
    * @param _signerAddress Address of the signer
    * @returns
    */
-  public updateSignerAddress(_signerAddress: string): Promise<ContractTransaction> {
-    return this.adminVerifier.updateSignerAddress(_signerAddress);
+  public updateSignerAddress(_signerAddress: string, options?: Overrides): Promise<ContractTransaction> {
+    return this.adminVerifier.updateSignerAddress(_signerAddress, { ...options });
   }
 }

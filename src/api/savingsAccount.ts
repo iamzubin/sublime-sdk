@@ -1,5 +1,5 @@
 import { SublimeConfig } from '../types/sublimeConfig';
-import { ContractTransaction, Signer } from 'ethers';
+import { ContractTransaction, Overrides, Signer } from 'ethers';
 
 import { SavingsAccount } from '../wrappers/SavingsAccount';
 import { SavingsAccount__factory } from '../wrappers/factories/SavingsAccount__factory';
@@ -37,7 +37,12 @@ export class SavingsAccountApi {
    * @param strategy
    * @returns Contract Transaction
    */
-  public async approveTokenForSavingsAccountDeposit(amount: string, asset: string, strategy: StrategyType): Promise<ContractTransaction> {
+  public async approveTokenForSavingsAccountDeposit(
+    amount: string,
+    asset: string,
+    strategy: StrategyType,
+    options?: Overrides
+  ): Promise<ContractTransaction> {
     const _strategyContractAddress: string = this.getStrategyAddress(strategy);
 
     await this.tokenManager.updateTokenDecimals(asset);
@@ -49,7 +54,9 @@ export class SavingsAccountApi {
     }
 
     const tokenContract: ERC20Detailed = new ERC20Detailed__factory(this.signer).attach(asset);
-    return tokenContract.approve(_strategyContractAddress, _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0));
+    return tokenContract.approve(_strategyContractAddress, _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0), {
+      ...options,
+    });
   }
 
   /**
@@ -60,7 +67,13 @@ export class SavingsAccountApi {
    * @param to
    * @returns Contract Transaction
    */
-  public async deposit(amount: string, asset: string, strategy: StrategyType, to: string): Promise<ContractTransaction> {
+  public async deposit(
+    amount: string,
+    asset: string,
+    strategy: StrategyType,
+    to: string,
+    options?: Overrides
+  ): Promise<ContractTransaction> {
     const _strategyContractAddress: string = this.getStrategyAddress(strategy);
 
     await this.tokenManager.updateTokenDecimals(asset);
@@ -72,11 +85,11 @@ export class SavingsAccountApi {
     }
 
     return this.savingsAccount.deposit(
-      _amount.multipliedBy(new BigNumber(10).pow(assetDecimals)).toFixed(0),
       asset,
       _strategyContractAddress,
       to,
-      { value: asset === zeroAddress ? _amount.multipliedBy(new BigNumber(10).pow(assetDecimals)).toFixed(0) : '0' }
+      _amount.multipliedBy(new BigNumber(10).pow(assetDecimals)).toFixed(0),
+      { ...options }
     );
   }
 
@@ -92,7 +105,8 @@ export class SavingsAccountApi {
     currentStrategy: StrategyType,
     newStrategy: StrategyType,
     asset: string,
-    amount: string
+    amount: string,
+    options?: Overrides
   ): Promise<ContractTransaction> {
     if (currentStrategy === newStrategy) {
       throw new Error('Current Strategy and new strategy can not be same');
@@ -113,7 +127,8 @@ export class SavingsAccountApi {
       _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
       asset,
       _currentStrategyAddress,
-      _newStrategyAddress
+      _newStrategyAddress,
+      { ...options }
     );
   }
 
@@ -131,7 +146,8 @@ export class SavingsAccountApi {
     token: string,
     strategy: StrategyType,
     to: string,
-    withdrawShares: boolean
+    withdrawShares: boolean,
+    options?: Overrides
   ): Promise<ContractTransaction> {
     const _strategyContractAddress = this.getStrategyAddress(strategy);
 
@@ -148,7 +164,8 @@ export class SavingsAccountApi {
       token,
       _strategyContractAddress,
       to,
-      withdrawShares
+      withdrawShares,
+      { ...options }
     );
   }
 
@@ -168,7 +185,8 @@ export class SavingsAccountApi {
     strategy: StrategyType,
     from: string,
     to: string,
-    withdrawShares: boolean
+    withdrawShares: boolean,
+    options?: Overrides
   ): Promise<ContractTransaction> {
     const _strategyContractAddress = this.getStrategyAddress(strategy);
 
@@ -187,7 +205,7 @@ export class SavingsAccountApi {
       from,
       to,
       withdrawShares,
-      {}
+      { ...options }
     );
   }
 
@@ -196,8 +214,8 @@ export class SavingsAccountApi {
    * @param asset / token address
    * @returns Contract Transaction
    */
-  public async withdrawAll(asset: string): Promise<ContractTransaction> {
-    return this.savingsAccount.withdrawAll(asset);
+  public async withdrawAll(asset: string, options?: Overrides): Promise<ContractTransaction> {
+    return this.savingsAccount.withdrawAll(asset, { ...options });
   }
 
   /**
@@ -207,7 +225,7 @@ export class SavingsAccountApi {
    * @param to : Address to which you want to approve
    * @returns Contract Transaction
    */
-  public async approve(amount: string, token: string, to: string): Promise<ContractTransaction> {
+  public async approve(amount: string, token: string, to: string, options?: Overrides): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
@@ -216,7 +234,7 @@ export class SavingsAccountApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.approve(_amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0), token, to);
+    return this.savingsAccount.approve(_amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0), token, to, { ...options });
   }
 
   /**
@@ -226,7 +244,7 @@ export class SavingsAccountApi {
    * @param amount
    * @returns Contract Transaction
    */
-  public async increaseAllowance(token: string, to: string, amount: string): Promise<ContractTransaction> {
+  public async increaseAllowance(token: string, to: string, amount: string, options?: Overrides): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
@@ -235,7 +253,9 @@ export class SavingsAccountApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.increaseAllowance(_amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0), token, to);
+    return this.savingsAccount.increaseAllowance(_amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0), token, to, {
+      ...options,
+    });
   }
 
   /**
@@ -245,7 +265,7 @@ export class SavingsAccountApi {
    * @param amount
    * @returns Contract Transaction
    */
-  public async decreaseAllowance(token: string, to: string, amount: string): Promise<ContractTransaction> {
+  public async decreaseAllowance(token: string, to: string, amount: string, options?: Overrides): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
@@ -254,7 +274,9 @@ export class SavingsAccountApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.decreaseAllowance(token, to, _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0));
+    return this.savingsAccount.decreaseAllowance(token, to, _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0), {
+      ...options,
+    });
   }
 
   /**
@@ -263,7 +285,7 @@ export class SavingsAccountApi {
    * @param amount
    * @returns
    */
-  public async approveTokenForCreditLines(token: string, amount: string): Promise<ContractTransaction> {
+  public async approveTokenForCreditLines(token: string, amount: string, options?: Overrides): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
@@ -275,7 +297,8 @@ export class SavingsAccountApi {
     return this.savingsAccount.approve(
       token,
       _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0),
-      this.config.creditLineContractAddress
+      this.config.creditLineContractAddress,
+      { ...options }
     );
   }
 
@@ -287,7 +310,13 @@ export class SavingsAccountApi {
    * @param to
    * @returns Contract Transaction
    */
-  public async transfer(amount: string, token: string, strategy: StrategyType, to: string): Promise<ContractTransaction> {
+  public async transfer(
+    amount: string,
+    token: string,
+    strategy: StrategyType,
+    to: string,
+    options?: Overrides
+  ): Promise<ContractTransaction> {
     const _strategyContractAddress = this.getStrategyAddress(strategy);
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
@@ -301,7 +330,8 @@ export class SavingsAccountApi {
       _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0),
       token,
       _strategyContractAddress,
-      to
+      to,
+      { ...options }
     );
   }
 
@@ -314,7 +344,14 @@ export class SavingsAccountApi {
    * @param to
    * @returns Contract Transaction
    */
-  public async transferFrom(amount: string, token: string, strategy: StrategyType, from: string, to: string): Promise<ContractTransaction> {
+  public async transferFrom(
+    amount: string,
+    token: string,
+    strategy: StrategyType,
+    from: string,
+    to: string,
+    options?: Overrides
+  ): Promise<ContractTransaction> {
     const _strategyContractAddress = this.getStrategyAddress(strategy);
 
     await this.tokenManager.updateTokenDecimals(token);
@@ -330,7 +367,8 @@ export class SavingsAccountApi {
       token,
       _strategyContractAddress,
       from,
-      to
+      to,
+      { ...options }
     );
   }
 

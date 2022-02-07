@@ -1,4 +1,5 @@
 import { BigNumber } from 'bignumber.js';
+import { BigNumberish } from 'ethers';
 import { BindingName } from 'typescript';
 
 export interface Asset {
@@ -77,22 +78,22 @@ export interface SavingsAccountUserDetails {
 // ---------only for disaply ----------- removeLatter
 export interface SavingsAccountStrategyBalanceDisplay {
   strategy: Strategy;
-  balance: string;
-  balanceUSD: string;
+  balance: Balance;
+  balanceUSD: Balance;
   APR: string;
 }
 export interface SavingsAccountBalanceDisplay {
   token: Asset;
-  balance: string;
+  balance: Balance;
   amountAllocatedToCreditLines: string;
-  balanceUSD: string;
+  balanceUSD: Balance;
   strategyBalance: [SavingsAccountStrategyBalanceDisplay?];
   APR: string; // weighted average of all strategy APRs
 }
 export interface SavingAccountUserDetailDisplay {
   user: string;
   balances: [SavingsAccountBalanceDisplay?];
-  totalBalance: string;
+  totalBalance: Balance;
 }
 
 // ---------only for disaply ----------- removeLatter
@@ -101,8 +102,8 @@ export interface PoolDetail {
   username?: string; // refers to borrower user name
   address: string; // refer to borrower address,
   borrowRate: string;
-  borrowedAmount: string;
-  lentAmount: string;
+  borrowedAmount: Balance;
+  lentAmount: Balance;
   nextPayment: string; // timestamp
   repaymentProgress: string;
   borrowAsset: Asset;
@@ -111,8 +112,8 @@ export interface PoolDetail {
   estimatedEndDate: string;
   lockedCollateral: string;
   collectionProgress: string;
-  lent: string;
-  profit: string;
+  lent: Balance;
+  profit: Balance;
   endedOn: string;
 }
 
@@ -123,20 +124,20 @@ export interface PoolLender {
   shareInPool: string;
   poolToken: Asset;
   suppliedToken: Asset;
-  suppliedAmount: string;
+  suppliedAmount: Balance;
 }
 
 export interface DashboardOverview {
-  totalBorrowedAmount: string;
-  totalLentAmount: string;
+  totalBorrowedAmount: Balance;
+  totalLentAmount: Balance;
   totalBorrowRate: string;
   totalLentRate: string;
 }
 
 export interface CreditLinesOverview {
-  creditGranted: string;
-  interestAccrued: string;
-  activeCredit: string;
+  creditGranted: Balance;
+  interestAccrued: Balance;
+  activeCredit: Balance;
   interestRate: string;
 }
 
@@ -150,9 +151,9 @@ export interface ProfileOverview {
 }
 
 export interface CreditLineDetail {
-  currentDebt: string;
-  principal: string;
-  interestAccrued: string;
+  currentDebt: Balance;
+  principal: Balance;
+  interestAccrued: Balance;
   collateralRatio: string;
   creditLimit: string;
   interestRate: string;
@@ -176,7 +177,7 @@ export interface CreditLineUser {
 export interface CreditLineHistory {
   title: string;
   description: string;
-  value: string;
+  value: Balance;
 }
 
 export interface InternalTokenMap {
@@ -190,4 +191,9 @@ export interface InternalTokenMap {
 export interface TwitterDetails {
   id: string;
   metadata: string;
+}
+
+export interface Balance {
+  value: BigNumberish;
+  decimals: number;
 }

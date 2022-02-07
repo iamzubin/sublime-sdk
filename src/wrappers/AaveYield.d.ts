@@ -12,7 +12,6 @@ import {
   Contract,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   CallOverrides,
 } from 'ethers';
 import { BytesLike } from '@ethersproject/bytes';
@@ -40,6 +39,7 @@ interface AaveYieldInterface extends ethers.utils.Interface {
     'updateAaveAddresses(address,address,address)': FunctionFragment;
     'updateReferralCode(uint16)': FunctionFragment;
     'updateSavingsAccount(address)': FunctionFragment;
+    'weth()': FunctionFragment;
     'wethGateway()': FunctionFragment;
   };
 
@@ -61,6 +61,7 @@ interface AaveYieldInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'updateAaveAddresses', values: [string, string, string]): string;
   encodeFunctionData(functionFragment: 'updateReferralCode', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'updateSavingsAccount', values: [string]): string;
+  encodeFunctionData(functionFragment: 'weth', values?: undefined): string;
   encodeFunctionData(functionFragment: 'wethGateway', values?: undefined): string;
 
   decodeFunctionResult(functionFragment: 'emergencyWithdraw', data: BytesLike): Result;
@@ -81,6 +82,7 @@ interface AaveYieldInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'updateAaveAddresses', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateReferralCode', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateSavingsAccount', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'weth', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'wethGateway', data: BytesLike): Result;
 
   events: {
@@ -158,21 +160,13 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<[BigNumber] & { shares: BigNumber }>;
+    getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'getSharesForTokens(uint256,address)'(
-      amount: BigNumberish,
-      asset: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { shares: BigNumber }>;
+    'getSharesForTokens(uint256,address)'(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<[BigNumber] & { amount: BigNumber }>;
+    getTokensForShares(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'getTokensForShares(uint256,address)'(
-      shares: BigNumberish,
-      asset: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { amount: BigNumber }>;
+    'getTokensForShares(uint256,address)'(shares: BigNumberish, asset: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     initialize(
       _owner: string,
@@ -196,22 +190,22 @@ export class AaveYield extends Contract {
 
     'lendingPoolAddressesProvider()'(overrides?: CallOverrides): Promise<[string]>;
 
-    liquidityToken(asset: string, overrides?: CallOverrides): Promise<[string] & { aToken: string }>;
+    liquidityToken(asset: string, overrides?: CallOverrides): Promise<[string]>;
 
-    'liquidityToken(address)'(asset: string, overrides?: CallOverrides): Promise<[string] & { aToken: string }>;
+    'liquidityToken(address)'(asset: string, overrides?: CallOverrides): Promise<[string]>;
 
     lockTokens(
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'lockTokens(address,address,uint256)'(
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -299,6 +293,10 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    weth(overrides?: CallOverrides): Promise<[string]>;
+
+    'weth()'(overrides?: CallOverrides): Promise<[string]>;
+
     wethGateway(overrides?: CallOverrides): Promise<[string]>;
 
     'wethGateway()'(overrides?: CallOverrides): Promise<[string]>;
@@ -354,14 +352,14 @@ export class AaveYield extends Contract {
     user: string,
     asset: string,
     amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'lockTokens(address,address,uint256)'(
     user: string,
     asset: string,
     amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
@@ -442,6 +440,10 @@ export class AaveYield extends Contract {
     _savingsAccount: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  weth(overrides?: CallOverrides): Promise<string>;
+
+  'weth()'(overrides?: CallOverrides): Promise<string>;
 
   wethGateway(overrides?: CallOverrides): Promise<string>;
 
@@ -544,6 +546,10 @@ export class AaveYield extends Contract {
 
     'updateSavingsAccount(address)'(_savingsAccount: string, overrides?: CallOverrides): Promise<void>;
 
+    weth(overrides?: CallOverrides): Promise<string>;
+
+    'weth()'(overrides?: CallOverrides): Promise<string>;
+
     wethGateway(overrides?: CallOverrides): Promise<string>;
 
     'wethGateway()'(overrides?: CallOverrides): Promise<string>;
@@ -636,14 +642,14 @@ export class AaveYield extends Contract {
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     'lockTokens(address,address,uint256)'(
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -714,6 +720,10 @@ export class AaveYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    weth(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'weth()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     wethGateway(overrides?: CallOverrides): Promise<BigNumber>;
 
     'wethGateway()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -770,14 +780,14 @@ export class AaveYield extends Contract {
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'lockTokens(address,address,uint256)'(
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -864,6 +874,10 @@ export class AaveYield extends Contract {
       _savingsAccount: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    weth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'weth()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     wethGateway(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

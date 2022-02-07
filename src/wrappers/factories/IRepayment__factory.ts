@@ -160,7 +160,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'bool',
-        name: '',
+        name: 'isBorrowerDefaulter',
         type: 'bool',
       },
     ],
@@ -179,7 +179,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'scaledCurrentInterval',
         type: 'uint256',
       },
     ],
@@ -192,7 +192,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'gracePeriod',
         type: 'uint256',
       },
     ],
@@ -211,12 +211,12 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'loanDurationCovered',
         type: 'uint256',
       },
       {
         internalType: 'uint256',
-        name: '',
+        name: 'interestPerSecond',
         type: 'uint256',
       },
     ],
@@ -235,7 +235,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'nextInstalmentDeadlineTimestamp',
         type: 'uint256',
       },
     ],
@@ -254,7 +254,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: '',
+        name: 'amountRepaid',
         type: 'uint256',
       },
     ],
@@ -264,9 +264,9 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: 'uint256',
+        internalType: 'uint64',
         name: 'numberOfTotalRepayments',
-        type: 'uint256',
+        type: 'uint64',
       },
       {
         internalType: 'uint256',

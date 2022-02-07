@@ -85,31 +85,59 @@ export class IPriceOracle extends Contract {
   interface: IPriceOracleInterface;
 
   functions: {
-    doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<[boolean]>;
+    doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<[boolean] & { feedExists: boolean }>;
 
-    'doesFeedExist(address,address)'(token1: string, token2: string, overrides?: CallOverrides): Promise<[boolean]>;
+    'doesFeedExist(address,address)'(
+      token1: string,
+      token2: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { feedExists: boolean }>;
 
-    getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    getLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber] & { price: BigNumber; decimals: BigNumber }>;
 
-    'getLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    'getLatestPrice(address,address)'(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber] & { price: BigNumber; decimals: BigNumber }>;
   };
 
   doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<boolean>;
 
   'doesFeedExist(address,address)'(token1: string, token2: string, overrides?: CallOverrides): Promise<boolean>;
 
-  getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+  getLatestPrice(
+    num: string,
+    den: string,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber] & { price: BigNumber; decimals: BigNumber }>;
 
-  'getLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+  'getLatestPrice(address,address)'(
+    num: string,
+    den: string,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, BigNumber] & { price: BigNumber; decimals: BigNumber }>;
 
   callStatic: {
     doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<boolean>;
 
     'doesFeedExist(address,address)'(token1: string, token2: string, overrides?: CallOverrides): Promise<boolean>;
 
-    getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    getLatestPrice(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber] & { price: BigNumber; decimals: BigNumber }>;
 
-    'getLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    'getLatestPrice(address,address)'(
+      num: string,
+      den: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber] & { price: BigNumber; decimals: BigNumber }>;
   };
 
   filters: {

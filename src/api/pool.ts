@@ -1,14 +1,12 @@
-import { BytesLike, ContractTransaction, ethers, Signer } from 'ethers';
+import { BytesLike, ContractTransaction, ethers, Overrides, Signer } from 'ethers';
 import { BigNumberish } from '@ethersproject/bignumber';
 import { BigNumber } from 'bignumber.js';
 
 import { SublimeConfig } from '../types/sublimeConfig';
-import { abi as PoolAbi } from '../artifacts/contracts/Pool/Pool.sol/Pool.json';
-import { bytecode as SublimeProxyByteCode } from '../artifacts/contracts/Proxy.sol/SublimeProxy.json';
 
 import { LoanStatus, PoolGenerateParams } from '../types/poolGenerateParam';
 import { PoolInfo } from '../types/poolInfo';
-import { PoolFactory } from '../wrappers';
+import { PoolFactory } from '../wrappers/PoolFactory';
 import { PoolFactory__factory } from '../wrappers/factories/PoolFactory__factory';
 
 import { Pool } from '../wrappers/Pool';
@@ -17,8 +15,6 @@ import { Pool__factory } from '../wrappers/factories/Pool__factory';
 import { IYield__factory } from '../wrappers/factories/IYield__factory';
 
 import { zeroAddress } from '../config/constants';
-const _interface = new ethers.utils.Interface(PoolAbi);
-const initializeFragement = _interface.getFunction('initialize');
 
 import { TokenManager } from '../tokenManager';
 
@@ -36,7 +32,7 @@ export class PoolApi {
     this.poolFactory = new PoolFactory__factory(this.signer).attach(config.poolFactoryContractAddress);
   }
 
-  public async createPool(params: PoolGenerateParams): Promise<ContractTransaction> {
+  public async createPool(params: PoolGenerateParams, options?: Overrides): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(params.borrowToken);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(params.borrowToken);
 
@@ -93,89 +89,21 @@ export class PoolApi {
       this.config.adminVerifierContractAddress,
       params.lenderVerifier,
       {
-        value:
-          params.collateralToken === zeroAddress ? collateralAmount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0) : 0,
+        ...options,
       }
     );
   }
 
-  public async generatePoolAddress(params: PoolGenerateParams): Promise<string> {
-    await this.tokenManager.updateTokenDecimals(params.borrowToken);
-    const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(params.borrowToken);
-
-    await this.tokenManager.updateTokenDecimals(params.collateralToken);
-    const collateralDecimal: BigNumberish = this.tokenManager.getTokenDecimals(params.collateralToken);
-
-    const borrowAmountRequests = new BigNumber(params.borrowAmountRequests);
-    if (borrowAmountRequests.isNaN() || borrowAmountRequests.isZero() || borrowAmountRequests.isNegative()) {
-      throw new Error('borrowAmountRequests should be a valid number');
-    }
-
-    const collateralVolatilityThreshold = new BigNumber(params.collateralVolatilityThreshold);
-    if (collateralVolatilityThreshold.isNaN() || collateralVolatilityThreshold.isZero() || collateralVolatilityThreshold.isNegative()) {
-      throw new Error('collateralVolatilityThreshold should be a valid number');
-    }
-
-    const collateralRatio = new BigNumber(params.collateralRatio);
-    if (collateralRatio.isNaN() || collateralRatio.isZero() || collateralRatio.isNegative()) {
-      throw new Error('collateralRatio should be a valid number');
-    }
-
-    const borrowRate = new BigNumber(params.borrowRate);
-    if (borrowRate.isNaN() || borrowRate.isZero() || borrowRate.isNegative()) {
-      throw new Error('borrowRate should be a valid number');
-    }
-
-    const repaymentInterval = new BigNumber(params.repaymentInterval);
-    if (repaymentInterval.isNaN() || repaymentInterval.isZero() || repaymentInterval.isNegative()) {
-      throw new Error('repaymentInterval should be a valid number');
-    }
-
-    const noOfRepaymentIntervals = new BigNumber(params.noOfRepaymentIntervals);
-    if (noOfRepaymentIntervals.isNaN() || noOfRepaymentIntervals.isZero() || noOfRepaymentIntervals.isNegative()) {
-      throw new Error('noOfRepaymentIntervals should be a valid number');
-    }
-
-    const collateralAmount = new BigNumber(params.collateralAmount);
-    if (collateralAmount.isNaN() || collateralAmount.isZero() || collateralAmount.isNegative()) {
-      throw new Error('collateralAmount should be a valid number');
-    }
-
-    const loanWithdrawDuration = await this.poolFactory.matchCollateralRatioInterval();
-    const collectionPeriod = await this.poolFactory.collectionPeriod();
-
-    const poolData = _interface.encodeFunctionData(initializeFragement, [
-      borrowAmountRequests.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
-      borrowRate.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
-      params.borrower,
-      params.borrowToken,
-      params.collateralToken,
-      collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
-      collateralVolatilityThreshold.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
-      repaymentInterval.toFixed(0),
-      noOfRepaymentIntervals.toFixed(0),
-      params.strategy,
-      collateralAmount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0),
-      params.transferFromSavingsAccount,
-      loanWithdrawDuration,
-      collectionPeriod,
-    ]);
-
-    const poolAddress = ethers.utils.getCreate2Address(
-      this.config.poolFactoryContractAddress,
-      this.getSalt(params.borrower, params.salt),
-      this.getInitCodehash(
-        SublimeProxyByteCode,
-        this.config.poolLogicContractAddress,
-        poolData,
-        '0x0000000000000000000000000000000000000001'
-      )
-    );
-
-    return poolAddress;
+  public async generatePoolAddress(creator: string, salt: BytesLike): Promise<string> {
+    return this.poolFactory.connect(this.signer).preComputeAddress(creator, salt);
   }
 
-  public async depositCollateral(poolContract: string, amount: string, transferFromSavingsAccount: boolean): Promise<ContractTransaction> {
+  public async depositCollateral(
+    poolContract: string,
+    amount: string,
+    transferFromSavingsAccount: boolean,
+    options?: Overrides
+  ): Promise<ContractTransaction> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
     const collateralAsset = (await pool.poolConstants()).collateralAsset;
 
@@ -190,9 +118,7 @@ export class PoolApi {
     return pool.depositCollateral(
       _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal.toString())).toFixed(0),
       transferFromSavingsAccount,
-      {
-        value: collateralAsset === zeroAddress ? _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal.toString())).toFixed(0) : 0,
-      }
+      { ...options }
     );
   }
 
@@ -217,10 +143,11 @@ export class PoolApi {
     poolContract: string,
     fromSavingsAccount: boolean,
     toSavingsAccount: boolean,
-    recieveLiquidityShare: boolean
+    recieveLiquidityShare: boolean,
+    options?: Overrides
   ): Promise<ContractTransaction> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
-    return await pool.liquidatePool(fromSavingsAccount, toSavingsAccount, recieveLiquidityShare);
+    return await pool.liquidatePool(fromSavingsAccount, toSavingsAccount, recieveLiquidityShare, { ...options });
   }
 
   public async liquidateLender(
@@ -228,10 +155,11 @@ export class PoolApi {
     lender: string,
     fromSavingsAccount: boolean,
     toSavingsAccount: boolean,
-    recieveLiquidityShare: boolean
+    recieveLiquidityShare: boolean,
+    options?: Overrides
   ): Promise<ContractTransaction> {
     const pool: Pool = new Pool__factory(this.signer).attach(poolContract);
-    return await pool.liquidateForLender(lender, fromSavingsAccount, toSavingsAccount, recieveLiquidityShare);
+    return await pool.liquidateForLender(lender, fromSavingsAccount, toSavingsAccount, recieveLiquidityShare, { ...options });
   }
 
   public async interestPerPeriod(poolContract: string, amount: string): Promise<string> {
@@ -295,7 +223,7 @@ export class PoolApi {
     await this.tokenManager.updateTokenDecimals(poolContract);
     const _decimal: BigNumberish = this.tokenManager.getTokenDecimals(poolContract);
 
-    const totalSupply = await pool.getTotalSupply();
+    const totalSupply = await pool.totalSupply();
     return new BigNumber(totalSupply.toString()).div(new BigNumber(10).pow(_decimal)).toFixed(2);
   }
 
@@ -363,15 +291,5 @@ export class PoolApi {
       .div(new BigNumber(10).pow(this.tokenManager.getTokenDecimals(poolConstants.collateralAsset.toLowerCase())))
       .toFixed(2);
     return result;
-  }
-
-  private getSalt(address: string, salt: BytesLike) {
-    return ethers.utils.solidityKeccak256(['bytes32', 'address'], [salt, address]);
-  }
-
-  private getInitCodehash(proxyBytecode: BytesLike, poolImplAddr: string, poolData: BytesLike, admin: string) {
-    const initialize = ethers.utils.defaultAbiCoder.encode(['address', 'address', 'bytes'], [poolImplAddr, admin, poolData]);
-    const encodedData = proxyBytecode + initialize.replace('0x', '');
-    return ethers.utils.keccak256(encodedData);
   }
 }

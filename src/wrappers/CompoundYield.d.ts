@@ -12,7 +12,6 @@ import {
   Contract,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   CallOverrides,
 } from 'ethers';
 import { BytesLike } from '@ethersproject/bytes';
@@ -22,7 +21,9 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface CompoundYieldInterface extends ethers.utils.Interface {
   functions: {
-    'emergencyWithdraw(address,address)': FunctionFragment;
+    'claimCompTokens(address,address,address)': FunctionFragment;
+    'depositLimit(address)': FunctionFragment;
+    'emergencyWithdraw(address,address,uint256)': FunctionFragment;
     'getSharesForTokens(uint256,address)': FunctionFragment;
     'getTokensForShares(uint256,address)': FunctionFragment;
     'initialize(address,address)': FunctionFragment;
@@ -31,14 +32,18 @@ interface CompoundYieldInterface extends ethers.utils.Interface {
     'owner()': FunctionFragment;
     'renounceOwnership()': FunctionFragment;
     'savingsAccount()': FunctionFragment;
+    'setDepositLimit(address,uint256)': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
     'unlockShares(address,uint256)': FunctionFragment;
     'unlockTokens(address,uint256)': FunctionFragment;
     'updateProtocolAddresses(address,address)': FunctionFragment;
     'updateSavingsAccount(address)': FunctionFragment;
+    'weth()': FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'emergencyWithdraw', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'claimCompTokens', values: [string, string, string]): string;
+  encodeFunctionData(functionFragment: 'depositLimit', values: [string]): string;
+  encodeFunctionData(functionFragment: 'emergencyWithdraw', values: [string, string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'getSharesForTokens', values: [BigNumberish, string]): string;
   encodeFunctionData(functionFragment: 'getTokensForShares', values: [BigNumberish, string]): string;
   encodeFunctionData(functionFragment: 'initialize', values: [string, string]): string;
@@ -47,12 +52,16 @@ interface CompoundYieldInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'savingsAccount', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'setDepositLimit', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'unlockShares', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'unlockTokens', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'updateProtocolAddresses', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'updateSavingsAccount', values: [string]): string;
+  encodeFunctionData(functionFragment: 'weth', values?: undefined): string;
 
+  decodeFunctionResult(functionFragment: 'claimCompTokens', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'depositLimit', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'emergencyWithdraw', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getSharesForTokens', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getTokensForShares', data: BytesLike): Result;
@@ -62,11 +71,13 @@ interface CompoundYieldInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'savingsAccount', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'setDepositLimit', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'unlockShares', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'unlockTokens', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateProtocolAddresses', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateSavingsAccount', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'weth', data: BytesLike): Result;
 
   events: {
     'LockedTokens(address,address,uint256)': EventFragment;
@@ -129,15 +140,35 @@ export class CompoundYield extends Contract {
   interface: CompoundYieldInterface;
 
   functions: {
-    emergencyWithdraw(
-      _asset: string,
-      _wallet: string,
+    claimCompTokens(
+      _comptroller: string,
+      _compToken: string,
+      _receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'emergencyWithdraw(address,address)'(
+    'claimCompTokens(address,address,address)'(
+      _comptroller: string,
+      _compToken: string,
+      _receiver: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    depositLimit(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    'depositLimit(address)'(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    emergencyWithdraw(
       _asset: string,
       _wallet: string,
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    'emergencyWithdraw(address,address,uint256)'(
+      _asset: string,
+      _wallet: string,
+      _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -185,14 +216,14 @@ export class CompoundYield extends Contract {
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'lockTokens(address,address,uint256)'(
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -206,6 +237,18 @@ export class CompoundYield extends Contract {
     savingsAccount(overrides?: CallOverrides): Promise<[string]>;
 
     'savingsAccount()'(overrides?: CallOverrides): Promise<[string]>;
+
+    setDepositLimit(
+      asset: string,
+      limit: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    'setDepositLimit(address,uint256)'(
+      asset: string,
+      limit: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -259,17 +302,41 @@ export class CompoundYield extends Contract {
       _savingsAccount: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    weth(overrides?: CallOverrides): Promise<[string]>;
+
+    'weth()'(overrides?: CallOverrides): Promise<[string]>;
   };
+
+  claimCompTokens(
+    _comptroller: string,
+    _compToken: string,
+    _receiver: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  'claimCompTokens(address,address,address)'(
+    _comptroller: string,
+    _compToken: string,
+    _receiver: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  depositLimit(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+  'depositLimit(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   emergencyWithdraw(
     _asset: string,
     _wallet: string,
+    _amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'emergencyWithdraw(address,address)'(
+  'emergencyWithdraw(address,address,uint256)'(
     _asset: string,
     _wallet: string,
+    _amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -317,14 +384,14 @@ export class CompoundYield extends Contract {
     user: string,
     asset: string,
     amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'lockTokens(address,address,uint256)'(
     user: string,
     asset: string,
     amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
@@ -338,6 +405,18 @@ export class CompoundYield extends Contract {
   savingsAccount(overrides?: CallOverrides): Promise<string>;
 
   'savingsAccount()'(overrides?: CallOverrides): Promise<string>;
+
+  setDepositLimit(
+    asset: string,
+    limit: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  'setDepositLimit(address,uint256)'(
+    asset: string,
+    limit: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -386,10 +465,32 @@ export class CompoundYield extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  callStatic: {
-    emergencyWithdraw(_asset: string, _wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+  weth(overrides?: CallOverrides): Promise<string>;
 
-    'emergencyWithdraw(address,address)'(_asset: string, _wallet: string, overrides?: CallOverrides): Promise<BigNumber>;
+  'weth()'(overrides?: CallOverrides): Promise<string>;
+
+  callStatic: {
+    claimCompTokens(_comptroller: string, _compToken: string, _receiver: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'claimCompTokens(address,address,address)'(
+      _comptroller: string,
+      _compToken: string,
+      _receiver: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    depositLimit(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'depositLimit(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    emergencyWithdraw(_asset: string, _wallet: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'emergencyWithdraw(address,address,uint256)'(
+      _asset: string,
+      _wallet: string,
+      _amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     getSharesForTokens(amount: BigNumberish, asset: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -423,6 +524,10 @@ export class CompoundYield extends Contract {
 
     'savingsAccount()'(overrides?: CallOverrides): Promise<string>;
 
+    setDepositLimit(asset: string, limit: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    'setDepositLimit(address,uint256)'(asset: string, limit: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
     transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
 
     'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
@@ -442,6 +547,10 @@ export class CompoundYield extends Contract {
     updateSavingsAccount(_savingsAccount: string, overrides?: CallOverrides): Promise<void>;
 
     'updateSavingsAccount(address)'(_savingsAccount: string, overrides?: CallOverrides): Promise<void>;
+
+    weth(overrides?: CallOverrides): Promise<string>;
+
+    'weth()'(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -475,11 +584,35 @@ export class CompoundYield extends Contract {
   };
 
   estimateGas: {
-    emergencyWithdraw(_asset: string, _wallet: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    claimCompTokens(
+      _comptroller: string,
+      _compToken: string,
+      _receiver: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    'emergencyWithdraw(address,address)'(
+    'claimCompTokens(address,address,address)'(
+      _comptroller: string,
+      _compToken: string,
+      _receiver: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    depositLimit(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'depositLimit(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    emergencyWithdraw(
       _asset: string,
       _wallet: string,
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    'emergencyWithdraw(address,address,uint256)'(
+      _asset: string,
+      _wallet: string,
+      _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -523,14 +656,14 @@ export class CompoundYield extends Contract {
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     'lockTokens(address,address,uint256)'(
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -544,6 +677,14 @@ export class CompoundYield extends Contract {
     savingsAccount(overrides?: CallOverrides): Promise<BigNumber>;
 
     'savingsAccount()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setDepositLimit(asset: string, limit: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    'setDepositLimit(address,uint256)'(
+      asset: string,
+      limit: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
@@ -583,18 +724,42 @@ export class CompoundYield extends Contract {
       _savingsAccount: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    weth(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'weth()'(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    emergencyWithdraw(
-      _asset: string,
-      _wallet: string,
+    claimCompTokens(
+      _comptroller: string,
+      _compToken: string,
+      _receiver: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'emergencyWithdraw(address,address)'(
+    'claimCompTokens(address,address,address)'(
+      _comptroller: string,
+      _compToken: string,
+      _receiver: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    depositLimit(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'depositLimit(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    emergencyWithdraw(
       _asset: string,
       _wallet: string,
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    'emergencyWithdraw(address,address,uint256)'(
+      _asset: string,
+      _wallet: string,
+      _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -642,14 +807,14 @@ export class CompoundYield extends Contract {
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'lockTokens(address,address,uint256)'(
       user: string,
       asset: string,
       amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -663,6 +828,18 @@ export class CompoundYield extends Contract {
     savingsAccount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'savingsAccount()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    setDepositLimit(
+      asset: string,
+      limit: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    'setDepositLimit(address,uint256)'(
+      asset: string,
+      limit: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     transferOwnership(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
@@ -716,5 +893,9 @@ export class CompoundYield extends Contract {
       _savingsAccount: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    weth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'weth()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }
