@@ -14,9 +14,9 @@ export class SavingAccountsEthUtils {
   private config: SublimeConfig;
 
   /**
-   * @param signer 
-   * @param config 
-   * @param tokenManager 
+   * @param signer
+   * @param config
+   * @param tokenManager
    */
   constructor(signer: Signer, config: SublimeConfig, tokenManager: TokenManager) {
     if (config.savingsAccountEthUtilsAddress) {
@@ -33,7 +33,7 @@ export class SavingAccountsEthUtils {
    * @param strategy strategy
    * @param amount amount of ETH to deposit
    * @param options transaction options
-   * @returns 
+   * @returns
    */
   public async depositEthToSavingsAccount(strategy: StrategyType, amount: string, options?: Overrides): Promise<ContractTransaction> {
     const decimals = 18;

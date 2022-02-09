@@ -32,10 +32,10 @@ export class SavingsAccountApi {
 
   /**
    * @description The returned objet helps in making direct ETH deposits to the savings Account
-   * @returns 
+   * @returns
    */
-  SavingAccountsEthUtils() : SavingAccountsEthUtils {
-    return new SavingAccountsEthUtils(this.signer, this.config, this.tokenManager)
+  SavingAccountsEthUtils(): SavingAccountsEthUtils {
+    return new SavingAccountsEthUtils(this.signer, this.config, this.tokenManager);
   }
 
   /**

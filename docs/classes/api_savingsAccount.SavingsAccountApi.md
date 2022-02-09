@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[src/api/savingsAccount.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L26)
+[src/api/savingsAccount.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L26)
 
 ## Properties
 
@@ -63,7 +63,7 @@
 
 #### Defined in
 
-[src/api/savingsAccount.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L23)
+[src/api/savingsAccount.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L23)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L22)
+[src/api/savingsAccount.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L22)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L21)
+[src/api/savingsAccount.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L21)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L24)
+[src/api/savingsAccount.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L24)
 
 ## Methods
 
@@ -109,7 +109,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:37](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L37)
+[src/api/savingsAccount.ts:37](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L37)
 
 ___
 
@@ -136,7 +136,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:236](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L236)
+[src/api/savingsAccount.ts:236](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L236)
 
 ___
 
@@ -160,7 +160,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:296](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L296)
+[src/api/savingsAccount.ts:296](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L296)
 
 ___
 
@@ -187,7 +187,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:48](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L48)
+[src/api/savingsAccount.ts:48](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L48)
 
 ___
 
@@ -214,7 +214,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:276](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L276)
+[src/api/savingsAccount.ts:276](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L276)
 
 ___
 
@@ -242,7 +242,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:78](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L78)
+[src/api/savingsAccount.ts:78](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L78)
 
 ___
 
@@ -267,7 +267,7 @@ Asset in detail
 
 #### Defined in
 
-[src/api/savingsAccount.ts:423](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L423)
+[src/api/savingsAccount.ts:423](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L423)
 
 ___
 
@@ -293,7 +293,7 @@ easy read number in string
 
 #### Defined in
 
-[src/api/savingsAccount.ts:405](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L405)
+[src/api/savingsAccount.ts:405](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L405)
 
 ___
 
@@ -315,7 +315,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:441](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L441)
+[src/api/savingsAccount.ts:441](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L441)
 
 ___
 
@@ -341,7 +341,7 @@ easy read number in string
 
 #### Defined in
 
-[src/api/savingsAccount.ts:390](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L390)
+[src/api/savingsAccount.ts:390](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L390)
 
 ___
 
@@ -368,7 +368,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:255](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L255)
+[src/api/savingsAccount.ts:255](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L255)
 
 ___
 
@@ -396,7 +396,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:112](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L112)
+[src/api/savingsAccount.ts:112](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L112)
 
 ___
 
@@ -424,7 +424,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:321](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L321)
+[src/api/savingsAccount.ts:321](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L321)
 
 ___
 
@@ -453,7 +453,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:355](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L355)
+[src/api/savingsAccount.ts:355](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L355)
 
 ___
 
@@ -482,7 +482,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:152](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L152)
+[src/api/savingsAccount.ts:152](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L152)
 
 ___
 
@@ -507,7 +507,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:225](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L225)
+[src/api/savingsAccount.ts:225](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L225)
 
 ___
 
@@ -537,4 +537,4 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:190](https://github.com/sublime-finance/sublime-sdk/blob/711fd4e/src/api/savingsAccount.ts#L190)
+[src/api/savingsAccount.ts:190](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L190)
