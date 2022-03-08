@@ -28,7 +28,6 @@ interface IRepaymentInterface extends ethers.utils.Interface {
     'getNextInstalmentDeadline(address)': FunctionFragment;
     'getTotalRepaidAmount(address)': FunctionFragment;
     'initializeRepayment(uint64,uint256,uint256,uint256,address)': FunctionFragment;
-    'instalmentDeadlineExtended(address)': FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: 'didBorrowerDefault', values: [string]): string;
@@ -41,7 +40,6 @@ interface IRepaymentInterface extends ethers.utils.Interface {
     functionFragment: 'initializeRepayment',
     values: [BigNumberish, BigNumberish, BigNumberish, BigNumberish, string]
   ): string;
-  encodeFunctionData(functionFragment: 'instalmentDeadlineExtended', values: [string]): string;
 
   decodeFunctionResult(functionFragment: 'didBorrowerDefault', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getCurrentLoanInterval', data: BytesLike): Result;
@@ -50,10 +48,8 @@ interface IRepaymentInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'getNextInstalmentDeadline', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getTotalRepaidAmount', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'initializeRepayment', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'instalmentDeadlineExtended', data: BytesLike): Result;
 
   events: {
-    'ExtensionRepaid(address,uint256)': EventFragment;
     'GracePenaltyRateUpdated(uint256)': EventFragment;
     'GracePenaltyRepaid(address,uint256)': EventFragment;
     'GracePeriodFractionUpdated(uint256)': EventFragment;
@@ -63,7 +59,6 @@ interface IRepaymentInterface extends ethers.utils.Interface {
     'PrincipalRepaid(address,uint256)': EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'ExtensionRepaid'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'GracePenaltyRateUpdated'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'GracePenaltyRepaid'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'GracePeriodFractionUpdated'): EventFragment;
@@ -183,13 +178,6 @@ export class IRepayment extends Contract {
       lentAsset: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    instalmentDeadlineExtended(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
-
-    'instalmentDeadlineExtended(address)'(
-      _poolID: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
   };
 
   didBorrowerDefault(_poolID: string, overrides?: CallOverrides): Promise<boolean>;
@@ -247,13 +235,6 @@ export class IRepayment extends Contract {
     borrowRate: BigNumberish,
     loanStartTime: BigNumberish,
     lentAsset: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  instalmentDeadlineExtended(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
-
-  'instalmentDeadlineExtended(address)'(
-    _poolID: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -315,18 +296,9 @@ export class IRepayment extends Contract {
       lentAsset: string,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    instalmentDeadlineExtended(_poolID: string, overrides?: CallOverrides): Promise<void>;
-
-    'instalmentDeadlineExtended(address)'(_poolID: string, overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
-    ExtensionRepaid(
-      poolID: string | null,
-      repayAmount: null
-    ): TypedEventFilter<[string, BigNumber], { poolID: string; repayAmount: BigNumber }>;
-
     GracePenaltyRateUpdated(gracePenaltyRate: BigNumberish | null): TypedEventFilter<[BigNumber], { gracePenaltyRate: BigNumber }>;
 
     GracePenaltyRepaid(
@@ -396,10 +368,6 @@ export class IRepayment extends Contract {
       lentAsset: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    instalmentDeadlineExtended(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'instalmentDeadlineExtended(address)'(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -442,13 +410,6 @@ export class IRepayment extends Contract {
       borrowRate: BigNumberish,
       loanStartTime: BigNumberish,
       lentAsset: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    instalmentDeadlineExtended(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
-
-    'instalmentDeadlineExtended(address)'(
-      _poolID: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

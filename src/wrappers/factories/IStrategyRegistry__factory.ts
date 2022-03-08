@@ -57,7 +57,7 @@ const _abi = [
     inputs: [
       {
         internalType: 'address',
-        name: '_strategy',
+        name: 'strategy',
         type: 'address',
       },
     ],
@@ -83,15 +83,15 @@ const _abi = [
     inputs: [
       {
         internalType: 'address',
-        name: '_strategy',
+        name: 'strategy',
         type: 'address',
       },
     ],
-    name: 'registry',
+    name: 'isValidStrategy',
     outputs: [
       {
         internalType: 'bool',
-        name: 'isValidStrategy',
+        name: 'validStrategy',
         type: 'bool',
       },
     ],
@@ -101,8 +101,27 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: 'address',
+        name: '_strategy',
+        type: 'address',
+      },
+    ],
+    name: 'registry',
+    outputs: [
+      {
         internalType: 'uint256',
-        name: '_strategyIndex',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'strategyIndex',
         type: 'uint256',
       },
     ],

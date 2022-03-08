@@ -21,7 +21,8 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface NoYieldInterface extends ethers.utils.Interface {
   functions: {
-    'emergencyWithdraw(address,address,uint256)': FunctionFragment;
+    'TREASURY()': FunctionFragment;
+    'emergencyWithdraw(address,uint256)': FunctionFragment;
     'getSharesForTokens(uint256,address)': FunctionFragment;
     'getTokensForShares(uint256,address)': FunctionFragment;
     'initialize(address,address)': FunctionFragment;
@@ -31,12 +32,13 @@ interface NoYieldInterface extends ethers.utils.Interface {
     'renounceOwnership()': FunctionFragment;
     'savingsAccount()': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
-    'unlockShares(address,uint256)': FunctionFragment;
-    'unlockTokens(address,uint256)': FunctionFragment;
+    'unlockShares(address,address,uint256)': FunctionFragment;
+    'unlockTokens(address,address,uint256)': FunctionFragment;
     'updateSavingsAccount(address)': FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'emergencyWithdraw', values: [string, string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'TREASURY', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'emergencyWithdraw', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'getSharesForTokens', values: [BigNumberish, string]): string;
   encodeFunctionData(functionFragment: 'getTokensForShares', values: [BigNumberish, string]): string;
   encodeFunctionData(functionFragment: 'initialize', values: [string, string]): string;
@@ -46,10 +48,11 @@ interface NoYieldInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'savingsAccount', values?: undefined): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'unlockShares', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'unlockTokens', values: [string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'unlockShares', values: [string, string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'unlockTokens', values: [string, string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'updateSavingsAccount', values: [string]): string;
 
+  decodeFunctionResult(functionFragment: 'TREASURY', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'emergencyWithdraw', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getSharesForTokens', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getTokensForShares', data: BytesLike): Result;
@@ -65,6 +68,7 @@ interface NoYieldInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'updateSavingsAccount', data: BytesLike): Result;
 
   events: {
+    'EmergencyWithdraw(address,address,uint256)': EventFragment;
     'LockedTokens(address,address,uint256)': EventFragment;
     'OwnershipTransferred(address,address)': EventFragment;
     'SavingsAccountUpdated(address)': EventFragment;
@@ -72,6 +76,7 @@ interface NoYieldInterface extends ethers.utils.Interface {
     'UnlockedTokens(address,uint256)': EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: 'EmergencyWithdraw'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'LockedTokens'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'SavingsAccountUpdated'): EventFragment;
@@ -123,16 +128,18 @@ export class NoYield extends Contract {
   interface: NoYieldInterface;
 
   functions: {
+    TREASURY(overrides?: CallOverrides): Promise<[string]>;
+
+    'TREASURY()'(overrides?: CallOverrides): Promise<[string]>;
+
     emergencyWithdraw(
       _asset: string,
-      _wallet: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'emergencyWithdraw(address,address,uint256)'(
+    'emergencyWithdraw(address,uint256)'(
       _asset: string,
-      _wallet: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -196,24 +203,28 @@ export class NoYield extends Contract {
 
     unlockShares(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'unlockShares(address,uint256)'(
+    'unlockShares(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     unlockTokens(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'unlockTokens(address,uint256)'(
+    'unlockTokens(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -229,16 +240,18 @@ export class NoYield extends Contract {
     ): Promise<ContractTransaction>;
   };
 
+  TREASURY(overrides?: CallOverrides): Promise<string>;
+
+  'TREASURY()'(overrides?: CallOverrides): Promise<string>;
+
   emergencyWithdraw(
     _asset: string,
-    _wallet: string,
     _amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'emergencyWithdraw(address,address,uint256)'(
+  'emergencyWithdraw(address,uint256)'(
     _asset: string,
-    _wallet: string,
     _amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -299,24 +312,28 @@ export class NoYield extends Contract {
 
   unlockShares(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'unlockShares(address,uint256)'(
+  'unlockShares(address,address,uint256)'(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   unlockTokens(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'unlockTokens(address,uint256)'(
+  'unlockTokens(address,address,uint256)'(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -329,14 +346,13 @@ export class NoYield extends Contract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    emergencyWithdraw(_asset: string, _wallet: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    TREASURY(overrides?: CallOverrides): Promise<string>;
 
-    'emergencyWithdraw(address,address,uint256)'(
-      _asset: string,
-      _wallet: string,
-      _amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    'TREASURY()'(overrides?: CallOverrides): Promise<string>;
+
+    emergencyWithdraw(_asset: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'emergencyWithdraw(address,uint256)'(_asset: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     getSharesForTokens(amount: BigNumberish, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -374,13 +390,13 @@ export class NoYield extends Contract {
 
     'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
 
-    unlockShares(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    unlockShares(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'unlockShares(address,uint256)'(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    'unlockShares(address,address,uint256)'(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    unlockTokens(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    unlockTokens(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'unlockTokens(address,uint256)'(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    'unlockTokens(address,address,uint256)'(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     updateSavingsAccount(_savingsAccount: string, overrides?: CallOverrides): Promise<void>;
 
@@ -388,6 +404,12 @@ export class NoYield extends Contract {
   };
 
   filters: {
+    EmergencyWithdraw(
+      asset: string | null,
+      withdrawTo: string | null,
+      tokensReceived: null
+    ): TypedEventFilter<[string, string, BigNumber], { asset: string; withdrawTo: string; tokensReceived: BigNumber }>;
+
     LockedTokens(
       user: string | null,
       investedTo: string | null,
@@ -413,16 +435,18 @@ export class NoYield extends Contract {
   };
 
   estimateGas: {
+    TREASURY(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'TREASURY()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     emergencyWithdraw(
       _asset: string,
-      _wallet: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'emergencyWithdraw(address,address,uint256)'(
+    'emergencyWithdraw(address,uint256)'(
       _asset: string,
-      _wallet: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -477,18 +501,30 @@ export class NoYield extends Contract {
 
     'transferOwnership(address)'(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    unlockShares(asset: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'unlockShares(address,uint256)'(
+    unlockShares(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    unlockTokens(asset: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'unlockTokens(address,uint256)'(
+    'unlockShares(address,address,uint256)'(
       asset: string,
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    unlockTokens(
+      asset: string,
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    'unlockTokens(address,address,uint256)'(
+      asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -502,16 +538,18 @@ export class NoYield extends Contract {
   };
 
   populateTransaction: {
+    TREASURY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'TREASURY()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     emergencyWithdraw(
       _asset: string,
-      _wallet: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'emergencyWithdraw(address,address,uint256)'(
+    'emergencyWithdraw(address,uint256)'(
       _asset: string,
-      _wallet: string,
       _amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -575,24 +613,28 @@ export class NoYield extends Contract {
 
     unlockShares(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'unlockShares(address,uint256)'(
+    'unlockShares(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     unlockTokens(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'unlockTokens(address,uint256)'(
+    'unlockTokens(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

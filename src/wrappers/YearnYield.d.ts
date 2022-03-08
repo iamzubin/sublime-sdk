@@ -31,8 +31,8 @@ interface YearnYieldInterface extends ethers.utils.Interface {
     'renounceOwnership()': FunctionFragment;
     'savingsAccount()': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
-    'unlockShares(address,uint256)': FunctionFragment;
-    'unlockTokens(address,uint256)': FunctionFragment;
+    'unlockShares(address,address,uint256)': FunctionFragment;
+    'unlockTokens(address,address,uint256)': FunctionFragment;
     'updateProtocolAddresses(address,address)': FunctionFragment;
     'updateSavingsAccount(address)': FunctionFragment;
     'weth()': FunctionFragment;
@@ -48,8 +48,8 @@ interface YearnYieldInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
   encodeFunctionData(functionFragment: 'savingsAccount', values?: undefined): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
-  encodeFunctionData(functionFragment: 'unlockShares', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'unlockTokens', values: [string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'unlockShares', values: [string, string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'unlockTokens', values: [string, string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'updateProtocolAddresses', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'updateSavingsAccount', values: [string]): string;
   encodeFunctionData(functionFragment: 'weth', values?: undefined): string;
@@ -204,24 +204,28 @@ export class YearnYield extends Contract {
 
     unlockShares(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'unlockShares(address,uint256)'(
+    'unlockShares(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     unlockTokens(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'unlockTokens(address,uint256)'(
+    'unlockTokens(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -323,24 +327,28 @@ export class YearnYield extends Contract {
 
   unlockShares(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'unlockShares(address,uint256)'(
+  'unlockShares(address,address,uint256)'(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   unlockTokens(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'unlockTokens(address,uint256)'(
+  'unlockTokens(address,address,uint256)'(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -414,13 +422,13 @@ export class YearnYield extends Contract {
 
     'transferOwnership(address)'(newOwner: string, overrides?: CallOverrides): Promise<void>;
 
-    unlockShares(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    unlockShares(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'unlockShares(address,uint256)'(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    'unlockShares(address,address,uint256)'(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    unlockTokens(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    unlockTokens(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'unlockTokens(address,uint256)'(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    'unlockTokens(address,address,uint256)'(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     updateProtocolAddresses(_asset: string, _liquidityToken: string, overrides?: CallOverrides): Promise<void>;
 
@@ -530,18 +538,30 @@ export class YearnYield extends Contract {
 
     'transferOwnership(address)'(newOwner: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    unlockShares(asset: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'unlockShares(address,uint256)'(
+    unlockShares(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    unlockTokens(asset: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'unlockTokens(address,uint256)'(
+    'unlockShares(address,address,uint256)'(
       asset: string,
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    unlockTokens(
+      asset: string,
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    'unlockTokens(address,address,uint256)'(
+      asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -644,24 +664,28 @@ export class YearnYield extends Contract {
 
     unlockShares(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'unlockShares(address,uint256)'(
+    'unlockShares(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     unlockTokens(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'unlockTokens(address,uint256)'(
+    'unlockTokens(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

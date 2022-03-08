@@ -11,6 +11,7 @@ import {
   PopulatedTransaction,
   Contract,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   CallOverrides,
 } from 'ethers';
@@ -21,17 +22,20 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface ICEtherInterface extends ethers.utils.Interface {
   functions: {
+    'getCash()': FunctionFragment;
     'liquidateBorrow(address,address)': FunctionFragment;
     'mint()': FunctionFragment;
     'repayBorrow()': FunctionFragment;
     'repayBorrowBehalf(address)': FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: 'getCash', values?: undefined): string;
   encodeFunctionData(functionFragment: 'liquidateBorrow', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'mint', values?: undefined): string;
   encodeFunctionData(functionFragment: 'repayBorrow', values?: undefined): string;
   encodeFunctionData(functionFragment: 'repayBorrowBehalf', values: [string]): string;
 
+  decodeFunctionResult(functionFragment: 'getCash', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'liquidateBorrow', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'mint', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'repayBorrow', data: BytesLike): Result;
@@ -84,6 +88,10 @@ export class ICEther extends Contract {
   interface: ICEtherInterface;
 
   functions: {
+    getCash(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    'getCash()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
     liquidateBorrow(
       borrower: string,
       cTokenCollateral: string,
@@ -111,6 +119,10 @@ export class ICEther extends Contract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
+
+  getCash(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  'getCash()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   liquidateBorrow(
     borrower: string,
@@ -140,6 +152,10 @@ export class ICEther extends Contract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    getCash(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'getCash()'(overrides?: CallOverrides): Promise<BigNumber>;
+
     liquidateBorrow(borrower: string, cTokenCollateral: string, overrides?: CallOverrides): Promise<void>;
 
     'liquidateBorrow(address,address)'(borrower: string, cTokenCollateral: string, overrides?: CallOverrides): Promise<void>;
@@ -160,6 +176,10 @@ export class ICEther extends Contract {
   filters: {};
 
   estimateGas: {
+    getCash(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    'getCash()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
     liquidateBorrow(
       borrower: string,
       cTokenCollateral: string,
@@ -186,6 +206,10 @@ export class ICEther extends Contract {
   };
 
   populateTransaction: {
+    getCash(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    'getCash()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
     liquidateBorrow(
       borrower: string,
       cTokenCollateral: string,

@@ -2,8 +2,8 @@ import { SublimeConfig } from '../../types/sublimeConfig';
 import { ContractTransaction, Signer, BigNumberish } from 'ethers';
 import { BigNumber } from 'bignumber.js';
 
-import { PoolUtils } from '../../wrappers/PoolUtils';
-import { PoolUtils__factory } from '../../wrappers/factories/PoolUtils__factory';
+import { PoolEthUtils as PoolUtils } from '../../wrappers/PoolEthUtils';
+import { PoolEthUtils__factory as PoolUtils__factory } from '../../wrappers/factories/PoolEthUtils__factory';
 
 import { TokenManager } from '../../tokenManager';
 import { Options as Overrides, StrategyType } from '../../types/Types';

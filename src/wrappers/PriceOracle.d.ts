@@ -24,6 +24,7 @@ interface PriceOracleInterface extends ethers.utils.Interface {
     'chainlinkFeedAddresses(address)': FunctionFragment;
     'doesFeedExist(address,address)': FunctionFragment;
     'getChainlinkLatestPrice(address,address)': FunctionFragment;
+    'getDecimals(address)': FunctionFragment;
     'getLatestPrice(address,address)': FunctionFragment;
     'getUniswapLatestPrice(address,address)': FunctionFragment;
     'initialize(address,address)': FunctionFragment;
@@ -40,6 +41,7 @@ interface PriceOracleInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'chainlinkFeedAddresses', values: [string]): string;
   encodeFunctionData(functionFragment: 'doesFeedExist', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'getChainlinkLatestPrice', values: [string, string]): string;
+  encodeFunctionData(functionFragment: 'getDecimals', values: [string]): string;
   encodeFunctionData(functionFragment: 'getLatestPrice', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'getUniswapLatestPrice', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'initialize', values: [string, string]): string;
@@ -55,6 +57,7 @@ interface PriceOracleInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'chainlinkFeedAddresses', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'doesFeedExist', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getChainlinkLatestPrice', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'getDecimals', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getLatestPrice', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getUniswapLatestPrice', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
@@ -124,12 +127,12 @@ export class PriceOracle extends Contract {
   interface: PriceOracleInterface;
 
   functions: {
-    chainlinkFeedAddresses(arg0: string, overrides?: CallOverrides): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
+    chainlinkFeedAddresses(arg0: string, overrides?: CallOverrides): Promise<[string, number] & { oracle: string; decimals: number }>;
 
     'chainlinkFeedAddresses(address)'(
       arg0: string,
       overrides?: CallOverrides
-    ): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
+    ): Promise<[string, number] & { oracle: string; decimals: number }>;
 
     doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<[boolean]>;
 
@@ -138,6 +141,10 @@ export class PriceOracle extends Contract {
     getChainlinkLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
     'getChainlinkLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+
+    getDecimals(_token: string, overrides?: CallOverrides): Promise<[number]>;
+
+    'getDecimals(address)'(_token: string, overrides?: CallOverrides): Promise<[number]>;
 
     getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
@@ -215,12 +222,12 @@ export class PriceOracle extends Contract {
     'weth()'(overrides?: CallOverrides): Promise<[string]>;
   };
 
-  chainlinkFeedAddresses(arg0: string, overrides?: CallOverrides): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
+  chainlinkFeedAddresses(arg0: string, overrides?: CallOverrides): Promise<[string, number] & { oracle: string; decimals: number }>;
 
   'chainlinkFeedAddresses(address)'(
     arg0: string,
     overrides?: CallOverrides
-  ): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
+  ): Promise<[string, number] & { oracle: string; decimals: number }>;
 
   doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<boolean>;
 
@@ -229,6 +236,10 @@ export class PriceOracle extends Contract {
   getChainlinkLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
   'getChainlinkLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+
+  getDecimals(_token: string, overrides?: CallOverrides): Promise<number>;
+
+  'getDecimals(address)'(_token: string, overrides?: CallOverrides): Promise<number>;
 
   getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
@@ -303,12 +314,12 @@ export class PriceOracle extends Contract {
   'weth()'(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    chainlinkFeedAddresses(arg0: string, overrides?: CallOverrides): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
+    chainlinkFeedAddresses(arg0: string, overrides?: CallOverrides): Promise<[string, number] & { oracle: string; decimals: number }>;
 
     'chainlinkFeedAddresses(address)'(
       arg0: string,
       overrides?: CallOverrides
-    ): Promise<[string, BigNumber] & { oracle: string; decimals: BigNumber }>;
+    ): Promise<[string, number] & { oracle: string; decimals: number }>;
 
     doesFeedExist(token1: string, token2: string, overrides?: CallOverrides): Promise<boolean>;
 
@@ -317,6 +328,10 @@ export class PriceOracle extends Contract {
     getChainlinkLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
     'getChainlinkLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+
+    getDecimals(_token: string, overrides?: CallOverrides): Promise<number>;
+
+    'getDecimals(address)'(_token: string, overrides?: CallOverrides): Promise<number>;
 
     getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
@@ -404,6 +419,10 @@ export class PriceOracle extends Contract {
 
     'getChainlinkLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    getDecimals(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'getDecimals(address)'(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'getLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -489,6 +508,10 @@ export class PriceOracle extends Contract {
     getChainlinkLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'getChainlinkLatestPrice(address,address)'(num: string, den: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getDecimals(_token: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'getDecimals(address)'(_token: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getLatestPrice(num: string, den: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

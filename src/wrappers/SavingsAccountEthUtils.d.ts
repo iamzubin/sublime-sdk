@@ -21,12 +21,12 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface SavingsAccountEthUtilsInterface extends ethers.utils.Interface {
   functions: {
-    'depositEth(address)': FunctionFragment;
+    'depositEth(address,address)': FunctionFragment;
     'savingsAccount()': FunctionFragment;
     'weth()': FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'depositEth', values: [string]): string;
+  encodeFunctionData(functionFragment: 'depositEth', values: [string, string]): string;
   encodeFunctionData(functionFragment: 'savingsAccount', values?: undefined): string;
   encodeFunctionData(functionFragment: 'weth', values?: undefined): string;
 
@@ -81,10 +81,15 @@ export class SavingsAccountEthUtils extends Contract {
   interface: SavingsAccountEthUtilsInterface;
 
   functions: {
-    depositEth(_strategy: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
-
-    'depositEth(address)'(
+    depositEth(
       _strategy: string,
+      _to: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    'depositEth(address,address)'(
+      _strategy: string,
+      _to: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -97,10 +102,15 @@ export class SavingsAccountEthUtils extends Contract {
     'weth()'(overrides?: CallOverrides): Promise<[string]>;
   };
 
-  depositEth(_strategy: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
-
-  'depositEth(address)'(
+  depositEth(
     _strategy: string,
+    _to: string,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  'depositEth(address,address)'(
+    _strategy: string,
+    _to: string,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -113,9 +123,9 @@ export class SavingsAccountEthUtils extends Contract {
   'weth()'(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    depositEth(_strategy: string, overrides?: CallOverrides): Promise<void>;
+    depositEth(_strategy: string, _to: string, overrides?: CallOverrides): Promise<void>;
 
-    'depositEth(address)'(_strategy: string, overrides?: CallOverrides): Promise<void>;
+    'depositEth(address,address)'(_strategy: string, _to: string, overrides?: CallOverrides): Promise<void>;
 
     savingsAccount(overrides?: CallOverrides): Promise<string>;
 
@@ -129,9 +139,13 @@ export class SavingsAccountEthUtils extends Contract {
   filters: {};
 
   estimateGas: {
-    depositEth(_strategy: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    depositEth(_strategy: string, _to: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    'depositEth(address)'(_strategy: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'depositEth(address,address)'(
+      _strategy: string,
+      _to: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     savingsAccount(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -143,10 +157,15 @@ export class SavingsAccountEthUtils extends Contract {
   };
 
   populateTransaction: {
-    depositEth(_strategy: string, overrides?: PayableOverrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
-
-    'depositEth(address)'(
+    depositEth(
       _strategy: string,
+      _to: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    'depositEth(address,address)'(
+      _strategy: string,
+      _to: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

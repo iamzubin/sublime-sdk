@@ -24,11 +24,13 @@ interface StrategyRegistryInterface extends ethers.utils.Interface {
     'addStrategy(address)': FunctionFragment;
     'getStrategies()': FunctionFragment;
     'initialize(address,uint256)': FunctionFragment;
+    'isValidStrategy(address)': FunctionFragment;
     'maxStrategies()': FunctionFragment;
     'owner()': FunctionFragment;
     'registry(address)': FunctionFragment;
     'removeStrategy(uint256)': FunctionFragment;
     'renounceOwnership()': FunctionFragment;
+    'retiredRegistry(address)': FunctionFragment;
     'strategies(uint256)': FunctionFragment;
     'transferOwnership(address)': FunctionFragment;
     'updateMaxStrategies(uint256)': FunctionFragment;
@@ -38,11 +40,13 @@ interface StrategyRegistryInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'addStrategy', values: [string]): string;
   encodeFunctionData(functionFragment: 'getStrategies', values?: undefined): string;
   encodeFunctionData(functionFragment: 'initialize', values: [string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'isValidStrategy', values: [string]): string;
   encodeFunctionData(functionFragment: 'maxStrategies', values?: undefined): string;
   encodeFunctionData(functionFragment: 'owner', values?: undefined): string;
   encodeFunctionData(functionFragment: 'registry', values: [string]): string;
   encodeFunctionData(functionFragment: 'removeStrategy', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'renounceOwnership', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'retiredRegistry', values: [string]): string;
   encodeFunctionData(functionFragment: 'strategies', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'transferOwnership', values: [string]): string;
   encodeFunctionData(functionFragment: 'updateMaxStrategies', values: [BigNumberish]): string;
@@ -51,11 +55,13 @@ interface StrategyRegistryInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'addStrategy', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getStrategies', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'isValidStrategy', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'maxStrategies', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'registry', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'removeStrategy', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'renounceOwnership', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'retiredRegistry', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'strategies', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'transferOwnership', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateMaxStrategies', data: BytesLike): Result;
@@ -138,6 +144,10 @@ export class StrategyRegistry extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    isValidStrategy(_strategy: string, overrides?: CallOverrides): Promise<[boolean]>;
+
+    'isValidStrategy(address)'(_strategy: string, overrides?: CallOverrides): Promise<[boolean]>;
+
     maxStrategies(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     'maxStrategies()'(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -146,9 +156,9 @@ export class StrategyRegistry extends Contract {
 
     'owner()'(overrides?: CallOverrides): Promise<[string]>;
 
-    registry(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
+    registry(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    'registry(address)'(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
+    'registry(address)'(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     removeStrategy(_strategyIndex: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -160,6 +170,10 @@ export class StrategyRegistry extends Contract {
     renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+    retiredRegistry(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    'retiredRegistry(address)'(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     strategies(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
 
@@ -217,6 +231,10 @@ export class StrategyRegistry extends Contract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  isValidStrategy(_strategy: string, overrides?: CallOverrides): Promise<boolean>;
+
+  'isValidStrategy(address)'(_strategy: string, overrides?: CallOverrides): Promise<boolean>;
+
   maxStrategies(overrides?: CallOverrides): Promise<BigNumber>;
 
   'maxStrategies()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -225,9 +243,9 @@ export class StrategyRegistry extends Contract {
 
   'owner()'(overrides?: CallOverrides): Promise<string>;
 
-  registry(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+  registry(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  'registry(address)'(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+  'registry(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   removeStrategy(_strategyIndex: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
@@ -239,6 +257,10 @@ export class StrategyRegistry extends Contract {
   renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+
+  retiredRegistry(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+  'retiredRegistry(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   strategies(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
@@ -285,6 +307,10 @@ export class StrategyRegistry extends Contract {
 
     'initialize(address,uint256)'(_owner: string, _maxStrategies: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
+    isValidStrategy(_strategy: string, overrides?: CallOverrides): Promise<boolean>;
+
+    'isValidStrategy(address)'(_strategy: string, overrides?: CallOverrides): Promise<boolean>;
+
     maxStrategies(overrides?: CallOverrides): Promise<BigNumber>;
 
     'maxStrategies()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -293,9 +319,9 @@ export class StrategyRegistry extends Contract {
 
     'owner()'(overrides?: CallOverrides): Promise<string>;
 
-    registry(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+    registry(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'registry(address)'(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+    'registry(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     removeStrategy(_strategyIndex: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
@@ -304,6 +330,10 @@ export class StrategyRegistry extends Contract {
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     'renounceOwnership()'(overrides?: CallOverrides): Promise<void>;
+
+    retiredRegistry(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'retiredRegistry(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     strategies(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
@@ -361,6 +391,10 @@ export class StrategyRegistry extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    isValidStrategy(_strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'isValidStrategy(address)'(_strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     maxStrategies(overrides?: CallOverrides): Promise<BigNumber>;
 
     'maxStrategies()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -383,6 +417,10 @@ export class StrategyRegistry extends Contract {
     renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+
+    retiredRegistry(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'retiredRegistry(address)'(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     strategies(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -435,6 +473,10 @@ export class StrategyRegistry extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    isValidStrategy(_strategy: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'isValidStrategy(address)'(_strategy: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     maxStrategies(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'maxStrategies()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -460,6 +502,10 @@ export class StrategyRegistry extends Contract {
     renounceOwnership(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     'renounceOwnership()'(overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+
+    retiredRegistry(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'retiredRegistry(address)'(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     strategies(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

@@ -35,7 +35,12 @@ export class SavingAccountsEthUtils {
    * @param options transaction options
    * @returns
    */
-  public async depositEthToSavingsAccount(strategy: StrategyType, amount: string, options?: Overrides): Promise<ContractTransaction> {
+  public async depositEthToSavingsAccount(
+    strategy: StrategyType,
+    amount: string,
+    to: string,
+    options?: Overrides
+  ): Promise<ContractTransaction> {
     const decimals = 18;
     const _amount = new BigNumber(amount);
     let value: BigNumberish = _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0);
@@ -48,6 +53,6 @@ export class SavingAccountsEthUtils {
       strategyAddress = this.config.yearnStrategyContractAddress;
     }
 
-    return this.savingsAccountEthUtils.depositEth(strategyAddress, { ...options, value });
+    return this.savingsAccountEthUtils.depositEth(strategyAddress, to, { ...options, value });
   }
 }

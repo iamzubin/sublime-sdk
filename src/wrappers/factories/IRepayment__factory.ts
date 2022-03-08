@@ -19,25 +19,6 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'poolID',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'repayAmount',
-        type: 'uint256',
-      },
-    ],
-    name: 'ExtensionRepaid',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
         internalType: 'uint256',
         name: 'gracePenaltyRate',
         type: 'uint256',
@@ -290,19 +271,6 @@ const _abi = [
       },
     ],
     name: 'initializeRepayment',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_poolID',
-        type: 'address',
-      },
-    ],
-    name: 'instalmentDeadlineExtended',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',

@@ -2,8 +2,8 @@ import { SublimeConfig } from '../../types/sublimeConfig';
 import { ContractTransaction, Signer, BigNumberish } from 'ethers';
 import { BigNumber } from 'bignumber.js';
 
-import { CreditLineUtils } from '../../wrappers/CreditLineUtils';
-import { CreditLineUtils__factory } from '../../wrappers/factories/CreditLineUtils__factory';
+import { CreditLineEthUtils as CreditLineUtils } from '../../wrappers/CreditLineEthUtils';
+import { CreditLineEthUtils__factory as CreditLineUtils__factory } from '../../wrappers/factories/CreditLineEthUtils__factory';
 
 import { TokenManager } from '../../tokenManager';
 import { StrategyType, Options as Overrides } from '../../types/Types';

@@ -23,6 +23,7 @@ interface IStrategyRegistryInterface extends ethers.utils.Interface {
   functions: {
     'addStrategy(address)': FunctionFragment;
     'getStrategies()': FunctionFragment;
+    'isValidStrategy(address)': FunctionFragment;
     'registry(address)': FunctionFragment;
     'removeStrategy(uint256)': FunctionFragment;
     'updateStrategy(uint256,address,address)': FunctionFragment;
@@ -30,12 +31,14 @@ interface IStrategyRegistryInterface extends ethers.utils.Interface {
 
   encodeFunctionData(functionFragment: 'addStrategy', values: [string]): string;
   encodeFunctionData(functionFragment: 'getStrategies', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'isValidStrategy', values: [string]): string;
   encodeFunctionData(functionFragment: 'registry', values: [string]): string;
   encodeFunctionData(functionFragment: 'removeStrategy', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'updateStrategy', values: [BigNumberish, string, string]): string;
 
   decodeFunctionResult(functionFragment: 'addStrategy', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getStrategies', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'isValidStrategy', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'registry', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'removeStrategy', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'updateStrategy', data: BytesLike): Result;
@@ -95,22 +98,26 @@ export class IStrategyRegistry extends Contract {
   interface: IStrategyRegistryInterface;
 
   functions: {
-    addStrategy(_strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    addStrategy(strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-    'addStrategy(address)'(_strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    'addStrategy(address)'(strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     getStrategies(overrides?: CallOverrides): Promise<[string[]] & { strategies: string[] }>;
 
     'getStrategies()'(overrides?: CallOverrides): Promise<[string[]] & { strategies: string[] }>;
 
-    registry(_strategy: string, overrides?: CallOverrides): Promise<[boolean] & { isValidStrategy: boolean }>;
+    isValidStrategy(strategy: string, overrides?: CallOverrides): Promise<[boolean] & { validStrategy: boolean }>;
 
-    'registry(address)'(_strategy: string, overrides?: CallOverrides): Promise<[boolean] & { isValidStrategy: boolean }>;
+    'isValidStrategy(address)'(strategy: string, overrides?: CallOverrides): Promise<[boolean] & { validStrategy: boolean }>;
 
-    removeStrategy(_strategyIndex: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+    registry(_strategy: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    'registry(address)'(_strategy: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    removeStrategy(strategyIndex: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
     'removeStrategy(uint256)'(
-      _strategyIndex: BigNumberish,
+      strategyIndex: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -129,22 +136,26 @@ export class IStrategyRegistry extends Contract {
     ): Promise<ContractTransaction>;
   };
 
-  addStrategy(_strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  addStrategy(strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
-  'addStrategy(address)'(_strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  'addStrategy(address)'(strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   getStrategies(overrides?: CallOverrides): Promise<string[]>;
 
   'getStrategies()'(overrides?: CallOverrides): Promise<string[]>;
 
-  registry(_strategy: string, overrides?: CallOverrides): Promise<boolean>;
+  isValidStrategy(strategy: string, overrides?: CallOverrides): Promise<boolean>;
 
-  'registry(address)'(_strategy: string, overrides?: CallOverrides): Promise<boolean>;
+  'isValidStrategy(address)'(strategy: string, overrides?: CallOverrides): Promise<boolean>;
 
-  removeStrategy(_strategyIndex: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
+  registry(_strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+  'registry(address)'(_strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+  removeStrategy(strategyIndex: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
 
   'removeStrategy(uint256)'(
-    _strategyIndex: BigNumberish,
+    strategyIndex: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -163,21 +174,25 @@ export class IStrategyRegistry extends Contract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    addStrategy(_strategy: string, overrides?: CallOverrides): Promise<void>;
+    addStrategy(strategy: string, overrides?: CallOverrides): Promise<void>;
 
-    'addStrategy(address)'(_strategy: string, overrides?: CallOverrides): Promise<void>;
+    'addStrategy(address)'(strategy: string, overrides?: CallOverrides): Promise<void>;
 
     getStrategies(overrides?: CallOverrides): Promise<string[]>;
 
     'getStrategies()'(overrides?: CallOverrides): Promise<string[]>;
 
-    registry(_strategy: string, overrides?: CallOverrides): Promise<boolean>;
+    isValidStrategy(strategy: string, overrides?: CallOverrides): Promise<boolean>;
 
-    'registry(address)'(_strategy: string, overrides?: CallOverrides): Promise<boolean>;
+    'isValidStrategy(address)'(strategy: string, overrides?: CallOverrides): Promise<boolean>;
 
-    removeStrategy(_strategyIndex: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    registry(_strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'removeStrategy(uint256)'(_strategyIndex: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    'registry(address)'(_strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    removeStrategy(strategyIndex: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    'removeStrategy(uint256)'(strategyIndex: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     updateStrategy(_strategyIndex: BigNumberish, _oldStrategy: string, _newStrategy: string, overrides?: CallOverrides): Promise<void>;
 
@@ -198,24 +213,25 @@ export class IStrategyRegistry extends Contract {
   };
 
   estimateGas: {
-    addStrategy(_strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    addStrategy(strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    'addStrategy(address)'(_strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    'addStrategy(address)'(strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     getStrategies(overrides?: CallOverrides): Promise<BigNumber>;
 
     'getStrategies()'(overrides?: CallOverrides): Promise<BigNumber>;
 
+    isValidStrategy(strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'isValidStrategy(address)'(strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     registry(_strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'registry(address)'(_strategy: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    removeStrategy(_strategyIndex: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
+    removeStrategy(strategyIndex: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
-    'removeStrategy(uint256)'(
-      _strategyIndex: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    'removeStrategy(uint256)'(strategyIndex: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     updateStrategy(
       _strategyIndex: BigNumberish,
@@ -233,25 +249,26 @@ export class IStrategyRegistry extends Contract {
   };
 
   populateTransaction: {
-    addStrategy(_strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    addStrategy(strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
-    'addStrategy(address)'(_strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
+    'addStrategy(address)'(strategy: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     getStrategies(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'getStrategies()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    isValidStrategy(strategy: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'isValidStrategy(address)'(strategy: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     registry(_strategy: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'registry(address)'(_strategy: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    removeStrategy(
-      _strategyIndex: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    removeStrategy(strategyIndex: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
 
     'removeStrategy(uint256)'(
-      _strategyIndex: BigNumberish,
+      strategyIndex: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

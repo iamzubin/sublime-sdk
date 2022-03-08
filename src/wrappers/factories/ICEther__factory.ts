@@ -15,6 +15,19 @@ export class ICEther__factory {
 
 const _abi = [
   {
+    inputs: [],
+    name: 'getCash',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
     inputs: [
       {
         internalType: 'address',

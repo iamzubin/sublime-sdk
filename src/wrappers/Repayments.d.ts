@@ -21,21 +21,24 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface RepaymentsInterface extends ethers.utils.Interface {
   functions: {
+    '_getInterestDueTillInstalmentDeadline(address,uint256)': FunctionFragment;
     'didBorrowerDefault(address)': FunctionFragment;
     'getCurrentInstalmentInterval(address)': FunctionFragment;
     'getCurrentLoanInterval(address)': FunctionFragment;
+    'getDuration(address,uint256)': FunctionFragment;
     'getGracePeriodFraction()': FunctionFragment;
     'getInstalmentsCompleted(address)': FunctionFragment;
+    'getInterest(address,uint256)': FunctionFragment;
     'getInterestCalculationVars(address)': FunctionFragment;
     'getInterestDueTillInstalmentDeadline(address)': FunctionFragment;
     'getInterestLeft(address)': FunctionFragment;
-    'getInterestOverdue(address)': FunctionFragment;
     'getInterestPerSecond(address)': FunctionFragment;
     'getNextInstalmentDeadline(address)': FunctionFragment;
     'getTotalRepaidAmount(address)': FunctionFragment;
+    'gracePenaltyRate()': FunctionFragment;
+    'gracePeriodFraction()': FunctionFragment;
     'initialize(address,uint128,uint128)': FunctionFragment;
     'initializeRepayment(uint64,uint256,uint256,uint256,address)': FunctionFragment;
-    'instalmentDeadlineExtended(address)': FunctionFragment;
     'isGracePenaltyApplicable(address)': FunctionFragment;
     'repay(address,uint256)': FunctionFragment;
     'repayConstants(address)': FunctionFragment;
@@ -46,24 +49,27 @@ interface RepaymentsInterface extends ethers.utils.Interface {
     'updatePoolFactory(address)': FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: '_getInterestDueTillInstalmentDeadline', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'didBorrowerDefault', values: [string]): string;
   encodeFunctionData(functionFragment: 'getCurrentInstalmentInterval', values: [string]): string;
   encodeFunctionData(functionFragment: 'getCurrentLoanInterval', values: [string]): string;
+  encodeFunctionData(functionFragment: 'getDuration', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'getGracePeriodFraction', values?: undefined): string;
   encodeFunctionData(functionFragment: 'getInstalmentsCompleted', values: [string]): string;
+  encodeFunctionData(functionFragment: 'getInterest', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'getInterestCalculationVars', values: [string]): string;
   encodeFunctionData(functionFragment: 'getInterestDueTillInstalmentDeadline', values: [string]): string;
   encodeFunctionData(functionFragment: 'getInterestLeft', values: [string]): string;
-  encodeFunctionData(functionFragment: 'getInterestOverdue', values: [string]): string;
   encodeFunctionData(functionFragment: 'getInterestPerSecond', values: [string]): string;
   encodeFunctionData(functionFragment: 'getNextInstalmentDeadline', values: [string]): string;
   encodeFunctionData(functionFragment: 'getTotalRepaidAmount', values: [string]): string;
+  encodeFunctionData(functionFragment: 'gracePenaltyRate', values?: undefined): string;
+  encodeFunctionData(functionFragment: 'gracePeriodFraction', values?: undefined): string;
   encodeFunctionData(functionFragment: 'initialize', values: [string, BigNumberish, BigNumberish]): string;
   encodeFunctionData(
     functionFragment: 'initializeRepayment',
     values: [BigNumberish, BigNumberish, BigNumberish, BigNumberish, string]
   ): string;
-  encodeFunctionData(functionFragment: 'instalmentDeadlineExtended', values: [string]): string;
   encodeFunctionData(functionFragment: 'isGracePenaltyApplicable', values: [string]): string;
   encodeFunctionData(functionFragment: 'repay', values: [string, BigNumberish]): string;
   encodeFunctionData(functionFragment: 'repayConstants', values: [string]): string;
@@ -73,21 +79,24 @@ interface RepaymentsInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: 'updateGracePeriodFraction', values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: 'updatePoolFactory', values: [string]): string;
 
+  decodeFunctionResult(functionFragment: '_getInterestDueTillInstalmentDeadline', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'didBorrowerDefault', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getCurrentInstalmentInterval', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getCurrentLoanInterval', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'getDuration', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getGracePeriodFraction', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getInstalmentsCompleted', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'getInterest', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getInterestCalculationVars', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getInterestDueTillInstalmentDeadline', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getInterestLeft', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'getInterestOverdue', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getInterestPerSecond', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getNextInstalmentDeadline', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getTotalRepaidAmount', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'gracePenaltyRate', data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: 'gracePeriodFraction', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'initialize', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'initializeRepayment', data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: 'instalmentDeadlineExtended', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'isGracePenaltyApplicable', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'repay', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'repayConstants', data: BytesLike): Result;
@@ -98,7 +107,6 @@ interface RepaymentsInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: 'updatePoolFactory', data: BytesLike): Result;
 
   events: {
-    'ExtensionRepaid(address,uint256)': EventFragment;
     'GracePenaltyRateUpdated(uint256)': EventFragment;
     'GracePenaltyRepaid(address,uint256)': EventFragment;
     'GracePeriodFractionUpdated(uint256)': EventFragment;
@@ -108,7 +116,6 @@ interface RepaymentsInterface extends ethers.utils.Interface {
     'PrincipalRepaid(address,uint256)': EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: 'ExtensionRepaid'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'GracePenaltyRateUpdated'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'GracePenaltyRepaid'): EventFragment;
   getEvent(nameOrSignatureOrTopic: 'GracePeriodFractionUpdated'): EventFragment;
@@ -162,6 +169,18 @@ export class Repayments extends Contract {
   interface: RepaymentsInterface;
 
   functions: {
+    _getInterestDueTillInstalmentDeadline(
+      _poolID: string,
+      _nextInstalmentDeadline: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    '_getInterestDueTillInstalmentDeadline(address,uint256)'(
+      _poolID: string,
+      _nextInstalmentDeadline: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     didBorrowerDefault(_poolID: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     'didBorrowerDefault(address)'(_poolID: string, overrides?: CallOverrides): Promise<[boolean]>;
@@ -174,6 +193,10 @@ export class Repayments extends Contract {
 
     'getCurrentLoanInterval(address)'(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    getDuration(_poolID: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    'getDuration(address,uint256)'(_poolID: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+
     getGracePeriodFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     'getGracePeriodFraction()'(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -181,6 +204,10 @@ export class Repayments extends Contract {
     getInstalmentsCompleted(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     'getInstalmentsCompleted(address)'(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    getInterest(_poolID: string, _scaledUpTime: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    'getInterest(address,uint256)'(_poolID: string, _scaledUpTime: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     getInterestCalculationVars(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
@@ -194,10 +221,6 @@ export class Repayments extends Contract {
 
     'getInterestLeft(address)'(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    getInterestOverdue(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    'getInterestOverdue(address)'(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-
     getInterestPerSecond(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     'getInterestPerSecond(address)'(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -209,6 +232,14 @@ export class Repayments extends Contract {
     getTotalRepaidAmount(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     'getTotalRepaidAmount(address)'(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    gracePenaltyRate(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    'gracePenaltyRate()'(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    gracePeriodFraction(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    'gracePeriodFraction()'(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     initialize(
       _poolFactory: string,
@@ -239,13 +270,6 @@ export class Repayments extends Contract {
       borrowRate: BigNumberish,
       loanStartTime: BigNumberish,
       lentAsset: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    instalmentDeadlineExtended(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
-
-    'instalmentDeadlineExtended(address)'(
-      _poolID: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -305,11 +329,9 @@ export class Repayments extends Contract {
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [boolean, BigNumber, BigNumber, BigNumber] & {
-        isLoanExtensionActive: boolean;
+      [BigNumber, BigNumber] & {
         repaidAmount: BigNumber;
         loanDurationCovered: BigNumber;
-        loanExtensionPeriod: BigNumber;
       }
     >;
 
@@ -317,11 +339,9 @@ export class Repayments extends Contract {
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [boolean, BigNumber, BigNumber, BigNumber] & {
-        isLoanExtensionActive: boolean;
+      [BigNumber, BigNumber] & {
         repaidAmount: BigNumber;
         loanDurationCovered: BigNumber;
-        loanExtensionPeriod: BigNumber;
       }
     >;
 
@@ -353,6 +373,18 @@ export class Repayments extends Contract {
     ): Promise<ContractTransaction>;
   };
 
+  _getInterestDueTillInstalmentDeadline(
+    _poolID: string,
+    _nextInstalmentDeadline: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  '_getInterestDueTillInstalmentDeadline(address,uint256)'(
+    _poolID: string,
+    _nextInstalmentDeadline: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   didBorrowerDefault(_poolID: string, overrides?: CallOverrides): Promise<boolean>;
 
   'didBorrowerDefault(address)'(_poolID: string, overrides?: CallOverrides): Promise<boolean>;
@@ -365,6 +397,10 @@ export class Repayments extends Contract {
 
   'getCurrentLoanInterval(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+  getDuration(_poolID: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+  'getDuration(address,uint256)'(_poolID: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
   getGracePeriodFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
   'getGracePeriodFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -372,6 +408,10 @@ export class Repayments extends Contract {
   getInstalmentsCompleted(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   'getInstalmentsCompleted(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+  getInterest(_poolID: string, _scaledUpTime: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+  'getInterest(address,uint256)'(_poolID: string, _scaledUpTime: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
   getInterestCalculationVars(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
@@ -385,10 +425,6 @@ export class Repayments extends Contract {
 
   'getInterestLeft(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  getInterestOverdue(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-  'getInterestOverdue(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
-
   getInterestPerSecond(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   'getInterestPerSecond(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -400,6 +436,14 @@ export class Repayments extends Contract {
   getTotalRepaidAmount(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   'getTotalRepaidAmount(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+  gracePenaltyRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+  'gracePenaltyRate()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+  gracePeriodFraction(overrides?: CallOverrides): Promise<BigNumber>;
+
+  'gracePeriodFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
 
   initialize(
     _poolFactory: string,
@@ -430,13 +474,6 @@ export class Repayments extends Contract {
     borrowRate: BigNumberish,
     loanStartTime: BigNumberish,
     lentAsset: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  instalmentDeadlineExtended(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<ContractTransaction>;
-
-  'instalmentDeadlineExtended(address)'(
-    _poolID: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -492,11 +529,9 @@ export class Repayments extends Contract {
     arg0: string,
     overrides?: CallOverrides
   ): Promise<
-    [boolean, BigNumber, BigNumber, BigNumber] & {
-      isLoanExtensionActive: boolean;
+    [BigNumber, BigNumber] & {
       repaidAmount: BigNumber;
       loanDurationCovered: BigNumber;
-      loanExtensionPeriod: BigNumber;
     }
   >;
 
@@ -504,11 +539,9 @@ export class Repayments extends Contract {
     arg0: string,
     overrides?: CallOverrides
   ): Promise<
-    [boolean, BigNumber, BigNumber, BigNumber] & {
-      isLoanExtensionActive: boolean;
+    [BigNumber, BigNumber] & {
       repaidAmount: BigNumber;
       loanDurationCovered: BigNumber;
-      loanExtensionPeriod: BigNumber;
     }
   >;
 
@@ -540,6 +573,18 @@ export class Repayments extends Contract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    _getInterestDueTillInstalmentDeadline(
+      _poolID: string,
+      _nextInstalmentDeadline: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    '_getInterestDueTillInstalmentDeadline(address,uint256)'(
+      _poolID: string,
+      _nextInstalmentDeadline: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     didBorrowerDefault(_poolID: string, overrides?: CallOverrides): Promise<boolean>;
 
     'didBorrowerDefault(address)'(_poolID: string, overrides?: CallOverrides): Promise<boolean>;
@@ -552,6 +597,10 @@ export class Repayments extends Contract {
 
     'getCurrentLoanInterval(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    getDuration(_poolID: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'getDuration(address,uint256)'(_poolID: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
     getGracePeriodFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
     'getGracePeriodFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -559,6 +608,10 @@ export class Repayments extends Contract {
     getInstalmentsCompleted(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'getInstalmentsCompleted(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    getInterest(_poolID: string, _scaledUpTime: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'getInterest(address,uint256)'(_poolID: string, _scaledUpTime: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     getInterestCalculationVars(_poolID: string, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
 
@@ -572,10 +625,6 @@ export class Repayments extends Contract {
 
     'getInterestLeft(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    getInterestOverdue(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'getInterestOverdue(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     getInterestPerSecond(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'getInterestPerSecond(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -587,6 +636,14 @@ export class Repayments extends Contract {
     getTotalRepaidAmount(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'getTotalRepaidAmount(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    gracePenaltyRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'gracePenaltyRate()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    gracePeriodFraction(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'gracePeriodFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     initialize(
       _poolFactory: string,
@@ -619,10 +676,6 @@ export class Repayments extends Contract {
       lentAsset: string,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    instalmentDeadlineExtended(_poolID: string, overrides?: CallOverrides): Promise<void>;
-
-    'instalmentDeadlineExtended(address)'(_poolID: string, overrides?: CallOverrides): Promise<void>;
 
     isGracePenaltyApplicable(_poolID: string, overrides?: CallOverrides): Promise<boolean>;
 
@@ -672,11 +725,9 @@ export class Repayments extends Contract {
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [boolean, BigNumber, BigNumber, BigNumber] & {
-        isLoanExtensionActive: boolean;
+      [BigNumber, BigNumber] & {
         repaidAmount: BigNumber;
         loanDurationCovered: BigNumber;
-        loanExtensionPeriod: BigNumber;
       }
     >;
 
@@ -684,11 +735,9 @@ export class Repayments extends Contract {
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [boolean, BigNumber, BigNumber, BigNumber] & {
-        isLoanExtensionActive: boolean;
+      [BigNumber, BigNumber] & {
         repaidAmount: BigNumber;
         loanDurationCovered: BigNumber;
-        loanExtensionPeriod: BigNumber;
       }
     >;
 
@@ -706,11 +755,6 @@ export class Repayments extends Contract {
   };
 
   filters: {
-    ExtensionRepaid(
-      poolID: string | null,
-      repayAmount: null
-    ): TypedEventFilter<[string, BigNumber], { poolID: string; repayAmount: BigNumber }>;
-
     GracePenaltyRateUpdated(gracePenaltyRate: BigNumberish | null): TypedEventFilter<[BigNumber], { gracePenaltyRate: BigNumber }>;
 
     GracePenaltyRepaid(
@@ -739,6 +783,18 @@ export class Repayments extends Contract {
   };
 
   estimateGas: {
+    _getInterestDueTillInstalmentDeadline(
+      _poolID: string,
+      _nextInstalmentDeadline: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    '_getInterestDueTillInstalmentDeadline(address,uint256)'(
+      _poolID: string,
+      _nextInstalmentDeadline: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     didBorrowerDefault(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'didBorrowerDefault(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -751,6 +807,10 @@ export class Repayments extends Contract {
 
     'getCurrentLoanInterval(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    getDuration(_poolID: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'getDuration(address,uint256)'(_poolID: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
     getGracePeriodFraction(overrides?: CallOverrides): Promise<BigNumber>;
 
     'getGracePeriodFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
@@ -758,6 +818,10 @@ export class Repayments extends Contract {
     getInstalmentsCompleted(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'getInstalmentsCompleted(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    getInterest(_poolID: string, _scaledUpTime: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    'getInterest(address,uint256)'(_poolID: string, _scaledUpTime: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     getInterestCalculationVars(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -771,10 +835,6 @@ export class Repayments extends Contract {
 
     'getInterestLeft(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    getInterestOverdue(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    'getInterestOverdue(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     getInterestPerSecond(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'getInterestPerSecond(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
@@ -786,6 +846,14 @@ export class Repayments extends Contract {
     getTotalRepaidAmount(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     'getTotalRepaidAmount(address)'(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    gracePenaltyRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'gracePenaltyRate()'(overrides?: CallOverrides): Promise<BigNumber>;
+
+    gracePeriodFraction(overrides?: CallOverrides): Promise<BigNumber>;
+
+    'gracePeriodFraction()'(overrides?: CallOverrides): Promise<BigNumber>;
 
     initialize(
       _poolFactory: string,
@@ -818,10 +886,6 @@ export class Repayments extends Contract {
       lentAsset: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    instalmentDeadlineExtended(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'instalmentDeadlineExtended(address)'(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
 
     isGracePenaltyApplicable(_poolID: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -873,6 +937,18 @@ export class Repayments extends Contract {
   };
 
   populateTransaction: {
+    _getInterestDueTillInstalmentDeadline(
+      _poolID: string,
+      _nextInstalmentDeadline: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    '_getInterestDueTillInstalmentDeadline(address,uint256)'(
+      _poolID: string,
+      _nextInstalmentDeadline: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     didBorrowerDefault(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'didBorrowerDefault(address)'(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -885,6 +961,10 @@ export class Repayments extends Contract {
 
     'getCurrentLoanInterval(address)'(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    getDuration(_poolID: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'getDuration(address,uint256)'(_poolID: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     getGracePeriodFraction(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'getGracePeriodFraction()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -892,6 +972,10 @@ export class Repayments extends Contract {
     getInstalmentsCompleted(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'getInstalmentsCompleted(address)'(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getInterest(_poolID: string, _scaledUpTime: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'getInterest(address,uint256)'(_poolID: string, _scaledUpTime: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getInterestCalculationVars(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -905,10 +989,6 @@ export class Repayments extends Contract {
 
     'getInterestLeft(address)'(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getInterestOverdue(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    'getInterestOverdue(address)'(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     getInterestPerSecond(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'getInterestPerSecond(address)'(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -920,6 +1000,14 @@ export class Repayments extends Contract {
     getTotalRepaidAmount(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     'getTotalRepaidAmount(address)'(_poolID: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    gracePenaltyRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'gracePenaltyRate()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    gracePeriodFraction(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    'gracePeriodFraction()'(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     initialize(
       _poolFactory: string,
@@ -950,13 +1038,6 @@ export class Repayments extends Contract {
       borrowRate: BigNumberish,
       loanStartTime: BigNumberish,
       lentAsset: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    instalmentDeadlineExtended(_poolID: string, overrides?: Overrides & { from?: string | Promise<string> }): Promise<PopulatedTransaction>;
-
-    'instalmentDeadlineExtended(address)'(
-      _poolID: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

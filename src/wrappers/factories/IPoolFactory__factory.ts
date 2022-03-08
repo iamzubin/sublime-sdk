@@ -70,19 +70,6 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: 'address',
-        name: 'updatedExtension',
-        type: 'address',
-      },
-    ],
-    name: 'ExtensionImplUpdated',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
         internalType: 'string',
         name: 'limitType',
         type: 'string',
@@ -323,21 +310,8 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: 'collectionPeriod',
+        name: '',
         type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'extension',
-    outputs: [
-      {
-        internalType: 'address',
-        name: 'extension',
-        type: 'address',
       },
     ],
     stateMutability: 'view',
@@ -367,7 +341,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: 'liquidatorRewardFraction',
+        name: '',
         type: 'uint256',
       },
     ],
@@ -380,7 +354,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: 'loanWithdrawalDuration',
+        name: '',
         type: 'uint256',
       },
     ],
@@ -393,7 +367,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: 'marginCallDuration',
+        name: '',
         type: 'uint256',
       },
     ],
@@ -406,7 +380,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: 'minBorrowFraction',
+        name: '',
         type: 'uint256',
       },
     ],
@@ -419,7 +393,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: 'noStrategyAddress',
+        name: '',
         type: 'address',
       },
     ],
@@ -432,7 +406,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: 'owner',
+        name: '',
         type: 'address',
       },
     ],
@@ -445,7 +419,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'uint256',
-        name: 'poolCancelPenaltyMultiple',
+        name: '',
         type: 'uint256',
       },
     ],
@@ -463,9 +437,9 @@ const _abi = [
     name: 'poolRegistry',
     outputs: [
       {
-        internalType: 'bool',
-        name: 'isPoolValid',
-        type: 'bool',
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
     ],
     stateMutability: 'view',
@@ -477,7 +451,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: 'priceOracle',
+        name: '',
         type: 'address',
       },
     ],
@@ -490,7 +464,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: 'repaymentImpl',
+        name: '',
         type: 'address',
       },
     ],
@@ -503,7 +477,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: 'savingsAccount',
+        name: '',
         type: 'address',
       },
     ],
@@ -516,7 +490,7 @@ const _abi = [
     outputs: [
       {
         internalType: 'address',
-        name: 'userRegistry',
+        name: '',
         type: 'address',
       },
     ],

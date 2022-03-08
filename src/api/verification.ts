@@ -4,8 +4,8 @@ import { SublimeConfig } from '../types/sublimeConfig';
 import { Verification } from '../wrappers/Verification';
 import { Verification__factory } from '../wrappers/factories/Verification__factory';
 
-import { AdminVerifier } from '../wrappers/AdminVerifier';
-import { AdminVerifier__factory } from '../wrappers/factories/AdminVerifier__factory';
+import { TwitterVerifier } from '../wrappers/TwitterVerifier';
+import { TwitterVerifier__factory } from '../wrappers/factories/TwitterVerifier__factory';
 
 import { BigNumberish } from '@ethersproject/bignumber';
 import { Options as Overrides } from '../types/Types';
@@ -16,7 +16,7 @@ import { Options as Overrides } from '../types/Types';
 export class VerificationAPI {
   private signer: Signer;
   private verification: Verification;
-  private adminVerifier: AdminVerifier;
+  private twitterVerifier: TwitterVerifier;
 
   /**
    * @param signer Signer
@@ -25,7 +25,7 @@ export class VerificationAPI {
   constructor(signer: Signer, config: SublimeConfig) {
     this.signer = signer;
     this.verification = new Verification__factory(this.signer).attach(config.verificationContractAddress);
-    this.adminVerifier = new AdminVerifier__factory(this.signer).attach(config.adminVerifierContractAddress);
+    this.twitterVerifier = new TwitterVerifier__factory(this.signer).attach(config.twitterVerifierContractAddress);
   }
 
   /**
@@ -33,7 +33,7 @@ export class VerificationAPI {
    * @returns
    */
   public async isUser(user: string): Promise<boolean> {
-    return this.verification.isUser(user, this.adminVerifier.address);
+    return this.verification.isUser(user, this.twitterVerifier.address);
   }
 
   /**
@@ -49,7 +49,7 @@ export class VerificationAPI {
    * @param verifier Address of the verifier contract. (Default is the admin verifier)
    * @returns
    */
-  public async addVerifier(verifier: string = this.adminVerifier.address, options?: Overrides): Promise<ContractTransaction> {
+  public async addVerifier(verifier: string = this.twitterVerifier.address, options?: Overrides): Promise<ContractTransaction> {
     return this.verification.addVerifier(verifier, { ...options });
   }
   /**
@@ -77,17 +77,18 @@ export class VerificationAPI {
     _r: BytesLike,
     _s: BytesLike,
     _twitterId: string,
+    _tweetId: string,
     _deadline: BigNumberish,
     options?: Overrides
   ): Promise<ContractTransaction> {
-    return this.adminVerifier.registerSelf(_isMasterLinked, _v, _r, _s, _twitterId, _deadline, { ...options });
+    return this.twitterVerifier.registerSelf(_isMasterLinked, _v, _r, _s, _twitterId, _tweetId, _deadline, { ...options });
   }
 
   /**
    * @returns
    */
   public unregisterSelfUsingAdminVerifier(options?: Overrides): Promise<ContractTransaction> {
-    return this.adminVerifier.unregisterSelf({ ...options });
+    return this.twitterVerifier.unregisterSelf({ ...options });
   }
 
   /**
@@ -96,7 +97,7 @@ export class VerificationAPI {
    * @returns
    */
   public updateVerification(_verification: string, options?: Overrides): Promise<ContractTransaction> {
-    return this.adminVerifier.updateVerification(_verification, { ...options });
+    return this.twitterVerifier.updateVerification(_verification, { ...options });
   }
 
   /**
@@ -105,6 +106,6 @@ export class VerificationAPI {
    * @returns
    */
   public updateSignerAddress(_signerAddress: string, options?: Overrides): Promise<ContractTransaction> {
-    return this.adminVerifier.updateSignerAddress(_signerAddress, { ...options });
+    return this.twitterVerifier.updateSignerAddress(_signerAddress, { ...options });
   }
 }

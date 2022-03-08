@@ -61,7 +61,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: 'exchangeRateStored',
+    name: 'getCash',
     outputs: [
       {
         internalType: 'uint256',
@@ -69,7 +69,7 @@ const _abi = [
         type: 'uint256',
       },
     ],
-    stateMutability: 'view',
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {

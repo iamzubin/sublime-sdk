@@ -59,6 +59,15 @@ export class CreditLineApi {
       throw new Error('collateralRatio should be a valid number');
     }
 
+    let strategyAddress: string;
+    if (request.strategyType == StrategyType.NoYield) {
+      strategyAddress = this.config.noStrategyAddress;
+    } else if (request.strategyType == StrategyType.CompounYield) {
+      strategyAddress = this.config.compoundStrategyContractAddress;
+    } else {
+      throw new Error('Unsupported strategy');
+    }
+
     return await this.creditLineContract.request(
       request.address,
       borrowLimit.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
@@ -67,6 +76,7 @@ export class CreditLineApi {
       collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       request.borrowAsset,
       request.collateralAsset,
+      strategyAddress,
       false,
       { ...options }
     );
@@ -94,6 +104,15 @@ export class CreditLineApi {
       throw new Error('collateralRatio should be a valid number');
     }
 
+    let strategyAddress: string;
+    if (request.strategyType == StrategyType.NoYield) {
+      strategyAddress = this.config.noStrategyAddress;
+    } else if (request.strategyType == StrategyType.CompounYield) {
+      strategyAddress = this.config.compoundStrategyContractAddress;
+    } else {
+      throw new Error('Unsupported strategy');
+    }
+
     return await this.creditLineContract.request(
       request.address,
       borrowLimit.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
@@ -102,6 +121,7 @@ export class CreditLineApi {
       collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
       request.borrowAsset,
       request.collateralAsset,
+      strategyAddress,
       true,
       { ...options }
     );
@@ -164,8 +184,8 @@ export class CreditLineApi {
    * @returns collateral ratio (easy readable)
    */
   public async calculateCurrentCollateralRatio(creditLineNumber: BigNumberish): Promise<string> {
-    const _value: BigNumberish = await this.creditLineContract.callStatic.calculateCurrentCollateralRatio(creditLineNumber);
-    return new BigNumber(_value.toString()).div(new BigNumber(10).div(28)).toFixed(2);
+    const [_value]: BigNumberish[] = await this.creditLineContract.callStatic.calculateCurrentCollateralRatio(creditLineNumber);
+    return new BigNumber(_value.toString()).div(new BigNumber(10).div(16)).toFixed(2);
   }
 
   /**
@@ -232,14 +252,12 @@ export class CreditLineApi {
    * @description Deposit Collateral to a credit line
    * @param creditLineNumber
    * @param amount
-   * @param strategy
    * @param fromSavingsAccount: when set to true, the collateral is transfered directly from savings account to credit line
    * @returns Contract Transaction
    */
   public async depositCollateral(
     creditLineNumber: BigNumberish,
     amount: string,
-    strategy: StrategyType,
     fromSavingsAccount: boolean,
     options?: Overrides
   ): Promise<ContractTransaction> {
@@ -251,19 +269,10 @@ export class CreditLineApi {
     if (_amount.isNaN() || _amount.isZero() || _amount.isNegative()) {
       throw new Error('amount should be a valid number');
     }
-    let strategyAddress: string;
-    if (strategy == StrategyType.NoYield) {
-      strategyAddress = this.config.noStrategyAddress;
-    } else if (strategy == StrategyType.CompounYield) {
-      strategyAddress = this.config.compoundStrategyContractAddress;
-    } else {
-      strategyAddress = this.config.yearnStrategyContractAddress;
-    }
 
     return this.creditLineContract.depositCollateral(
       creditLineNumber,
       _amount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0),
-      strategyAddress,
       fromSavingsAccount,
       { ...options }
     );
@@ -294,15 +303,9 @@ export class CreditLineApi {
    * @description Repay the amount to credit line
    * @param creditLineNumber
    * @param amount
-   * @param fromSavingsAccount
    * @returns Contract Transaction
    */
-  public async repayCreditLine(
-    creditLineNumber: BigNumberish,
-    amount: string,
-    fromSavingsAccount: boolean,
-    options?: Overrides
-  ): Promise<ContractTransaction> {
+  public async repayCreditLine(creditLineNumber: BigNumberish, amount: string, options?: Overrides): Promise<ContractTransaction> {
     const borrowAsset: string = await (await this.creditLineContract.creditLineConstants(creditLineNumber)).borrowAsset;
     await this.tokenManager.updateTokenDecimals(borrowAsset);
     const borrowDecimal: BigNumberish = this.tokenManager.getTokenDecimals(borrowAsset);
@@ -312,12 +315,9 @@ export class CreditLineApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.creditLineContract.repay(
-      creditLineNumber,
-      _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
-      fromSavingsAccount,
-      { ...options }
-    );
+    return this.creditLineContract.repay(creditLineNumber, _amount.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0), {
+      ...options,
+    });
   }
 
   /**

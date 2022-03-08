@@ -11,7 +11,7 @@ import {
   PopulatedTransaction,
   Contract,
   ContractTransaction,
-  PayableOverrides,
+  Overrides,
   CallOverrides,
 } from 'ethers';
 import { BytesLike } from '@ethersproject/bytes';
@@ -21,11 +21,11 @@ import { TypedEventFilter, TypedEvent, TypedListener } from './commons';
 
 interface ICreditlineInterface extends ethers.utils.Interface {
   functions: {
-    'depositCollateral(uint256,uint256,address,bool)': FunctionFragment;
+    'depositCollateral(uint256,address,uint256,bool)': FunctionFragment;
     'repay(uint256,uint256,bool)': FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: 'depositCollateral', values: [BigNumberish, BigNumberish, string, boolean]): string;
+  encodeFunctionData(functionFragment: 'depositCollateral', values: [BigNumberish, string, BigNumberish, boolean]): string;
   encodeFunctionData(functionFragment: 'repay', values: [BigNumberish, BigNumberish, boolean]): string;
 
   decodeFunctionResult(functionFragment: 'depositCollateral', data: BytesLike): Result;
@@ -80,78 +80,78 @@ export class ICreditline extends Contract {
   functions: {
     depositCollateral(
       _id: BigNumberish,
-      _amount: BigNumberish,
       _strategy: string,
+      _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'depositCollateral(uint256,uint256,address,bool)'(
+    'depositCollateral(uint256,address,uint256,bool)'(
       _id: BigNumberish,
-      _amount: BigNumberish,
       _strategy: string,
+      _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     repay(
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     'repay(uint256,uint256,bool)'(
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   depositCollateral(
     _id: BigNumberish,
-    _amount: BigNumberish,
     _strategy: string,
+    _amount: BigNumberish,
     _fromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'depositCollateral(uint256,uint256,address,bool)'(
+  'depositCollateral(uint256,address,uint256,bool)'(
     _id: BigNumberish,
-    _amount: BigNumberish,
     _strategy: string,
+    _amount: BigNumberish,
     _fromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   repay(
     _id: BigNumberish,
     _amount: BigNumberish,
     _fromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   'repay(uint256,uint256,bool)'(
     _id: BigNumberish,
     _amount: BigNumberish,
     _fromSavingsAccount: boolean,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     depositCollateral(
       _id: BigNumberish,
-      _amount: BigNumberish,
       _strategy: string,
+      _amount: BigNumberish,
       _fromSavingsAccount: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    'depositCollateral(uint256,uint256,address,bool)'(
+    'depositCollateral(uint256,address,uint256,bool)'(
       _id: BigNumberish,
-      _amount: BigNumberish,
       _strategy: string,
+      _amount: BigNumberish,
       _fromSavingsAccount: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -171,64 +171,64 @@ export class ICreditline extends Contract {
   estimateGas: {
     depositCollateral(
       _id: BigNumberish,
-      _amount: BigNumberish,
       _strategy: string,
+      _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    'depositCollateral(uint256,uint256,address,bool)'(
+    'depositCollateral(uint256,address,uint256,bool)'(
       _id: BigNumberish,
-      _amount: BigNumberish,
       _strategy: string,
+      _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     repay(
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     'repay(uint256,uint256,bool)'(
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     depositCollateral(
       _id: BigNumberish,
-      _amount: BigNumberish,
       _strategy: string,
+      _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'depositCollateral(uint256,uint256,address,bool)'(
+    'depositCollateral(uint256,address,uint256,bool)'(
       _id: BigNumberish,
-      _amount: BigNumberish,
       _strategy: string,
+      _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     repay(
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     'repay(uint256,uint256,bool)'(
       _id: BigNumberish,
       _amount: BigNumberish,
       _fromSavingsAccount: boolean,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

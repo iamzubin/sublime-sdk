@@ -51,6 +51,7 @@ export interface CreditLineRequest {
   collateralRatio: string;
   borrowAsset: string;
   collateralAsset: string;
+  strategyType: StrategyType;
 }
 
 export interface SavingsAccountStrategyBalance {

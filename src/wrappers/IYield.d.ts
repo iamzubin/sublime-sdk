@@ -25,16 +25,16 @@ interface IYieldInterface extends ethers.utils.Interface {
     'getTokensForShares(uint256,address)': FunctionFragment;
     'liquidityToken(address)': FunctionFragment;
     'lockTokens(address,address,uint256)': FunctionFragment;
-    'unlockShares(address,uint256)': FunctionFragment;
-    'unlockTokens(address,uint256)': FunctionFragment;
+    'unlockShares(address,address,uint256)': FunctionFragment;
+    'unlockTokens(address,address,uint256)': FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: 'getSharesForTokens', values: [BigNumberish, string]): string;
   encodeFunctionData(functionFragment: 'getTokensForShares', values: [BigNumberish, string]): string;
   encodeFunctionData(functionFragment: 'liquidityToken', values: [string]): string;
   encodeFunctionData(functionFragment: 'lockTokens', values: [string, string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'unlockShares', values: [string, BigNumberish]): string;
-  encodeFunctionData(functionFragment: 'unlockTokens', values: [string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'unlockShares', values: [string, string, BigNumberish]): string;
+  encodeFunctionData(functionFragment: 'unlockTokens', values: [string, string, BigNumberish]): string;
 
   decodeFunctionResult(functionFragment: 'getSharesForTokens', data: BytesLike): Result;
   decodeFunctionResult(functionFragment: 'getTokensForShares', data: BytesLike): Result;
@@ -144,24 +144,28 @@ export class IYield extends Contract {
 
     unlockShares(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'unlockShares(address,uint256)'(
+    'unlockShares(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     unlockTokens(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    'unlockTokens(address,uint256)'(
+    'unlockTokens(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -211,24 +215,28 @@ export class IYield extends Contract {
 
   unlockShares(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'unlockShares(address,uint256)'(
+  'unlockShares(address,address,uint256)'(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   unlockTokens(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  'unlockTokens(address,uint256)'(
+  'unlockTokens(address,address,uint256)'(
     asset: string,
+    to: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -250,13 +258,13 @@ export class IYield extends Contract {
 
     'lockTokens(address,address,uint256)'(user: string, asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    unlockShares(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    unlockShares(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'unlockShares(address,uint256)'(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    'unlockShares(address,address,uint256)'(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    unlockTokens(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    unlockTokens(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    'unlockTokens(address,uint256)'(asset: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    'unlockTokens(address,address,uint256)'(asset: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   filters: {
@@ -322,18 +330,30 @@ export class IYield extends Contract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    unlockShares(asset: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'unlockShares(address,uint256)'(
+    unlockShares(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    unlockTokens(asset: string, amount: BigNumberish, overrides?: Overrides & { from?: string | Promise<string> }): Promise<BigNumber>;
-
-    'unlockTokens(address,uint256)'(
+    'unlockShares(address,address,uint256)'(
       asset: string,
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    unlockTokens(
+      asset: string,
+      to: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    'unlockTokens(address,address,uint256)'(
+      asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -384,24 +404,28 @@ export class IYield extends Contract {
 
     unlockShares(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'unlockShares(address,uint256)'(
+    'unlockShares(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     unlockTokens(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    'unlockTokens(address,uint256)'(
+    'unlockTokens(address,address,uint256)'(
       asset: string,
+      to: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

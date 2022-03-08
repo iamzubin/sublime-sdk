@@ -22,14 +22,14 @@ const _abi = [
         type: 'uint256',
       },
       {
-        internalType: 'uint256',
-        name: '_amount',
-        type: 'uint256',
-      },
-      {
         internalType: 'address',
         name: '_strategy',
         type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: '_amount',
+        type: 'uint256',
       },
       {
         internalType: 'bool',
@@ -39,7 +39,7 @@ const _abi = [
     ],
     name: 'depositCollateral',
     outputs: [],
-    stateMutability: 'payable',
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -62,7 +62,7 @@ const _abi = [
     ],
     name: 'repay',
     outputs: [],
-    stateMutability: 'payable',
+    stateMutability: 'nonpayable',
     type: 'function',
   },
 ];

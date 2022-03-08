@@ -6,7 +6,6 @@ import { PoolApi } from './api/pool';
 import { CreditLineApi } from './api/creditLines';
 import { YieldAndStrategyApi } from './api/yieldAndStrategy';
 import { SavingsAccountApi } from './api/savingsAccount';
-import { ExtensionApi } from './api/extension';
 import { RepaymentApi } from './api/repayments';
 import { VerificationAPI } from './api/verification';
 import { TokenApi } from './api/tokenApi';
@@ -49,10 +48,6 @@ export class SublimeConnector {
    */
   Address(): Promise<string> {
     return this.signer.getAddress();
-  }
-
-  ExtensionApi(): ExtensionApi {
-    return new ExtensionApi(this.signer, this.config);
   }
 
   RepaymentApi(): RepaymentApi {

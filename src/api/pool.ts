@@ -93,7 +93,7 @@ export class PoolApi {
       collateralAmount.multipliedBy(new BigNumber(10).pow(collateralDecimal)).toFixed(0),
       params.transferFromSavingsAccount,
       params.salt,
-      this.config.adminVerifierContractAddress,
+      this.config.twitterVerifierContractAddress,
       params.lenderVerifier,
       {
         ...options,

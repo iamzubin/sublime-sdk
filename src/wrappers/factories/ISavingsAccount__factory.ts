@@ -55,15 +55,15 @@ const _abi = [
         type: 'address',
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: 'address',
-        name: 'from',
+        name: 'strategy',
         type: 'address',
       },
       {
         indexed: true,
         internalType: 'address',
-        name: 'to',
+        name: 'from',
         type: 'address',
       },
       {
@@ -73,20 +73,7 @@ const _abi = [
         type: 'uint256',
       },
     ],
-    name: 'CreditLineAllowanceRefreshed',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'updatedCreditLine',
-        type: 'address',
-      },
-    ],
-    name: 'CreditLineUpdated',
+    name: 'Burned',
     type: 'event',
   },
   {
@@ -286,7 +273,7 @@ const _abi = [
       {
         indexed: false,
         internalType: 'bool',
-        name: 'withdrawShares',
+        name: 'receiveShares',
         type: 'bool',
       },
     ],
@@ -317,6 +304,35 @@ const _abi = [
     ],
     name: 'WithdrawnAll',
     type: 'event',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'user',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'token',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+    ],
+    name: 'allowance',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'userAllowance',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
     inputs: [
@@ -368,6 +384,35 @@ const _abi = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address',
+        name: 'token',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'poolSavingsStrategy',
+        type: 'address',
+      },
+    ],
+    name: 'burn',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -470,29 +515,6 @@ const _abi = [
       },
     ],
     name: 'increaseAllowance',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'token',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: 'from',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-    ],
-    name: 'increaseAllowanceToCreditLine',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -695,7 +717,7 @@ const _abi = [
       },
       {
         internalType: 'bool',
-        name: 'withdrawShares',
+        name: 'receiveShares',
         type: 'bool',
       },
     ],
@@ -782,11 +804,94 @@ const _abi = [
       },
       {
         internalType: 'bool',
-        name: 'withdrawShares',
+        name: 'receiveShares',
         type: 'bool',
       },
     ],
     name: 'withdrawFrom',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'amountReceived',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'token',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'strategy',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'shares',
+        type: 'uint256',
+      },
+      {
+        internalType: 'bool',
+        name: 'receiveShares',
+        type: 'bool',
+      },
+    ],
+    name: 'withdrawShares',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'amountReceived',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'token',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'strategy',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'shares',
+        type: 'uint256',
+      },
+      {
+        internalType: 'bool',
+        name: 'receiveShares',
+        type: 'bool',
+      },
+    ],
+    name: 'withdrawSharesFrom',
     outputs: [
       {
         internalType: 'uint256',
