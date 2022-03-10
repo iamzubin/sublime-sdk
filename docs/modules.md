@@ -7,7 +7,6 @@
 ### Modules
 
 - [api/creditLines](modules/api_creditLines.md)
-- [api/extension](modules/api_extension.md)
 - [api/pool](modules/api_pool.md)
 - [api/priceOracle](modules/api_priceOracle.md)
 - [api/repayments](modules/api_repayments.md)

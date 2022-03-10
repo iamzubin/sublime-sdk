@@ -35,6 +35,7 @@
 - [transferFrom](api_savingsAccount.SavingsAccountApi.md#transferfrom)
 - [withdraw](api_savingsAccount.SavingsAccountApi.md#withdraw)
 - [withdrawAll](api_savingsAccount.SavingsAccountApi.md#withdrawall)
+- [withdrawAllFromAStrategy](api_savingsAccount.SavingsAccountApi.md#withdrawallfromastrategy)
 - [withdrawFrom](api_savingsAccount.SavingsAccountApi.md#withdrawfrom)
 
 ## Constructors
@@ -53,7 +54,7 @@
 
 #### Defined in
 
-[src/api/savingsAccount.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L26)
+[src/api/savingsAccount.ts:26](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L26)
 
 ## Properties
 
@@ -63,7 +64,7 @@
 
 #### Defined in
 
-[src/api/savingsAccount.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L23)
+[src/api/savingsAccount.ts:23](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L23)
 
 ___
 
@@ -73,7 +74,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L22)
+[src/api/savingsAccount.ts:22](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L22)
 
 ___
 
@@ -83,7 +84,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L21)
+[src/api/savingsAccount.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L21)
 
 ___
 
@@ -93,7 +94,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L24)
+[src/api/savingsAccount.ts:24](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L24)
 
 ## Methods
 
@@ -109,7 +110,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:37](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L37)
+[src/api/savingsAccount.ts:37](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L37)
 
 ___
 
@@ -136,7 +137,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:236](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L236)
+[src/api/savingsAccount.ts:248](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L248)
 
 ___
 
@@ -160,7 +161,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:296](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L296)
+[src/api/savingsAccount.ts:308](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L308)
 
 ___
 
@@ -187,7 +188,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:48](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L48)
+[src/api/savingsAccount.ts:48](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L48)
 
 ___
 
@@ -214,7 +215,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:276](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L276)
+[src/api/savingsAccount.ts:288](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L288)
 
 ___
 
@@ -242,7 +243,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:78](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L78)
+[src/api/savingsAccount.ts:78](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L78)
 
 ___
 
@@ -267,7 +268,7 @@ Asset in detail
 
 #### Defined in
 
-[src/api/savingsAccount.ts:423](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L423)
+[src/api/savingsAccount.ts:435](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L435)
 
 ___
 
@@ -293,7 +294,7 @@ easy read number in string
 
 #### Defined in
 
-[src/api/savingsAccount.ts:405](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L405)
+[src/api/savingsAccount.ts:417](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L417)
 
 ___
 
@@ -315,7 +316,7 @@ ___
 
 #### Defined in
 
-[src/api/savingsAccount.ts:441](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L441)
+[src/api/savingsAccount.ts:453](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L453)
 
 ___
 
@@ -341,7 +342,7 @@ easy read number in string
 
 #### Defined in
 
-[src/api/savingsAccount.ts:390](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L390)
+[src/api/savingsAccount.ts:402](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L402)
 
 ___
 
@@ -368,7 +369,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:255](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L255)
+[src/api/savingsAccount.ts:267](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L267)
 
 ___
 
@@ -396,13 +397,13 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:112](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L112)
+[src/api/savingsAccount.ts:112](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L112)
 
 ___
 
 ### transfer
 
-▸ **transfer**(`amount`, `token`, `strategy`, `to`, `options?`): `Promise`<`ContractTransaction`\>
+▸ **transfer**(`token`, `strategy`, `to`, `amount`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Transfer tokens from one address to another, but within the same strategy
 
@@ -410,10 +411,10 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `amount` | `string` |
 | `token` | `string` |
 | `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) |
 | `to` | `string` |
+| `amount` | `string` |
 | `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
@@ -424,13 +425,13 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:321](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L321)
+[src/api/savingsAccount.ts:333](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L333)
 
 ___
 
 ### transferFrom
 
-▸ **transferFrom**(`amount`, `token`, `strategy`, `from`, `to`, `options?`): `Promise`<`ContractTransaction`\>
+▸ **transferFrom**(`token`, `strategy`, `from`, `to`, `amount`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Transfer tokens from "from" address to another address
 
@@ -438,11 +439,11 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `amount` | `string` |
 | `token` | `string` |
 | `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) |
 | `from` | `string` |
 | `to` | `string` |
+| `amount` | `string` |
 | `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
 #### Returns
@@ -453,13 +454,13 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:355](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L355)
+[src/api/savingsAccount.ts:367](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L367)
 
 ___
 
 ### withdraw
 
-▸ **withdraw**(`amount`, `token`, `strategy`, `to`, `withdrawShares`, `options?`): `Promise`<`ContractTransaction`\>
+▸ **withdraw**(`token`, `strategy`, `to`, `amount`, `withdrawShares`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Withdraw amount from a given strategy
 
@@ -467,10 +468,10 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `amount` | `string` |
 | `token` | `string` |
 | `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) |
 | `to` | `string` |
+| `amount` | `string` |
 | `withdrawShares` | `boolean` |
 | `options?` | [`Options`](../interfaces/types_Types.Options.md) |
 
@@ -482,7 +483,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:152](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L152)
+[src/api/savingsAccount.ts:152](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L152)
 
 ___
 
@@ -507,7 +508,33 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:225](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L225)
+[src/api/savingsAccount.ts:225](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L225)
+
+___
+
+### withdrawAllFromAStrategy
+
+▸ **withdrawAllFromAStrategy**(`asset`, `strategy`, `options?`): `Promise`<`ContractTransaction`\>
+
+**`description`** withdraw all tokens from a strategy
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `asset` | `string` | asset to withdraw |
+| `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) | strategy from which the tokens should be withdrawn |
+| `options?` | [`Options`](../interfaces/types_Types.Options.md) |  |
+
+#### Returns
+
+`Promise`<`ContractTransaction`\>
+
+Contract Transaction
+
+#### Defined in
+
+[src/api/savingsAccount.ts:236](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L236)
 
 ___
 
@@ -537,4 +564,4 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/savingsAccount.ts:190](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/savingsAccount.ts#L190)
+[src/api/savingsAccount.ts:190](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/savingsAccount.ts#L190)

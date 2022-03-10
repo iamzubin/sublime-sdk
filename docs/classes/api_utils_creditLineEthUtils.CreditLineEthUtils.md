@@ -37,7 +37,7 @@
 
 #### Defined in
 
-[src/api/utils/creditLineEthUtils.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/utils/creditLineEthUtils.ts#L16)
+[src/api/utils/creditLineEthUtils.ts:16](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/utils/creditLineEthUtils.ts#L16)
 
 ## Properties
 
@@ -47,17 +47,17 @@
 
 #### Defined in
 
-[src/api/utils/creditLineEthUtils.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/utils/creditLineEthUtils.ts#L14)
+[src/api/utils/creditLineEthUtils.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/utils/creditLineEthUtils.ts#L14)
 
 ___
 
 ### creditLineUtils
 
-• `Private` **creditLineUtils**: `CreditLineUtils`
+• `Private` **creditLineUtils**: `CreditLineEthUtils`
 
 #### Defined in
 
-[src/api/utils/creditLineEthUtils.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/utils/creditLineEthUtils.ts#L12)
+[src/api/utils/creditLineEthUtils.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/utils/creditLineEthUtils.ts#L12)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[src/api/utils/creditLineEthUtils.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/utils/creditLineEthUtils.ts#L13)
+[src/api/utils/creditLineEthUtils.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/utils/creditLineEthUtils.ts#L13)
 
 ## Methods
 
@@ -94,7 +94,7 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/utils/creditLineEthUtils.ts:34](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/utils/creditLineEthUtils.ts#L34)
+[src/api/utils/creditLineEthUtils.ts:34](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/utils/creditLineEthUtils.ts#L34)
 
 ___
 
@@ -120,4 +120,4 @@ Contract Transaction
 
 #### Defined in
 
-[src/api/utils/creditLineEthUtils.ts:63](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/utils/creditLineEthUtils.ts#L63)
+[src/api/utils/creditLineEthUtils.ts:63](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/utils/creditLineEthUtils.ts#L63)

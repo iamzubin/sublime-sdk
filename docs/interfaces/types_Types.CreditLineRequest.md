@@ -15,6 +15,7 @@
 - [borrowRate](types_Types.CreditLineRequest.md#borrowrate)
 - [collateralAsset](types_Types.CreditLineRequest.md#collateralasset)
 - [collateralRatio](types_Types.CreditLineRequest.md#collateralratio)
+- [strategyType](types_Types.CreditLineRequest.md#strategytype)
 
 ## Properties
 
@@ -24,7 +25,7 @@
 
 #### Defined in
 
-[src/types/Types.ts:47](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/types/Types.ts#L47)
+[src/types/Types.ts:47](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/types/Types.ts#L47)
 
 ___
 
@@ -34,7 +35,7 @@ ___
 
 #### Defined in
 
-[src/types/Types.ts:50](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/types/Types.ts#L50)
+[src/types/Types.ts:50](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/types/Types.ts#L50)
 
 ___
 
@@ -44,7 +45,7 @@ ___
 
 #### Defined in
 
-[src/types/Types.ts:52](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/types/Types.ts#L52)
+[src/types/Types.ts:52](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/types/Types.ts#L52)
 
 ___
 
@@ -54,7 +55,7 @@ ___
 
 #### Defined in
 
-[src/types/Types.ts:48](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/types/Types.ts#L48)
+[src/types/Types.ts:48](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/types/Types.ts#L48)
 
 ___
 
@@ -64,7 +65,7 @@ ___
 
 #### Defined in
 
-[src/types/Types.ts:49](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/types/Types.ts#L49)
+[src/types/Types.ts:49](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/types/Types.ts#L49)
 
 ___
 
@@ -74,7 +75,7 @@ ___
 
 #### Defined in
 
-[src/types/Types.ts:53](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/types/Types.ts#L53)
+[src/types/Types.ts:53](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/types/Types.ts#L53)
 
 ___
 
@@ -84,4 +85,14 @@ ___
 
 #### Defined in
 
-[src/types/Types.ts:51](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/types/Types.ts#L51)
+[src/types/Types.ts:51](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/types/Types.ts#L51)
+
+___
+
+### strategyType
+
+• **strategyType**: [`StrategyType`](../enums/types_Types.StrategyType.md)
+
+#### Defined in
+
+[src/types/Types.ts:54](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/types/Types.ts#L54)

@@ -71,9 +71,9 @@ export class CreditLineApi {
     return await this.creditLineContract.request(
       request.address,
       borrowLimit.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
-      borrowRate.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
+      borrowRate.multipliedBy(new BigNumber(10).pow(16)).toFixed(0),
       request.autoLiquidation,
-      collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
+      collateralRatio.multipliedBy(new BigNumber(10).pow(16)).toFixed(0),
       request.borrowAsset,
       request.collateralAsset,
       strategyAddress,
@@ -116,9 +116,9 @@ export class CreditLineApi {
     return await this.creditLineContract.request(
       request.address,
       borrowLimit.multipliedBy(new BigNumber(10).pow(borrowDecimal)).toFixed(0),
-      borrowRate.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
+      borrowRate.multipliedBy(new BigNumber(10).pow(16)).toFixed(0),
       request.autoLiquidation,
-      collateralRatio.multipliedBy(new BigNumber(10).pow(28)).toFixed(0),
+      collateralRatio.multipliedBy(new BigNumber(10).pow(16)).toFixed(0),
       request.borrowAsset,
       request.collateralAsset,
       strategyAddress,

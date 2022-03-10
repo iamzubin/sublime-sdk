@@ -12,8 +12,8 @@
 
 ### Properties
 
-- [adminVerifier](api_verification.VerificationAPI.md#adminverifier)
 - [signer](api_verification.VerificationAPI.md#signer)
+- [twitterVerifier](api_verification.VerificationAPI.md#twitterverifier)
 - [verification](api_verification.VerificationAPI.md#verification)
 
 ### Methods
@@ -42,19 +42,9 @@
 
 #### Defined in
 
-[src/api/verification.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L25)
+[src/api/verification.ts:25](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L25)
 
 ## Properties
-
-### adminVerifier
-
-• `Private` **adminVerifier**: `AdminVerifier`
-
-#### Defined in
-
-[src/api/verification.ts:19](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L19)
-
-___
 
 ### signer
 
@@ -62,7 +52,17 @@ ___
 
 #### Defined in
 
-[src/api/verification.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L17)
+[src/api/verification.ts:17](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L17)
+
+___
+
+### twitterVerifier
+
+• `Private` **twitterVerifier**: `TwitterVerifier`
+
+#### Defined in
+
+[src/api/verification.ts:19](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L19)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[src/api/verification.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L18)
+[src/api/verification.ts:18](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L18)
 
 ## Methods
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[src/api/verification.ts:52](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L52)
+[src/api/verification.ts:52](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L52)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[src/api/verification.ts:35](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L35)
+[src/api/verification.ts:35](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L35)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[src/api/verification.ts:44](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L44)
+[src/api/verification.ts:44](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L44)
 
 ___
 
@@ -155,13 +155,13 @@ ___
 
 #### Defined in
 
-[src/api/verification.ts:61](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L61)
+[src/api/verification.ts:61](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L61)
 
 ___
 
 ### registerSelfUsingAdminVerifier
 
-▸ **registerSelfUsingAdminVerifier**(`_isMasterLinked`, `_v`, `_r`, `_s`, `_twitterId`, `_deadline`, `options?`): `Promise`<`ContractTransaction`\>
+▸ **registerSelfUsingAdminVerifier**(`_isMasterLinked`, `_v`, `_r`, `_s`, `_twitterId`, `_tweetId`, `_deadline`, `options?`): `Promise`<`ContractTransaction`\>
 
 #### Parameters
 
@@ -172,6 +172,7 @@ ___
 | `_r` | `BytesLike` | R component of the signature |
 | `_s` | `BytesLike` | S component of the signature |
 | `_twitterId` | `string` | Twitter ID of the user |
+| `_tweetId` | `string` | - |
 | `_deadline` | `BigNumberish` | Deadline for the registration |
 | `options?` | [`Options`](../interfaces/types_Types.Options.md) | - |
 
@@ -181,7 +182,7 @@ ___
 
 #### Defined in
 
-[src/api/verification.ts:74](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L74)
+[src/api/verification.ts:74](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L74)
 
 ___
 
@@ -201,7 +202,7 @@ ___
 
 #### Defined in
 
-[src/api/verification.ts:89](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L89)
+[src/api/verification.ts:90](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L90)
 
 ___
 
@@ -222,7 +223,7 @@ ___
 
 #### Defined in
 
-[src/api/verification.ts:107](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L107)
+[src/api/verification.ts:108](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L108)
 
 ___
 
@@ -243,4 +244,4 @@ ___
 
 #### Defined in
 
-[src/api/verification.ts:98](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/verification.ts#L98)
+[src/api/verification.ts:99](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/verification.ts#L99)

@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[src/api/utils/savingsAccountEthUtils.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/utils/savingsAccountEthUtils.ts#L21)
+[src/api/utils/savingsAccountEthUtils.ts:21](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/utils/savingsAccountEthUtils.ts#L21)
 
 ## Properties
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[src/api/utils/savingsAccountEthUtils.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/utils/savingsAccountEthUtils.ts#L14)
+[src/api/utils/savingsAccountEthUtils.ts:14](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/utils/savingsAccountEthUtils.ts#L14)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[src/api/utils/savingsAccountEthUtils.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/utils/savingsAccountEthUtils.ts#L12)
+[src/api/utils/savingsAccountEthUtils.ts:12](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/utils/savingsAccountEthUtils.ts#L12)
 
 ___
 
@@ -66,13 +66,13 @@ ___
 
 #### Defined in
 
-[src/api/utils/savingsAccountEthUtils.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/utils/savingsAccountEthUtils.ts#L13)
+[src/api/utils/savingsAccountEthUtils.ts:13](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/utils/savingsAccountEthUtils.ts#L13)
 
 ## Methods
 
 ### depositEthToSavingsAccount
 
-▸ **depositEthToSavingsAccount**(`strategy`, `amount`, `options?`): `Promise`<`ContractTransaction`\>
+▸ **depositEthToSavingsAccount**(`strategy`, `amount`, `to`, `options?`): `Promise`<`ContractTransaction`\>
 
 **`description`** Use this function to deposit ETH to savings account directly
 
@@ -82,6 +82,7 @@ ___
 | :------ | :------ | :------ |
 | `strategy` | [`StrategyType`](../enums/types_Types.StrategyType.md) | strategy |
 | `amount` | `string` | amount of ETH to deposit |
+| `to` | `string` | - |
 | `options?` | [`Options`](../interfaces/types_Types.Options.md) | transaction options |
 
 #### Returns
@@ -90,4 +91,4 @@ ___
 
 #### Defined in
 
-[src/api/utils/savingsAccountEthUtils.ts:38](https://github.com/sublime-finance/sublime-sdk/blob/e0a8c27/src/api/utils/savingsAccountEthUtils.ts#L38)
+[src/api/utils/savingsAccountEthUtils.ts:38](https://github.com/sublime-finance/sublime-sdk/blob/c26eed8/src/api/utils/savingsAccountEthUtils.ts#L38)

@@ -132,10 +132,10 @@ export class SavingsAccountApi {
     }
 
     return this.savingsAccount.switchStrategy(
-      _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
-      asset,
       _currentStrategyAddress,
       _newStrategyAddress,
+      asset,
+      _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
       { ...options }
     );
   }
@@ -150,10 +150,10 @@ export class SavingsAccountApi {
    * @returns Contract Transaction
    */
   public async withdraw(
-    amount: string,
     token: string,
     strategy: StrategyType,
     to: string,
+    amount: string,
     withdrawShares: boolean,
     options?: Overrides
   ): Promise<ContractTransaction> {
@@ -168,10 +168,10 @@ export class SavingsAccountApi {
     }
 
     return this.savingsAccount.withdraw(
-      _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
       token,
       _strategyContractAddress,
       to,
+      _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
       withdrawShares,
       { ...options }
     );
@@ -207,11 +207,11 @@ export class SavingsAccountApi {
     }
 
     return this.savingsAccount.withdrawFrom(
-      _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
       token,
       _strategyContractAddress,
       from,
       to,
+      _amount.multipliedBy(new BigNumber(10).pow(decimal)).toFixed(0),
       withdrawShares,
       { ...options }
     );
@@ -223,7 +223,19 @@ export class SavingsAccountApi {
    * @returns Contract Transaction
    */
   public async withdrawAll(asset: string, options?: Overrides): Promise<ContractTransaction> {
-    return this.savingsAccount.withdrawAll(asset, { ...options });
+    return this.savingsAccount['withdrawAll(address)'](asset, { ...options });
+  }
+
+  /**
+   * @description withdraw all tokens from a strategy
+   * @param asset asset to withdraw
+   * @param strategy strategy from which the tokens should be withdrawn
+   * @param options
+   * @returns Contract Transaction
+   */
+  public async withdrawAllFromAStrategy(asset: string, strategy: StrategyType, options?: Overrides): Promise<ContractTransaction> {
+    const _strategyContractAddress = this.getStrategyAddress(strategy);
+    return this.savingsAccount['withdrawAll(address,address)'](asset, _strategyContractAddress, { ...options });
   }
 
   /**
@@ -319,10 +331,10 @@ export class SavingsAccountApi {
    * @returns Contract Transaction
    */
   public async transfer(
-    amount: string,
     token: string,
     strategy: StrategyType,
     to: string,
+    amount: string,
     options?: Overrides
   ): Promise<ContractTransaction> {
     const _strategyContractAddress = this.getStrategyAddress(strategy);
@@ -335,10 +347,10 @@ export class SavingsAccountApi {
     }
 
     return this.savingsAccount.transfer(
-      _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0),
       token,
       _strategyContractAddress,
       to,
+      _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0),
       { ...options }
     );
   }
@@ -353,11 +365,11 @@ export class SavingsAccountApi {
    * @returns Contract Transaction
    */
   public async transferFrom(
-    amount: string,
     token: string,
     strategy: StrategyType,
     from: string,
     to: string,
+    amount: string,
     options?: Overrides
   ): Promise<ContractTransaction> {
     const _strategyContractAddress = this.getStrategyAddress(strategy);
@@ -371,11 +383,11 @@ export class SavingsAccountApi {
     }
 
     return this.savingsAccount.transferFrom(
-      _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0),
       token,
       _strategyContractAddress,
       from,
       to,
+      _amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0),
       { ...options }
     );
   }
