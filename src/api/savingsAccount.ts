@@ -245,7 +245,7 @@ export class SavingsAccountApi {
    * @param to : Address to which you want to approve
    * @returns Contract Transaction
    */
-  public async approve(amount: string, token: string, to: string, options?: Overrides): Promise<ContractTransaction> {
+  public async approve( token: string, to: string,amount: string, options?: Overrides): Promise<ContractTransaction> {
     await this.tokenManager.updateTokenDecimals(token);
     const decimals = this.tokenManager.getTokenDecimals(token);
 
@@ -254,7 +254,7 @@ export class SavingsAccountApi {
       throw new Error('amount should be a valid number');
     }
 
-    return this.savingsAccount.approve(_amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0), token, to, { ...options });
+    return this.savingsAccount.approve( token,to,_amount.multipliedBy(new BigNumber(10).pow(decimals)).toFixed(0),{ ...options });
   }
 
   /**
